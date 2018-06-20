@@ -1,1 +1,8 @@
-{"ID":3,"Question":"Do you want to suck some dick?","Answers":["Yes","Maybe","Definitely","Si claro"],"CorrectAnswer":0,"CanBeKnown":true,"Asked":true}
+{
+	"ID":3,
+	"Question":"What was the first humanoid robot?",
+	"Answers":["Mark Zuckerberg by unknown", "Eric by Captain William Richards","Roboy by Raf","Maschinenmensch by Fritz Lang"],
+	"CorrectAnswer":1,
+	"CanBeKnown":true,
+	"Asked":false
+}
