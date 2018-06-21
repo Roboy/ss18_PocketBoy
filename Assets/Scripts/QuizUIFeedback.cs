@@ -57,6 +57,11 @@ namespace Pocketboy.QuizSystem
         {
             m_FeedbackImages[QuizManager.Instance.CurrentQuiz.CurrentQuestion].color = IncorrectColor;
         }
+
+        public void ShowResult()
+        {
+
+        }
     }
 }
 

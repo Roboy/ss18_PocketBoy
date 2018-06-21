@@ -217,7 +217,7 @@ MonoBehaviour:
   QuizPrefab: {fileID: 114452400854489730, guid: 26dd5cdd75073224491e8b91bd57bb35,
     type: 2}
   m_QuizCollection: {fileID: 1059557556}
-  TimeForEachQuestion: 20
+  TimeForEachQuestion: 30
 --- !u!4 &1059557555
 Transform:
   m_ObjectHideFlags: 0

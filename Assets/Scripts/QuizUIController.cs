@@ -23,10 +23,18 @@ namespace Pocketboy.QuizSystem
         [SerializeField]
         private Color DefaultButtonColor;
 
+        private Dictionary<Button, Animator> m_ButtonAnimators = new Dictionary<Button, Animator>();
+
+        private void Awake()
+        {
+            CacheButtonAnimators();
+        }
+
         private void Start()
         {
             QuizEvents.OnAnswerCorrect += CorrectAnswerAnimation;
             QuizEvents.OnAnswerIncorrect += IncorrectAnswerAnimation;
+            
         }
 
         private void OnDestroy()
@@ -44,7 +52,6 @@ namespace Pocketboy.QuizSystem
         public void SetupUIForQuestion(QuizQuestion question)
         {
             QuestionText.text = question.Question;
-
             for (int i = 0; i < question.Answers.Length; i++)
             {
                 AnswerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = question.Answers[i];
@@ -65,9 +72,14 @@ namespace Pocketboy.QuizSystem
         private void IncorrectAnswerAnimation(int correctAnswer, int incorrectAnswer)
         {
             ToggleButtonInteraction(false);
-            AnswerButtons[correctAnswer].image.color = Color.green;
-            if(incorrectAnswer != -1)
+            StartCoroutine(ButtonBlinkAnimation(AnswerButtons[correctAnswer], Color.green));
+            //AnswerButtons[correctAnswer].image.color = Color.green;
+            if (incorrectAnswer != -1)
+            {
                 AnswerButtons[incorrectAnswer].image.color = Color.red;
+                m_ButtonAnimators[AnswerButtons[incorrectAnswer]].SetTrigger("Shake");
+            }
+                
             QuizTimer.StopTimer();
             QuizUIFeedback.ShowIncorrectFeedback();
         }
@@ -79,7 +91,40 @@ namespace Pocketboy.QuizSystem
                 button.interactable = value;
             }
         }
-        
+
+        private void CacheButtonAnimators()
+        {
+            foreach (var button in AnswerButtons)
+            {
+                var animator = button.GetComponent<Animator>();
+                if (animator != null)
+                    m_ButtonAnimators.Add(button, animator);
+            }
+        }
+
+        private IEnumerator ButtonBlinkAnimation(Button button, Color blinkColor)
+        {
+            Color defaultColor = button.image.color;
+            float currentTime = 0f;
+            float stepTime = 0.2f;
+            float animTime = 1f;
+            bool isColored = false;
+            while (currentTime < animTime)
+            {
+                if (isColored)
+                {
+                    button.image.color = defaultColor;
+                }
+                else
+                {
+                    button.image.color = blinkColor;
+                }
+                isColored = !isColored;
+                currentTime += stepTime;
+                yield return new WaitForSeconds(stepTime);
+            }
+            button.image.color = blinkColor;
+        }
     }
 }
 

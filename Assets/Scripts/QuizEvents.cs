@@ -15,7 +15,7 @@ namespace Pocketboy.QuizSystem
         public delegate void AnswerIncorrectHandler(int correctAnswer, int incorrectAnswer);
         public static event AnswerIncorrectHandler OnAnswerIncorrect;
 
-        public delegate void QuizFinishedHandler();
+        public delegate void QuizFinishedHandler(int points);
         public static event QuizFinishedHandler OnQuizFinished;
 
         public static void TimeOutEvent()
@@ -36,10 +36,10 @@ namespace Pocketboy.QuizSystem
                 OnAnswerIncorrect(correctAnswer, incorrectAnswer);
         }
 
-        public static void QuizFinishedEvent()
+        public static void QuizFinishedEvent(int points)
         {
             if (OnQuizFinished != null)
-                OnQuizFinished();
+                OnQuizFinished(points);
         }
     }
 }
