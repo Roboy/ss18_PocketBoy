@@ -1,1 +1,9 @@
-{"ID":2,"Question":"What is a humanoid robot?","Answers":["A dog robot","Mark Zuckerberg","A human looking robot","A slave"],"CorrectAnswer":2,"CanBeKnown":true,"Asked":false}
+{
+	"ID":2,
+	"IsPictureBased":false,
+	"Question":"What is a humanoid robot?",
+	"Answers":["A dog robot","Mark Zuckerberg","A human looking robot","A slave"],
+	"CorrectAnswer":2,
+	"CanBeKnown":true,
+	"Asked":false
+}

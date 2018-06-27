@@ -1,5 +1,6 @@
 {
 	"ID":4,
+	"IsPictureBased":false,
 	"Question":"Which was the first roboter on Mars?",
 	"Answers":["Oppotunity in 2004","Roboy in 2050","Mark Zuckerberg in 5000 B.C.","Curiosity in 2012"],
 	"CorrectAnswer":0,

@@ -10,6 +10,8 @@ namespace Pocketboy.QuizSystem
     {
         public int ID;
 
+        public bool IsPictureBased;
+
         public string Question;
 
         public string[] Answers;
