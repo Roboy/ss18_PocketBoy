@@ -16,6 +16,8 @@ namespace Pocketboy.QuizSystem
 
         public string[] Answers;
 
+        public Sprite[] ImageAnswers;
+
         public int CorrectAnswer;
 
         public bool CanBeKnown;
