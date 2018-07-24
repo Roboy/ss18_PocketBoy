@@ -26,7 +26,6 @@
             if (m_roboyModel == null && m_roboyFound == false)
             {
                 t.text = ("no roboy yet");
-                Debug.Log(GameObject.FindGameObjectWithTag("Roboy"));
                 m_roboyModel = GameObject.FindGameObjectWithTag("Roboy");
                 if (m_roboyModel != null)
                 {

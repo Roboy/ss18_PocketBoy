@@ -14,7 +14,7 @@
     /// <summary>
     /// Sets up the level by scanning for planes and placing the Roboy model at a suitable position.
     /// </summary>
-    public class LevelSpawner : MonoBehaviour
+    public class LevelManager : MonoBehaviour
     {
 
         /// <summary>
@@ -59,6 +59,11 @@
         private bool m_ModelSpawned = false;
 
         /// <summary>
+        /// Reference to the available levels, represented as spheres.
+        /// </summary>
+        private List<GameObject> m_Levels = new List<GameObject>();
+
+        /// <summary>
         /// The Unity Update() method.
         /// </summary>
         public void Update()
@@ -82,49 +87,13 @@
             if (!m_ModelSpawned && m_AllPlanes.Count>0 )
             {
                 //Call function to spawn Roboy
-                SpawnModel();
+                SpawnLevel();
             }
 
-            //// If the player has not touched the screen, we are done with this update.
-            //Touch touch;
-            //if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
-            //{
-            //    return;
-            //}
+            //if (m_ModelSpawned)
+            //    Debug.Log("Distance :" + Vector3.Distance(m_Levels[0].gameObject.transform.position, FirstPersonCamera.transform.position));
 
-            //// Raycast against the location the player touched to search for planes.
-            //TrackableHit hit;
-            //TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
-            //    TrackableHitFlags.FeaturePointWithSurfaceNormal;
 
-            //if (Frame.Raycast(touch.position.x, touch.position.y, raycastFilter, out hit))
-            //{
-            //    // Use hit pose and camera pose to check if hittest is from the
-            //    // back of the plane, if it is, no need to create the anchor.
-            //    if ((hit.Trackable is DetectedPlane) &&
-            //        Vector3.Dot(FirstPersonCamera.transform.position - hit.Pose.position,
-            //            hit.Pose.rotation * Vector3.up) < 0)
-            //    {
-            //        Debug.Log("Hit at back of the current DetectedPlane");
-            //    }
-            //    else
-            //    {
-            //        // Instantiate Andy model at the hit pose.
-            //        //var andyObject = Instantiate(AndyAndroidPrefab, hit.Pose.position, hit.Pose.rotation);
-            //        var andyObject = Instantiate(Roboy, hit.Pose.position, hit.Pose.rotation);
-
-            //        // Compensate for the hitPose rotation facing away from the raycast (i.e. camera).
-            //        andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
-            //        andyObject.transform.Rotate(90, 0, 0, Space.Self);
-
-            //        // Create an anchor to allow ARCore to track the hitpoint as understanding of the physical
-            //        // world evolves.
-            //        var anchor = hit.Trackable.CreateAnchor(hit.Pose);
-
-            //        // Make Andy model a child of the anchor.
-            //        andyObject.transform.parent = anchor.transform;
-            //    }
-            //}
         }
 
         /// <summary>
@@ -169,14 +138,38 @@
             }
         }
 
-        private void SpawnModel()
+        private void SpawnLevel()
         {
+            //Spawn Roboy
             DetectedPlane tmp = m_AllPlanes[0];
             var anchor = tmp.CreateAnchor(tmp.CenterPose);
             var roboy = Instantiate(Roboy, tmp.CenterPose.position, tmp.CenterPose.rotation);
             roboy.transform.Rotate(90, 0, 0, Space.Self);
+            roboy.transform.Rotate(0, 0, k_ModelRotation, Space.Self);
             roboy.transform.parent = anchor.transform;
             m_ModelSpawned = true;
+            Debug.Log("roboy spawned.");
+
+            //Spawn Level spheres
+            for (int i = 1; i < 5; i++)
+            {
+                GameObject levelSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                levelSphere.name = "level" + (i);
+                levelSphere.tag = "Level";
+                if (i % 2 == 0)
+                { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x + ((float)i / 4), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
+                if (i % 2 == 1)
+                { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x - ((float)i / 4), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
+                levelSphere.transform.localScale = levelSphere.transform.localScale * 0.25f;
+                levelSphere.transform.parent = anchor.transform;
+                levelSphere.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+                m_Levels.Add(levelSphere);
+
+            }
+
+            Debug.Log("spheres spawned.");
+            Debug.Log(m_Levels.Count + " " + m_Levels[0]);
+            
         }
 
         /// <summary>
