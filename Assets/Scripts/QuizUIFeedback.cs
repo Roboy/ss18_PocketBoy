@@ -10,6 +10,9 @@ namespace Pocketboy.QuizSystem
     public class QuizUIFeedback : MonoBehaviour
     {
         [SerializeField]
+        private Sprite ElementImage;
+
+        [SerializeField]
         private Color DefaultColor;
 
         [SerializeField]
@@ -44,8 +47,10 @@ namespace Pocketboy.QuizSystem
                 image.color = DefaultColor;
                 image.transform.parent = transform;
                 image.GetComponent<RectTransform>().sizeDelta = new Vector2(widthForEachElement, height);
+                image.sprite = ElementImage;
                 m_FeedbackImages.Add(image);
             }
+            GetComponent<Image>().enabled = false;
         }
 
         public void ShowCorrectFeedback()
@@ -56,6 +61,11 @@ namespace Pocketboy.QuizSystem
         public void ShowIncorrectFeedback()
         {
             m_FeedbackImages[QuizManager.Instance.CurrentQuiz.CurrentQuestion].color = IncorrectColor;
+        }
+
+        public void ShowResult()
+        {
+
         }
     }
 }

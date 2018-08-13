@@ -49,7 +49,6 @@ namespace Pocketboy.QuizSystem
             m_Running = true;
             m_CurrentTime = 0f;
             m_Slider.value = 0f;
-            Debug.Log("Starting Time");
         }
 
         public void StopTimer()

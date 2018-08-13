@@ -21,12 +21,12 @@ namespace Pocketboy.QuizSystem
         private void Start()
         {
             CreateQuiz();
-            QuizEvents.OnQuizFinished += DestroyCurrentQuiz;
+            //QuizEvents.OnQuizFinished += DestroyCurrentQuiz;
         }
 
         private void OnDisable()
         {
-            QuizEvents.OnQuizFinished -= DestroyCurrentQuiz;
+            //QuizEvents.OnQuizFinished -= DestroyCurrentQuiz;
         }
 
         public void CreateQuiz()
@@ -35,7 +35,7 @@ namespace Pocketboy.QuizSystem
             CurrentQuiz.SetupQuiz(m_QuizCollection.GetQuizQuestions(), TimeForEachQuestion);
         }
 
-        private void DestroyCurrentQuiz()
+        private void DestroyCurrentQuiz(int ignore)
         {
             if (CurrentQuiz != null)
                 Destroy(CurrentQuiz.gameObject);

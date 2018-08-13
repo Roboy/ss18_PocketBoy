@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 21bb4a2e415cb4f428979503d536e247
+=======
+guid: 5800cd3be6e4fb24bab680104c20676d
+>>>>>>> history_scene
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

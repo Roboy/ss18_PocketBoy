@@ -12,7 +12,7 @@ namespace Pocketboy.QuizSystem
         private TextMeshProUGUI QuestionText;
 
         [SerializeField]
-        private Button[] AnswerButtons;
+        private QuizAnswerButton[] AnswerButtons;
 
         [SerializeField]
         private QuizUIFeedback QuizUIFeedback;
@@ -20,13 +20,12 @@ namespace Pocketboy.QuizSystem
         [SerializeField]
         private QuizTimer QuizTimer;
 
-        [SerializeField]
-        private Color DefaultButtonColor;
 
         private void Start()
         {
             QuizEvents.OnAnswerCorrect += CorrectAnswerAnimation;
             QuizEvents.OnAnswerIncorrect += IncorrectAnswerAnimation;
+            
         }
 
         private void OnDestroy()
@@ -44,12 +43,16 @@ namespace Pocketboy.QuizSystem
         public void SetupUIForQuestion(QuizQuestion question)
         {
             QuestionText.text = question.Question;
-
             for (int i = 0; i < question.Answers.Length; i++)
             {
-                AnswerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = question.Answers[i];
-                AnswerButtons[i].image.color = DefaultButtonColor;
-                AnswerButtons[i].interactable = true;
+                if (!question.IsPictureBased)
+                {
+                    AnswerButtons[i].LoadText(question.Answers[i]);
+                }
+                else
+                {
+                    AnswerButtons[i].LoadImage(question.ImageAnswers[i]);
+                }
             }
             QuizTimer.StartTimer();
         }
@@ -57,7 +60,7 @@ namespace Pocketboy.QuizSystem
         private void CorrectAnswerAnimation(int correctAnswer)
         {
             ToggleButtonInteraction(false);
-            AnswerButtons[correctAnswer].image.color = Color.green;
+            AnswerButtons[correctAnswer].CorrectAnimation();
             QuizTimer.StopTimer();
             QuizUIFeedback.ShowCorrectFeedback();
         }
@@ -65,9 +68,11 @@ namespace Pocketboy.QuizSystem
         private void IncorrectAnswerAnimation(int correctAnswer, int incorrectAnswer)
         {
             ToggleButtonInteraction(false);
-            AnswerButtons[correctAnswer].image.color = Color.green;
-            if(incorrectAnswer != -1)
-                AnswerButtons[incorrectAnswer].image.color = Color.red;
+            AnswerButtons[correctAnswer].CorrectAnimation();
+            if (incorrectAnswer != -1)
+            {
+                AnswerButtons[incorrectAnswer].IncorrectAnimation();
+            }
             QuizTimer.StopTimer();
             QuizUIFeedback.ShowIncorrectFeedback();
         }
@@ -76,10 +81,9 @@ namespace Pocketboy.QuizSystem
         {
             foreach (var button in AnswerButtons)
             {
-                button.interactable = value;
+                button.Deactivate();
             }
         }
-        
     }
 }
 

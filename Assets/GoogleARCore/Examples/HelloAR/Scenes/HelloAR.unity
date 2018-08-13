@@ -13,7 +13,11 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
+<<<<<<< HEAD
   serializedVersion: 9
+=======
+  serializedVersion: 8
+>>>>>>> history_scene
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,8 +42,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+<<<<<<< HEAD
   m_IndirectSpecularColor: {r: 0.44300637, g: 0.4921953, b: 0.5719249, a: 1}
   m_UseRadianceAmbientProbe: 0
+=======
+  m_IndirectSpecularColor: {r: 0.44301882, g: 0.49220932, b: 0.57192963, a: 1}
+>>>>>>> history_scene
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -55,10 +63,18 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
+<<<<<<< HEAD
     serializedVersion: 10
     m_Resolution: 2
     m_BakeResolution: 40
     m_AtlasSize: 1024
+=======
+    serializedVersion: 9
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_TextureWidth: 1024
+    m_TextureHeight: 1024
+>>>>>>> history_scene
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -113,6 +129,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &34103339
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +204,8 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 34103339}
+=======
+>>>>>>> history_scene
 --- !u!1001 &97747990
 Prefab:
   m_ObjectHideFlags: 0
@@ -233,6 +252,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c10877f7cd5764de18d46d7b777d1faa, type: 2}
   m_IsPrefabParent: 0
+<<<<<<< HEAD
 --- !u!1 &430439822
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,6 +321,8 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 430439822}
+=======
+>>>>>>> history_scene
 --- !u!1 &557169198
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +403,11 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
+<<<<<<< HEAD
   m_IsActive: 0
+=======
+  m_IsActive: 1
+>>>>>>> history_scene
 --- !u!4 &627916102
 Transform:
   m_ObjectHideFlags: 0
@@ -409,6 +435,7 @@ MonoBehaviour:
   FirstPersonCamera: {fileID: 896679035}
   DetectedPlanePrefab: {fileID: 1654175882956584, guid: 6a35c744e5010405c847fad90282d2be,
     type: 2}
+<<<<<<< HEAD
   AndyAndroidPrefab: {fileID: 1556612136799238, guid: 70734eb0216130a4d972434b182eee3d,
     type: 2}
   SearchingForPlaneUI: {fileID: 1133631540}
@@ -525,11 +552,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+=======
+  AndyAndroidPrefab: {fileID: 1190091649889860, guid: 242a320930b81430ba610f94f9b760c8,
+    type: 2}
+  SearchingForPlaneUI: {fileID: 1133631540}
+>>>>>>> history_scene
 --- !u!20 &896679035 stripped
 Camera:
   m_PrefabParentObject: {fileID: 20155940112608238, guid: c10877f7cd5764de18d46d7b777d1faa,
     type: 2}
   m_PrefabInternal: {fileID: 97747990}
+<<<<<<< HEAD
 --- !u!4 &989943872 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4497055787654456, guid: c10877f7cd5764de18d46d7b777d1faa,
@@ -647,6 +680,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> history_scene
 --- !u!1 &1133631540
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,7 +711,11 @@ RectTransform:
   m_Children:
   - {fileID: 1764419356}
   m_Father: {fileID: 1608144857}
+<<<<<<< HEAD
   m_RootOrder: 2
+=======
+  m_RootOrder: 0
+>>>>>>> history_scene
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -778,6 +817,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1372119674
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,6 +887,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+=======
+>>>>>>> history_scene
 --- !u!1001 &1394164186
 Prefab:
   m_ObjectHideFlags: 0
@@ -889,6 +931,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf498fc35b538884db557f7a9a2c0ef9, type: 2}
   m_IsPrefabParent: 0
+<<<<<<< HEAD
 --- !u!1 &1484531769
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,6 +977,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> history_scene
 --- !u!1 &1608144853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,10 +1064,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+<<<<<<< HEAD
   - {fileID: 1029182769}
   - {fileID: 430439823}
   - {fileID: 1133631541}
   - {fileID: 2002337392}
+=======
+  - {fileID: 1133631541}
+>>>>>>> history_scene
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1062,7 +1111,10 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+<<<<<<< HEAD
   m_RenderingLayerMask: 4294967295
+=======
+>>>>>>> history_scene
   m_Materials:
   - {fileID: 2100000, guid: fb4fbd1b92e244df2bc6f43deb7a57a2, type: 2}
   m_StaticBatchInfo:
@@ -1189,6 +1241,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1764419355}
+<<<<<<< HEAD
 --- !u!1 &2002337391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1311,8 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2002337391}
+=======
+>>>>>>> history_scene
 --- !u!1 &2083512464
 GameObject:
   m_ObjectHideFlags: 0

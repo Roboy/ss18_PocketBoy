@@ -1,1 +1,9 @@
-{"ID":2,"Question":"Do you want to suck some dick?","Answers":["Yes","Maybe","Definitely","Si claro"],"CorrectAnswer":0,"CanBeKnown":true,"Asked":true}
+{
+	"ID":2,
+	"IsPictureBased":false,
+	"Question":"What is a humanoid robot?",
+	"Answers":["A dog robot","Mark Zuckerberg","A human looking robot","A slave"],
+	"CorrectAnswer":2,
+	"CanBeKnown":true,
+	"Asked":false
+}

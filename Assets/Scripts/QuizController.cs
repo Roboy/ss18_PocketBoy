@@ -11,13 +11,15 @@ namespace Pocketboy.QuizSystem
         private QuizUIController UIController;
 
         [SerializeField]
-        private float AnswerShowTime = 1f;
+        private float AnswerShowTime = 2f;
 
         public int CurrentQuestion { get; private set; }
 
         private List<QuizQuestion> m_QuizQuestions = new List<QuizQuestion>();
 
         private float m_TimeForEachQuestion;
+
+        private int m_Points = 0;
 
         private void Start()
         {
@@ -34,6 +36,7 @@ namespace Pocketboy.QuizSystem
             m_QuizQuestions = quizQuestions;
             UIController.SetupUI(quizQuestions.Count, timeForEachQuestion);
             CurrentQuestion = 0;
+            m_Points = 0;
             UIController.SetupUIForQuestion(m_QuizQuestions[CurrentQuestion]);
         }
 
@@ -43,6 +46,7 @@ namespace Pocketboy.QuizSystem
             if (isCorrect)
             {
                 QuizEvents.AnswerCorrectEvent(answerNumber);
+                m_Points++;
             }
             else
             {
@@ -68,7 +72,7 @@ namespace Pocketboy.QuizSystem
             CurrentQuestion++;
             if (CurrentQuestion > m_QuizQuestions.Count - 1)
             {
-                QuizEvents.QuizFinishedEvent();
+                QuizEvents.QuizFinishedEvent(m_Points);
             }
             else
             {

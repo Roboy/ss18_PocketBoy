@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Pocketboy.QuizSystem
 {
     public class QuizCollection : MonoBehaviour
     {
+        public Dictionary<int, Image> QuestionPictures { get; private set; }
+
         private Dictionary<int, QuizQuestion> m_QuestionsByID = new Dictionary<int, QuizQuestion>();
 
         private string m_QuestionsRelativePath = "/QuizQuestions/";
@@ -72,9 +75,9 @@ namespace Pocketboy.QuizSystem
             }
             foreach (var questionText in questionsInTextForm)
             {
-                var question = JsonUtility.FromJson<QuizQuestion>(questionText.text);
-                if (question != null)
-                    m_QuestionsByID.Add(question.ID, question);
+                var questionObject = JsonUtility.FromJson<QuizQuestion>(questionText.text);
+                if (questionObject != null)
+                    m_QuestionsByID.Add(questionObject.ID, questionObject);
             }
             // if the json questions could not be loaded into a QuizQuestion => mismatch of the question format
             if (m_QuestionsByID.Count > 0) return true;
