@@ -174,22 +174,27 @@
 
             for (int i = 0; i < Spheres.Count; i++)
             {
-                
+
                 var levelSphere = Instantiate(Spheres[i]);
                 levelSphere.name = "Level" + (i);
                 levelSphere.tag = "Level";
 
+                //if (i % 2 == 0)
+                //{ levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x + ((float)(i+1) / Spheres.Count), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
+                //if (i % 2 == 1)
+                //{ levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x - ((float)(i+1) / Spheres.Count), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
                 if (i % 2 == 0)
-                { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x + ((float)(i+1) / Spheres.Count), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
+                { levelSphere.transform.position = new Vector3(roboy.transform.position.x + ((float)(i + 1) / Spheres.Count), roboy.transform.position.y + 0.5f, roboy.transform.position.z); }
                 if (i % 2 == 1)
-                { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x - ((float)(i+1) / Spheres.Count), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
+                { levelSphere.transform.position = new Vector3(roboy.transform.position.x - ((float)(i + 1) / Spheres.Count), roboy.transform.position.y + 0.5f, roboy.transform.position.z); }
+
+                levelSphere.transform.RotateAround(roboy.transform.position, Vector3.up, 90.0f);
                 levelSphere.transform.localScale = levelSphere.transform.localScale * 0.25f;
                 levelSphere.transform.parent = anchor.transform;
                 //levelSphere.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
                 m_Levels.Add(levelSphere);
 
             }
-
             Debug.Log("spheres spawned.");
             Debug.Log(m_Levels.Count + " " + m_Levels[0]);
             
