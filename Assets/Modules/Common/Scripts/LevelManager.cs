@@ -33,6 +33,11 @@
         public GameObject Roboy;
 
         /// <summary>
+        /// Topics to learn about, represented as spheres/ portals to get into the respective training world.
+        /// </summary>
+        public List<GameObject> Spheres;
+
+        /// <summary>
         /// A gameobject parenting UI for displaying the "searching for planes" snackbar.
         /// </summary>
         public GameObject SearchingForPlaneUI;
@@ -150,19 +155,37 @@
             m_ModelSpawned = true;
             Debug.Log("roboy spawned.");
 
-            //Spawn Level spheres
-            for (int i = 1; i < 5; i++)
+            ////Spawn Level spheres
+            //for (int i = 1; i < 5; i++)
+            //{
+            //    GameObject levelSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            //    levelSphere.name = "level" + (i);
+            //    levelSphere.tag = "Level";
+            //    if (i % 2 == 0)
+            //    { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x + ((float)i / 4), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
+            //    if (i % 2 == 1)
+            //    { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x - ((float)i / 4), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
+            //    levelSphere.transform.localScale = levelSphere.transform.localScale * 0.25f;
+            //    levelSphere.transform.parent = anchor.transform;
+            //    levelSphere.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            //    m_Levels.Add(levelSphere);
+
+            //}
+
+            for (int i = 0; i < Spheres.Count; i++)
             {
-                GameObject levelSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                levelSphere.name = "level" + (i);
+                
+                var levelSphere = Instantiate(Spheres[i]);
+                levelSphere.name = "Level" + (i);
                 levelSphere.tag = "Level";
+
                 if (i % 2 == 0)
-                { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x + ((float)i / 4), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
+                { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x + ((float)(i+1) / Spheres.Count), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
                 if (i % 2 == 1)
-                { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x - ((float)i / 4), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
+                { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x - ((float)(i+1) / Spheres.Count), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
                 levelSphere.transform.localScale = levelSphere.transform.localScale * 0.25f;
                 levelSphere.transform.parent = anchor.transform;
-                levelSphere.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+                //levelSphere.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
                 m_Levels.Add(levelSphere);
 
             }
