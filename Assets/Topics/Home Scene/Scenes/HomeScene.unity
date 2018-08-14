@@ -776,6 +776,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114977880820556334, guid: df147d8dfad329a49b591f43e2c651d8,
+        type: 2}
+      propertyPath: Spheres.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4769029404385088, guid: df147d8dfad329a49b591f43e2c651d8, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1081,6 +1086,11 @@ MonoBehaviour:
   DetectedPlanePrefab: {fileID: 1654175882956584, guid: 6a35c744e5010405c847fad90282d2be,
     type: 2}
   Roboy: {fileID: 1556612136799238, guid: 70734eb0216130a4d972434b182eee3d, type: 2}
+  Spheres:
+  - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
+  - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
+  - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
+  - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
   SearchingForPlaneUI: {fileID: 1748469454}
 --- !u!4 &1585404061
 Transform:
@@ -1133,7 +1143,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c193fbbaac9bc2b4ab66c7a432ba673f, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c193fbbaac9bc2b4ab66c7a432ba673f, type: 3}
       propertyPath: m_LocalScale.x
