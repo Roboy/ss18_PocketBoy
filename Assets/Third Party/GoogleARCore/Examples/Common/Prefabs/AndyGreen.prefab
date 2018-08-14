@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4280309514915974}
   m_Layer: 0
-  m_Name: AndyDiffuse
+  m_Name: AndyGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,7 +172,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 0130982ecc98e47e4a78ec2f85196be5, type: 2}
   m_StaticBatchInfo:
@@ -207,9 +206,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 3ba1a07a228bd46a188bdc2dc6c52a16, type: 2}
+  - {fileID: 2100000, guid: 572e1e52514434db5a8ce3957db3b3fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
