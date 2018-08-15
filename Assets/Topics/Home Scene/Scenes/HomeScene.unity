@@ -823,6 +823,24 @@ Prefab:
       propertyPath: SearchingForPlaneUI
       value: 
       objectReference: {fileID: 1748469454}
+    - target: {fileID: 114977880820556334, guid: df147d8dfad329a49b591f43e2c651d8,
+        type: 2}
+      propertyPath: Spheres.Array.data[1]
+      value: 
+      objectReference: {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a,
+        type: 2}
+    - target: {fileID: 114977880820556334, guid: df147d8dfad329a49b591f43e2c651d8,
+        type: 2}
+      propertyPath: Spheres.Array.data[3]
+      value: 
+      objectReference: {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a,
+        type: 2}
+    - target: {fileID: 114977880820556334, guid: df147d8dfad329a49b591f43e2c651d8,
+        type: 2}
+      propertyPath: Spheres.Array.data[2]
+      value: 
+      objectReference: {fileID: 1864275086667500, guid: 116a2719a8d9e9e46919d1c9621d558d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df147d8dfad329a49b591f43e2c651d8, type: 2}
   m_IsPrefabParent: 0
@@ -1088,9 +1106,9 @@ MonoBehaviour:
   Roboy: {fileID: 1556612136799238, guid: 70734eb0216130a4d972434b182eee3d, type: 2}
   Spheres:
   - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-  - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-  - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-  - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
+  - {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a, type: 2}
+  - {fileID: 1864275086667500, guid: 116a2719a8d9e9e46919d1c9621d558d, type: 2}
+  - {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a, type: 2}
   SearchingForPlaneUI: {fileID: 1748469454}
 --- !u!4 &1585404061
 Transform:
