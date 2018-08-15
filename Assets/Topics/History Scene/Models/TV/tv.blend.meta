@@ -9,36 +9,72 @@ ModelImporter:
     100006: //RootNode
     100008: Tv-body
     100010: Tv-monitor
+    100012: TV_001
+    100014: Antenna
     400000: Back-button
     400002: Forward-button
     400004: Repeat-button
     400006: //RootNode
     400008: Tv-body
     400010: Tv-monitor
+    400012: TV_001
+    400014: Antenna
     2100000: button-repeat
     2100002: tv-monitor
     2100004: tv-body__Untitled
     2100006: button-back
     2100008: buttons-next
+    2100010: Material
     2300000: Back-button
     2300002: Forward-button
     2300004: Repeat-button
     2300006: Tv-body
     2300008: Tv-monitor
+    2300010: TV_001
+    2300012: Antenna
     3300000: Back-button
     3300002: Forward-button
     3300004: Repeat-button
     3300006: Tv-body
     3300008: Tv-monitor
+    3300010: TV_001
+    3300012: Antenna
     4300000: Repeat-button
     4300002: Tv-monitor
     4300004: Tv-body
     4300006: Back-button
     4300008: Forward-button
+    4300010: TV_001
+    4300012: Antenna
     7400000: Default Take
     9500000: //RootNode
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: button-back
+    second: {fileID: 2100000, guid: 6798ea82d8702da43b752973bc8371a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: button-repeat
+    second: {fileID: 2100000, guid: 171b6fee1c6e1584ead1ecb63effa302, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: buttons-next
+    second: {fileID: 2100000, guid: 414516b1b4da3fd4181126665e6a12d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tv-body__Untitled
+    second: {fileID: 2100000, guid: c830058d449f226448618a8223b7f126, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tv-monitor
+    second: {fileID: 2100000, guid: d23db8063eeb597418f3d0e763fb86d9, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

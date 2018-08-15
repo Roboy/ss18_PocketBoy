@@ -8,6 +8,10 @@ namespace Pocketboy.HistoryScene
 {
     public class TimeSlider : MonoBehaviour
     {
+        public int MaxDates { get { return MaxDatesVisible; } }
+
+        public float PartSize { get { return SliderPartSize; } }
+
 
         [SerializeField, Tooltip("Part representing a visual date")]
         private TimeSliderPart SliderPart;
@@ -39,7 +43,7 @@ namespace Pocketboy.HistoryScene
         /// <summary>
         /// Cached list of all slider parts.
         /// </summary>
-        private List<Transform> m_SliderParts = new List<Transform>();
+        private List<TimeSliderPart> m_SliderParts = new List<TimeSliderPart>();
 
         private TimeSliderEnd m_LeftEnd;
 
@@ -75,19 +79,18 @@ namespace Pocketboy.HistoryScene
             for (int i = 0; i < Dates.Length; i++)
             {
                 var sliderPart = Instantiate(SliderPart, SliderContainer);
-                sliderPart.Setup(SliderContainer, position, size, Dates[i], SliderColor);
-                m_SliderParts.Add(sliderPart.transform);
+                sliderPart.Setup(this, SliderContainer, position, size, Dates[i], SliderColor);
+                m_SliderParts.Add(sliderPart);
                 position.x += SliderPartSize; // move to next position
             }
             // create the ends
             m_RightEnd = Instantiate(RightEnd, SliderContainer);
-            position.x = SliderPartSize;
-            m_RightEnd.Setup(position, size, SliderColor);
-            m_RightEnd.ImageComponent.enabled = false;
+            position.x = SliderPartSize * Dates.Length;
+            m_RightEnd.Setup(SliderContainer, position, size, SliderColor);
 
             m_LeftEnd = Instantiate(LeftEnd, SliderContainer);
             position.x = -SliderPartSize;
-            m_LeftEnd.Setup(position, size, SliderColor);
+            m_LeftEnd.Setup(SliderContainer, position, size, SliderColor);
         }
 
         public void ShowNextDate()
@@ -115,35 +118,30 @@ namespace Pocketboy.HistoryScene
                 yield return null;
 
             m_Changing = true;
-            if (m_CurrentDate == 0)
-            {
-                m_LeftEnd.Show(DateSwitchTime);
-            }
-            else if (m_CurrentDate == m_SliderParts.Count - 1)
-            {
-                m_RightEnd.Show(DateSwitchTime);
-
-            }
-            else
-            {
-                m_LeftEnd.Hide(DateSwitchTime);
-                m_RightEnd.Hide(DateSwitchTime);
-            }
 
             float currentTime = 0f;
-            float positionChange = -m_SliderParts[m_CurrentDate].localPosition.x; // we move the whole slider to the left so we need the opposite vector motion
+            float positionChange = -m_SliderParts[m_CurrentDate].transform.localPosition.x; // we move the whole slider to the left so we need the opposite vector motion
             var posByPartIndex = new Dictionary<int, float>();
+            float leftEndInitPos = m_LeftEnd.transform.localPosition.x;
+            float rightEndInitPos = m_RightEnd.transform.localPosition.x;
             for (int i = 0; i < m_SliderParts.Count; i++)
             {
-                posByPartIndex.Add(i, m_SliderParts[i].localPosition.x);
+                posByPartIndex.Add(i, m_SliderParts[i].transform.localPosition.x);
             }
+            float newPos = 0f;
+            float factor = 0f;
             while (currentTime < DateSwitchTime)
             {
+                factor = currentTime / DateSwitchTime;
                 for (int i = 0; i < m_SliderParts.Count; i++)
                 {
-                    var newPos = Mathf.SmoothStep(posByPartIndex[i], posByPartIndex[i] + positionChange, currentTime / DateSwitchTime);
+                    newPos = Mathf.SmoothStep(posByPartIndex[i], posByPartIndex[i] + positionChange, factor);
                     m_SliderParts[i].transform.localPosition = Vector3.right * newPos;
                 }
+                newPos = Mathf.SmoothStep(leftEndInitPos, leftEndInitPos + positionChange, factor);
+                m_LeftEnd.transform.localPosition = Vector3.right * newPos;
+                newPos = Mathf.SmoothStep(rightEndInitPos, rightEndInitPos + positionChange, factor);
+                m_RightEnd.transform.localPosition = Vector3.right * newPos;
                 currentTime += Time.deltaTime;
                 yield return null;
             }
