@@ -88,23 +88,21 @@ namespace Pocketboy.HistoryScene
                 return;
 
 #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.RightArrow)) { ShowNextContent(); }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow)) { ShowPreviousContent(); }
-
-
+            if (Input.GetKeyDown(KeyCode.RightArrow)) { ShowNextContent(); }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow)) { ShowPreviousContent(); }
 #elif UNITY_ANDROID
-        if (Input.touches.Length > 0 && Input.GetTouch(0).phase == TouchPhase.Began )
-        {
-            var pos = Input.GetTouch(0).position;
-            if (pos.x > Screen.width / 2)
+            if (Input.touches.Length > 0 && Input.GetTouch(0).phase == TouchPhase.Began )
             {
-                ShowNextContent();
+                var pos = Input.GetTouch(0).position;
+                if (pos.x > Screen.width / 2)
+                {
+                    ShowNextContent();
+                }
+                else
+                {
+                    ShowPreviousContent();
+                }
             }
-            else
-            {
-                ShowPreviousContent();
-            }
-        }
 #endif
         }
 
@@ -124,24 +122,37 @@ namespace Pocketboy.HistoryScene
             ShowContent(m_CurrentContent - 1);
         }
 
-        public void ShowContent(int index)
+        public void RepeatContent()
+        {
+            if (m_ContentList[m_CurrentContent].IsVideo)
+            {
+                ShowContent(m_CurrentContent, false);
+                Debug.Log("R");
+            }            
+        }
+
+        public void ShowContent(int index, bool showStaticImage = true)
         {
             if (m_ContentList.Count == 0)
                 return;
 
             m_CurrentContent = MathUtility.WrapArrayIndex(index, m_ContentList.Count);
-            StartCoroutine(UpdateContent());
+            StartCoroutine(UpdateContent(showStaticImage));
         }
 
-        private IEnumerator UpdateContent()
+        private IEnumerator UpdateContent(bool showStaticImage)
         {
             while (m_Changing)
                 yield return null;
 
             m_Changing = true;
-            MonitorRenderer.material = StaticMaterial;
-            yield return new WaitForSeconds(StaticImageTime);
 
+            if (showStaticImage)
+            {
+                MonitorRenderer.material = StaticMaterial;
+                yield return new WaitForSeconds(StaticImageTime);
+            }
+            
             if (!m_ContentList[m_CurrentContent].IsVideo)
             {
                 DefaultMaterial.mainTexture = m_ContentList[m_CurrentContent].Image;
@@ -151,6 +162,7 @@ namespace Pocketboy.HistoryScene
             {
                 DefaultMaterial.mainTexture = VideoTexture;
                 m_VideoPlayer.clip = m_ContentList[m_CurrentContent].Video;
+                m_VideoPlayer.Stop();
                 m_VideoPlayer.Play();
             }
             MonitorRenderer.material = DefaultMaterial;

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222866314917013012}
   - component: {fileID: 114054549293844872}
   - component: {fileID: 114094752801356636}
+  - component: {fileID: 114311345343849442}
   m_Layer: 5
   m_Name: SliderRightEnd
   m_TagString: Untagged
@@ -68,6 +69,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ImageComponent: {fileID: 114054549293844872}
+  SoftMask: {fileID: 114311345343849442}
+--- !u!114 &114311345343849442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1413240371891914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ee60af491978345bc197ed4e1316bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaskArea: {fileID: 224360404878517626}
+  MaskScalingRect: {fileID: 0}
+  AlphaMask: {fileID: 2800000, guid: b0a6bab68e3068343806b9a503b37980, type: 3}
+  CutOff: 0
+  HardBlend: 0
+  FlipAlphaMask: 0
+  DontClipMaskScalingRect: 0
+  CascadeToALLChildren: 0
 --- !u!222 &222866314917013012
 CanvasRenderer:
   m_ObjectHideFlags: 1
