@@ -16,17 +16,6 @@
     /// </summary>
     public class LevelManager : MonoBehaviour
     {
-
-        /// <summary>
-        /// The first-person camera being used to render the passthrough camera image (i.e. AR background).
-        /// </summary>
-        public Camera FirstPersonCamera;
-
-        /// <summary>
-        /// A prefab for tracking and visualizing detected planes.
-        /// </summary>
-        public GameObject DetectedPlanePrefab;
-
         /// <summary>
         /// A model to place when a raycast from a user touch hits a plane.
         /// </summary>
