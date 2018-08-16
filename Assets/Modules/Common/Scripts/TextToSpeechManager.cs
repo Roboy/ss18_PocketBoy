@@ -25,12 +25,13 @@ namespace Pocketboy.Common
                 return;
 
             IsTalking = true;
-            m_TextToSpeechJavaClass.CallStatic("promptSpeechOutputWithCallback", text, name, "TalkDone");
+            m_TextToSpeechJavaClass.CallStatic("promptSpeechOutputWithCallback", text, gameObject.name, "TalkDone");
         }
 
         private void TalkDone()
         {
             IsTalking = false;
+            Debug.LogError("FUUUUUUUUUUUUUUUUUUCK");
         }
 
         private void Initialize()

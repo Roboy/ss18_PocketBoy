@@ -32,7 +32,6 @@ namespace Pocketboy.SpeechPlugin
             try
             {
                 m_SpeechToTextJavaClass = new AndroidJavaClass(SpeechPlugin.PACKAGE_NAME + "." + SpeechPlugin.SPEECH_TO_TEXT_CLASS);
-                m_SpeechToTextJavaClass.CallStatic("setUnityReceiver", name);
                 m_SpeechToTextJavaClass.CallStatic("setDelimiter", m_Delimiter);
                 m_Initialized = true;
             }
@@ -49,7 +48,7 @@ namespace Pocketboy.SpeechPlugin
             if (!m_Initialized)
                 return;
 
-            m_SpeechToTextJavaClass.CallStatic("promptSpeechInput", name, "OnResults");
+            m_SpeechToTextJavaClass.CallStatic("promptSpeechInput", gameObject.name, "OnResults");
         }
 
         void OnResults(string recognizedText)

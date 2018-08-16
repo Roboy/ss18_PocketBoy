@@ -13,6 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TVContent: {fileID: 2800000, guid: 141f45ec30c80b449aa56c0e92b9d319, type: 3}
   Date: 2012
-  Text: Thank you for tuning in. This programm will tell you about some awesome milestones
-    in the evolution of robots. In order to change the milestones just click on the
-    buttons attached to the television.
+  Text: Baxter is a collaborative robot with a face projected on a display. This makes
+    him more friendly to interact with. He also has a little brother called Sawyer.

@@ -80,7 +80,6 @@ namespace Pocketboy.HistoryScene
                 tvContent.Add(content.TVContent);
                 dates.Add(content.Date);
                 TextForSpeech.Add(content.Text);
-                Debug.Log(content.Text);
             }
             TV.FillContent(tvContent.ToArray());
             Slider.FillSlider(dates.ToArray());
