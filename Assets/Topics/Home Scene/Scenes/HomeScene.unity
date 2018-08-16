@@ -718,6 +718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TriggerTime: 2
+  LogoRotationSpeed: 10
   RoboyLogo: {fileID: 181820036}
 --- !u!114 &845338481
 MonoBehaviour:

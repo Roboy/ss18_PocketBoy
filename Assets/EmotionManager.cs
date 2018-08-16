@@ -2,21 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmotionManager : MonoBehaviour {
 
-    public List<Sprite> Mouths;
-    public float Speed = 0.1f;
-
-    
-
-    private IEnumerator mouthMoving()
+namespace Pocketboy.Common
+{
+    public class EmotionManager : Singleton<EmotionManager>
     {
-        for (int i = 0; i < Mouths.Count; i++)
+
+        public List<Sprite> Mouths;
+        public float Speed = 0.1f;
+
+        public IEnumerator mouthMoving()
         {
-            this.GetComponent<SpriteRenderer>().sprite = Mouths[i];
-            yield return new WaitForSeconds(Speed);
+            SpriteRenderer s = this.GetComponent<SpriteRenderer>();
+            while (true)
+            {
+                
+                for (int i = 0; i < Mouths.Count; i++)
+                {
+                    s.sprite = Mouths[i];
+                    yield return new WaitForSeconds(Speed);
+                }
+            }
         }
 
-        yield return null;
+        public void ResetMouth()
+        {
+            this.GetComponent<SpriteRenderer>().sprite = Mouths[0];
+        }
     }
+
 }
