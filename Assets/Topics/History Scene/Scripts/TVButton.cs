@@ -32,15 +32,13 @@ namespace Pocketboy.HistoryScene
             switch(ButtonOperation)
             {
                 case ButtonType.Next:
-                    TV.ShowNextContent();
-                    Slider.ShowNextDate();
+                    EventManager.OnNextContent();
                     break;
                 case ButtonType.Previous:
-                    TV.ShowPreviousContent();
-                    Slider.ShowPreviousDate();
+                    EventManager.OnPreviousContent();                    
                     break;
                 case ButtonType.Repeat:
-                    TV.RepeatContent();
+                    EventManager.OnRepeatContent();
                     break;
             }
             StartCoroutine(HighlightAnimation());

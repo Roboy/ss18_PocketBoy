@@ -49,13 +49,7 @@ namespace Pocketboy.SpeechPlugin
             if (!m_Initialized)
                 return;
 
-            m_SpeechToTextJavaClass.CallStatic("promptSpeechInput");
-        }
-
-        void OnActivityResult(string recognizedText)
-        {
-            // show the result with the highest confidence
-            SpeechOutput.text = "Fake News";
+            m_SpeechToTextJavaClass.CallStatic("promptSpeechInput", name, "OnResults");
         }
 
         void OnResults(string recognizedText)

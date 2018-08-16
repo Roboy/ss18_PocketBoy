@@ -126,12 +126,12 @@ MonoBehaviour:
     type: 2}
   LeftEnd: {fileID: 114542173363665374, guid: a020e4299b4341f43b8c689b5a9ea1a6, type: 2}
   RightEnd: {fileID: 114094752801356636, guid: 38ed48722ae1bfa41ac41c8d4eda1a70, type: 2}
-  SliderPartSize: 500
+  SliderPartSize: 200
   SliderColor: {r: 0.10984874, g: 1, b: 0, a: 1}
   SliderContainer: {fileID: 224268651165833526}
-  Dates: a1070000c4070000d1070000d5070000e4070000b70b000029230000
-  MaxDatesVisible: 5
-  DateSwitchTime: 0.469
+  Dates: 
+  MaxDatesVisible: 3
+  DateSwitchTime: 0.3
 --- !u!222 &222103133606587854
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -173,7 +173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 500, y: -416}
+  m_AnchoredPosition: {x: 0, y: -604}
   m_SizeDelta: {x: 2500, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224571185595148034
