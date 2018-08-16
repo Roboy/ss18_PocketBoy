@@ -21,7 +21,7 @@ namespace Pocketboy.Common
 
         public void Talk(string text)
         {
-            if (IsTalking)
+            if (IsTalking || !m_Initialized)
                 return;
 
             IsTalking = true;
@@ -31,7 +31,6 @@ namespace Pocketboy.Common
         private void TalkDone()
         {
             IsTalking = false;
-            Debug.LogError("FUUUUUUUUUUUUUUUUUUCK");
         }
 
         private void Initialize()

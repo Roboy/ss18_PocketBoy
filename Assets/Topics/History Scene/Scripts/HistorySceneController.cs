@@ -22,6 +22,8 @@ namespace Pocketboy.HistoryScene
 
         private int m_CurrentContentIndex = 0;
 
+        private bool m_IsOff;
+
         private void Awake()
         {
             Initialize();
@@ -46,10 +48,8 @@ namespace Pocketboy.HistoryScene
             if (TextToSpeechManager.Instance.IsTalking)
                 return;
 
-            TV.ShowContent(m_CurrentContentIndex);
-            Slider.ShowDate(m_CurrentContentIndex);
-            TextToSpeechManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
             m_CurrentContentIndex = MathUtility.WrapArrayIndex(m_CurrentContentIndex + 1, TextForSpeech.Count);
+            ShowContent(m_CurrentContentIndex);
         }
 
         private void PreviousContent()
@@ -57,9 +57,8 @@ namespace Pocketboy.HistoryScene
             if (TextToSpeechManager.Instance.IsTalking)
                 return;
 
-            TV.ShowContent(MathUtility.WrapArrayIndex(m_CurrentContentIndex - 1, TextForSpeech.Count));
-            Slider.ShowDate(MathUtility.WrapArrayIndex(m_CurrentContentIndex - 1, TextForSpeech.Count));
-            TextToSpeechManager.Instance.Talk(TextForSpeech[MathUtility.WrapArrayIndex(m_CurrentContentIndex - 1, TextForSpeech.Count)]);
+            m_CurrentContentIndex = MathUtility.WrapArrayIndex(m_CurrentContentIndex - 1, TextForSpeech.Count);
+            ShowContent(m_CurrentContentIndex);           
         }
 
         private void RepeatContent()
@@ -68,6 +67,13 @@ namespace Pocketboy.HistoryScene
                 return;
 
             TV.RepeatContent();
+            TextToSpeechManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
+        }
+
+        private void ShowContent(int index)
+        {
+            TV.ShowContent(m_CurrentContentIndex);
+            Slider.ShowDate(m_CurrentContentIndex);
             TextToSpeechManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
         }
 

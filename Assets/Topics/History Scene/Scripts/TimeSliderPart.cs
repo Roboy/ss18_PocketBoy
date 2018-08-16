@@ -40,7 +40,7 @@ namespace Pocketboy.HistoryScene
             transform.localPosition = position;
             GetComponent<RectTransform>().sizeDelta = size;
             Date.text = date.ToString();
-            Date.transform.localPosition = new Vector2(0f, size.y / 2f); // position above image
+            Date.transform.localPosition = new Vector2(0f, -size.y / 1.5f); // position above image
             Date.GetComponent<RectTransform>().sizeDelta = size;
             GetComponent<Image>().color = color;
             m_PosToFade = ((slider.MaxDates / 2) * slider.PartSize);

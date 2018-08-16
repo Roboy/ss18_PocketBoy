@@ -315,6 +315,40 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1866659757489260, guid: 57dae54c396da0d4eaaa97ec625042c4, type: 2}
+      propertyPath: m_Name
+      value: Container
+      objectReference: {fileID: 0}
+    - target: {fileID: 114869492291372186, guid: 57dae54c396da0d4eaaa97ec625042c4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224268651165833526, guid: 57dae54c396da0d4eaaa97ec625042c4,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 654
+      objectReference: {fileID: 0}
+    - target: {fileID: 114943873191047858, guid: 57dae54c396da0d4eaaa97ec625042c4,
+        type: 2}
+      propertyPath: SliderPartSize
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 114943873191047858, guid: 57dae54c396da0d4eaaa97ec625042c4,
+        type: 2}
+      propertyPath: SliderColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114943873191047858, guid: 57dae54c396da0d4eaaa97ec625042c4,
+        type: 2}
+      propertyPath: SliderColor.g
+      value: 0.79495114
+      objectReference: {fileID: 0}
+    - target: {fileID: 114943873191047858, guid: 57dae54c396da0d4eaaa97ec625042c4,
+        type: 2}
+      propertyPath: SliderColor.b
+      value: 0.4481132
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 57dae54c396da0d4eaaa97ec625042c4, type: 2}
   m_IsPrefabParent: 0
