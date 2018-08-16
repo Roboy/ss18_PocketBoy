@@ -56,13 +56,6 @@ namespace Pocketboy.HistoryScene
 
         private bool m_Changing;
 
-        //// Update is called once per frame
-        //void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.RightArrow)) { ShowNextDate(); }
-        //    else if (Input.GetKeyDown(KeyCode.LeftArrow)) { ShowPreviousDate(); }
-        //}
-
         public void FillSlider(int[] dates)
         {
             // e.g. partsize = 200 with 5 parts => (200 * (5-1)) = 800 => 800 / 2 => 400 => first position = -400
@@ -112,7 +105,6 @@ namespace Pocketboy.HistoryScene
                 yield return null;
 
             m_Changing = true;
-
             float currentTime = 0f;
             float positionChange = -m_SliderParts[m_CurrentDate].transform.localPosition.x; // we move the whole slider to the left so we need the opposite vector motion
             var posByPartIndex = new Dictionary<int, float>();
@@ -143,6 +135,8 @@ namespace Pocketboy.HistoryScene
             {
                 m_SliderParts[i].transform.localPosition = Vector3.right * (posByPartIndex[i] + positionChange);
             }
+            m_LeftEnd.transform.localPosition = Vector3.right * (leftEndInitPos + positionChange);
+            m_RightEnd.transform.localPosition = Vector3.right * (rightEndInitPos + positionChange);
             m_Changing = false;
         }
     }
