@@ -384,6 +384,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1051500379884648, guid: ce9ff82be98f5b945989ac9fce9f8fb5, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce9ff82be98f5b945989ac9fce9f8fb5, type: 2}
   m_IsPrefabParent: 0
@@ -468,7 +472,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1914568965366702, guid: be4e8e0578a7066449da360a0cd46a6b, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be4e8e0578a7066449da360a0cd46a6b, type: 2}
@@ -718,6 +722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TriggerTime: 2
+  LogoRotationSpeed: 10
   RoboyLogo: {fileID: 181820036}
 --- !u!114 &845338481
 MonoBehaviour:
@@ -747,7 +752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &999211590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1393,7 +1398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2021205464
 MonoBehaviour:
   m_ObjectHideFlags: 0

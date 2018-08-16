@@ -11,6 +11,7 @@ namespace Pocketboy.Common
     {
         [SerializeField]
         private Transform Head;
+        private Coroutine m_cor;
 
         void Start()
         {
@@ -22,6 +23,17 @@ namespace Pocketboy.Common
         void Update()
         {
             Head.LookAt(Camera.main.transform.position);
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                m_cor = StartCoroutine(EmotionManager.Instance.mouthMoving());
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                if(m_cor !=null)
+                StopCoroutine(m_cor);
+                EmotionManager.Instance.ResetMouth();
+            }
         }
     }
 }
