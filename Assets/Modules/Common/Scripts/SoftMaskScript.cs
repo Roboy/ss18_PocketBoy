@@ -144,7 +144,7 @@ namespace Pocketboy.Common
 
         void SetMask()
         {
-            if (MaterialNotSupported)
+            if (MaterialNotSupported || mat == null)
             {
                 return;
             }

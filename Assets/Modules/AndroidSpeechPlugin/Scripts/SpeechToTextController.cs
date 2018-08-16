@@ -32,7 +32,6 @@ namespace Pocketboy.SpeechPlugin
             try
             {
                 m_SpeechToTextJavaClass = new AndroidJavaClass(SpeechPlugin.PACKAGE_NAME + "." + SpeechPlugin.SPEECH_TO_TEXT_CLASS);
-                m_SpeechToTextJavaClass.CallStatic("setUnityReceiver", name);
                 m_SpeechToTextJavaClass.CallStatic("setDelimiter", m_Delimiter);
                 m_Initialized = true;
             }
@@ -49,13 +48,7 @@ namespace Pocketboy.SpeechPlugin
             if (!m_Initialized)
                 return;
 
-            m_SpeechToTextJavaClass.CallStatic("promptSpeechInput");
-        }
-
-        void OnActivityResult(string recognizedText)
-        {
-            // show the result with the highest confidence
-            SpeechOutput.text = "Fake News";
+            m_SpeechToTextJavaClass.CallStatic("promptSpeechInput", gameObject.name, "OnResults");
         }
 
         void OnResults(string recognizedText)

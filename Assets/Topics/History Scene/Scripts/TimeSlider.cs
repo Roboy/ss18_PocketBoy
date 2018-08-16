@@ -56,36 +56,30 @@ namespace Pocketboy.HistoryScene
 
         private bool m_Changing;
 
-        // Use this for initialization
-        void Start()
-        {
-            CreateSlider();
-        }
+        //// Update is called once per frame
+        //void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.RightArrow)) { ShowNextDate(); }
+        //    else if (Input.GetKeyDown(KeyCode.LeftArrow)) { ShowPreviousDate(); }
+        //}
 
-        // Update is called once per frame
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.RightArrow)) { ShowNextDate(); }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow)) { ShowPreviousDate(); }
-        }
-
-        private void CreateSlider()
+        public void FillSlider(int[] dates)
         {
             // e.g. partsize = 200 with 5 parts => (200 * (5-1)) = 800 => 800 / 2 => 400 => first position = -400
             float x_position = 0f;
             Vector3 position = new Vector3(x_position, 0f, 0f);
             Vector2 size = new Vector3(SliderPartSize, SliderPartSize);
             SliderContainer.sizeDelta = new Vector2(SliderPartSize * MaxDatesVisible, SliderPartSize);
-            for (int i = 0; i < Dates.Length; i++)
+            for (int i = 0; i < dates.Length; i++)
             {
                 var sliderPart = Instantiate(SliderPart, SliderContainer);
-                sliderPart.Setup(this, SliderContainer, position, size, Dates[i], SliderColor);
+                sliderPart.Setup(this, SliderContainer, position, size, dates[i], SliderColor);
                 m_SliderParts.Add(sliderPart);
                 position.x += SliderPartSize; // move to next position
             }
             // create the ends
             m_RightEnd = Instantiate(RightEnd, SliderContainer);
-            position.x = SliderPartSize * Dates.Length;
+            position.x = SliderPartSize * dates.Length;
             m_RightEnd.Setup(SliderContainer, position, size, SliderColor);
 
             m_LeftEnd = Instantiate(LeftEnd, SliderContainer);
@@ -105,10 +99,10 @@ namespace Pocketboy.HistoryScene
 
         public void ShowDate(int index)
         {
-            if (Dates.Length == 0)
+            if (m_SliderParts.Count == 0)
                 return;
 
-            m_CurrentDate = MathUtility.WrapArrayIndex(index, Dates.Length);
+            m_CurrentDate = MathUtility.WrapArrayIndex(index, m_SliderParts.Count);
             StartCoroutine(UpdateSlider());
         }
 

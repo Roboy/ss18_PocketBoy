@@ -11,6 +11,8 @@ ModelImporter:
     100010: Tv-monitor
     100012: TV_001
     100014: Antenna
+    100016: Tv-monitor_001
+    100018: TV-monitor
     400000: Back-button
     400002: Forward-button
     400004: Repeat-button
@@ -19,12 +21,16 @@ ModelImporter:
     400010: Tv-monitor
     400012: TV_001
     400014: Antenna
+    400016: Tv-monitor_001
+    400018: TV-monitor
     2100000: button-repeat
     2100002: tv-monitor
     2100004: tv-body__Untitled
     2100006: button-back
     2100008: buttons-next
     2100010: Material
+    2100012: tv-monitor__1973-WabotOne_jpg
+    2100014: tv-monitor__1974-IRB6_jpg
     2300000: Back-button
     2300002: Forward-button
     2300004: Repeat-button
@@ -32,6 +38,8 @@ ModelImporter:
     2300008: Tv-monitor
     2300010: TV_001
     2300012: Antenna
+    2300014: Tv-monitor_001
+    2300016: TV-monitor
     3300000: Back-button
     3300002: Forward-button
     3300004: Repeat-button
@@ -39,6 +47,8 @@ ModelImporter:
     3300008: Tv-monitor
     3300010: TV_001
     3300012: Antenna
+    3300014: Tv-monitor_001
+    3300016: TV-monitor
     4300000: Repeat-button
     4300002: Tv-monitor
     4300004: Tv-body
@@ -46,6 +56,8 @@ ModelImporter:
     4300008: Forward-button
     4300010: TV_001
     4300012: Antenna
+    4300014: Tv-monitor_001
+    4300016: TV-monitor
     7400000: Default Take
     9500000: //RootNode
     2186277476908879412: ImportLogs

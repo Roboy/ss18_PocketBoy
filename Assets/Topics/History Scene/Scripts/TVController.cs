@@ -77,11 +77,6 @@ namespace Pocketboy.HistoryScene
         /// </summary>
         private bool m_Changing;
 
-        private void Awake()
-        {
-            FillContentList();
-        }
-
         void Update()
         {
             if (!m_DebugMode)
@@ -110,6 +105,45 @@ namespace Pocketboy.HistoryScene
         {
             // we need to reset the material because changes of materials in play mode are saved
             DefaultMaterial.mainTexture = null;
+        }
+
+        /// <summary>
+        /// Fills the content list with objects of the serialized content array which are either of type VideoClip or Texture2D.
+        /// </summary>
+        public void FillContent(UnityEngine.Object[] content)
+        {
+            bool videoIncluded = false;
+            for (int i = 0; i < content.Length; i++)
+            {
+                if (content[i] == null)
+                    continue;
+
+                try
+                {
+                    var image = (Texture2D)content[i];
+                    if (image != null)
+                        m_ContentList.Add(new TVObject(image));
+                }
+                catch (InvalidCastException e)
+                {
+                    var video = (VideoClip)content[i];
+                    if (video != null)
+                    {
+                        m_ContentList.Add(new TVObject(video));
+                        videoIncluded = true;
+                    }
+                }
+            }
+            if (!videoIncluded)
+                return;
+
+            m_VideoPlayer = gameObject.AddComponent<VideoPlayer>();
+            m_VideoPlayer.playOnAwake = false;
+            m_VideoPlayer.aspectRatio = VideoAspectRatio.FitInside;
+            m_VideoPlayer.isLooping = false;
+            m_VideoPlayer.audioOutputMode = VideoAudioOutputMode.Direct;
+            m_VideoPlayer.renderMode = VideoRenderMode.RenderTexture;
+            m_VideoPlayer.targetTexture = VideoTexture;
         }
 
         public void ShowNextContent()
@@ -156,7 +190,8 @@ namespace Pocketboy.HistoryScene
             if (!m_ContentList[m_CurrentContent].IsVideo)
             {
                 DefaultMaterial.mainTexture = m_ContentList[m_CurrentContent].Image;
-                m_VideoPlayer.clip = null;
+                if(m_VideoPlayer != null)
+                    m_VideoPlayer.clip = null;
             }
             else
             {
@@ -169,43 +204,6 @@ namespace Pocketboy.HistoryScene
             m_Changing = false;
         }
 
-        /// <summary>
-        /// Fills the content list with objects of the serialized content array which are either of type VideoClip or Texture2D.
-        /// </summary>
-        private void FillContentList()
-        {
-            bool videoIncluded = false;
-            for (int i = 0; i < Content.Length; i++)
-            {
-                if (Content[i] == null)
-                    continue;
-
-                try
-                {
-                    var image = (Texture2D)Content[i];
-                    if (image != null)
-                        m_ContentList.Add(new TVObject(image));
-                }
-                catch (InvalidCastException e)
-                {
-                    var video = (VideoClip)Content[i];
-                    if (video != null)
-                    {
-                        m_ContentList.Add(new TVObject(video));
-                        videoIncluded = true;
-                    }
-                }
-            }
-            if (!videoIncluded)
-                return;
-
-            m_VideoPlayer = gameObject.AddComponent<VideoPlayer>();
-            m_VideoPlayer.playOnAwake = false;
-            m_VideoPlayer.aspectRatio = VideoAspectRatio.FitInside;
-            m_VideoPlayer.isLooping = false;
-            m_VideoPlayer.audioOutputMode = VideoAudioOutputMode.Direct;
-            m_VideoPlayer.renderMode = VideoRenderMode.RenderTexture;
-            m_VideoPlayer.targetTexture = VideoTexture;
-        }
+       
     }
 }

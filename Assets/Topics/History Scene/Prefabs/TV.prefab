@@ -647,7 +647,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864145667038662}
-  m_Mesh: {fileID: 4300002, guid: 66e12f3f4be54fb42b0f398114d47386, type: 3}
+  m_Mesh: {fileID: 4300016, guid: 66e12f3f4be54fb42b0f398114d47386, type: 3}
 --- !u!33 &33361474674306430
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -816,10 +816,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultMaterial: {fileID: 2100000, guid: 7b51886c795e01a4b873857a52ed5be8, type: 2}
   StaticMaterial: {fileID: 2100000, guid: b3f0138d09db8f445b573462937e3722, type: 2}
-  StaticImageTime: 0.25
+  StaticImageTime: 0.3
   MonitorRenderer: {fileID: 23371379743829220}
-  Content:
-  - {fileID: 2800000, guid: 18efcf16de9a77f4191be779a8b38eb1, type: 3}
-  - {fileID: 32900000, guid: 0f6e4362969b7684597640b3157c8ce2, type: 3}
+  Content: []
   VideoTexture: {fileID: 8400000, guid: 29dee607b657f494686e4f8e5440791d, type: 2}
   m_DebugMode: 0
