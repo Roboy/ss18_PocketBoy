@@ -16,7 +16,15 @@ namespace Pocketboy.HistoryScene
 
         private float m_FloatTime = 0.2f;
 
-        private bool m_FadedOut;
+        private enum FadeState
+        {
+            FadedOut,
+            FadedOutHalf,
+            FadedInHalf,
+            FadedIn
+        }
+
+        private FadeState State = FadeState.FadedOut;
 
         private TVController m_TV;
 
@@ -24,13 +32,35 @@ namespace Pocketboy.HistoryScene
 
         private void Update()
         {
+            // out of the mask
             if (transform.localPosition.x < -m_PosToFade || transform.localPosition.x > m_PosToFade)
             {
                 FadeOutDate();
+                return;
             }
-            else
+            // inside the mask
+            else if (transform.localPosition.x > -m_PosToFade && transform.localPosition.x < m_PosToFade)
             {
-                FadeInDate();
+                // active element
+                if (transform.localPosition.x == 0f)
+                {
+                    FadeInDate();
+                    return;
+                }
+                // inside the mask but not active elment
+                else
+                {
+                    if (State == FadeState.FadedIn)
+                    {
+                        FadeOutDateHalf();
+                        return;
+                    }
+                    else
+                    {
+                        FadeInDateHalf();
+                        return;
+                    }                       
+                }                        
             }
         }
 
@@ -46,21 +76,48 @@ namespace Pocketboy.HistoryScene
             m_PosToFade = ((slider.MaxDates / 2) * slider.PartSize);
         }
 
-        public void FadeOutDate()
+        private void FadeOutDate()
         {
-            if(!m_FadedOut)
-                StartCoroutine(Fade(1f, 0f));
+            if (State == FadeState.FadedOut)
+                return;
+
+            State = FadeState.FadedOut;
+            StartCoroutine(Fade(0.5f, 0f));           
+            Debug.Log("FadeOutDate");
         }
 
-        public void FadeInDate()
+        private void FadeInDate()
         {
-            if (m_FadedOut)
-                StartCoroutine(Fade(0f, 1f));
+            if (State == FadeState.FadedIn)
+                return;
+
+            State = FadeState.FadedIn;
+            StartCoroutine(Fade(0.5f, 1f));
+            Debug.Log("FadeInDate");
+        }
+
+        private void FadeInDateHalf()
+        {
+            if (State == FadeState.FadedInHalf)
+                return;
+
+            State = FadeState.FadedInHalf;
+            StartCoroutine(Fade(0f, 0.5f));
+            Debug.Log("FadeInDateHalf");
+        }
+
+        private void FadeOutDateHalf()
+        {
+            if (State == FadeState.FadedOutHalf)
+                return;
+
+            State = FadeState.FadedOutHalf;
+            StartCoroutine(Fade(1f, 0.5f));
+            Debug.Log("FadeOutDateHalf");
         }
 
         private IEnumerator Fade(float startValue, float endValue)
         {
-            m_FadedOut = endValue == 0f ? true : false;
             float currentTime = 0f;
             Color color = Date.color;
             color.a = startValue;
