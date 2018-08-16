@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 114511887295326824}
   m_Layer: 14
   m_Name: Roboy_simplified_rotated
-  m_TagString: Untagged
+  m_TagString: Roboy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
