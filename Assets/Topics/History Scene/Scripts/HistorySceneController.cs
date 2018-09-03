@@ -22,7 +22,7 @@ namespace Pocketboy.HistoryScene
 
         private int m_CurrentContentIndex = 0;
 
-        private bool m_IsOff;
+        private bool m_IsOn = false;
 
         private void Awake()
         {
@@ -48,7 +48,10 @@ namespace Pocketboy.HistoryScene
             if (TextToSpeechManager.Instance.IsTalking)
                 return;
 
-            m_CurrentContentIndex = MathUtility.WrapArrayIndex(m_CurrentContentIndex + 1, TextForSpeech.Count);
+            if(m_IsOn)
+                m_CurrentContentIndex = MathUtility.WrapArrayIndex(m_CurrentContentIndex + 1, TextForSpeech.Count);
+
+            m_IsOn = true;
             ShowContent(m_CurrentContentIndex);
         }
 
@@ -75,6 +78,7 @@ namespace Pocketboy.HistoryScene
             TV.ShowContent(m_CurrentContentIndex);
             Slider.ShowDate(m_CurrentContentIndex);
             TextToSpeechManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
+            
         }
 
         private void Initialize()
@@ -89,6 +93,14 @@ namespace Pocketboy.HistoryScene
             }
             TV.FillContent(tvContent.ToArray());
             Slider.FillSlider(dates.ToArray());
+
+            var roboy = LevelManager.Instance.Roboy;
+            TV.transform.position = roboy.transform.position + roboy.transform.right * 0.65f;
+            TV.transform.forward = roboy.transform.forward;
+
+            TextToSpeechManager.Instance.Talk("Thank you for tuning in. " +
+                "This programm will tell you about some awesome milestones in the evolution of robots. " +
+                "In order to change the milestones just click on the buttons attached to the television.");
         }
     }
 }

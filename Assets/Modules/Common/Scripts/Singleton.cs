@@ -65,6 +65,12 @@ namespace Pocketboy.Common
             }
         }
 
+        protected virtual void Awake()
+        {
+            //if (Instance != null && Instance != this)
+            //    Destroy(this);
+        }
+
         private static bool applicationIsQuitting = false;
         /// <summary>
         /// When Unity quits, it destroys objects in a random order.

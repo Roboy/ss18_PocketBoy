@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GoogleARCore;
 
 namespace Pocketboy.Common
 {
@@ -9,31 +10,55 @@ namespace Pocketboy.Common
     /// </summary>
     public class RoboyController : MonoBehaviour
     {
+        public Anchor ARAnchor { get; private set; }
+
         [SerializeField]
         private Transform Head;
-        private Coroutine m_cor;
 
-        void Start()
+        private Coroutine m_MouthAnimation;
+
+        private bool m_Initialized = false;
+     
+        private void Start()
         {
-            var cameraPosition = Camera.main.transform.position;
-            cameraPosition.y = transform.position.y;
-            transform.LookAt(cameraPosition);
+            if(!m_Initialized)
+                LookAtCamera();
         }
 
         void Update()
         {
             Head.LookAt(Camera.main.transform.position);
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                m_cor = StartCoroutine(EmotionManager.Instance.mouthMoving());
-            }
+        }
 
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                if(m_cor !=null)
-                StopCoroutine(m_cor);
-                EmotionManager.Instance.ResetMouth();
-            }
+        public void StartTalkAnimation()
+        {
+            m_MouthAnimation = StartCoroutine(EmotionManager.Instance.mouthMoving());
+        }
+
+        public void StopTalkAnimation()
+        {
+            if (m_MouthAnimation != null)
+                StopCoroutine(m_MouthAnimation);
+            EmotionManager.Instance.ResetMouth();
+        }
+
+        public void Initialize(Anchor anchor)
+        {
+            if (m_Initialized)
+                return;
+
+            LookAtCamera();
+            ARAnchor = anchor;
+            m_Initialized = true;
+
+            GetComponent<DontDestroyOnLoadObject>().Hack();
+        }
+
+        private void LookAtCamera()
+        {
+            var cameraPosition = Camera.main.transform.position;
+            cameraPosition.y = transform.position.y;
+            transform.LookAt(cameraPosition);
         }
     }
 }

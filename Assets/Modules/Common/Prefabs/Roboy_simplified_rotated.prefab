@@ -419,6 +419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4985741707097072}
   - component: {fileID: 114511887295326824}
+  - component: {fileID: 114131175322436894}
   m_Layer: 14
   m_Name: Roboy_simplified_rotated
   m_TagString: Roboy
@@ -3215,6 +3216,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1668452, y: 0.7804022, z: 2.5767028}
   m_Center: {x: 1.0468508, y: -0.81573284, z: -8.590171}
+--- !u!114 &114131175322436894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1494862893493862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c2d01a6a3d11f4c9d1ccbcfe4a27c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114264631474798928
 MonoBehaviour:
   m_ObjectHideFlags: 1

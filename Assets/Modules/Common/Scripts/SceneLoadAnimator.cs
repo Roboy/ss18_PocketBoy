@@ -20,8 +20,9 @@ namespace Pocketboy.Common
 
         private Coroutine m_AnimationCoroutine;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             m_EndSize = Vector2.one * Screen.width * 1.4f;
         }
 
@@ -36,12 +37,14 @@ namespace Pocketboy.Common
             {
                 StopCoroutine(m_AnimationCoroutine);
             }
+            RoboyLogo.gameObject.SetActive(false);
+            RoboyLogo.sizeDelta = Vector2.zero;
         }
 
         private IEnumerator RoboyHeadAnimation(string sceneToLoadAfterAnimation)
         {
-            float currentTime = 0f;
             RoboyLogo.gameObject.SetActive(true);
+            float currentTime = 0f;           
             RoboyLogo.sizeDelta = Vector2.zero;
             while (currentTime < TriggerTime)
             {
@@ -52,11 +55,13 @@ namespace Pocketboy.Common
             }
             RoboyLogo.sizeDelta = m_EndSize;
             SceneLoader.Instance.LoadScene(sceneToLoadAfterAnimation);
-            StartCoroutine(ReverseHeadAnimation());
+            RoboyLogo.gameObject.SetActive(false);
+            StartCoroutine(ReverseHeadAnimation());            
         }
 
         private IEnumerator ReverseHeadAnimation()
         {
+            RoboyLogo.gameObject.SetActive(true);
             float currentTime = 0f;           
             RoboyLogo.sizeDelta = m_EndSize;
             while (currentTime < TriggerTime)

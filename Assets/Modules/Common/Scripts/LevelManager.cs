@@ -5,6 +5,7 @@
     using GoogleARCore.Examples.Common;
     using GoogleARCore.Examples.HelloAR;
     using UnityEngine;
+    using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
     // Set up touch input propagation while using Instant Preview in the editor.
@@ -14,12 +15,12 @@
     /// <summary>
     /// Sets up the level by scanning for planes and placing the Roboy model at a suitable position.
     /// </summary>
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : Singleton<LevelManager>
     {
         /// <summary>
-        /// A model to place when a raycast from a user touch hits a plane.
+        /// Roboy prefab.
         /// </summary>
-        public GameObject Roboy;
+        public RoboyController RoboyPrefab;
 
         /// <summary>
         /// Topics to learn about, represented as spheres/ portals to get into the respective training world.
@@ -31,10 +32,7 @@
         /// </summary>
         public GameObject SearchingForPlaneUI;
 
-        /// <summary>
-        /// The rotation in degrees need to apply to model when the Andy model is placed.
-        /// </summary>
-        private const float k_ModelRotation = 180.0f;
+        public RoboyController Roboy;
 
         /// <summary>
         /// A list to hold all planes ARCore is tracking in the current frame. This object is used across
@@ -50,12 +48,26 @@
         /// <summary>
         /// True if one model of Roboy has been spawned.
         /// </summary>
-        private bool m_ModelSpawned = false;
+        [HideInInspector]
+        public bool m_RoboySpawned = false;
+
+        [HideInInspector]
+        public bool m_LevelSpheresSpawned = false;
 
         /// <summary>
         /// Reference to the available levels, represented as spheres.
         /// </summary>
         private List<GameObject> m_Levels = new List<GameObject>();
+
+        //private void OnEnable()
+        //{
+        //    SceneManager.sceneLoaded += ResetLevel;
+        //}
+
+        //private void OnDisable()
+        //{
+        //    SceneManager.sceneLoaded -= ResetLevel;
+        //}
 
         /// <summary>
         /// The Unity Update() method.
@@ -78,16 +90,15 @@
 
             SearchingForPlaneUI.SetActive(showSearchingUI);
 
-            if (!m_ModelSpawned && m_AllPlanes.Count>0 )
+            if (!m_RoboySpawned)
             {
                 //Call function to spawn Roboy
-                SpawnLevel();
+                SpawnRoboy();
             }
-
-            //if (m_ModelSpawned)
-            //    Debug.Log("Distance :" + Vector3.Distance(m_Levels[0].gameObject.transform.position, FirstPersonCamera.transform.position));
-
-
+            else if (!m_LevelSpheresSpawned)
+            {
+                SpawnLevelSpheres();
+            }
         }
 
         /// <summary>
@@ -132,61 +143,58 @@
             }
         }
 
-        private void SpawnLevel()
+        private void SpawnRoboy()
         {
-            //Spawn Roboy
-            DetectedPlane tmp = m_AllPlanes[0];
-            var anchor = tmp.CreateAnchor(tmp.CenterPose);
-            var roboy = Instantiate(Roboy, tmp.CenterPose.position, tmp.CenterPose.rotation);
-            roboy.transform.Rotate(90, 0, 0, Space.Self);
-            roboy.transform.Rotate(0, 0, k_ModelRotation, Space.Self);
-            roboy.transform.parent = anchor.transform;
-            m_ModelSpawned = true;
-            Debug.Log("roboy spawned.");
+            if (m_AllPlanes.Count == 0 || m_RoboySpawned)
+                return;
 
-            ////Spawn Level spheres
-            //for (int i = 1; i < 5; i++)
-            //{
-            //    GameObject levelSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            //    levelSphere.name = "level" + (i);
-            //    levelSphere.tag = "Level";
-            //    if (i % 2 == 0)
-            //    { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x + ((float)i / 4), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
-            //    if (i % 2 == 1)
-            //    { levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x - ((float)i / 4), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
-            //    levelSphere.transform.localScale = levelSphere.transform.localScale * 0.25f;
-            //    levelSphere.transform.parent = anchor.transform;
-            //    levelSphere.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-            //    m_Levels.Add(levelSphere);
+            m_RoboySpawned = true;
+            DetectedPlane plane = m_AllPlanes[0];
+            var anchor = plane.CreateAnchor(plane.CenterPose);
+            Roboy = Instantiate(RoboyPrefab, plane.CenterPose.position, plane.CenterPose.rotation);
+            Roboy.transform.parent = anchor.transform;
+            Roboy.Initialize(anchor);
+            SpawnLevelSpheres();
+        }
 
-            //}
+        private void SpawnLevelSpheres()
+        {
+            if (Roboy == null || m_LevelSpheresSpawned)
+                return;
 
+            m_LevelSpheresSpawned = true;
+            var levelSphereInitPosition = new Vector3(Roboy.transform.position.x, Roboy.transform.position.y + 0.5f, Roboy.transform.position.z);
+            var levelSphereOffset = Vector3.zero;
             for (int i = 0; i < Spheres.Count; i++)
             {
-
                 var levelSphere = Instantiate(Spheres[i]);
                 levelSphere.name = "Level" + (i);
                 levelSphere.tag = "Level";
 
-                //if (i % 2 == 0)
-                //{ levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x + ((float)(i+1) / Spheres.Count), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
-                //if (i % 2 == 1)
-                //{ levelSphere.transform.position = new Vector3(tmp.CenterPose.position.x - ((float)(i+1) / Spheres.Count), tmp.CenterPose.position.y + 0.5f, tmp.CenterPose.position.z); }
-                if (i % 2 == 0)
-                { levelSphere.transform.position = new Vector3(roboy.transform.position.x + ((float)(i + 1) / Spheres.Count), roboy.transform.position.y + 0.5f, roboy.transform.position.z); }
+                levelSphereOffset = ((float)(i + 1) / Spheres.Count) * Roboy.transform.forward; // WHY FORWARD???? Right does spawns the spheres in front of roboy, dafuq
                 if (i % 2 == 1)
-                { levelSphere.transform.position = new Vector3(roboy.transform.position.x - ((float)(i + 1) / Spheres.Count), roboy.transform.position.y + 0.5f, roboy.transform.position.z); }
+                {
+                    levelSphereOffset *= -1;
+                }
 
-                levelSphere.transform.RotateAround(roboy.transform.position, Vector3.up, 90.0f);
+                levelSphere.transform.position = levelSphereInitPosition + levelSphereOffset;
+                levelSphere.transform.RotateAround(Roboy.transform.position, Vector3.up, 90.0f);
                 levelSphere.transform.localScale = levelSphere.transform.localScale * 0.25f;
-                levelSphere.transform.parent = anchor.transform;
-                //levelSphere.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-                m_Levels.Add(levelSphere);
 
-            }
-            Debug.Log("spheres spawned.");
-            Debug.Log(m_Levels.Count + " " + m_Levels[0]);
-            
+                DetectedPlane plane = m_AllPlanes[0];
+                var anchor = plane.CreateAnchor(plane.CenterPose);
+
+                levelSphere.transform.parent = anchor.transform;
+                m_Levels.Add(levelSphere);
+            }            
+        }
+
+        private void ResetLevel(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name != "HomeScene")
+                return;
+
+            m_LevelSpheresSpawned = false;
         }
 
         /// <summary>

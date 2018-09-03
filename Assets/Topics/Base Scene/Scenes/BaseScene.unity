@@ -330,48 +330,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoboyPrefab: {fileID: 114511887295326824, guid: 062dd618ba53e60489da5e88ad0fb676,
     type: 2}
---- !u!1001 &897598875
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4120862180361898, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4120862180361898, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4120862180361898, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -1.354
-      objectReference: {fileID: 0}
-    - target: {fileID: 4120862180361898, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4120862180361898, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4120862180361898, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4120862180361898, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4120862180361898, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &914270028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5498,6 +5456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0169c21a919a89d45923b30a2d793c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxShakeAmount: 0.02
+  SceneName: 
   MaxRotationSpeed: 100
   MinRotationSpeed: 10

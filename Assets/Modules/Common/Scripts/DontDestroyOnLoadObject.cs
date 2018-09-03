@@ -9,7 +9,13 @@ namespace Pocketboy.Common
 
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(transform.root.gameObject);
+            
+        }
+
+        public void Hack()
+        {
+            DontDestroyOnLoad(transform.root.gameObject);
         }
     }
 }

@@ -74,7 +74,6 @@ GameObject:
   - component: {fileID: 4837840311288866}
   - component: {fileID: 33799152591111864}
   - component: {fileID: 23133972435901866}
-  - component: {fileID: 65882863851103398}
   m_Layer: 8
   m_Name: Back-button
   m_TagString: Untagged
@@ -109,7 +108,6 @@ GameObject:
   - component: {fileID: 4709790623661504}
   - component: {fileID: 33770411069334568}
   - component: {fileID: 23177106973571060}
-  - component: {fileID: 65214012035441268}
   m_Layer: 8
   m_Name: Forward-button
   m_TagString: Untagged
@@ -126,7 +124,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4364392009604362}
   - component: {fileID: 95275668997490958}
-  - component: {fileID: 114655709598237124}
   m_Layer: 8
   m_Name: TV
   m_TagString: Untagged
@@ -144,7 +141,6 @@ GameObject:
   - component: {fileID: 4831744401178088}
   - component: {fileID: 33645373648376964}
   - component: {fileID: 23210536923282888}
-  - component: {fileID: 65038966435779470}
   m_Layer: 8
   m_Name: Repeat-button
   m_TagString: Untagged
@@ -557,42 +553,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1057173560752104}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65038966435779470
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1986302142325366}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.943466, y: 1.299228, z: 0.062016}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65214012035441268
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1810851849912672}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.808468, y: 0.640248, z: 0.05499}
-  m_Center: {x: -0.009112, y: 0.027494997, z: 0}
---- !u!65 &65882863851103398
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1529051248389268}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.808468, y: 0.640248, z: 0.05499}
-  m_Center: {x: 0.009112, y: 0.027494997, z: 0}
 --- !u!95 &95275668997490958
 Animator:
   serializedVersion: 3
@@ -625,26 +585,6 @@ MonoBehaviour:
   SceneName: HistoryScene
   MaxRotationSpeed: 400
   MinRotationSpeed: 10
---- !u!114 &114655709598237124
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1834726302773370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95bdb7c6154b672409fb0fa51d99df20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DefaultMaterial: {fileID: 2100000, guid: 7b51886c795e01a4b873857a52ed5be8, type: 2}
-  StaticMaterial: {fileID: 2100000, guid: b3f0138d09db8f445b573462937e3722, type: 2}
-  StaticImageTime: 0.25
-  MonitorRenderer: {fileID: 23480936951055842}
-  Content:
-  - {fileID: 2800000, guid: 18efcf16de9a77f4191be779a8b38eb1, type: 3}
-  - {fileID: 0}
-  VideoTexture: {fileID: 8400000, guid: 29dee607b657f494686e4f8e5440791d, type: 2}
-  m_DebugMode: 0
 --- !u!135 &135565062895191120
 SphereCollider:
   m_ObjectHideFlags: 1

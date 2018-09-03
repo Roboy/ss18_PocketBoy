@@ -12,10 +12,12 @@ namespace Pocketboy.Common
 
         private AndroidJavaClass m_TextToSpeechJavaClass;
 
-        private bool m_Initialized;
+        [HideInInspector]
+        public bool m_Initialized;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             Initialize();
         }
 
@@ -26,11 +28,13 @@ namespace Pocketboy.Common
 
             IsTalking = true;
             m_TextToSpeechJavaClass.CallStatic("promptSpeechOutputWithCallback", text, gameObject.name, "TalkDone");
+            LevelManager.Instance.Roboy.StartTalkAnimation();
         }
 
         private void TalkDone()
         {
             IsTalking = false;
+            LevelManager.Instance.Roboy.StopTalkAnimation();
         }
 
         private void Initialize()
