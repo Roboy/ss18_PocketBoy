@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Pocketboy.SpeechPlugin
 {
-    public class SpeechToTextController : MonoBehaviour
+    public class SpeechToTextControllerDemo : MonoBehaviour
     {
 
         [SerializeField]
@@ -48,7 +48,7 @@ namespace Pocketboy.SpeechPlugin
             if (!m_Initialized)
                 return;
 
-            m_SpeechToTextJavaClass.CallStatic("promptSpeechInput", gameObject.name, "OnResults");
+            m_SpeechToTextJavaClass.CallStatic("startListening", gameObject.name, "OnResults");
         }
 
         void OnResults(string recognizedText)

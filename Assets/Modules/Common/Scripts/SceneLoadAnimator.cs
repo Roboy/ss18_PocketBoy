@@ -20,9 +20,8 @@ namespace Pocketboy.Common
 
         private Coroutine m_AnimationCoroutine;
 
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
             m_EndSize = Vector2.one * Screen.width * 1.4f;
         }
 

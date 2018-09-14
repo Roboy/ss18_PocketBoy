@@ -6,7 +6,7 @@ using System;
 
 namespace Pocketboy.SpeechPlugin
 {
-    public class TextToSpeechController : MonoBehaviour
+    public class TextToSpeechControllerDemo : MonoBehaviour
     {
 
         [SerializeField]

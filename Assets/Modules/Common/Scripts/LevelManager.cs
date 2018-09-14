@@ -20,7 +20,7 @@
         /// <summary>
         /// Roboy prefab.
         /// </summary>
-        public RoboyController RoboyPrefab;
+        public RoboyManager RoboyPrefab;
 
         /// <summary>
         /// Topics to learn about, represented as spheres/ portals to get into the respective training world.
@@ -32,7 +32,7 @@
         /// </summary>
         public GameObject SearchingForPlaneUI;
 
-        public RoboyController Roboy;
+        public RoboyManager Roboy;
 
         /// <summary>
         /// A list to hold all planes ARCore is tracking in the current frame. This object is used across

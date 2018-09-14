@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Pocketboy.SpeechPlugin;
 
 namespace Pocketboy.Common
 {
-    public class TextToSpeechManager : Singleton<TextToSpeechManager>
+    public class TextToSpeechController : MonoBehaviour
     {
         public bool IsTalking { get; private set; }
 
+        [SerializeField, HideInInspector]
+        private RoboyManager m_RoboyController;
+
+        [SerializeField, HideInInspector]
         private AndroidJavaClass m_TextToSpeechJavaClass;
 
-        [HideInInspector]
-        public bool m_Initialized;
+        [SerializeField, HideInInspector]
+        private bool m_Initialized;
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
             Initialize();
         }
 
@@ -27,14 +29,13 @@ namespace Pocketboy.Common
                 return;
 
             IsTalking = true;
-            m_TextToSpeechJavaClass.CallStatic("promptSpeechOutputWithCallback", text, gameObject.name, "TalkDone");
-            LevelManager.Instance.Roboy.StartTalkAnimation();
+            m_TextToSpeechJavaClass.CallStatic("promptSpeechOutputWithCallback", text, gameObject.name, "TalkDoneInternal");
         }
 
-        private void TalkDone()
-        {
+        private void TalkDoneInternal()
+        {            
             IsTalking = false;
-            LevelManager.Instance.Roboy.StopTalkAnimation();
+            m_RoboyController.TalkDone();
         }
 
         private void Initialize()
@@ -44,12 +45,23 @@ namespace Pocketboy.Common
                 m_TextToSpeechJavaClass = new AndroidJavaClass(Pocketboy.SpeechPlugin.SpeechPlugin.PACKAGE_NAME + "." + Pocketboy.SpeechPlugin.SpeechPlugin.TEXT_TO_SPEECH_CLASS);
                 m_TextToSpeechJavaClass.CallStatic("setPitch", 1f);
                 m_TextToSpeechJavaClass.CallStatic("setSpeed", 1f);
-                m_Initialized = true;
+                m_RoboyController = GetComponent<RoboyManager>();               
             }
             catch (Exception e)
             {
                 Debug.LogError(e);
                 m_Initialized = false;
+                return;
+            }
+
+            if (m_RoboyController == null)
+            {
+                Debug.LogError("Could not find <RoboyController>.");
+                m_Initialized = false;
+            }
+            else
+            {
+                m_Initialized = true;
             }
         }
     }

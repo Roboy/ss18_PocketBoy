@@ -9,7 +9,7 @@ namespace Pocketboy.Common
     public class LevelManager2 : Singleton<LevelManager2>
     {
         [SerializeField]
-        private RoboyController RoboyPrefab;
+        private RoboyManager RoboyPrefab;
 
         private List<DetectedPlane> m_AllPlanes = new List<DetectedPlane>();
 
@@ -19,7 +19,7 @@ namespace Pocketboy.Common
 
         private DetectedPlane m_RoboyPlane;
 
-        private RoboyController m_Roboy;
+        private RoboyManager m_Roboy;
 
 
         void Update()

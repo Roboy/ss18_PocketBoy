@@ -6,9 +6,9 @@ namespace Pocketboy.Common
 {
     public class PersistentSingleton<T> : Singleton<T> where T : MonoBehaviour
     {
-        void Awake()
+        public void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(transform.root.gameObject);
         }
     }
 }

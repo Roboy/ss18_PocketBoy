@@ -45,7 +45,7 @@ namespace Pocketboy.HistoryScene
 
         private void NextContent()
         {
-            if (TextToSpeechManager.Instance.IsTalking)
+            if (RoboyManager.Instance.IsTalking)
                 return;
 
             if(m_IsOn)
@@ -57,7 +57,7 @@ namespace Pocketboy.HistoryScene
 
         private void PreviousContent()
         {
-            if (TextToSpeechManager.Instance.IsTalking)
+            if (RoboyManager.Instance.IsTalking)
                 return;
 
             m_CurrentContentIndex = MathUtility.WrapArrayIndex(m_CurrentContentIndex - 1, TextForSpeech.Count);
@@ -66,18 +66,18 @@ namespace Pocketboy.HistoryScene
 
         private void RepeatContent()
         {
-            if (TextToSpeechManager.Instance.IsTalking)
+            if (RoboyManager.Instance.IsTalking)
                 return;
 
             TV.RepeatContent();
-            TextToSpeechManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
+            RoboyManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
         }
 
         private void ShowContent(int index)
         {
             TV.ShowContent(m_CurrentContentIndex);
             Slider.ShowDate(m_CurrentContentIndex);
-            TextToSpeechManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
+            RoboyManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
             
         }
 
@@ -94,11 +94,13 @@ namespace Pocketboy.HistoryScene
             TV.FillContent(tvContent.ToArray());
             Slider.FillSlider(dates.ToArray());
 
+            Debug.Log("DICK 1: " + LevelManager.Instance.name);
             var roboy = LevelManager.Instance.Roboy;
+            Debug.Log("DICK 2: " + LevelManager.Instance.Roboy.name);
             TV.transform.position = roboy.transform.position + roboy.transform.right * 0.65f;
             TV.transform.forward = roboy.transform.forward;
 
-            TextToSpeechManager.Instance.Talk("Thank you for tuning in. " +
+            RoboyManager.Instance.Talk("Thank you for tuning in. " +
                 "This programm will tell you about some awesome milestones in the evolution of robots. " +
                 "In order to change the milestones just click on the buttons attached to the television.");
         }
