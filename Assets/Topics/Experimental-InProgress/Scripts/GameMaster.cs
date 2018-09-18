@@ -59,10 +59,9 @@ public class GameMaster : Singleton<GameMaster> {
         Debug.Log(s);
     }
 
-    public void StartRunaround(int correctAnswer)
+    public void StartRunaround(int correctAns)
     {
-        Debug.Log("Game has started.");
-        Coroutine game = StartCoroutine(PlayRunaround(correctAnswer));
+        Coroutine game = StartCoroutine(PlayRunaround(correctAns));
         if (!m_TimerText.IsActive())
         {
             m_TimerText.gameObject.SetActive(true);
@@ -73,8 +72,7 @@ public class GameMaster : Singleton<GameMaster> {
 
     private IEnumerator PlayRunaround(int correctAnswer)
     {
-        //Deactivate the previous result
-        m_Outcome.gameObject.SetActive(false);
+        yield return StartCoroutine(ResetGame());
         //Initialize the game, highlight the first plane.
         float counter = 0.0f;
         float current_speed = speed;
@@ -109,7 +107,9 @@ public class GameMaster : Singleton<GameMaster> {
 
         }
         m_highlightedPlane.GetComponent<Renderer>().material = mat_default;
+        //Display the outcome including win or loose state
         StartCoroutine(DisplayResult());
+        //Make the timer disappear again
         m_TimerText.gameObject.SetActive(false);
 
         
@@ -126,12 +126,14 @@ public class GameMaster : Singleton<GameMaster> {
         //Display the winning or loosing state
         if (!m_Outcome.IsActive())
         {
-            if (m_playerWon && m_playerAnswer!=null)
+            if (m_playerAnswer != null && m_correctAnswer == AnswerPlanes.IndexOf(m_playerAnswer))
             {
+                m_playerWon = true;
                 m_Outcome.text = "You won!";
             }
             else
             {
+                m_playerWon = false;
                 m_Outcome.text = "You lost!";
             }
             m_Outcome.gameObject.SetActive(true);
@@ -157,24 +159,26 @@ public class GameMaster : Singleton<GameMaster> {
 
         }
 
+         
 
+
+    }
+
+    private IEnumerator ResetGame()
+    {
+        //Deactivate the previous result
+        m_Outcome.gameObject.SetActive(false);
+        //Reset game outcome
+        m_playerWon = false;
+        m_playerAnswer = null;
+        yield return null;
     }
 
     public void CheckPosition(RunaroundAnswer ans)
     {
-        
-        int tmp = AnswerPlanes.IndexOf(ans);
+        //Store the players answer
         m_playerAnswer = ans;
-
-        if (m_correctAnswer == tmp)
-        {
-            m_playerWon = true;
-        }
-        else
-        {
-            m_playerWon = false;
-        }
-
+        //Indicate the position of the player on the field
         ans.SignPost.GetComponent<Renderer>().material = mat_position;
     }
 

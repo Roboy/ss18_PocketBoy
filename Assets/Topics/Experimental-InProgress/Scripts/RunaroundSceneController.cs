@@ -23,18 +23,16 @@ namespace Pocketboy.Runaround
 
         public void Listen()
         {
-            Debug.Log("Button Clicked.");
             GameMaster.Instance.StartRunaround(Random.Range(0, 3));
         }
 
         private void Initialize()
         {
             var roboy = LevelManager.Instance.Roboy;
-            m_GM.transform.position = roboy.transform.position - roboy.transform.right * 6.65f;
-            m_GM.transform.position = roboy.transform.position - 0.5f * roboy.transform.up;
+            m_GM.transform.position = roboy.transform.position - roboy.transform.right * 3.0f;
+            m_GM.transform.position -= 0.5f * roboy.transform.up;
             m_GM.transform.forward = roboy.transform.forward * (-1f);
             m_GM.transform.parent = roboy.transform.parent;
-            Debug.Log(m_GM.transform.parent);
             m_play.onClick.AddListener(Listen);
         }
 

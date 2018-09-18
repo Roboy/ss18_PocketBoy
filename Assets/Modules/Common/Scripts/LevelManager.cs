@@ -154,6 +154,7 @@
             Roboy = Instantiate(RoboyPrefab, plane.CenterPose.position, plane.CenterPose.rotation);
             Roboy.transform.parent = anchor.transform;
             Roboy.Initialize(anchor);
+            Debug.Log("Roboy axis:  forward =" + Roboy.transform.forward + "; right ="+Roboy.transform.right + " and up=" + Roboy.transform.up);
             SpawnLevelSpheres();
         }
 

@@ -22,6 +22,15 @@ public class PlayerStandingOnMe : MonoBehaviour {
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            GameMaster.Instance.CheckPosition(m_ans);
+        }
+
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
