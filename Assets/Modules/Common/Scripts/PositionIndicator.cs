@@ -23,7 +23,6 @@
             //Get a reference to the roboy model
             if (m_roboyModel == null && m_roboyFound == false)
             {
-                Debug.Log("No Roboy yet.");
                 m_roboyModel = GameObject.FindGameObjectWithTag("Roboy");
                 if (m_roboyModel != null)
                 {

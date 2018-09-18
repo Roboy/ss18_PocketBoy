@@ -8,6 +8,9 @@ TagManager:
   - RoboyPart
   - Level
   - Logo
+  - Sign
+  - Floor
+  - Levelsphere
   layers:
   - Default
   - TransparentFX

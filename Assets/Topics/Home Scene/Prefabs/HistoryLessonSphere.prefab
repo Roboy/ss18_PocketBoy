@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 23610454782489010}
   - component: {fileID: 135565062895191120}
   - component: {fileID: 114496713990713876}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HistoryLessonSphere
-  m_TagString: Untagged
+  m_TagString: Levelsphere
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 4671919365123094}
   - component: {fileID: 33175527872001518}
   - component: {fileID: 23078771549211624}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Tv-body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 4380042359301520}
   - component: {fileID: 33586651111348584}
   - component: {fileID: 23480936951055842}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Tv-monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 4837840311288866}
   - component: {fileID: 33799152591111864}
   - component: {fileID: 23133972435901866}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Back-button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 4644052500888334}
   - component: {fileID: 33394288231612188}
   - component: {fileID: 23663269532540720}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Antenna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 4709790623661504}
   - component: {fileID: 33770411069334568}
   - component: {fileID: 23177106973571060}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Forward-button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4364392009604362}
   - component: {fileID: 95275668997490958}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 4831744401178088}
   - component: {fileID: 33645373648376964}
   - component: {fileID: 23210536923282888}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Repeat-button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -584,7 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneName: HistoryScene
   MaxRotationSpeed: 400
-  MinRotationSpeed: 10
+  MinRotationSpeed: 51
 --- !u!135 &135565062895191120
 SphereCollider:
   m_ObjectHideFlags: 1

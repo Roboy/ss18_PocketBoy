@@ -169,7 +169,6 @@
             {
                 var levelSphere = Instantiate(Spheres[i]);
                 levelSphere.name = "Level" + (i);
-                levelSphere.tag = "Level";
 
                 levelSphereOffset = ((float)(i + 1) / Spheres.Count) * Roboy.transform.forward; // WHY FORWARD???? Right does spawns the spheres in front of roboy, dafuq
                 if (i % 2 == 1)
