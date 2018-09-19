@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0169c21a919a89d45923b30a2d793c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: WordCloudScene
+  SceneName: RunaroundScene
   MaxRotationSpeed: 400
   MinRotationSpeed: 10
 --- !u!114 &114814566310515544

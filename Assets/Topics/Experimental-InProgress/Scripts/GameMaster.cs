@@ -4,7 +4,8 @@ using UnityEngine;
 using TMPro;
 using Pocketboy.Common;
 
-public class GameMaster : Singleton<GameMaster> {
+public class GameMaster : Singleton<GameMaster>
+{
 
     /// <summary>
     /// The user can stand on planes representing answers to a question, one will be the correct one.
@@ -44,6 +45,8 @@ public class GameMaster : Singleton<GameMaster> {
     private TextMeshPro m_TimerText;
     [SerializeField]
     private TextMeshPro m_Outcome;
+    [SerializeField]
+    private TextMeshPro m_Score;
     /// <summary>
     /// Which plane is currently highlighted.
     /// </summary>
@@ -51,6 +54,13 @@ public class GameMaster : Singleton<GameMaster> {
     private int m_correctAnswer = -1;
     private RunaroundAnswer m_playerAnswer;
     private bool m_playerWon = false;
+
+    //Scoring
+    private int m_CurrentMultiplier = 0;
+    private int m_CurrentScore = 0;
+    private Vector3 m_CurrentPlayerPosition;
+    private Vector3 m_PreviousPlayerPosition;
+    private float m_CurrentDistance;
 
 
 
@@ -66,9 +76,21 @@ public class GameMaster : Singleton<GameMaster> {
         {
             m_TimerText.gameObject.SetActive(true);
         }
+        GameObject score = m_Score.gameObject.transform.parent.gameObject;
+        if (!score.activeInHierarchy)
+        {
+            score.SetActive(true);
+        }
+
         StartCoroutine(m_TimerText.GetComponent<GameTimer>().Countdown(duration));
+        StartCoroutine(CalculateScore(duration));
     }
 
+    /// <summary>
+    /// Goal of the game is to stand to answer a question right. There are three answer spots on the ground. Standing in the right one lets you win. Score bonus points by moving.
+    /// </summary>
+    /// <param name="correctAnswer"></param>
+    /// <returns></returns>
 
     private IEnumerator PlayRunaround(int correctAnswer)
     {
@@ -112,9 +134,49 @@ public class GameMaster : Singleton<GameMaster> {
         //Make the timer disappear again
         m_TimerText.gameObject.SetActive(false);
 
-        
-        
     }
+
+    /// <summary>
+    /// Score is based on player movement. Moving a large amount in the player area before answering gets you highpoints.
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    private IEnumerator CalculateScore(float time)
+    {
+        int Score = 0;
+        while (time > 0.0f)
+        {
+            //Standing still is penalized
+            if (m_CurrentDistance < 0.5)
+            {
+                m_CurrentMultiplier = -7;
+            }
+            
+            //Moving not quite enough
+            if (m_CurrentDistance > 0.5 && m_CurrentDistance < 1)
+            {
+                m_CurrentMultiplier = 0;
+            }
+            //Moving quickly is rewarded.
+            if (m_CurrentDistance > 2)
+            {
+                m_CurrentMultiplier = (int)(2 * m_CurrentDistance);
+            }
+
+            //Actual calculation
+            Score += m_CurrentMultiplier;
+            //Prevent negative score
+            if (Score <= 0)
+            {
+                Score = 0;
+            }
+            //Display the current score as feedback for the player
+            m_Score.text = Score.ToString();
+            time -= Time.deltaTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+
     /// <summary>
     /// Make the correct answer visible by flashing the responding plane.
     /// </summary>
@@ -129,12 +191,12 @@ public class GameMaster : Singleton<GameMaster> {
             if (m_playerAnswer != null && m_correctAnswer == AnswerPlanes.IndexOf(m_playerAnswer))
             {
                 m_playerWon = true;
-                m_Outcome.text = "You won!";
+                m_Outcome.text = "You win!";
             }
             else
             {
                 m_playerWon = false;
-                m_Outcome.text = "You lost!";
+                m_Outcome.text = "You loose!";
             }
             m_Outcome.gameObject.SetActive(true);
         }
@@ -142,7 +204,7 @@ public class GameMaster : Singleton<GameMaster> {
         //Fancy flashy animation, highlighting correct answer in green and if player is on the wrong spot, in red.
         while (counter < 2.0f)
         {
-            if (!m_playerWon && m_playerAnswer !=null)
+            if (!m_playerWon && m_playerAnswer != null)
             {
                 m_playerAnswer.Floor.GetComponent<Renderer>().material = mat_incorrect;
             }
@@ -159,7 +221,7 @@ public class GameMaster : Singleton<GameMaster> {
 
         }
 
-         
+
 
 
     }
@@ -171,8 +233,42 @@ public class GameMaster : Singleton<GameMaster> {
         //Reset game outcome
         m_playerWon = false;
         m_playerAnswer = null;
+        //Reset score
+        m_Score.text = "0";
         yield return null;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            m_CurrentPlayerPosition = other.transform.position;
+            m_PreviousPlayerPosition = m_CurrentPlayerPosition;
+        }
+
+    }
+
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            m_CurrentPlayerPosition = other.transform.position;
+            float distance = Vector3.Distance(m_CurrentPlayerPosition, m_PreviousPlayerPosition);
+            m_CurrentDistance = 3000 * distance;
+            m_PreviousPlayerPosition = m_CurrentPlayerPosition;
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            m_CurrentMultiplier = 0;
+        }
+    }
+
 
     public void CheckPosition(RunaroundAnswer ans)
     {
@@ -188,7 +284,7 @@ public class GameMaster : Singleton<GameMaster> {
     /// <param name="ans"></param>
     public void ResetPlane(RunaroundAnswer ans)
     {
-        
+
         //Reset the floor
         ans.Floor.GetComponent<Renderer>().material = mat_default;
         //Reset the signpost
