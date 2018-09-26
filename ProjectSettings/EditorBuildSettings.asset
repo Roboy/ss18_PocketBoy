@@ -12,9 +12,12 @@ EditorBuildSettings:
     path: Assets/Topics/History Scene/Scenes/HistoryScene.unity
     guid: e8d25eb8e5405514799984e52e9ab7aa
   - enabled: 0
-    path: Assets/Topics/Experimental-InProgress/Scenes/WordCloudScene.unity
+    path: 
     guid: 982e703502bd5c54abe026258c69f38f
   - enabled: 1
-    path: Assets/Topics/Experimental-InProgress/Scenes/RunaroundScene.unity
+    path: Assets/Topics/Experimental-InProgress/RunaroundScene/Scenes/RunaroundScene.unity
     guid: b293ec5ad1057aa4085a297dedbd3e85
+  - enabled: 1
+    path: Assets/Topics/Experimental-InProgress/WordCloudScene/Scenes/WordCloudScene.unity
+    guid: c845e095e60a1c445ae6296e5b95631b
   m_configObjects: {}
