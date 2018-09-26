@@ -83,7 +83,7 @@ public class GameMaster : Singleton<GameMaster>
         }
 
         StartCoroutine(m_TimerText.GetComponent<GameTimer>().Countdown(duration));
-        StartCoroutine(CalculateScore(duration));
+        StartCoroutine(CalculateScore(duration - 1));
     }
 
     /// <summary>
