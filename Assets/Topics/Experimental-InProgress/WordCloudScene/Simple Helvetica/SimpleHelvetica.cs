@@ -104,7 +104,7 @@ namespace Pocketboy.Wordcloud
 
             for (int ctr = 0; ctr <= Text.Length - 1; ctr++)
             {
-                string childObjectName = Text[ctr].ToString();
+                string childObjectName = Text[ctr].ToString();                
                 LetterToShow = transform.Find("_Alphabets/" + childObjectName).gameObject;
 
                 if (Orientation == alignment.horizontal)
@@ -191,9 +191,6 @@ namespace Pocketboy.Wordcloud
         void ResetText()
         {
 
-            //reset scale
-            //transform.localScale = new Vector3(1,1,1);
-
             ObjScale = transform.localScale;
 
             //reset position
@@ -207,7 +204,6 @@ namespace Pocketboy.Wordcloud
             {
                 if (childTransform.name != "_Alphabets" && childTransform.name != transform.name && childTransform.parent.name != "_Alphabets")
                 {
-                    //Debug.Log("previous letter: "+childTransform.name);
                     DestroyImmediate(childTransform.gameObject);
                 }
 
@@ -221,10 +217,10 @@ namespace Pocketboy.Wordcloud
        
 
 
-            foreach (Transform child in transform.Find("_Alphabets"))
-            {
-                child.gameObject.AddComponent<BoxCollider>();
-            }
+            //foreach (Transform child in transform.Find("_Alphabets"))
+            //{
+            //    child.gameObject.AddComponent<BoxCollider>();
+            //}
 
             foreach (Transform child in transform)
             {
@@ -272,7 +268,6 @@ namespace Pocketboy.Wordcloud
 
         public void RemoveBoxCollider()
         {
-            //Debug.Log ("RemoveBoxCollider");
 
             DestroyImmediate(this.GetComponent<BoxCollider>());
 

@@ -8,10 +8,18 @@ public class WordCloud : MonoBehaviour
 {
 
     public Word WordPrefab;
-    public List<WordCloudContent> Words_Content;
-
+    public WordCloudContent Content;
+    /// <summary>
+    /// Colour if the word is context related.
+    /// </summary>
     public Material mat_correct;
+    /// <summary>
+    /// Colour if the word is context unrelated.
+    /// </summary>
     public Material mat_incorrect;
+    /// <summary>
+    /// Colour when the context relation is undefined.
+    /// </summary>
     public Material mat_undefined;
 
     public GameObject Explanation;
@@ -19,7 +27,9 @@ public class WordCloud : MonoBehaviour
     [SerializeField]
     private bool cloud_spawned = false;
 
-
+    /// <summary>
+    /// Deletes the current WordCloud.
+    /// </summary>
     public void DestroyCloud()
     {
         foreach (Transform t in transform)
@@ -34,6 +44,9 @@ public class WordCloud : MonoBehaviour
         textfield.text = "Please start again!";
     }
 
+    /// <summary>
+    /// Starts the generation of the WordCloud.
+    /// </summary>
     public void GenerateWordCloud()
     {
         StartCoroutine(CreateWords());
@@ -48,6 +61,9 @@ public class WordCloud : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// User clicks on words, triggers reaction.
+    /// </summary>
     private void OnMouseDown()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -66,13 +82,13 @@ public class WordCloud : MonoBehaviour
             return;
         //Only check objects that have a Word component
         Word tmp_word = m_hittedObject.GetComponent<Word>();
-        WordCloudContent tmp_content = null;
-        WordCloudContent.CR related = WordCloudContent.CR.undefined;
+        WordInCloud tmp_content = null;
+        WordInCloud.CR related = WordInCloud.CR.undefined;
 
         if (tmp_word != null)
         {
             string tmp_text = tmp_word.Text;
-            foreach (WordCloudContent w in Words_Content)
+            foreach (WordInCloud w in Content.Words)
             {
                 //Search for the correct word in the scriptable objects
                 if (w.Word == tmp_text)
@@ -86,22 +102,22 @@ public class WordCloud : MonoBehaviour
 
         Renderer[] rr = tmp_word.GetComponentsInChildren<Renderer>();
 
-        //Visualize the context relation of the word to the topic
+        //Visualize the context relation of the word to the topic.
         switch (related)
         {
-            case WordCloudContent.CR.yes:
+            case WordInCloud.CR.yes:
                 for (int i = 0; i < rr.Length; i++)
                 {
                     rr[i].material = mat_correct;
                 }
                 break;
-            case WordCloudContent.CR.no:
+            case WordInCloud.CR.no:
                 for (int i = 0; i < rr.Length; i++)
                 {
                     rr[i].material = mat_incorrect;
                 }
                 break;
-            case WordCloudContent.CR.undefined:
+            case WordInCloud.CR.undefined:
                 for (int i = 0; i < rr.Length; i++)
                 {
                     rr[i].material = mat_undefined;
@@ -117,18 +133,30 @@ public class WordCloud : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Creates the single parts of the word cloud.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator CreateWords()
     {
 
-        foreach (WordCloudContent w in Words_Content)
+        foreach (WordInCloud w in Content.Words)
         {
             var word = Instantiate(WordPrefab, transform);
             SimpleHelvetica tmp = word.Obj.GetComponent<SimpleHelvetica>();
             tmp.Text = w.Word;
             word.Text = tmp.Text;
             word.name = "Word-" + tmp.Text;
-            SimpleHelvetica.alignment tmp_alignment = (SimpleHelvetica.alignment)Random.Range(0, 2);
-            tmp.Orientation = tmp_alignment;
+            int n = Random.Range(0, 11);
+            if (n < 2)
+            {
+                tmp.Orientation = SimpleHelvetica.alignment.vertical;
+            }
+            if (n >= 2)
+            {
+                tmp.Orientation = SimpleHelvetica.alignment.horizontal;
+            }
+            
             tmp.GenerateText();
             tmp.AddBoxCollider();
             word.transform.localScale = tmp.transform.localScale;
@@ -152,7 +180,11 @@ public class WordCloud : MonoBehaviour
 
 
     }
-
+    /// <summary>
+    /// Placing the word along a geometric path, if there are collision look further for an empty spot.
+    /// </summary>
+    /// <param name="word">The word that will be placed on the spiral.</param>
+    /// <returns></returns>
     private IEnumerator PlaceWord(Word word)
     {
         word.gameObject.layer = LayerMask.NameToLayer("Ignore");
@@ -169,8 +201,6 @@ public class WordCloud : MonoBehaviour
             word.transform.position = new Vector3(word.transform.parent.position.x + x, word.transform.parent.position.y + y, word.transform.parent.position.z);
             currentDistance += 0.0005f;
             currentAngle += 0.1f;
-            //if (!Physics.CheckBox(word.transform.position, word.transform.localScale /2f, Quaternion.identity, layerMask))
-            //    break;
             if (!Physics.CheckBox(word.transform.position, tmp.size, Quaternion.identity, layerMask))
                 break;
 
