@@ -7,6 +7,7 @@ using Pocketboy.Common;
 namespace Pocketboy.Runaround
 {
 
+
     public class GameMaster : Singleton<GameMaster>
     {
 
@@ -31,17 +32,10 @@ namespace Pocketboy.Runaround
         /// </summary>
         public Material mat_highlighted;
         /// <summary>
-        /// The colour the plane will flash in when it is the correct answer.
-        /// </summary>
-        public Material mat_correct;
-        /// <summary>
-        /// The colour the plane will flash in when it is the incorrect answer.
-        /// </summary>
-        public Material mat_incorrect;
-        /// <summary>
         /// Additional feedback where the player is currently Standing.
         /// </summary>
         public Material mat_position;
+        
 
 
         [SerializeField]
@@ -51,12 +45,29 @@ namespace Pocketboy.Runaround
         [SerializeField]
         private TextMeshPro m_Score;
         /// <summary>
+        /// Reference to floors original materials with id.
+        /// </summary>
+        public Dictionary<int, Material> dic_mat_floors = new Dictionary<int, Material>();
+        /// <summary>
+        /// Reference to signposts orginal materials with id.
+        /// </summary>
+        public Dictionary<int, Material> dic_mat_posts = new Dictionary<int, Material>();
+        /// <summary>
+        /// Reference to answer planes original positions.
+        /// </summary>
+        public Dictionary<int, Vector3> dic_plane_positions = new Dictionary<int, Vector3>();
+        /// <summary>
+        /// Referenc to answer floors original scales.
+        /// </summary>
+        public Dictionary<int, Vector3> dic_plane_scale = new Dictionary<int, Vector3>();
+        /// <summary>
         /// Which plane is currently highlighted.
         /// </summary>
         private GameObject m_highlightedPlane;
         private int m_correctAnswer = -1;
         private RunaroundAnswer m_playerAnswer;
         private bool m_playerWon = false;
+       
 
         //Scoring
         private int m_CurrentMultiplier = 0;
@@ -65,11 +76,27 @@ namespace Pocketboy.Runaround
         private Vector3 m_PreviousPlayerPosition;
         private float m_CurrentDistance;
 
+        
 
-
-        public void DebugMessage(string s)
+        public void SetInitProperties()
         {
-            Debug.Log(s);
+            
+            for (int i = 0; i < AnswerPlanes.Count; i++)
+            {
+                //Save the material of every floor
+                dic_mat_floors.Add(i, AnswerPlanes[i].Floor.GetComponent<Renderer>().material);
+                //Save the material of every post
+                dic_mat_posts.Add(i, AnswerPlanes[i].SignPost.GetComponent<Renderer>().material);
+                //Save the position of every Answer
+                Vector3 position = new Vector3(AnswerPlanes[i].transform.position.x, AnswerPlanes[i].transform.position.y, AnswerPlanes[i].transform.position.z);
+                dic_plane_positions.Add(i, position);
+                //Save the scale of every floor
+                Vector3 scale = new Vector3(AnswerPlanes[i].Floor.transform.localScale.x, AnswerPlanes[i].Floor.transform.localScale.y, AnswerPlanes[i].Floor.transform.localScale.z);
+                dic_plane_scale.Add(i, scale);
+         
+            }
+            
+
         }
 
         public void StartRunaround(int correctAns)
@@ -85,7 +112,7 @@ namespace Pocketboy.Runaround
                 score.SetActive(true);
             }
 
-            StartCoroutine(m_TimerText.GetComponent<GameTimer>().Countdown(duration));
+            StartCoroutine(this.GetComponent<GameTimer>().Countdown(duration));
             StartCoroutine(CalculateScore(duration - 1));
         }
 
@@ -111,8 +138,10 @@ namespace Pocketboy.Runaround
             {
                 for (int i = 0; i < AnswerPlanes.Count; i++)
                 {
+
                     //make the old plane default again
-                    m_highlightedPlane.GetComponent<Renderer>().material = mat_default;
+                    int tmp = AnswerPlanes.IndexOf(m_highlightedPlane.gameObject.transform.parent.GetComponent<RunaroundAnswer>());
+                    m_highlightedPlane.GetComponent<Renderer>().material = dic_mat_floors[tmp];
                     if (i == AnswerPlanes.Count - 1)
                     {
                         m_highlightedPlane = AnswerPlanes[0].Floor;
@@ -131,7 +160,8 @@ namespace Pocketboy.Runaround
 
 
             }
-            m_highlightedPlane.GetComponent<Renderer>().material = mat_default;
+            int n = AnswerPlanes.IndexOf(m_highlightedPlane.gameObject.transform.parent.GetComponent<RunaroundAnswer>());
+            m_highlightedPlane.GetComponent<Renderer>().material = dic_mat_floors[n];
             //Display the outcome including win or loose state
             StartCoroutine(DisplayResult());
             //Make the timer disappear again
@@ -204,20 +234,36 @@ namespace Pocketboy.Runaround
                 m_Outcome.gameObject.SetActive(true);
             }
 
+            foreach(RunaroundAnswer ans in AnswerPlanes)
+            {
+                if (m_correctAnswer == AnswerPlanes.IndexOf(ans))
+                {
+                    ans.transform.position = ans.transform.parent.position;
+                    ans.Floor.transform.localScale = new Vector3(4, ans.Floor.transform.localScale.y, ans.Floor.transform.localScale.z);
+                }
+                else
+                {
+                    ans.gameObject.SetActive(false);
+                }
+            }
+
             //Fancy flashy animation, highlighting correct answer in green and if player is on the wrong spot, in red.
             while (counter < 2.0f)
             {
-                if (!m_playerWon && m_playerAnswer != null)
-                {
-                    m_playerAnswer.Floor.GetComponent<Renderer>().material = mat_incorrect;
-                }
-                AnswerPlanes[m_correctAnswer].Floor.GetComponent<Renderer>().material = mat_correct;
+                int t = AnswerPlanes.IndexOf(m_playerAnswer);
+                //if (!m_playerWon && m_playerAnswer != null)
+                //{
+                //    //Standing on the wrong plate
+                //    m_playerAnswer.Floor.GetComponent<Renderer>().material = mat_incorrect;
+                //}
+                AnswerPlanes[m_correctAnswer].Floor.GetComponent<Renderer>().material = mat_highlighted;
                 yield return new WaitForSeconds(0.1f);
-                if (!m_playerWon && m_playerAnswer != null)
-                {
-                    m_playerAnswer.Floor.GetComponent<Renderer>().material = mat_default;
-                }
-                AnswerPlanes[m_correctAnswer].Floor.GetComponent<Renderer>().material = mat_default;
+                //if (!m_playerWon && m_playerAnswer != null)
+                //{
+                //    m_playerAnswer.Floor.GetComponent<Renderer>().material = dic_mat_answers[t];
+                //}
+                int n = AnswerPlanes.IndexOf(AnswerPlanes[m_correctAnswer]);
+                AnswerPlanes[m_correctAnswer].Floor.GetComponent<Renderer>().material = dic_mat_floors[n];
                 yield return new WaitForSeconds(0.1f);
 
                 counter += 0.2f;
@@ -238,6 +284,18 @@ namespace Pocketboy.Runaround
             m_playerAnswer = null;
             //Reset score
             m_Score.text = "0";
+            //Reset the planes to original colour
+            foreach (RunaroundAnswer ans in AnswerPlanes)
+            {
+                ans.gameObject.SetActive(true);
+                int tmp = AnswerPlanes.IndexOf(ans);
+                //Reset position of answer object
+                ans.transform.position = dic_plane_positions[tmp];
+                //Reset scale of floor
+                ans.Floor.transform.localScale = dic_plane_scale[tmp];
+                //Asign the original materials to the floor
+                ans.Floor.GetComponent<Renderer>().material = dic_mat_floors[tmp];
+            }
             yield return null;
         }
 
@@ -279,6 +337,7 @@ namespace Pocketboy.Runaround
             m_playerAnswer = ans;
             //Indicate the position of the player on the field
             ans.SignPost.GetComponent<Renderer>().material = mat_position;
+            QuestionManager.Instance.answer_sprites[AnswerPlanes.IndexOf(ans)].material = mat_position;
         }
 
         /// <summary>
@@ -287,13 +346,14 @@ namespace Pocketboy.Runaround
         /// <param name="ans"></param>
         public void ResetPlane(RunaroundAnswer ans)
         {
-
+            int t = AnswerPlanes.IndexOf(ans);
             //Reset the floor
-            ans.Floor.GetComponent<Renderer>().material = mat_default;
+            ans.Floor.GetComponent<Renderer>().material = dic_mat_floors[t];
             //Reset the signpost
-            ans.SignPost.GetComponent<Renderer>().material = mat_default;
+            ans.SignPost.GetComponent<Renderer>().material = dic_mat_posts[t];
             //Reset the player's answer
             m_playerAnswer = null;
+            QuestionManager.Instance.answer_sprites[AnswerPlanes.IndexOf(ans)].material = dic_mat_posts[AnswerPlanes.IndexOf(ans)];
         }
 
 

@@ -19,11 +19,13 @@ namespace Pocketboy.Runaround
         private void Awake()
         {
             Initialize();
+            
+            
         }
 
         public void Listen()
         {
-            GameMaster.Instance.StartRunaround(Random.Range(0, 3));
+            GameMaster.Instance.StartRunaround(QuestionManager.Instance.GetCurrentQuestion().CorrectAnswerID);
         }
 
         private void Initialize()
@@ -35,6 +37,9 @@ namespace Pocketboy.Runaround
             m_GM.transform.forward = roboy.transform.forward * (-1f);
             m_GM.transform.parent = roboy.transform.parent;
             m_play.onClick.AddListener(Listen);
+
+            GameMaster.Instance.SetInitProperties();
+            QuestionManager.Instance.LoadQuestion(0);
         }
 
         
