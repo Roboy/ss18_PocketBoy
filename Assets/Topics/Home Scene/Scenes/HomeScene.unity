@@ -512,46 +512,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f44dfe02f73e94e9b2b1a24aa5604c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &755427128
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 755427130}
-  - component: {fileID: 755427129}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &755427129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 755427128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f522d3621305aa498f552a4f00c969e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &755427130
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 755427128}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1082.2812, y: 509.76233, z: 385.03836}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &833664564
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +760,7 @@ Prefab:
         type: 2}
       propertyPath: Spheres.Array.data[3]
       value: 
-      objectReference: {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a,
+      objectReference: {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674,
         type: 2}
     - target: {fileID: 114977880820556334, guid: df147d8dfad329a49b591f43e2c651d8,
         type: 2}
@@ -819,6 +779,12 @@ Prefab:
       propertyPath: RoboyPrefab
       value: 
       objectReference: {fileID: 114511887295326824, guid: 062dd618ba53e60489da5e88ad0fb676,
+        type: 2}
+    - target: {fileID: 114977880820556334, guid: df147d8dfad329a49b591f43e2c651d8,
+        type: 2}
+      propertyPath: Spheres.Array.data[0]
+      value: 
+      objectReference: {fileID: 1660781682682994, guid: 64076efdccb4e084d86429167c69d4b9,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df147d8dfad329a49b591f43e2c651d8, type: 2}
@@ -917,6 +883,7 @@ GameObject:
   - component: {fileID: 1511700737}
   - component: {fileID: 1511700736}
   - component: {fileID: 1511700735}
+  - component: {fileID: 1511700738}
   m_Layer: 0
   m_Name: First Person Camera
   m_TagString: MainCamera
@@ -1008,6 +975,21 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1511700738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1511700733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -768656878, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &1585404059
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,10 +1023,10 @@ MonoBehaviour:
   RoboyPrefab: {fileID: 114511887295326824, guid: 062dd618ba53e60489da5e88ad0fb676,
     type: 2}
   Spheres:
-  - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
+  - {fileID: 1660781682682994, guid: 64076efdccb4e084d86429167c69d4b9, type: 2}
   - {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a, type: 2}
   - {fileID: 1864275086667500, guid: 116a2719a8d9e9e46919d1c9621d558d, type: 2}
-  - {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a, type: 2}
+  - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
   SearchingForPlaneUI: {fileID: 1748469454}
   Roboy: {fileID: 0}
   m_RoboySpawned: 0
