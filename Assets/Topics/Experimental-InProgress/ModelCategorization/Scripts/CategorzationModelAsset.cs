@@ -13,14 +13,6 @@ namespace Pocketboy.ModelCategorization
 
         public string Explanation;
 
-        [HideInInspector]
-        public enum ContentRelated
-        {
-            Yes,
-            No,
-            Undefined
-        };
-
         public ContentRelated ContentRelatedState = ContentRelated.No;
 
     }
