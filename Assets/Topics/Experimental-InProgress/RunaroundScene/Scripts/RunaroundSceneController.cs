@@ -30,6 +30,7 @@ namespace Pocketboy.Runaround
 
         private void Initialize()
         {
+
             var roboy = LevelManager.Instance.Roboy;
             m_GM.transform.position = roboy.transform.position - roboy.transform.right * 2.0f;
             m_GM.transform.position += 1.0f * roboy.transform.forward;
@@ -40,6 +41,7 @@ namespace Pocketboy.Runaround
 
             GameMaster.Instance.SetInitProperties();
             QuestionManager.Instance.LoadQuestion(0);
+
         }
 
         

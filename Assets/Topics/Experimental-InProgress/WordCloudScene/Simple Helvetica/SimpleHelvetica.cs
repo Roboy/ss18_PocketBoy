@@ -226,7 +226,7 @@ namespace Pocketboy.Wordcloud
             {
                 if (child.name != "_Alphabets")
                 {
-                    child.gameObject.AddComponent<BoxCollider>();
+                    child.gameObject.AddComponent<BoxCollider2D>();
                 }
             }
 
@@ -236,8 +236,8 @@ namespace Pocketboy.Wordcloud
             SetBoxColliderVariables();
 
 
-            this.gameObject.AddComponent<BoxCollider>();
-            BoxCollider tmp = GetComponent<BoxCollider>();
+            this.gameObject.AddComponent<BoxCollider2D>();
+            BoxCollider2D tmp = GetComponent<BoxCollider2D>();
             List<Renderer> rr = new List<Renderer>();
 
 
@@ -261,7 +261,7 @@ namespace Pocketboy.Wordcloud
                 }
             }
 
-            tmp.center = bounds.center - this.transform.position;
+            tmp.offset = bounds.center - this.transform.position;
             tmp.size = new Vector3(bounds.size.x + 0.06f, bounds.size.y + 0.06f, bounds.size.z);
             
         }
@@ -269,18 +269,18 @@ namespace Pocketboy.Wordcloud
         public void RemoveBoxCollider()
         {
 
-            DestroyImmediate(this.GetComponent<BoxCollider>());
+            DestroyImmediate(this.GetComponent<BoxCollider2D>());
 
             foreach (Transform child in transform.Find("_Alphabets"))
             {
-                DestroyImmediate(child.gameObject.GetComponent<BoxCollider>());
+                DestroyImmediate(child.gameObject.GetComponent<BoxCollider2D>());
             }
 
             foreach (Transform child in transform)
             {
                 if (child.name != "_Alphabets")
                 {
-                    DestroyImmediate(child.gameObject.GetComponent<BoxCollider>());
+                    DestroyImmediate(child.gameObject.GetComponent<BoxCollider2D>());
                 }
             }
 
@@ -335,7 +335,7 @@ namespace Pocketboy.Wordcloud
 
             foreach (Transform child in transform.Find("_Alphabets"))
             {
-                BoxCollider thisCollider = child.gameObject.GetComponent<BoxCollider>();
+                BoxCollider2D thisCollider = child.gameObject.GetComponent<BoxCollider2D>();
                 if (thisCollider != null)
                 {
                     thisCollider.isTrigger = BoxColliderIsTrigger;
@@ -344,7 +344,7 @@ namespace Pocketboy.Wordcloud
 
             foreach (Transform child in transform)
             {
-                BoxCollider thisCollider = child.gameObject.GetComponent<BoxCollider>();
+                BoxCollider2D thisCollider = child.gameObject.GetComponent<BoxCollider2D>();
                 if (child.name != "_Alphabets" && thisCollider != null)
                 {
                     thisCollider.isTrigger = BoxColliderIsTrigger;

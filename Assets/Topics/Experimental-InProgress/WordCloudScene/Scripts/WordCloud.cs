@@ -22,6 +22,8 @@ public class WordCloud : MonoBehaviour
     /// </summary>
     public Material mat_undefined;
 
+    public Material mat_trans;
+
     public GameObject Explanation;
 
     [SerializeField]
@@ -53,35 +55,18 @@ public class WordCloud : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0) && cloud_spawned)
-        {
-            OnMouseDown();
-        }
-    }
-
     /// <summary>
     /// User clicks on words, triggers reaction.
     /// </summary>
-    private void OnMouseDown()
+    public void OnMouseDown(GameObject go)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        GameObject m_hittedObject = null;
-
-        int layer_mask = LayerMask.GetMask("Words");
-
-        //Check if an object is hit at all, but only on the specific layer
-        if (Physics.Raycast(ray, out hit, 1000, layer_mask))
-        {
-            m_hittedObject = hit.transform.gameObject;
-        }
-
-        if (m_hittedObject == null)
-            return;
+        GameObject m_hittedObject = go;
+        Word tmp_word = null;
         //Only check objects that have a Word component
-        Word tmp_word = m_hittedObject.GetComponent<Word>();
+        if (m_hittedObject.GetComponent<Word>() != null)
+        {
+            tmp_word = m_hittedObject.GetComponent<Word>();
+        }
         WordInCloud tmp_content = null;
         WordInCloud.CR related = WordInCloud.CR.undefined;
 
@@ -108,19 +93,45 @@ public class WordCloud : MonoBehaviour
             case WordInCloud.CR.yes:
                 for (int i = 0; i < rr.Length; i++)
                 {
-                    rr[i].material = mat_correct;
+                    if (rr[i].gameObject.tag == "NoColorChange")
+                    {
+                        //Do nothing
+                        //It's the bounding box
+                    }
+                    else
+                    {
+                        rr[i].material = mat_correct;
+                    }
                 }
                 break;
             case WordInCloud.CR.no:
                 for (int i = 0; i < rr.Length; i++)
                 {
-                    rr[i].material = mat_incorrect;
+                    if (rr[i].gameObject.tag == "NoColorChange")
+                    {
+                        //Do nothing
+                        //It's the bounding box
+                    }
+                    else
+                    {
+                        rr[i].material = mat_incorrect;
+                    }
+                   
                 }
                 break;
             case WordInCloud.CR.undefined:
                 for (int i = 0; i < rr.Length; i++)
                 {
-                    rr[i].material = mat_undefined;
+                    if (rr[i].gameObject.tag == "NoColorChange")
+                    {
+                        //Do nothing
+                        //It's the bounding box
+                    }
+                    else
+                    {
+                        rr[i].material = mat_undefined;
+                    }
+                    
                 }
                 break;
             default:
@@ -139,6 +150,20 @@ public class WordCloud : MonoBehaviour
     /// <returns></returns>
     private IEnumerator CreateWords()
     {
+        //if (cloud_spawned)
+        //{
+        //    //use the current transform
+        //    //change nothing
+        //}
+        //else
+        //{
+        //    //cloudposition = camera forward position
+        //    GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+        //    //transform.position = camera.transform.position;
+        //    transform.position = camera.transform.forward * 10.0f;
+        //    transform.rotation = camera.transform.rotation;
+
+        //}
 
         foreach (WordInCloud w in Content.Words)
         {
@@ -147,28 +172,34 @@ public class WordCloud : MonoBehaviour
             tmp.Text = w.Word;
             word.Text = tmp.Text;
             word.name = "Word-" + tmp.Text;
-            int n = Random.Range(0, 11);
-            if (n < 2)
-            {
-                tmp.Orientation = SimpleHelvetica.alignment.vertical;
-            }
-            if (n >= 2)
+            if (tmp.Text.Length > 4)
             {
                 tmp.Orientation = SimpleHelvetica.alignment.horizontal;
             }
-            
+            if (tmp.Text.Length < 4)
+            {
+                int n = Random.Range(0, 6);
+                if (n < 5)
+                {
+                    tmp.Orientation = SimpleHelvetica.alignment.vertical;
+                }
+                if (n >= 5)
+                {
+                    tmp.Orientation = SimpleHelvetica.alignment.horizontal;
+                }
+            }
             tmp.GenerateText();
             tmp.AddBoxCollider();
             word.transform.localScale = tmp.transform.localScale;
 
 
             //Add Collider
-            BoxCollider tmp_collider = word.gameObject.AddComponent<BoxCollider>();
-            tmp_collider.size = tmp.GetComponent<BoxCollider>().size;
-            tmp_collider.center = tmp.GetComponent<BoxCollider>().center;
+            BoxCollider2D tmp_collider = word.gameObject.AddComponent<BoxCollider2D>();
+            tmp_collider.size = tmp.GetComponent<BoxCollider2D>().size;
+            tmp_collider.offset = tmp.GetComponent<BoxCollider2D>().offset;
             tmp.RemoveBoxCollider();
-
             word.transform.parent = transform;
+            
             yield return StartCoroutine(PlaceWord(word));
 
 
@@ -189,23 +220,45 @@ public class WordCloud : MonoBehaviour
     {
         word.gameObject.layer = LayerMask.NameToLayer("Ignore");
         int layerMask = ~(1 << LayerMask.NameToLayer("Ignore"));
+
+
         var currentDistance = 0f;
         var currentAngle = 0f;
-        Bounds tmp = word.gameObject.GetComponent<BoxCollider>().bounds;
-        GameObject parent = word.transform.parent.gameObject;
-        while (true)
+        Bounds tmp = word.gameObject.GetComponent<BoxCollider2D>().bounds;
+
+        while(true)
         {
             var radians = currentAngle * Mathf.Deg2Rad;
             var x = Mathf.Cos(radians) * currentDistance;
             var y = Mathf.Sin(radians) * currentDistance;
             word.transform.position = new Vector3(word.transform.parent.position.x + x, word.transform.parent.position.y + y, word.transform.parent.position.z);
-            currentDistance += 0.0005f;
-            currentAngle += 0.1f;
-            if (!Physics.CheckBox(word.transform.position, tmp.size, Quaternion.identity, layerMask))
+            currentDistance += 0.005f;
+            currentAngle += 2.5f;
+            Vector2 pos = new Vector2(word.transform.position.x, word.transform.position.y);
+            Vector2 size = new Vector2(tmp.size.x, tmp.size.y);
+            Vector2 dir = new Vector2(x, y);
+            RaycastHit2D[] r_tmp = Physics2D.BoxCastAll(pos, size*2, 0.0f, dir);
+
+            if (r_tmp.Length == 1)
+            {
+                GameObject boundingbox = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                boundingbox.transform.parent = word.transform;
+                boundingbox.gameObject.tag = "NoColorChange";
+                boundingbox.transform.localScale = new Vector3 (tmp.size.x, tmp.size.y, 0.1f);
+                Vector2 offset = word.GetComponent<BoxCollider2D>().offset;
+                boundingbox.transform.position = new Vector3( word.transform.position.x + offset.x , word.transform.position.y + offset.y , word.transform.position.z+0.01f);
+                boundingbox.GetComponent<Renderer>().material = mat_trans;
+                DestroyImmediate(boundingbox.GetComponent<BoxCollider>());
+                
+                
                 break;
+            }
+
+            //if (!Physics.CheckBox(word.transform.position, tmp.size, Quaternion.identity, layerMask))
+            //    break;
 
         }
-        word.gameObject.layer = 10;
+        word.gameObject.layer = LayerMask.NameToLayer("Words");
         yield return null;
     }
 }

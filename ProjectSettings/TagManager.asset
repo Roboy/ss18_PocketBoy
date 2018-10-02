@@ -13,6 +13,8 @@ TagManager:
   - Levelsphere
   - NextQuestion
   - PreviousQuestion
+  - WordCloud
+  - NoColorChange
   layers:
   - Default
   - TransparentFX

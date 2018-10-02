@@ -1629,7 +1629,7 @@ Note: Using raw JNI functions requires advanced knowledge of the Android Java Na
     </member>
     <member name="P:UnityEngine.Application.isPlaying">
       <summary>
-        <para>Returns true when in any kind of player (Read Only).</para>
+        <para>Returns true when in any kind of player is active.(Read Only).</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Application.isShowingSplashScreen">
@@ -3853,7 +3853,7 @@ If called outside of a rendering callback and stereo is enabled, it will return 
       <summary>
         <para>Makes this camera's settings match other camera.</para>
       </summary>
-      <param name="other"></param>
+      <param name="other">Copy camera settings to the other camera.</param>
     </member>
     <member name="M:UnityEngine.Camera.CopyStereoDeviceProjectionMatrixToNonJittered(UnityEngine.Camera/StereoscopicEye)">
       <summary>
@@ -8118,6 +8118,11 @@ The default value is Camera.MonoOrStereoscopicEye.Left, so Camera.MonoOrStereosc
       </summary>
     </member>
     <member name="T:UnityEngine.Experimental.PlayerLoop.PostLateUpdate.UpdateCustomRenderTextures">
+      <summary>
+        <para>Native engine system updated by the native player loop.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.Experimental.PlayerLoop.PostLateUpdate.UpdateRectTransform">
       <summary>
         <para>Native engine system updated by the native player loop.</para>
       </summary>
@@ -13009,7 +13014,10 @@ Only usable on Android, Windows Phone or Windows Tablets.</para>
       <summary>
         <para>Returns true while the virtual button identified by buttonName is held down.</para>
       </summary>
-      <param name="buttonName"></param>
+      <param name="buttonName">The name of the button such as Jump.</param>
+      <returns>
+        <para>True when an axis has been pressed and not released.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Input.GetButtonDown(System.String)">
       <summary>
@@ -13171,6 +13179,21 @@ Only usable on Android, Windows Phone or Windows Tablets.</para>
         <para>TransformAccessArray.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Jobs.TransformAccessArray.capacity">
+      <summary>
+        <para>Returns array capacity.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Jobs.TransformAccessArray.isCreated">
+      <summary>
+        <para>isCreated.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.Jobs.TransformAccessArray.length">
+      <summary>
+        <para>Length.</para>
+      </summary>
+    </member>
     <member name="M:UnityEngine.Jobs.TransformAccessArray.Add(UnityEngine.Transform)">
       <summary>
         <para>Add.</para>
@@ -13184,11 +13207,6 @@ Only usable on Android, Windows Phone or Windows Tablets.</para>
       <param name="capacity">Capacity.</param>
       <param name="desiredJobCount">Desired job count.</param>
       <param name="array">TransformAccessArray.</param>
-    </member>
-    <member name="P:UnityEngine.Jobs.TransformAccessArray.Capacity">
-      <summary>
-        <para>Returns array capacity.</para>
-      </summary>
     </member>
     <member name="M:UnityEngine.Jobs.TransformAccessArray.#ctor(UnityEngine.Transform[],System.Int32)">
       <summary>
@@ -13209,16 +13227,6 @@ Only usable on Android, Windows Phone or Windows Tablets.</para>
     <member name="M:UnityEngine.Jobs.TransformAccessArray.Dispose">
       <summary>
         <para>Dispose.</para>
-      </summary>
-    </member>
-    <member name="P:UnityEngine.Jobs.TransformAccessArray.IsCreated">
-      <summary>
-        <para>IsCreated.</para>
-      </summary>
-    </member>
-    <member name="P:UnityEngine.Jobs.TransformAccessArray.Length">
-      <summary>
-        <para>Length.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.Jobs.TransformAccessArray.RemoveAtSwapBack(System.Int32)">
@@ -19617,20 +19625,20 @@ The Player ID is always 1, because only one Editor can be connected.</param>
         <para>Destroys the object obj immediately. You are strongly recommended to use Destroy instead.</para>
       </summary>
       <param name="obj">Object to be destroyed.</param>
-      <param name="allowDestroyingAssets">Set to true to allow assets to be destoyed.</param>
+      <param name="allowDestroyingAssets">Set to true to allow assets to be destroyed.</param>
     </member>
     <member name="M:UnityEngine.Object.DestroyImmediate(UnityEngine.Object,System.Boolean)">
       <summary>
         <para>Destroys the object obj immediately. You are strongly recommended to use Destroy instead.</para>
       </summary>
       <param name="obj">Object to be destroyed.</param>
-      <param name="allowDestroyingAssets">Set to true to allow assets to be destoyed.</param>
+      <param name="allowDestroyingAssets">Set to true to allow assets to be destroyed.</param>
     </member>
     <member name="M:UnityEngine.Object.DontDestroyOnLoad(UnityEngine.Object)">
       <summary>
         <para>Makes the object target not be destroyed automatically when loading a new scene.</para>
       </summary>
-      <param name="target"></param>
+      <param name="target">The object which is not destroyed on scene change.</param>
     </member>
     <member name="M:UnityEngine.Object.FindObjectOfType(System.Type)">
       <summary>
@@ -19638,7 +19646,7 @@ The Player ID is always 1, because only one Editor can be connected.</param>
       </summary>
       <param name="type">The type of object to find.</param>
       <returns>
-        <para>This returns the first Object that matches the specified type. It returns null if no Objects match the type.</para>
+        <para>This returns the  Object that matches the specified type. It returns null if no Object matches the type.</para>
       </returns>
     </member>
     <member name="M:UnityEngine.Object.FindObjectsOfType(System.Type)">
@@ -19825,8 +19833,11 @@ The Player ID is always 1, because only one Editor can be connected.</param>
     </member>
     <member name="M:UnityEngine.Object.ToString">
       <summary>
-        <para>Returns the name of the game object.</para>
+        <para>Returns the name of the GameObject.</para>
       </summary>
+      <returns>
+        <para>The name returned by ToString.</para>
+      </returns>
     </member>
     <member name="T:UnityEngine.OcclusionArea">
       <summary>
@@ -26319,6 +26330,9 @@ Texture dimension must be of type TextureDimension.Cube.</para>
       <summary>
         <para>Actually creates the RenderTexture.</para>
       </summary>
+      <returns>
+        <para>True if the texture is created, else false.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.RenderTexture.#ctor(System.Int32,System.Int32,System.Int32)">
       <summary>
@@ -28720,6 +28734,45 @@ Returns NULL if there is no associated alpha texture for the source sprite. This
         <para>Returns a copy of the array containing sprite mesh vertex positions.</para>
       </summary>
     </member>
+    <member name="M:UnityEngine.Sprite.Create(UnityEngine.Texture2D,UnityEngine.Rect,UnityEngine.Vector2,System.Single,System.UInt32)">
+      <summary>
+        <para>Create a new Sprite object.</para>
+      </summary>
+      <param name="texture">Texture from which to obtain the sprite graphic.</param>
+      <param name="rect">Rectangular section of the texture to use for the sprite.</param>
+      <param name="pivot">Sprite's pivot point relative to its graphic rectangle.</param>
+      <param name="pixelsPerUnit">The number of pixels in the sprite that correspond to one unit in world space.</param>
+      <param name="extrude">Amount by which the sprite mesh should be expanded outwards.</param>
+      <param name="meshType">Controls the type of mesh generated for the sprite.</param>
+      <param name="border">The border sizes of the sprite (X=left, Y=bottom, Z=right, W=top).</param>
+      <param name="generateFallbackPhysicsShape">Generates a default physics shape for the sprite.</param>
+    </member>
+    <member name="M:UnityEngine.Sprite.Create(UnityEngine.Texture2D,UnityEngine.Rect,UnityEngine.Vector2,System.Single,System.UInt32,UnityEngine.SpriteMeshType)">
+      <summary>
+        <para>Create a new Sprite object.</para>
+      </summary>
+      <param name="texture">Texture from which to obtain the sprite graphic.</param>
+      <param name="rect">Rectangular section of the texture to use for the sprite.</param>
+      <param name="pivot">Sprite's pivot point relative to its graphic rectangle.</param>
+      <param name="pixelsPerUnit">The number of pixels in the sprite that correspond to one unit in world space.</param>
+      <param name="extrude">Amount by which the sprite mesh should be expanded outwards.</param>
+      <param name="meshType">Controls the type of mesh generated for the sprite.</param>
+      <param name="border">The border sizes of the sprite (X=left, Y=bottom, Z=right, W=top).</param>
+      <param name="generateFallbackPhysicsShape">Generates a default physics shape for the sprite.</param>
+    </member>
+    <member name="M:UnityEngine.Sprite.Create(UnityEngine.Texture2D,UnityEngine.Rect,UnityEngine.Vector2,System.Single,System.UInt32,UnityEngine.SpriteMeshType,UnityEngine.Vector4,System.Boolean)">
+      <summary>
+        <para>Create a new Sprite object.</para>
+      </summary>
+      <param name="texture">Texture from which to obtain the sprite graphic.</param>
+      <param name="rect">Rectangular section of the texture to use for the sprite.</param>
+      <param name="pivot">Sprite's pivot point relative to its graphic rectangle.</param>
+      <param name="pixelsPerUnit">The number of pixels in the sprite that correspond to one unit in world space.</param>
+      <param name="extrude">Amount by which the sprite mesh should be expanded outwards.</param>
+      <param name="meshType">Controls the type of mesh generated for the sprite.</param>
+      <param name="border">The border sizes of the sprite (X=left, Y=bottom, Z=right, W=top).</param>
+      <param name="generateFallbackPhysicsShape">Generates a default physics shape for the sprite.</param>
+    </member>
     <member name="M:UnityEngine.Sprite.Create(UnityEngine.Texture2D,UnityEngine.Rect,UnityEngine.Vector2,System.Single,System.UInt32,UnityEngine.SpriteMeshType,UnityEngine.Vector4)">
       <summary>
         <para>Create a new Sprite object.</para>
@@ -28731,8 +28784,35 @@ Returns NULL if there is no associated alpha texture for the source sprite. This
       <param name="extrude">Amount by which the sprite mesh should be expanded outwards.</param>
       <param name="meshType">Controls the type of mesh generated for the sprite.</param>
       <param name="border">The border sizes of the sprite (X=left, Y=bottom, Z=right, W=top).</param>
+      <param name="generateFallbackPhysicsShape">Generates a default physics shape for the sprite.</param>
     </member>
-    <member name="M:UnityEngine.Sprite.GetPhysicsShape">
+    <member name="M:UnityEngine.Sprite.Create(UnityEngine.Texture2D,UnityEngine.Rect,UnityEngine.Vector2)">
+      <summary>
+        <para>Create a new Sprite object.</para>
+      </summary>
+      <param name="texture">Texture from which to obtain the sprite graphic.</param>
+      <param name="rect">Rectangular section of the texture to use for the sprite.</param>
+      <param name="pivot">Sprite's pivot point relative to its graphic rectangle.</param>
+      <param name="pixelsPerUnit">The number of pixels in the sprite that correspond to one unit in world space.</param>
+      <param name="extrude">Amount by which the sprite mesh should be expanded outwards.</param>
+      <param name="meshType">Controls the type of mesh generated for the sprite.</param>
+      <param name="border">The border sizes of the sprite (X=left, Y=bottom, Z=right, W=top).</param>
+      <param name="generateFallbackPhysicsShape">Generates a default physics shape for the sprite.</param>
+    </member>
+    <member name="M:UnityEngine.Sprite.Create(UnityEngine.Texture2D,UnityEngine.Rect,UnityEngine.Vector2,System.Single)">
+      <summary>
+        <para>Create a new Sprite object.</para>
+      </summary>
+      <param name="texture">Texture from which to obtain the sprite graphic.</param>
+      <param name="rect">Rectangular section of the texture to use for the sprite.</param>
+      <param name="pivot">Sprite's pivot point relative to its graphic rectangle.</param>
+      <param name="pixelsPerUnit">The number of pixels in the sprite that correspond to one unit in world space.</param>
+      <param name="extrude">Amount by which the sprite mesh should be expanded outwards.</param>
+      <param name="meshType">Controls the type of mesh generated for the sprite.</param>
+      <param name="border">The border sizes of the sprite (X=left, Y=bottom, Z=right, W=top).</param>
+      <param name="generateFallbackPhysicsShape">Generates a default physics shape for the sprite.</param>
+    </member>
+    <member name="M:UnityEngine.Sprite.GetPhysicsShape(System.Int32,System.Collections.Generic.List`1&lt;UnityEngine.Vector2&gt;)">
       <summary>
         <para>Gets a physics shape from the Sprite by its index.</para>
       </summary>
@@ -31189,9 +31269,13 @@ Useful for restarting a trail from a new position.</para>
     </member>
     <member name="M:UnityEngine.Transform.Find(System.String)">
       <summary>
-        <para>Finds a child by name and returns it.</para>
+        <para>Finds a child by n and returns it.</para>
       </summary>
-      <param name="name">Name of child to be found.</param>
+      <param name="n">Name of child to be found.</param>
+      <param name="name"></param>
+      <returns>
+        <para>The returned child transform or null if no child is found.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Transform.GetChild(System.Int32)">
       <summary>
@@ -31287,8 +31371,9 @@ Useful for restarting a trail from a new position.</para>
       <summary>
         <para>Applies a rotation of eulerAngles.z degrees around the z axis, eulerAngles.x degrees around the x axis, and eulerAngles.y degrees around the y axis (in that order).</para>
       </summary>
-      <param name="eulerAngles">Rotation to apply.</param>
       <param name="relativeTo">Rotation is local to object or World.</param>
+      <param name="eulers">Rotation to apply.</param>
+      <param name="eulerAngles"></param>
     </member>
     <member name="M:UnityEngine.Transform.Rotate(System.Single,System.Single,System.Single,UnityEngine.Space)">
       <summary>
@@ -31636,9 +31721,9 @@ Useful for restarting a trail from a new position.</para>
         <para>NativeContainerIsAtomicWriteOnlyAttribute.</para>
       </summary>
     </member>
-    <member name="T:Unity.Collections.LowLevel.Unsafe.NativeContainerNeedsThreadIndexAttribute">
+    <member name="T:Unity.Collections.LowLevel.Unsafe.NativeContainerIsReadOnlyAttribute">
       <summary>
-        <para>NativeContainerNeedsThreadIndexAttribute.</para>
+        <para>NativeContainerIsReadOnlyAttribute.</para>
       </summary>
     </member>
     <member name="T:Unity.Collections.LowLevel.Unsafe.NativeContainerSupportsDeallocateOnJobCompletionAttribute">
@@ -31646,9 +31731,19 @@ Useful for restarting a trail from a new position.</para>
         <para>NativeContainerSupportsDeallocateOnJobCompletionAttribute.</para>
       </summary>
     </member>
+    <member name="T:Unity.Collections.LowLevel.Unsafe.NativeContainerSupportsDeferredConvertListToArray">
+      <summary>
+        <para>NativeContainerSupportsDeferredConvertListToArray.</para>
+      </summary>
+    </member>
     <member name="T:Unity.Collections.LowLevel.Unsafe.NativeContainerSupportsMinMaxWriteRestrictionAttribute">
       <summary>
         <para>NativeContainerSupportsMinMaxWriteRestrictionAttribute.</para>
+      </summary>
+    </member>
+    <member name="T:Unity.Collections.LowLevel.Unsafe.NativeDisableContainerSafetyRestrictionAttribute">
+      <summary>
+        <para>By default native containers are tracked by the safety system to avoid race conditions. The safety system encapsulates the best practices and catches many race condition bugs from the start.</para>
       </summary>
     </member>
     <member name="T:Unity.Collections.LowLevel.Unsafe.NativeDisableUnsafePtrRestrictionAttribute">
@@ -31659,6 +31754,11 @@ Useful for restarting a trail from a new position.</para>
     <member name="T:Unity.Collections.LowLevel.Unsafe.NativeSetClassTypeToNullOnScheduleAttribute">
       <summary>
         <para>When this attribute is applied to a field in a job struct, the managed reference to the class will be set to null on the copy of the job struct that is passed to the job.</para>
+      </summary>
+    </member>
+    <member name="T:Unity.Collections.LowLevel.Unsafe.NativeSetThreadIndexAttribute">
+      <summary>
+        <para>This attribute can inject a worker thread index into an int on the job struct. This is usually used in the implementation of atomic containers. The index is guaranteed to be unique to any other job that might be running in parallel.</para>
       </summary>
     </member>
     <member name="T:Unity.Collections.LowLevel.Unsafe.NativeSliceUnsafeUtility">
@@ -32403,37 +32503,37 @@ See Also: JobHandle.CombineDependencies.</para>
         <para>Struct containing information about a range the job is allowed to work on.</para>
       </summary>
     </member>
-    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.batchSize">
+    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.BatchSize">
       <summary>
         <para>The size of the batch.</para>
       </summary>
     </member>
-    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.indicesPerPhase">
+    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.IndicesPerPhase">
       <summary>
         <para>Number of indices per phase.</para>
       </summary>
     </member>
-    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.numJobs">
+    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.NumJobs">
       <summary>
         <para>Number of jobs.</para>
       </summary>
     </member>
-    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.numPhases">
+    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.NumPhases">
       <summary>
         <para>Number of phases.</para>
       </summary>
     </member>
-    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.phaseData">
+    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.PhaseData">
       <summary>
         <para>Phase Data.</para>
       </summary>
     </member>
-    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.startEndIndex">
+    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.StartEndIndex">
       <summary>
         <para>The start and end index of the job range.</para>
       </summary>
     </member>
-    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.totalIterationCount">
+    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobRanges.TotalIterationCount">
       <summary>
         <para>Total iteration count.</para>
       </summary>
@@ -32500,26 +32600,6 @@ See Also: JobHandle.CombineDependencies.</para>
         <para>Struct containing job parameters for scheduling.</para>
       </summary>
     </member>
-    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobsUtility.JobScheduleParameters.dependency">
-      <summary>
-        <para>A JobHandle to any dependency this job would have.</para>
-      </summary>
-    </member>
-    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobsUtility.JobScheduleParameters.jobDataPtr">
-      <summary>
-        <para>Pointer to the job data.</para>
-      </summary>
-    </member>
-    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobsUtility.JobScheduleParameters.reflectionData">
-      <summary>
-        <para>Pointer to the reflection data.</para>
-      </summary>
-    </member>
-    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobsUtility.JobScheduleParameters.scheduleMode">
-      <summary>
-        <para>ScheduleMode option.</para>
-      </summary>
-    </member>
     <member name="M:Unity.Jobs.LowLevel.Unsafe.JobsUtility.JobScheduleParameters.#ctor(System.Void*,System.IntPtr,Unity.Jobs.JobHandle,Unity.Jobs.LowLevel.Unsafe.ScheduleMode)">
       <summary>
         <para>Constructor.</para>
@@ -32528,6 +32608,26 @@ See Also: JobHandle.CombineDependencies.</para>
       <param name="i_reflectionData"></param>
       <param name="i_dependency"></param>
       <param name="i_scheduleMode"></param>
+    </member>
+    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobsUtility.JobScheduleParameters.Dependency">
+      <summary>
+        <para>A JobHandle to any dependency this job would have.</para>
+      </summary>
+    </member>
+    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobsUtility.JobScheduleParameters.JobDataPtr">
+      <summary>
+        <para>Pointer to the job data.</para>
+      </summary>
+    </member>
+    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobsUtility.JobScheduleParameters.ReflectionData">
+      <summary>
+        <para>Pointer to the reflection data.</para>
+      </summary>
+    </member>
+    <member name="F:Unity.Jobs.LowLevel.Unsafe.JobsUtility.JobScheduleParameters.ScheduleMode">
+      <summary>
+        <para>ScheduleMode option.</para>
+      </summary>
     </member>
     <member name="F:Unity.Jobs.LowLevel.Unsafe.JobsUtility.MaxJobThreadCount">
       <summary>
@@ -32555,6 +32655,18 @@ See Also: JobHandle.CombineDependencies.</para>
       <param name="parameters"></param>
       <param name="arrayLength"></param>
       <param name="innerloopBatchCount"></param>
+      <returns>
+        <para>Returns a JobHandle to the newly created Job.</para>
+      </returns>
+    </member>
+    <member name="M:Unity.Jobs.LowLevel.Unsafe.JobsUtility.ScheduleParallelForDeferArraySize(Unity.Jobs.LowLevel.Unsafe.JobsUtility/JobScheduleParameters&amp;,System.Int32,System.Void*,System.Void*)">
+      <summary>
+        <para>Schedule a IJobParallelFor job.</para>
+      </summary>
+      <param name="parameters"></param>
+      <param name="innerloopBatchCount"></param>
+      <param name="listData"></param>
+      <param name="listDataAtomicSafetyHandle"></param>
       <returns>
         <para>Returns a JobHandle to the newly created Job.</para>
       </returns>
@@ -33432,10 +33544,13 @@ See Also: JobHandle.CombineDependencies.</para>
       <summary>
         <para>Rotates a vector current towards target.</para>
       </summary>
-      <param name="current"></param>
-      <param name="target"></param>
-      <param name="maxRadiansDelta"></param>
-      <param name="maxMagnitudeDelta"></param>
+      <param name="current">The vector being managed.</param>
+      <param name="target">The vector.</param>
+      <param name="maxRadiansDelta">The distance between the two vectors  in radians.</param>
+      <param name="maxMagnitudeDelta">The length of the radian.</param>
+      <returns>
+        <para>The location that RotateTowards generates.</para>
+      </returns>
     </member>
     <member name="M:UnityEngine.Vector3.Scale(UnityEngine.Vector3,UnityEngine.Vector3)">
       <summary>

@@ -1448,7 +1448,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4892439360912996}
   - component: {fileID: 114058130449845666}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Word
   m_TagString: Untagged
   m_Icon: {fileID: 0}
