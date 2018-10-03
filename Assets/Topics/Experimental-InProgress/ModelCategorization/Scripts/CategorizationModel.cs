@@ -54,17 +54,21 @@ namespace Pocketboy.ModelCategorization
 
         private void ResetPose() // TO DO DA FUQ
         {
-            var rigidbody = GetComponent<Rigidbody>();
-            if (rigidbody)
-            {
-                rigidbody.position = m_RespawnPose.position;
-                rigidbody.rotation = m_RespawnPose.rotation;
-            }
-            else
-            {
-                transform.position = m_RespawnPose.position;
-                transform.rotation = m_RespawnPose.rotation;
-            }
+            transform.position = m_RespawnPose.position;
+            transform.rotation = m_RespawnPose.rotation;
+            //var rigidbody = GetComponent<Rigidbody>();
+            //if (rigidbody)
+            //{
+            //    Debug.Log("Rigidbody");
+            //    rigidbody.position = m_RespawnPose.position;
+            //    rigidbody.rotation = m_RespawnPose.rotation;
+            //}
+            //else
+            //{
+            //    Debug.Log("Transform");
+            //    transform.position = m_RespawnPose.position;
+            //    transform.rotation = m_RespawnPose.rotation;
+            //}
         }
 
         void OnTriggerEnter(Collider other)
@@ -76,11 +80,12 @@ namespace Pocketboy.ModelCategorization
                 return;
             }
 
-            var deadzone = other.GetComponent<Deadzone>();
-            if (deadzone)
+            if (other.CompareTag("Deadzone"))
             {
                 ResetPose();
             }
+
+
         }
 
         void OnTriggerExit(Collider other)

@@ -15,6 +15,7 @@ TagManager:
   - PreviousQuestion
   - WordCloud
   - NoColorChange
+  - Deadzone
   layers:
   - Default
   - TransparentFX
