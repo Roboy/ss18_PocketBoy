@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pocketboy.Common;
 
-namespace Pocketboy.Word
+namespace Pocketboy.Wordcloud
 {
 
     public class WordCloudController : MonoBehaviour
@@ -30,7 +30,7 @@ namespace Pocketboy.Word
             m_WC.transform.position += 0.5f * roboy.transform.up;
             //m_WC.transform.forward = roboy.transform.forward * (-1f);
             m_WC.transform.parent = roboy.transform.parent;
-            
+
 
         }
 

@@ -35,7 +35,9 @@ namespace Pocketboy.Runaround
         /// Additional feedback where the player is currently Standing.
         /// </summary>
         public Material mat_position;
-        
+
+        public Material mat_currentAnswer;
+
 
 
         [SerializeField]
@@ -337,7 +339,7 @@ namespace Pocketboy.Runaround
             m_playerAnswer = ans;
             //Indicate the position of the player on the field
             ans.SignPost.GetComponent<Renderer>().material = mat_position;
-            QuestionManager.Instance.answer_sprites[AnswerPlanes.IndexOf(ans)].material = mat_position;
+            QuestionManager.Instance.answer_Images[AnswerPlanes.IndexOf(ans)].material = mat_currentAnswer;
         }
 
         /// <summary>
@@ -353,7 +355,7 @@ namespace Pocketboy.Runaround
             ans.SignPost.GetComponent<Renderer>().material = dic_mat_posts[t];
             //Reset the player's answer
             m_playerAnswer = null;
-            QuestionManager.Instance.answer_sprites[AnswerPlanes.IndexOf(ans)].material = dic_mat_posts[AnswerPlanes.IndexOf(ans)];
+            QuestionManager.Instance.answer_Images[AnswerPlanes.IndexOf(ans)].material = dic_mat_floors[AnswerPlanes.IndexOf(ans)];
         }
 
 

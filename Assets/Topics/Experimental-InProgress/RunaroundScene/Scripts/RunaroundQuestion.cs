@@ -12,6 +12,7 @@ namespace Pocketboy.Runaround
         public List<string> QuestionAnswers;
         public int CorrectAnswerID;
         public Sprite QuestionImage;
+        public Sprite[] AnswerImages;
 
     }
 }

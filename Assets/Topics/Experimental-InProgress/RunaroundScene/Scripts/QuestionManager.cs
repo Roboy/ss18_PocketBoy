@@ -3,27 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pocketboy.Common;
 using TMPro;
+using UnityEngine.UI;
+
 namespace Pocketboy.Runaround
 {
 
     public class QuestionManager : Singleton<QuestionManager>
     {
         public List<RunaroundQuestion> Questions;
-        public GameObject QuestionArea;
-        public GameObject AnswerArea;
-        public GameObject Buttons;
-        public Sprite QuestionDefaultImage;
-        public SpriteRenderer[] answer_sprites;
-        private TextMeshPro[] answer_texts;
+        public Image QuestionImage;
+        public Sprite QuestionDefaultSprite;
+        public Material mat_QuestionTransparent;
+        public Material mat_QuestionSolid;
+        public Image[] answer_Images;
         private RunaroundQuestion m_currentQuestion;
 
-        private void Update()
+        public void NavigateQuestion(string tag)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (tag == "NextQuestion")
             {
-                ButtonTouch();
+                NextQuestion();
+            }
+            if (tag == "PreviousQuestion")
+            {
+                PreviousQuestion();
             }
         }
+
         public RunaroundQuestion GetCurrentQuestion()
         {
             return m_currentQuestion;
@@ -32,24 +38,36 @@ namespace Pocketboy.Runaround
         public void LoadQuestion(int index)
         {
             m_currentQuestion = Questions[index];
-            QuestionArea.GetComponentInChildren<TextMeshPro>().text = m_currentQuestion.QuestionText;
+            QuestionImage.GetComponentInChildren<TextMeshProUGUI>().text = m_currentQuestion.QuestionText;
 
-            //Try to load image
+            //Try to load image for question.
             if (m_currentQuestion.QuestionImage != null)
             {
-                QuestionArea.GetComponent<SpriteRenderer>().sprite = m_currentQuestion.QuestionImage;
+                QuestionImage.sprite = m_currentQuestion.QuestionImage;
+                QuestionImage.material = mat_QuestionSolid;
             }
             else
             {
-                QuestionArea.GetComponent<SpriteRenderer>().sprite = QuestionDefaultImage;
+                QuestionImage.sprite = QuestionDefaultSprite;
+                QuestionImage.material = mat_QuestionTransparent;
             }
-
-            answer_sprites = AnswerArea.GetComponentsInChildren<SpriteRenderer>();
-            answer_texts = AnswerArea.GetComponentsInChildren<TextMeshPro>();
-            for (int i = 0; i < Questions.Count; i++)
+            //Assign the image and text components of the current question regarding answers.
+            for (int i = 0; i < answer_Images.Length; i++)
             {
-                answer_sprites[i].material = GameMaster.Instance.dic_mat_posts[i];
-                answer_texts[i].text = m_currentQuestion.QuestionAnswers[i];
+                //Assign the same material as the corresponding floor.
+                answer_Images[i].material = GameMaster.Instance.dic_mat_floors[i];
+                answer_Images[i].material.shader = Shader.Find("UI/Unlit/Transparent");
+                //Try to load image for every single answer.
+                if (m_currentQuestion.AnswerImages.Length > 0)
+                {
+                    answer_Images[i].sprite = m_currentQuestion.AnswerImages[i];
+                }
+                else
+                {
+                    answer_Images[i].sprite = QuestionDefaultSprite;
+                }
+                answer_Images[i].GetComponentInChildren< TextMeshProUGUI >().text = m_currentQuestion.QuestionAnswers[i];
+                
             }
         }
 
@@ -80,38 +98,6 @@ namespace Pocketboy.Runaround
             LoadQuestion(index);
         }
 
-        private void ButtonTouch()
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            GameObject m_hittedObject = null;
-
-            int layer_mask = LayerMask.GetMask("QuestionButtons");
-
-
-            //Check if an object is hit at all, but only on the specific layer
-            if (Physics.Raycast(ray, out hit, 1000,layer_mask))
-            {
-                m_hittedObject = hit.collider.gameObject;
-
-            }
-
-            if (m_hittedObject == null)
-                return;
-
-            if (m_hittedObject.tag == "NextQuestion")
-            {
-                //TODO: check for timer;
-                NextQuestion();
-            }
-
-            if (m_hittedObject.tag == "PreviousQuestion")
-            {
-                //TODO: check for timer;
-                PreviousQuestion();
-            }
-
-        }
     }
 
    

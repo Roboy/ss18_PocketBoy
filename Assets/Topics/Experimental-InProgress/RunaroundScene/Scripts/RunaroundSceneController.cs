@@ -37,10 +37,11 @@ namespace Pocketboy.Runaround
             m_GM.transform.position -= 0.5f * roboy.transform.up;
             m_GM.transform.forward = roboy.transform.forward * (-1f);
             m_GM.transform.parent = roboy.transform.parent;
-            m_play.onClick.AddListener(Listen);
+
 
             GameMaster.Instance.SetInitProperties();
             QuestionManager.Instance.LoadQuestion(0);
+            m_play.onClick.AddListener(Listen);
 
         }
 

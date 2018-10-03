@@ -17,4 +17,8 @@ MonoBehaviour:
   - 42
   - 2
   CorrectAnswerID: 2
-  QuestionImage: {fileID: 21300000, guid: ffd9c7788ae06874499eb90e196ebc39, type: 3}
+  QuestionImage: {fileID: 0}
+  AnswerImages:
+  - {fileID: 21300000, guid: 67695763a6bf9114a845953a9b521f34, type: 3}
+  - {fileID: 21300000, guid: 67695763a6bf9114a845953a9b521f34, type: 3}
+  - {fileID: 21300000, guid: 67695763a6bf9114a845953a9b521f34, type: 3}
