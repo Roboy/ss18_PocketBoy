@@ -9,6 +9,6 @@ namespace Pocketboy.ModelCategorization
     {
         Yes,
         No,
-        Undefined
+        Debatable
     };
 }

@@ -29,6 +29,8 @@ TagManager:
   - Words
   - Ignore
   - QuestionButtons
+  - CategorizationModels
+  - CategorizationPlatforms
   - 
   - 
   - 
@@ -45,9 +47,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Roboy
   m_SortingLayers:
   - name: Default
     uniqueID: 0

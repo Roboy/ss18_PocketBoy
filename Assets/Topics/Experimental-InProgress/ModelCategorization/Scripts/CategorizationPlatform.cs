@@ -28,12 +28,6 @@ namespace Pocketboy.ModelCategorization
 
         private Vector3 m_HeightStep;
 
-        private void Start()
-        {
-            m_ContentCount = 5;
-            SetupFlag();
-        }
-
         public void SetContentCount(int count)
         {
             m_ContentCount = count;
@@ -45,10 +39,8 @@ namespace Pocketboy.ModelCategorization
             if (m_CurrentContentCount > m_ContentCount)
                 return false;
 
-            Debug.Log("CheckContent");
             if (state == ContentRelatedState)
             {
-                Debug.Log("Here");
                 StartCoroutine(RiseFlag());
                 return true;
             }

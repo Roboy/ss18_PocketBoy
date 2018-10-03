@@ -9,28 +9,23 @@ namespace Pocketboy.ModelCategorization
 {
     public class CategorizationModel : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        [SerializeField]
-        private GameObject NameContainer;
-
-        [SerializeField]
-        private TextMeshProUGUI Name;
-
-        [SerializeField]
         private ContentRelated m_ContentRelatedState;
 
         private CategorizationPlatform m_Platform;
 
         private bool m_IsOnPlatform = false;
 
+        private string m_Name = null;
+
+        private string m_Explanation = null;
+
         public void OnPointerDown(PointerEventData eventData)
         {
-            ShowName();
+            ModelCategorizationManager.Instance.ShowObjectInformation(m_Name, m_Explanation);
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            HideName();
-
             if (!m_IsOnPlatform && m_Platform != null)
             {
                 bool isOnCorrentPlatform = m_Platform.CheckContent(m_ContentRelatedState);
@@ -45,22 +40,15 @@ namespace Pocketboy.ModelCategorization
             }
         }
 
-        public void ShowName()
+        public void Setup(GameObject modelPrefab, string name, string explanation, ContentRelated state)
         {
-            NameContainer.gameObject.SetActive(true);
+            m_Name = name;
+            m_Explanation = explanation;
+            m_ContentRelatedState = state;
+            var model = Instantiate(modelPrefab, transform);
         }
 
-        public void HideName()
-        {
-            NameContainer.gameObject.SetActive(false);
-        }
-
-        public void SetName(string name)
-        {
-            Name.text = name;
-        }
-
-        public void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             var platform = other.GetComponent<CategorizationPlatform>();
             if (platform != null)
@@ -69,7 +57,7 @@ namespace Pocketboy.ModelCategorization
             }
         }
 
-        public void OnTriggerExit(Collider other)
+        void OnTriggerExit(Collider other)
         {
             m_Platform = null;
         }

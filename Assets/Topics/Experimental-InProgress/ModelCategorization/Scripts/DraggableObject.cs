@@ -23,6 +23,10 @@ namespace Pocketboy.ModelCategorization
 
         private Vector3 m_TouchPositionWorldSpace;
 
+        private Rigidbody m_RigidBody;
+
+        private bool m_KinematicState;
+
         /// <summary>
         /// Offset when on touch down between the touch position and the position to avoid a snap to the center.
         /// </summary>
@@ -33,6 +37,15 @@ namespace Pocketboy.ModelCategorization
         /// the distance between the camera and the position is used as z-coordinate for the world touch position.
         /// </summary>
         private float m_DistanceToCameraOnTouch = 0f;
+
+        void Start()
+        {
+            m_RigidBody = GetComponent<Rigidbody>();
+            if (m_RigidBody)
+            {
+                m_KinematicState = m_RigidBody.isKinematic;
+            }
+        }
 
         public void OnPointerDown(PointerEventData eventData)
         {
@@ -56,8 +69,18 @@ namespace Pocketboy.ModelCategorization
         void StartDrag()
         {
             m_IsTouched = true;
+
+            if (m_RigidBody)
+            {
+                m_RigidBody.isKinematic = true;
+            }
+
             m_DistanceToCameraOnTouch = (Camera.main.transform.position - transform.position).magnitude;
+#if UNITY_EDITOR
+            m_OffsetOnTouch = (Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, m_DistanceToCameraOnTouch)) - transform.position);
+#elif UNITY_ANDROID
             m_OffsetOnTouch = (Camera.main.ScreenToWorldPoint(new Vector3(Input.touches[0].position.x, Input.touches[0].position.y, m_DistanceToCameraOnTouch)) - transform.position);
+#endif
         }
 
         void StopDrag()
@@ -65,11 +88,20 @@ namespace Pocketboy.ModelCategorization
             m_IsTouched = false;
             m_DistanceToCameraOnTouch = 0f;
             m_OffsetOnTouch = Vector3.zero;
+
+            if (m_RigidBody)
+            {
+                m_RigidBody.isKinematic = m_KinematicState;
+            }
         }
 
         void UpdateDrag()
         {
+#if UNITY_EDITOR
+            m_TouchPositionScreenSpace = Input.mousePosition;
+#elif UNITY_ANDROID
             m_TouchPositionScreenSpace = Input.touches[0].position;
+#endif
             m_TouchPositionWorldSpace = m_TouchPositionScreenSpace;
             m_TouchPositionWorldSpace.z = m_DistanceToCameraOnTouch; // transform touch position from 2d to 3d on the plane where the first touch occured
             transform.position = Camera.main.ScreenToWorldPoint(m_TouchPositionWorldSpace) - m_OffsetOnTouch;
