@@ -19,6 +19,8 @@ namespace Pocketboy.ModelCategorization
 
         private string m_Explanation = null;
 
+        private Transform m_RespawnPose;
+
         public void OnPointerDown(PointerEventData eventData)
         {
             ModelCategorizationManager.Instance.ShowObjectInformation(m_Name, m_Explanation);
@@ -40,12 +42,29 @@ namespace Pocketboy.ModelCategorization
             }
         }
 
-        public void Setup(GameObject modelPrefab, string name, string explanation, ContentRelated state)
+        public void Setup(GameObject modelPrefab, string name, string explanation, ContentRelated state, Transform respawnPose)
         {
             m_Name = name;
             m_Explanation = explanation;
             m_ContentRelatedState = state;
             var model = Instantiate(modelPrefab, transform);
+            m_RespawnPose = respawnPose;
+            ResetPose();
+        }
+
+        private void ResetPose() // TO DO DA FUQ
+        {
+            var rigidbody = GetComponent<Rigidbody>();
+            if (rigidbody)
+            {
+                rigidbody.position = m_RespawnPose.position;
+                rigidbody.rotation = m_RespawnPose.rotation;
+            }
+            else
+            {
+                transform.position = m_RespawnPose.position;
+                transform.rotation = m_RespawnPose.rotation;
+            }
         }
 
         void OnTriggerEnter(Collider other)
@@ -54,6 +73,13 @@ namespace Pocketboy.ModelCategorization
             if (platform != null)
             {
                 m_Platform = platform;
+                return;
+            }
+
+            var deadzone = other.GetComponent<Deadzone>();
+            if (deadzone)
+            {
+                ResetPose();
             }
         }
 

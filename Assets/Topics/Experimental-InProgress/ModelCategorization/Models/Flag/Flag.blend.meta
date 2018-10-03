@@ -6,25 +6,52 @@ ModelImporter:
     100000: //RootNode
     100002: Flag
     100004: Stand
+    100006: Cube
+    100008: Border
+    100010: Pole
     400000: //RootNode
     400002: Flag
     400004: Stand
+    400006: Cube
+    400008: Border
+    400010: Pole
     2100000: mat_flag
     2100002: mat_stand
+    2100004: mat_border
+    2100006: mat_ground
     2300000: Flag
     2300002: Stand
+    2300004: Cube
+    2300006: Border
+    2300008: Pole
     3300000: Flag
     3300002: Stand
+    3300004: Cube
+    3300006: Border
+    3300008: Pole
     4300000: Flag
     4300002: Stand
+    4300004: Cube
+    4300006: Border
+    4300008: Pole
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: mat_border
+    second: {fileID: 2100000, guid: 3b6e97d645b84ab409d7623325bb9ed8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: mat_flag
     second: {fileID: 2100000, guid: 1516ad2ce48968f4987468a0b8ff488f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_ground
+    second: {fileID: 2100000, guid: 043a4a195f61ba04888093a08aafd99f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

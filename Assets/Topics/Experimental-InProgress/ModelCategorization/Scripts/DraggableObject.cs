@@ -49,7 +49,7 @@ namespace Pocketboy.ModelCategorization
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            StartDrag();
+            StartDrag(eventData);
         }
 
         public void OnPointerUp(PointerEventData eventData)
@@ -66,7 +66,7 @@ namespace Pocketboy.ModelCategorization
             }
         }
 
-        void StartDrag()
+        void StartDrag(PointerEventData eventData)
         {
             m_IsTouched = true;
 
@@ -76,11 +76,7 @@ namespace Pocketboy.ModelCategorization
             }
 
             m_DistanceToCameraOnTouch = (Camera.main.transform.position - transform.position).magnitude;
-#if UNITY_EDITOR
-            m_OffsetOnTouch = (Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, m_DistanceToCameraOnTouch)) - transform.position);
-#elif UNITY_ANDROID
-            m_OffsetOnTouch = (Camera.main.ScreenToWorldPoint(new Vector3(Input.touches[0].position.x, Input.touches[0].position.y, m_DistanceToCameraOnTouch)) - transform.position);
-#endif
+            m_OffsetOnTouch = (Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, m_DistanceToCameraOnTouch)) - transform.position);
         }
 
         void StopDrag()

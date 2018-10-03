@@ -8,11 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Man
-  m_EditorClassIdentifier: Assembly-CSharp:Pocketboy.ModelCategorization:CategorizationModelAsset
+  m_Script: {fileID: 11500000, guid: ce652740536cac04d8ce8266b7d35d0f, type: 3}
+  m_Name: Pirate
+  m_EditorClassIdentifier: 
   ModelPrefab: {fileID: 1147427837983226, guid: cb033161d25945a49a7abcb7e702d173,
     type: 2}
-  Name: ARRRRRRRRRRRRRR
-  Explanation: Its a robot pirate.
-  ContentRelatedState: 0
+  Name: ARRR
+  Explanation: ARRRRRRRRRRr
+  ContentRelatedState: 1
