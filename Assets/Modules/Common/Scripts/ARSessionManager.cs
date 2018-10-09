@@ -14,34 +14,6 @@ namespace Pocketboy.Common
     using Input = InstantPreviewInput;
 #endif
 
-    public enum SessionState
-    {
-        /// <summary>
-        /// <see cref="ARSessionManager"/> has not calibrated the floor yet.
-        /// </summary>
-        None,
-
-        /// <summary>
-        /// <see cref="ARSessionManager"/> is calibrating the floor.
-        /// </summary>
-        CalibratingFloor,
-
-        /// <summary>
-        /// <see cref="ARSessionManager"/> has calibrated the floor but did not found a plane yet.
-        /// </summary>
-        CalibratedFloor,
-
-        /// <summary>
-        /// <see cref="ARSessionManager"/> is searching for a plane.
-        /// </summary>
-        SearchingPlane,
-
-        /// <summary>
-        /// <see cref="ARSessionManager"/> has found a plane and has calibrated the floor.
-        /// </summary>
-        FoundPlane
-    }
-
     public class ARSessionManager : Singleton<ARSessionManager>
     {
         [SerializeField]
@@ -66,8 +38,6 @@ namespace Pocketboy.Common
 
         public float FloorHeight { get; private set; }
 
-        private SessionState State = SessionState.None;
-
         private bool m_CalibrationConfirmed;
 
         private List<DetectedPlane> m_AllPlanes = new List<DetectedPlane>();
@@ -83,15 +53,10 @@ namespace Pocketboy.Common
         private void Update()
         {
             UpdateApplicationLifecycle();
-
-            //UpdateState();
         }
 
         private void Calibrate()
-        {
-            if (State != SessionState.None)
-                return;
-            
+        {            
             StartCoroutine(CalibrateFloorInternal());
         }
 
@@ -102,30 +67,8 @@ namespace Pocketboy.Common
             CalibrateButton.gameObject.SetActive(true);
         }
 
-        private void UpdateState()
-        {
-            switch (State)
-            {
-                case SessionState.None:
-                    StartCoroutine(CalibrateFloorInternal());
-                    break;
-                case SessionState.CalibratingFloor:
-                    break;
-                case SessionState.CalibratedFloor:
-                    break;
-                case SessionState.SearchingPlane:
-                    break;
-                case SessionState.FoundPlane:
-                    break;
-                default:
-                    break;
-            }
-        }
-
         private IEnumerator CalibrateFloorInternal()
         {
-            State = SessionState.CalibratingFloor;
-
             InstructionText.text = "Tap on a plane to place an object.";
             CalibrateButton.gameObject.SetActive(false);
 
@@ -135,9 +78,7 @@ namespace Pocketboy.Common
             Anchor lastAnchor = null;
 
             while (!m_CalibrationConfirmed)
-            {
-                Session.GetTrackables<DetectedPlane>(m_AllPlanes);
-                
+            { 
                 // If the player has not touched the screen, we are done with this update.
                 if (Input.touchCount < 1 || Input.GetTouch(0).phase != TouchPhase.Began)
                 {
@@ -171,6 +112,7 @@ namespace Pocketboy.Common
                     var floorObject = Instantiate(FloorObjectPrefab, hit.Pose.position, Quaternion.identity);
                     floorObject.transform.parent = lastAnchor.transform;
                     FloorHeight = hit.Pose.position.y;
+                    GamePlane = hit.Trackable as DetectedPlane;
 
                     // As soon as an object is created on the floor the user can confirm the plane as the floor plane.
                     ConfirmButton.gameObject.SetActive(true);
@@ -178,24 +120,9 @@ namespace Pocketboy.Common
                 yield return null;
             }
 
-            State = SessionState.CalibratedFloor;
             Destroy(DetectedPlaneGenerator);
             CalibrateButton.GetComponentInChildren<TextMeshProUGUI>().text = FloorHeight.ToString("n2");
             //CalibrationUI.SetActive(false);
-        }
-
-        private void FindPlane()
-        {
-            
-            Session.GetTrackables<DetectedPlane>(m_AllPlanes);
-            foreach (var plane in m_AllPlanes)
-            {
-                if (!(plane.SubsumedBy == null && plane.PlaneType == DetectedPlaneType.HorizontalUpwardFacing))
-                    continue;
-
-                GamePlane = plane;
-                return;
-            }
         }
 
         /// <summary>
