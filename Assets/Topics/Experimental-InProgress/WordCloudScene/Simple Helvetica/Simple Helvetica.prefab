@@ -1865,7 +1865,7 @@ GameObject:
   m_Layer: 0
   m_Name: Simple Helvetica
   m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: fd46e94725684474eabe4b864e99477c, type: 3}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

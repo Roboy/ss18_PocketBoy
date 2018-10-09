@@ -16,6 +16,7 @@ TagManager:
   - WordCloud
   - NoColorChange
   - Deadzone
+  - Cup
   layers:
   - Default
   - TransparentFX

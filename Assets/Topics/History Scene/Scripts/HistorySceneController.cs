@@ -97,6 +97,7 @@ namespace Pocketboy.HistoryScene
             var roboy = LevelManager.Instance.Roboy;
             TV.transform.position = roboy.transform.position + roboy.transform.right * 0.65f;
             TV.transform.forward = roboy.transform.forward;
+            TV.transform.parent = roboy.ARAnchor.transform;
 
             TextToSpeechManager.Instance.Talk("Thank you for tuning in. " +
                 "This programm will tell you about some awesome milestones in the evolution of robots. " +

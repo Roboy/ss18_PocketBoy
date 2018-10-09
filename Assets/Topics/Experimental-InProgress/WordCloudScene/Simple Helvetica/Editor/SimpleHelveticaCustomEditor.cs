@@ -41,11 +41,6 @@ namespace Pocketboy.Wordcloud
             MeshRenderer thisMeshRenderer = newSimpleHelvetica.GetComponent<MeshRenderer>();
             thisMeshRenderer.sharedMaterial = AssetDatabase.LoadAssetAtPath("Assets/Simple Helvetica/Materials/Default.mat", typeof(Material)) as Material;
 
-            //instantiating prefab
-            //GameObject SimpleHelvetica);
-            //SimpleHelvetica = AssetDatabase.LoadAssetAtPath("Assets/Simple Helvetica/Simple Helvetica.prefab",typeof(GameObject)) as GameObject; 
-            //GameObject newSH = PrefabUtility.InstantiatePrefab(SimpleHelvetica) as GameObject; 
-            //PrefabUtility.DisconnectPrefabInstance(newSH);  
 
         }
 
