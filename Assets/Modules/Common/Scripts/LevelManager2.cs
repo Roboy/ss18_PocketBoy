@@ -39,6 +39,8 @@ namespace Pocketboy.Common
                 if (!(plane.SubsumedBy == null && plane.PlaneType == DetectedPlaneType.HorizontalUpwardFacing))
                     return;
 
+                
+
                 m_Roboy = Instantiate(RoboyPrefab, plane.CreateAnchor(plane.CenterPose).transform);
                 //m_Roboy.transform.localPosition = Vector3.zero;
                 //m_Roboy.transform.LookAt(Camera.main.transform.forward);
