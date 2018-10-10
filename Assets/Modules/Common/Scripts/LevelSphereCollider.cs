@@ -10,22 +10,9 @@ namespace Pocketboy.Common
     /// </summary>
     public class LevelSphereCollider : MonoBehaviour
     {
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.tag == "Levelsphere")
-            {
-                var levelSphere = other.GetComponent<LevelSphere>();
-                if (levelSphere != null && !string.IsNullOrEmpty(levelSphere.SceneToLoad))
-                {
-                    SceneLoadAnimator.Instance.StartAnimation(levelSphere.SceneToLoad);
-                }
-            }
-        }
+        public float LoadDuration { get { return SceneLoadDuration; } }
 
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.tag == "Levelsphere")
-                SceneLoadAnimator.Instance.StopAnimation();
-        }
+        [SerializeField]
+        private float SceneLoadDuration = 2f;
     }
 }

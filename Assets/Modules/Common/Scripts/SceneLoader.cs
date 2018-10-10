@@ -1,14 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 namespace Pocketboy.Common
 {
     public class SceneLoader : Singleton<SceneLoader>
     {
+        [SerializeField]
+        private Image FadeImage;
 
         private bool m_IsLoading = false;
+
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += (scene, mode) => FadeOutImage();
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= (scene, mode) => FadeOutImage();
+        }
 
         /// <summary>
         /// Loads a scene via an async operation.
@@ -22,6 +35,26 @@ namespace Pocketboy.Common
             StartCoroutine(LoadSceneAsync(sceneName));
         }
 
+        void FadeOutImage()
+        {
+            StartCoroutine(FadeImageInternal(1f, 0f, 0.5f));
+        }
+
+        IEnumerator FadeImageInternal(float startValue, float endValue, float duration)
+        {
+            float currentDuration = 0f;
+            Color fadeColor = new Color(FadeImage.color.r, FadeImage.color.g, FadeImage.color.b, startValue);
+            while (currentDuration < duration)
+            {
+                fadeColor.a = Mathf.Lerp(startValue, endValue, currentDuration / duration);
+                FadeImage.color = fadeColor;
+                currentDuration += Time.deltaTime;
+                yield return null;
+            }
+            fadeColor.a = endValue;
+            FadeImage.color = fadeColor;
+        }
+
         IEnumerator LoadSceneAsync(string sceneName)
         {
             m_IsLoading = true;
@@ -31,6 +64,9 @@ namespace Pocketboy.Common
             {
                 yield return null;
             }
+
+            yield return StartCoroutine(FadeImageInternal(0f, 1f, 0.5f));
+
             AO.allowSceneActivation = true;
             m_IsLoading = false;
         }

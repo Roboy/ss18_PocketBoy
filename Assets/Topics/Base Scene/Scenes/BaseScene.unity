@@ -384,6 +384,74 @@ Prefab:
     - {fileID: 114773981200383764, guid: d952d0e6efbf1b749948baf376f37977, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d952d0e6efbf1b749948baf376f37977, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &911516829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 911516830}
+  - component: {fileID: 911516832}
+  - component: {fileID: 911516831}
+  m_Layer: 5
+  m_Name: FadeImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &911516830
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 911516829}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1942857616}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &911516831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 911516829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &911516832
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 911516829}
 --- !u!1 &914270028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1459,28 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114554297199342858, guid: 3d00aaad65c8e6641b83c8313927ddee,
+        type: 2}
+      propertyPath: TriggerTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114554297199342858, guid: 3d00aaad65c8e6641b83c8313927ddee,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114937246805667462, guid: 3d00aaad65c8e6641b83c8313927ddee,
+        type: 2}
+      propertyPath: FadeImage
+      value: 
+      objectReference: {fileID: 911516831}
+    - target: {fileID: 114574637402587842, guid: 3d00aaad65c8e6641b83c8313927ddee,
+        type: 2}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114574637402587842, guid: 3d00aaad65c8e6641b83c8313927ddee, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3d00aaad65c8e6641b83c8313927ddee, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &1942857616 stripped

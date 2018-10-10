@@ -128,7 +128,7 @@ namespace Pocketboy.Common
             CalibrationUI.SetActive(false);
             if (!string.IsNullOrEmpty(SceneAfterCalibration))
             {
-                SceneLoadAnimator.Instance.StartAnimation(SceneAfterCalibration);
+                SceneLoader.Instance.LoadScene(SceneAfterCalibration);
             }
         }
 

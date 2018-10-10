@@ -75,7 +75,7 @@ namespace Pocketboy.Common
         {
             if (recognizedText.Contains("home") || recognizedText.Contains("beam") || recognizedText.Contains("scotty"))
             {
-                SceneLoadAnimator.Instance.StartAnimation("HomeScene");
+                SceneLoader.Instance.LoadScene("HomeScene");
             }
         }
 
