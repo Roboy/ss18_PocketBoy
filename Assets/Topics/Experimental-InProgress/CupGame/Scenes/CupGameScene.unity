@@ -370,7 +370,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: b86a1ff70305ec149a8cd5f1f1b7706a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: -2.3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b86a1ff70305ec149a8cd5f1f1b7706a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -703,7 +703,7 @@ GameObject:
   - component: {fileID: 1137589234}
   - component: {fileID: 1137589233}
   - component: {fileID: 1137589232}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,7 +862,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: b86a1ff70305ec149a8cd5f1f1b7706a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b86a1ff70305ec149a8cd5f1f1b7706a, type: 3}
       propertyPath: m_LocalPosition.y
