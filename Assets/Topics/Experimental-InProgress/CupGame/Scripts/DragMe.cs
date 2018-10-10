@@ -89,7 +89,6 @@ namespace Pocketboy.Cupgame
                 m_RigidBody.isKinematic = m_KinematicState;
             }
 
-            transform.position = new Vector3(transform.position.x, m_OriginalPosition.y, transform.position.z);
             gameObject.GetComponent<BoxCollider>().isTrigger = false;
         }
 
@@ -103,14 +102,42 @@ namespace Pocketboy.Cupgame
             m_TouchPositionWorldSpace = m_TouchPositionScreenSpace;
             m_TouchPositionWorldSpace.z = m_DistanceToCameraOnTouch; // transform touch position from 2d to 3d on the plane where the first touch occured
             Vector3 NextPosition = Camera.main.ScreenToWorldPoint(m_TouchPositionWorldSpace) - m_OffsetOnTouch;
-            transform.position = new Vector3(NextPosition.x, transform.position.y, NextPosition.z);
+            transform.position = new Vector3(NextPosition.x, transform.position.y, transform.position.z);
+
+            //CheckForElevation();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            float newHeight = Mathf.Abs(other.gameObject.transform.position.y);
+            //float newHeight = Mathf.Abs(other.gameObject.transform.position.y);
            
-            transform.position = new Vector3(transform.position.x, transform.position.y + newHeight, transform.position.z);
+            //transform.position = new Vector3(transform.position.x, transform.position.y + newHeight, transform.position.z);
+        }
+
+        private void CheckForElevation()
+        {
+            gameObject.layer = LayerMask.NameToLayer("Ignore");
+            int layerMask = ~(1 << LayerMask.NameToLayer("Ignore"));
+
+            if (Physics.OverlapBox(transform.position, Vector3.one, Quaternion.identity, layerMask).Length > 0)
+            {
+                //If colliding and not elevated, increase the height, so that the cups stack
+                if (transform.position.y == m_OriginalPosition.y)
+                {
+                    transform.position = new Vector3(transform.position.x, transform.position.y + transform.position.y, transform.position.z);
+                }
+                else
+                {
+                    //keep the current y value, do not change
+                }
+            }
+            //If not colliding, reset the y value to the plane surface
+            else
+            {
+                transform.position = new Vector3(m_OriginalPosition.x, m_OriginalPosition.y, transform.position.z);
+            }
+
+            gameObject.layer = LayerMask.NameToLayer("Default");
         }
 
     }
