@@ -5,6 +5,7 @@ using Pocketboy.Common;
 using GoogleARCore;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Pocketboy.Common
 {
@@ -33,6 +34,9 @@ namespace Pocketboy.Common
 
         [SerializeField]
         private GameObject DetectedPlaneGenerator;
+
+        [SerializeField]
+        private string SceneAfterCalibration;
 
         public DetectedPlane FloorPlane { get; private set; }
 
@@ -121,8 +125,11 @@ namespace Pocketboy.Common
             }
 
             Destroy(DetectedPlaneGenerator);
-            CalibrateButton.GetComponentInChildren<TextMeshProUGUI>().text = FloorHeight.ToString("n2");
-            //CalibrationUI.SetActive(false);
+            CalibrationUI.SetActive(false);
+            if (!string.IsNullOrEmpty(SceneAfterCalibration))
+            {
+                SceneLoadAnimator.Instance.StartAnimation(SceneAfterCalibration);
+            }
         }
 
         /// <summary>
