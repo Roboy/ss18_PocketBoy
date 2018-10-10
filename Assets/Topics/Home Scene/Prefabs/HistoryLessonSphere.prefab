@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114496713990713876}
   m_Layer: 8
   m_Name: HistoryLessonSphere
-  m_TagString: Untagged
+  m_TagString: Levelsphere
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -22,10 +22,10 @@ GameObject:
   - component: {fileID: 33877878913471170}
   - component: {fileID: 23130245233025624}
   - component: {fileID: 135488238511089592}
-  - component: {fileID: 114814566310515544}
-  m_Layer: 0
+  - component: {fileID: 114946145921861204}
+  m_Layer: 8
   m_Name: SpaceSphere 1
-  m_TagString: Untagged
+  m_TagString: Levelsphere
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1359520476956792}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114814566310515544
+--- !u!114 &114946145921861204
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -93,10 +93,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1359520476956792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bdb6823ce90fd8488a0fa9b6520b6bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0169c21a919a89d45923b30a2d793c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 40
+  SceneName: WordCloudScene
+  MaxRotationSpeed: 100
+  MinRotationSpeed: 10
 --- !u!135 &135488238511089592
 SphereCollider:
   m_ObjectHideFlags: 1

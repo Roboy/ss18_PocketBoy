@@ -11,6 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Topics/History Scene/Scenes/HistoryScene.unity
     guid: e8d25eb8e5405514799984e52e9ab7aa
+  - enabled: 1
+    path: Assets/Topics/Experimental-InProgress/RunaroundScene/Scenes/RunaroundScene.unity
+    guid: b293ec5ad1057aa4085a297dedbd3e85
+  - enabled: 1
+    path: Assets/Topics/Experimental-InProgress/WordCloudScene/Scenes/WordCloudScene.unity
+    guid: c845e095e60a1c445ae6296e5b95631b
+  - enabled: 1
+    path: Assets/Topics/Experimental-InProgress/ModelCategorization/Scenes/ModelCategorizationScene.unity
+    guid: 5425fafd3787e9944a24a7a7052736ec
   - enabled: 0
     path: Assets/Topics/History Scene/Scenes/HistoryScene_Runaround.unity
     guid: c87cc881b8a7ecf4ba219967f06dd03b

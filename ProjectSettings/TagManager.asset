@@ -8,6 +8,15 @@ TagManager:
   - RoboyPart
   - Level
   - Logo
+  - Floor
+  - Sign
+  - PreviousQuestion
+  - NextQuestion
+  - Levelsphere
+  - NoColorChange
+  - WordCloud
+  - Deadzone
+  - Cup
   layers:
   - Default
   - TransparentFX
@@ -19,6 +28,12 @@ TagManager:
   - 
   - LevelSphere
   - LevelSphereCollider
+  - Words
+  - Ignore
+  - QuestionButtons
+  - CategorizationModels
+  - CategorizationPlatforms
+  - Deadzone
   - 
   - 
   - 
@@ -34,13 +49,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Roboy
   m_SortingLayers:
   - name: Default
     uniqueID: 0

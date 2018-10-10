@@ -12,16 +12,20 @@ namespace Pocketboy.Common
     {
         private void OnTriggerEnter(Collider other)
         {
-            var levelSphere = other.GetComponent<LevelSphere>();
-            if (levelSphere != null && !string.IsNullOrEmpty(levelSphere.SceneToLoad))
+            if (other.tag == "Levelsphere")
             {
-                SceneLoadAnimator.Instance.StartAnimation(levelSphere.SceneToLoad);
-            }          
+                var levelSphere = other.GetComponent<LevelSphere>();
+                if (levelSphere != null && !string.IsNullOrEmpty(levelSphere.SceneToLoad))
+                {
+                    SceneLoadAnimator.Instance.StartAnimation(levelSphere.SceneToLoad);
+                }
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            SceneLoadAnimator.Instance.StopAnimation();
+            if (other.tag == "Levelsphere")
+                SceneLoadAnimator.Instance.StopAnimation();
         }
     }
 }

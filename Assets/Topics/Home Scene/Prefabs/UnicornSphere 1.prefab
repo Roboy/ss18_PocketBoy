@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4131946091835312}
   - component: {fileID: 33605714652058604}
   - component: {fileID: 23358250332889342}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Unicorn_smooth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,10 +39,10 @@ GameObject:
   - component: {fileID: 33397084656170382}
   - component: {fileID: 23334821002851258}
   - component: {fileID: 135496884588813046}
-  - component: {fileID: 114123919646679830}
-  m_Layer: 0
+  - component: {fileID: 114030129862603682}
+  m_Layer: 8
   m_Name: UnicornSphere 1
-  m_TagString: Untagged
+  m_TagString: Levelsphere
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,7 +158,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1355327282997658}
   m_Mesh: {fileID: 4300000, guid: 14373b86d006d104ca0304dc60031b7f, type: 3}
---- !u!114 &114123919646679830
+--- !u!114 &114030129862603682
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -166,10 +166,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1864275086667500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bdb6823ce90fd8488a0fa9b6520b6bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0169c21a919a89d45923b30a2d793c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 40
+  SceneName: RunaroundScene
+  MaxRotationSpeed: 100
+  MinRotationSpeed: 10
 --- !u!135 &135496884588813046
 SphereCollider:
   m_ObjectHideFlags: 1

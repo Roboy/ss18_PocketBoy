@@ -169,7 +169,7 @@
             {
                 var levelSphere = Instantiate(Spheres[i]);
                 levelSphere.name = "Level" + (i);
-                levelSphere.tag = "Level";
+                //levelSphere.tag = "Level";
 
                 levelSphereOffset = ((float)(i + 1) / Spheres.Count) * Roboy.transform.forward; // WHY FORWARD???? Right does spawns the spheres in front of roboy, dafuq
                 if (i % 2 == 1)
@@ -186,7 +186,7 @@
 
                 levelSphere.transform.parent = anchor.transform;
                 m_Levels.Add(levelSphere);
-            }            
+            }
         }
 
         private void ResetLevel(Scene scene, LoadSceneMode mode)

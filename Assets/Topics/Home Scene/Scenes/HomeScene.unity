@@ -701,7 +701,7 @@ Prefab:
         type: 2}
       propertyPath: Spheres.Array.data[1]
       value: 
-      objectReference: {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a,
+      objectReference: {fileID: 1660781682682994, guid: ba2cbde2d449f294384abe2f1e0ba244,
         type: 2}
     - target: {fileID: 114977880820556334, guid: df147d8dfad329a49b591f43e2c651d8,
         type: 2}
@@ -719,7 +719,7 @@ Prefab:
         type: 2}
       propertyPath: Roboy
       value: 
-      objectReference: {fileID: 1494862893493862, guid: 062dd618ba53e60489da5e88ad0fb676,
+      objectReference: {fileID: 114511887295326824, guid: 062dd618ba53e60489da5e88ad0fb676,
         type: 2}
     - target: {fileID: 114977880820556334, guid: df147d8dfad329a49b591f43e2c651d8,
         type: 2}
@@ -949,11 +949,11 @@ MonoBehaviour:
     type: 2}
   Spheres:
   - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-  - {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a, type: 2}
+  - {fileID: 1660781682682994, guid: ba2cbde2d449f294384abe2f1e0ba244, type: 2}
   - {fileID: 1864275086667500, guid: 116a2719a8d9e9e46919d1c9621d558d, type: 2}
   - {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a, type: 2}
   SearchingForPlaneUI: {fileID: 1748469454}
-  Roboy: {fileID: 0}
+  Roboy: {fileID: 114511887295326824, guid: 062dd618ba53e60489da5e88ad0fb676, type: 2}
   m_RoboySpawned: 0
   m_LevelSpheresSpawned: 0
 --- !u!4 &1585404061
