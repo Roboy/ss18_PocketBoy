@@ -34,7 +34,7 @@ namespace Pocketboy.Common
         [SerializeField]
         private GameObject DetectedPlaneGenerator;
 
-        public DetectedPlane GamePlane { get; private set; }
+        public DetectedPlane FloorPlane { get; private set; }
 
         public float FloorHeight { get; private set; }
 
@@ -112,7 +112,7 @@ namespace Pocketboy.Common
                     var floorObject = Instantiate(FloorObjectPrefab, hit.Pose.position, Quaternion.identity);
                     floorObject.transform.parent = lastAnchor.transform;
                     FloorHeight = hit.Pose.position.y;
-                    GamePlane = hit.Trackable as DetectedPlane;
+                    FloorPlane = hit.Trackable as DetectedPlane;
 
                     // As soon as an object is created on the floor the user can confirm the plane as the floor plane.
                     ConfirmButton.gameObject.SetActive(true);
