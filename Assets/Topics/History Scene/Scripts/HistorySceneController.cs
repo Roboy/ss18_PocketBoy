@@ -94,9 +94,8 @@ namespace Pocketboy.HistoryScene
             TV.FillContent(tvContent.ToArray());
             Slider.FillSlider(dates.ToArray());
 
-            Debug.Log("DICK 1: " + LevelManager.Instance.name);
             var roboy = LevelManager.Instance.Roboy;
-            Debug.Log("DICK 2: " + LevelManager.Instance.Roboy.name);
+            TV.transform.parent = RoboyManager.Instance.ARAnchor.transform;
             TV.transform.position = roboy.transform.position + roboy.transform.right * 0.65f;
             TV.transform.forward = roboy.transform.forward;
 

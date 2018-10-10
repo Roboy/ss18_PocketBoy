@@ -11,46 +11,56 @@ namespace Pocketboy.Common
         [SerializeField]
         private string SceneName;
 
-        [SerializeField, Range(0f, 1000f)]
-        private float MaxRotationSpeed = 100f;
+        [SerializeField]
+        private MeshRenderer HologramRenderer;
 
-        [SerializeField, Range(0f, 100f)]
-        private float MinRotationSpeed = 10f;
+        [SerializeField]
+        private float RotationSpeed = 30f;
 
-        private float m_CurrentRotationSpeed = 0f;
+        private Material m_HologramMaterial;
 
-        private float m_InitDistance;
-
-        private float m_CurrentDistance = 0f;
-
-        private float m_Speed;
+        private Coroutine m_AnimationCoroutine;
 
         private void Start()
         {
-            m_CurrentRotationSpeed = MinRotationSpeed;
+            if (HologramRenderer.material.HasProperty("_DissolveValue"))
+            {
+                m_HologramMaterial = HologramRenderer.material;
+            }
         }
 
-        private void FixedUpdate()
-        {
-            transform.Rotate(Vector3.up, m_CurrentRotationSpeed * Time.fixedDeltaTime);
-        }
         private void OnTriggerEnter(Collider other)
         {
-            m_InitDistance = (other.transform.position - transform.position).magnitude;
+            LevelSphereCollider collider;
+            if ((collider = other.GetComponent<LevelSphereCollider>()) != null)
+            {
+                m_AnimationCoroutine = StartCoroutine(LoadingAnimation(collider.LoadDuration));
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            m_CurrentDistance = 0f;
-            m_InitDistance = 0f;
-            m_CurrentRotationSpeed = MinRotationSpeed;
+            m_HologramMaterial.SetFloat("_DissolveValue", 0f);
+            if (m_AnimationCoroutine != null)
+            {
+                StopCoroutine(m_AnimationCoroutine);
+            }
         }
 
-        private void OnTriggerStay(Collider other)
+        private IEnumerator LoadingAnimation(float duration)
         {
-            m_CurrentDistance = Mathf.Max(0f, (other.transform.position - transform.position).magnitude - 0.5f * transform.localScale.x);
-            m_CurrentRotationSpeed = Mathf.Lerp(0f, MaxRotationSpeed, (1f - m_CurrentDistance / m_InitDistance));
+            float currentDuration = 0f;
+            while (currentDuration < duration)
+            {
+                m_HologramMaterial.SetFloat("_DissolveValue", Mathf.Lerp(0f, 1f, currentDuration / duration));
+                currentDuration += Time.deltaTime;
+                transform.Rotate(Vector3.up, RotationSpeed * Time.deltaTime);
+                yield return null;
+            }
+            m_HologramMaterial.SetFloat("_DissolveValue", 1f);
+            SceneLoader.Instance.LoadScene(SceneName);
         }
+        
     }
 }
 

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Pocketboy.Common
 {
     public class SceneLoadAnimator : Singleton<SceneLoadAnimator>
     {
-        [SerializeField, Range(0.5f, 2f)]
+        [SerializeField, Range(0.05f, 0.2f)]
         private float TriggerTime = 1f;
 
         [SerializeField]
@@ -20,14 +21,32 @@ namespace Pocketboy.Common
 
         private Coroutine m_AnimationCoroutine;
 
-        protected void Awake()
+        protected void Start()
         {
             m_EndSize = Vector2.one * Screen.width * 1.4f;
         }
 
-        public void StartAnimation(string sceneToLoadAfterAnimation)
+        //private void OnEnable()
+        //{
+        //    SceneManager.sceneLoaded += SceneStartAnimaton;
+        //}
+
+        //private void OnDisable()
+        //{
+        //    SceneManager.sceneLoaded -= SceneStartAnimaton;
+        //}
+
+        public void SceneStartAnimaton(Scene scene, LoadSceneMode mode)
         {
-            m_AnimationCoroutine = StartCoroutine(RoboyHeadAnimation(sceneToLoadAfterAnimation));
+            StopAnimation();
+            m_AnimationCoroutine = StartCoroutine(ReverseHeadAnimation());
+        }
+
+        public IEnumerator SceneEndAnimation()
+        {
+            StopAnimation();
+            m_AnimationCoroutine = StartCoroutine(RoboyHeadAnimation());
+            yield return m_AnimationCoroutine;
         }
 
         public void StopAnimation()
@@ -40,7 +59,7 @@ namespace Pocketboy.Common
             RoboyLogo.sizeDelta = Vector2.zero;
         }
 
-        private IEnumerator RoboyHeadAnimation(string sceneToLoadAfterAnimation)
+        private IEnumerator RoboyHeadAnimation()
         {
             RoboyLogo.gameObject.SetActive(true);
             float currentTime = 0f;           
@@ -53,9 +72,8 @@ namespace Pocketboy.Common
                 yield return null;
             }
             RoboyLogo.sizeDelta = m_EndSize;
-            SceneLoader.Instance.LoadScene(sceneToLoadAfterAnimation);
             RoboyLogo.gameObject.SetActive(false);
-            StartCoroutine(ReverseHeadAnimation());            
+            //StartCoroutine(ReverseHeadAnimation());            
         }
 
         private IEnumerator ReverseHeadAnimation()
