@@ -14,6 +14,7 @@ namespace Pocketboy.Cupgame
 
 
         public GameObject PlayingField;
+        public bool HoldsBall { get { return m_HoldsBall; } }
 
         private bool m_IsTouched;
 
@@ -26,7 +27,11 @@ namespace Pocketboy.Cupgame
         private bool m_KinematicState;
 
         private Vector3 m_OriginalPosition { get; set; }
+
         private bool m_Lifted;
+        private bool m_HoldsBall;
+        private bool m_Dragable = false;
+        private GameObject m_ball = null;
 
 
         /// <summary>
@@ -50,6 +55,7 @@ namespace Pocketboy.Cupgame
 
             m_OriginalPosition = transform.position;
             m_Lifted = false;
+            m_HoldsBall = false;
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -82,6 +88,11 @@ namespace Pocketboy.Cupgame
 
             m_DistanceToCameraOnTouch = (Camera.main.transform.position - transform.position).magnitude;
             m_OffsetOnTouch = (Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, m_DistanceToCameraOnTouch)) - transform.position);
+            if (m_ball != null)
+            {
+                m_ball.GetComponent<Renderer>().enabled = false;
+            }
+
 
         }
 
@@ -97,7 +108,7 @@ namespace Pocketboy.Cupgame
             }
 
             StartCoroutine(SwapCups());
-
+            
 
         }
 
@@ -111,10 +122,18 @@ namespace Pocketboy.Cupgame
 #elif UNITY_ANDROID
             m_TouchPositionScreenSpace = Input.touches[0].position;
 #endif
-            m_TouchPositionWorldSpace = m_TouchPositionScreenSpace;
-            m_TouchPositionWorldSpace.z = m_DistanceToCameraOnTouch; // transform touch position from 2d to 3d on the plane where the first touch occured.
-            Vector3 NextPosition = Camera.main.ScreenToWorldPoint(m_TouchPositionWorldSpace) - m_OffsetOnTouch;
-            transform.position = new Vector3(NextPosition.x, transform.position.y, transform.position.z);
+
+            if (m_Dragable)
+            {
+                m_TouchPositionWorldSpace = m_TouchPositionScreenSpace;
+                m_TouchPositionWorldSpace.z = m_DistanceToCameraOnTouch; // transform touch position from 2d to 3d on the plane where the first touch occured.
+                Vector3 NextPosition = Camera.main.ScreenToWorldPoint(m_TouchPositionWorldSpace) - m_OffsetOnTouch;
+                transform.position = new Vector3(NextPosition.x, transform.position.y, transform.position.z);
+                if (m_ball != null)
+                {
+                    m_ball.transform.position = new Vector3(NextPosition.x, m_ball.transform.position.y, transform.position.z);
+                }
+            }
         }
 
         private IEnumerator CheckForElevation()
@@ -200,6 +219,7 @@ namespace Pocketboy.Cupgame
 
         private IEnumerator SwapCups()
         {
+            ShuffleMaster.Instance.CupsMoveable = false;
             gameObject.layer = LayerMask.NameToLayer("Ignore");
             int layerMask = ~(1 << LayerMask.NameToLayer("Ignore"));
             Collider[] hitted_Objects = Physics.OverlapBox(transform.position, Vector3.one, Quaternion.identity, layerMask);
@@ -252,23 +272,30 @@ namespace Pocketboy.Cupgame
                         ShuffleMaster.Instance.Cups[index_a] = other_cup;
                         gameObject.GetComponent<DragMe>().resetOriginalPosition();
                         other_cup.GetComponent<DragMe>().resetOriginalPosition();
+                        
 
                     }
-
-                    //determine offsets
-                    //code here
-
+                   
 
                 }
             }
             m_Lifted = false;
             gameObject.layer = LayerMask.NameToLayer("Default");
+            ShuffleMaster.Instance.CupsMoveable = true;
+            if (m_ball != null)
+            {
+                m_ball.GetComponent<Renderer>().enabled = true;
+            }
 
             yield return null;
         }
 
         public IEnumerator MoveCupLinear(Vector3 destination, float duration)
         {
+            if (m_ball != null)
+            {
+                m_ball.GetComponent<Renderer>().enabled = false;
+            }
             float currentDuration = 0.0f;
             Vector3 start = gameObject.transform.position;
 
@@ -281,12 +308,20 @@ namespace Pocketboy.Cupgame
 
             gameObject.transform.position = destination;
 
-
+            if (m_ball != null)
+            {
+                m_ball.GetComponent<Renderer>().enabled = true;
+                m_ball.transform.position = new Vector3(gameObject.transform.position.x, m_ball.transform.position.y, gameObject.transform.position.z);
+            }
 
         }
 
         public IEnumerator MoveCupCircular(Vector3 destination, float duration, RotationDirection dir, RotationLane lan)
         {
+            if (m_ball != null)
+            {
+                m_ball.GetComponent<Renderer>().enabled = false;
+            }
             float currentDuration = 0.0f;
             float currentAngle = 0.0f;
             float startingAngle = 0.0f;
@@ -329,12 +364,33 @@ namespace Pocketboy.Cupgame
 
             gameObject.transform.position = destination;
 
-
+            if (m_ball != null)
+            {
+                m_ball.GetComponent<Renderer>().enabled = true;
+                m_ball.transform.position = new Vector3(gameObject.transform.position.x, m_ball.transform.position.y, gameObject.transform.position.z);
+            }
         }
 
         public void resetOriginalPosition()
         {
             m_OriginalPosition = gameObject.transform.position;
+        }
+
+        public void HoldBall(GameObject ball)
+        {
+            m_HoldsBall = true;
+            m_ball = ball;
+        }
+
+        public void LoseBall()
+        {
+            m_HoldsBall = false;
+            m_ball = null;
+        }
+
+        public void SetDragable(bool b)
+        {
+            m_Dragable = b;
         }
     }
 }
