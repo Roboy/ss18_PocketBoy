@@ -17,6 +17,7 @@ TagManager:
   - WordCloud
   - Deadzone
   - Cup
+  - Hand
   layers:
   - Default
   - TransparentFX

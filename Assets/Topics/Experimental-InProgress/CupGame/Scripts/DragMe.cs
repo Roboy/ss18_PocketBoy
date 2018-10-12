@@ -14,6 +14,7 @@ namespace Pocketboy.Cupgame
 
 
         public GameObject PlayingField;
+        public ParticleSystem PS;
         public bool HoldsBall { get { return m_HoldsBall; } }
 
         private bool m_IsTouched;

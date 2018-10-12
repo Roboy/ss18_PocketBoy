@@ -5,36 +5,71 @@ using UnityEngine;
 public class RadarSensor : MonoBehaviour {
 
     public GameObject RayPrefab;
-    public bool SensorActive = true;
+    public bool SensorActive = false;
     public float EmissionRate = 1.0f;
     public float Lifetime = 3.0f;
 
     private float counter = 0.0f;
-	
-	// Update is called once per frame
-	void Update () {
 
+    [SerializeField]
+    private ParticleSystem ps;
+    private bool m_ParticleActive;
 
-		
-	}
-
-    private void FixedUpdate()
+    private void Awake()
     {
+        ps.Stop();
+        m_ParticleActive = ps.isPlaying;
+       
+    }
 
-        if (counter < EmissionRate)
-        {
-            counter += Time.deltaTime;
-            return;
-        }
+
+
+    // Update is called once per frame
+    void Update () {
+
+        //Enable emission of rays
         if (SensorActive)
         {
-            SpawnRay();
+            if (!m_ParticleActive)
+            {
+                ps.Play();
+                m_ParticleActive = true;
+
+            }
+
+            
         }
+
+        //Disable emission of rays
+        if (!SensorActive)
+        {
+            if (m_ParticleActive)
+            {
+                ps.Stop();
+                m_ParticleActive = false;
+                
+            }
+        }
+
         
-        //reset counter
-        counter = 0.0f;
         
     }
+
+    //private void FixedUpdate()
+    //{
+       
+
+    //    if (counter < EmissionRate)
+    //    {
+    //        counter += Time.deltaTime;
+    //        return;
+    //    }
+        
+        
+    //    //reset counter
+    //    counter = 0.0f;
+        
+    //}
 
     private void SpawnRay()
     {

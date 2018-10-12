@@ -47,12 +47,14 @@ namespace Pocketboy.Cupgame
             }
         }
 
+       
+
         private void Start()
         {
             StartButton.onClick.AddListener(HandleStart);
             StartButton.enabled = true;
             m_ball_spawned = false;
-            RoboyArm.SetActive(false);
+            
         }
 
         private void HandleStart()
@@ -96,31 +98,47 @@ namespace Pocketboy.Cupgame
 
         public IEnumerator StartLocating()
         {
+            
             RoboyArm.transform.position = new Vector3(Cups[0].transform.position.x, RoboyArm.transform.position.y, RoboyArm.transform.position.z);
             RoboyArm.SetActive(true);
+            RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = false;
             yield return StartCoroutine(LowerArm());
-            RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = true;
-
-            
-
+ 
             while (counter < hoverTime)
             {
                 counter += Time.deltaTime;
                 yield return null;
             }
-
             counter = 0.0f;
+
+            CupEmitResult(0);
             yield return StartCoroutine(MoveArm(1));
 
-            RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = true;
+
             while (counter < hoverTime)
             {
                 counter += Time.deltaTime;
                 yield return null;
             }
             counter = 0.0f;
+
+            CupStopEmitting(0);
+            CupEmitResult(1);
             yield return StartCoroutine(MoveArm(2));
-            RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = true;
+
+            while (counter < hoverTime)
+            {
+                counter += Time.deltaTime;
+                yield return null;
+            }
+            counter = 0.0f;
+
+            CupStopEmitting(1);
+            CupEmitResult(2);
+            yield return StartCoroutine(RiseArm());
+
+            CupStopEmitting(2);
+
 
         }
 
@@ -237,7 +255,7 @@ namespace Pocketboy.Cupgame
                     yield return StartCoroutine(LowerCup(Cups[i]));
                 }
             }
-            m_ball_spawned = false;
+            //m_ball_spawned = false;
         }
 
         private void RemoveBall()
@@ -257,6 +275,7 @@ namespace Pocketboy.Cupgame
 
         private IEnumerator LowerArm()
         {
+            
             float startingAngleX = 0.0f;
             float currentAngleX = 0.0f;
             float endAngleX = -90.0f;
@@ -270,8 +289,35 @@ namespace Pocketboy.Cupgame
                 currentDuration += Time.deltaTime;
                 yield return null;
             }
-            RoboyArm.transform.eulerAngles = new Vector3(endAngleX, RoboyArm.transform.eulerAngles.y, RoboyArm.transform.eulerAngles.z);
 
+            
+            RoboyArm.transform.eulerAngles = new Vector3(endAngleX, RoboyArm.transform.eulerAngles.y, RoboyArm.transform.eulerAngles.z);
+            RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = true;
+            yield return null;
+        }
+
+        private IEnumerator RiseArm()
+        {
+
+            float startingAngleX = -90.0f;
+            float currentAngleX = 0.0f;
+            float endAngleX = 0.0f;
+            float currentDuration = 0.0f;
+            float duration = 1.0f;
+            //No active sensing when putting the arm up
+            RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = false;
+
+            while (currentDuration < duration)
+            {
+                currentAngleX = Mathf.Lerp(startingAngleX, endAngleX, currentDuration / duration);
+                RoboyArm.transform.eulerAngles = new Vector3(currentAngleX, RoboyArm.transform.eulerAngles.y, RoboyArm.transform.eulerAngles.z);
+                currentDuration += Time.deltaTime;
+                yield return null;
+            }
+
+
+            RoboyArm.transform.eulerAngles = new Vector3(endAngleX, RoboyArm.transform.eulerAngles.y, RoboyArm.transform.eulerAngles.z);
+            
             yield return null;
         }
 
@@ -297,8 +343,37 @@ namespace Pocketboy.Cupgame
                 yield return null;
             }
             RoboyArm.transform.position = new Vector3(endPosX, RoboyArm.transform.position.y, RoboyArm.transform.position.z);
+            RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = true;
 
             yield return null;
+        }
+
+        private void CupEmitResult(int CupIndex)
+        {
+            GameObject Cup = Cups[CupIndex];
+            ParticleSystem PS = Cup.GetComponent<DragMe>().PS;
+            bool hasBall = Cup.GetComponent<DragMe>().HoldsBall;
+
+            if (hasBall)
+            {
+                var main = PS.main;
+                main.startColor = Color.green;
+            }
+            else
+            {
+                var main = PS.main;
+                main.startColor = Color.red;
+            }
+
+            PS.Play();
+        }
+
+        private void CupStopEmitting(int CupIndex)
+        {
+
+            GameObject Cup = Cups[CupIndex];
+            ParticleSystem PS = Cup.GetComponent<DragMe>().PS;
+            PS.Stop();
         }
     }
 }
