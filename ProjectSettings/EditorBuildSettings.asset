@@ -5,34 +5,37 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Topics/Base Scene/Scenes/BaseScene.unity
     guid: 796a58abdd61b194a8f997d793580c1d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Topics/Home Scene/Scenes/HomeScene_DEV.unity
     guid: c3cdeade3524d0949bfbf6bf5771e306
-  - enabled: 1
+  - enabled: 0
     path: Assets/Topics/Home Scene/Scenes/HomeScene.unity
     guid: 352c64f03a1c45b41aea57163e2af6fc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Topics/History Scene/Scenes/HistoryScene.unity
     guid: e8d25eb8e5405514799984e52e9ab7aa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Topics/Experimental-InProgress/RunaroundScene/Scenes/RunaroundScene.unity
     guid: b293ec5ad1057aa4085a297dedbd3e85
-  - enabled: 1
+  - enabled: 0
     path: Assets/Topics/Experimental-InProgress/WordCloudScene/Scenes/WordCloudScene.unity
     guid: c845e095e60a1c445ae6296e5b95631b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Topics/Experimental-InProgress/ModelCategorization/Scenes/ModelCategorizationScene.unity
     guid: 5425fafd3787e9944a24a7a7052736ec
   - enabled: 0
     path: Assets/Topics/History Scene/Scenes/HistoryScene_Runaround.unity
     guid: c87cc881b8a7ecf4ba219967f06dd03b
   - enabled: 0
-    path: Assets/Topics/Base Scene/Scenes/Test1.unity
-    guid: 7734dda50abf0674cbea1ecdd45b3908
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Topics/Base Scene/Scenes/Test2.unity
-    guid: e2bf07721a1a3dd4694f9c6ccd4680a7
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Topics/Experimental-InProgress/PitchPlatformer/Scenes/PitchPlatformerScene.unity
+    guid: 07b8615fa77ef2a4eb0c548dda38ebfd
   m_configObjects: {}
