@@ -159,8 +159,8 @@
 			half rim = 1.0 - saturate(dot(i.viewDir, i.worldNormal));
 			fixed4 rimColor = _RimColor * pow(rim, _RimPower);
 
-			fixed4 col = texColor * _HologramColor + (glow * 0.35 * _HologramColor) + rimColor;
-			col.a = texColor.a * _Alpha * (scan + rim + glow) * flicker;
+			fixed4 col = _HologramColor + (glow * 0.35 * _HologramColor) + rimColor;
+			col.a = _Alpha * (scan + rim + glow) * flicker;
 
 			col.rgb *= _Brightness;
 
@@ -182,7 +182,7 @@
 				if (i.dGeometry + thresholdTransitionValue * 1000 > 0.0)
 				{
 					fixed4 defaultRimColor = fixed4(1, 1, 1, 1) * pow(rim, 5);
-					fixed4 defaultColor = tex2D(_MainTex, i.uv) * _HologramColor + defaultRimColor;
+					fixed4 defaultColor = _HologramColor + defaultRimColor;
 					defaultColor.a = _Alpha;
 					defaultColor.rgb *= _Brightness;
 					return defaultColor;

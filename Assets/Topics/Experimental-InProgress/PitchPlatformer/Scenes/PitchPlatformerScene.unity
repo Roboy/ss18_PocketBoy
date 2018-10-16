@@ -707,7 +707,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &203721962
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1151,9 +1151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049996d02452ef94787070a5738c2646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CalibrateHighPitchButton: {fileID: 1261253127}
-  CalibrateLowPitchButton: {fileID: 1955606337}
-  PitchVisualization: {fileID: 1598186441}
+  CalibrateHighPitchButton: {fileID: 391848836}
+  CalibrateLowPitchButton: {fileID: 1332232106}
+  PitchVisualization: {fileID: 250231373}
   m_CalibrationDuration: 3
 --- !u!1 &391848834
 GameObject:
