@@ -6,7 +6,7 @@ using GoogleARCore;
 namespace Pocketboy.Common
 {
     /// <summary>
-    /// TODO:: Add functionality e.g. startAnimationXY, SayXY
+    /// TODO:: Add functionality e.g. startAnimationXY, SayXY, StopTalking, StopListening
     /// </summary>
     public class RoboyManager : PersistentSingleton<RoboyManager>
     {

@@ -11,16 +11,26 @@ namespace Pocketboy.Common
         [SerializeField]
         private Image FadeImage;
 
+        [SerializeField]
+        private Button HomeButton;
+
         private bool m_IsLoading = false;
+
+        private void Awake()
+        {
+            HomeButton.onClick.AddListener(() => LoadScene("HomeScene_DEV"));
+        }
 
         private void OnEnable()
         {
             SceneManager.sceneLoaded += (scene, mode) => FadeOutImage();
+            SceneManager.sceneLoaded += (scene, mode) => ToggleHomeButton(scene);
         }
 
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= (scene, mode) => FadeOutImage();
+            SceneManager.sceneLoaded -= (scene, mode) => ToggleHomeButton(scene);
         }
 
         /// <summary>
@@ -38,6 +48,18 @@ namespace Pocketboy.Common
         void FadeOutImage()
         {
             StartCoroutine(FadeImageInternal(1f, 0f, 0.5f));
+        }
+
+        void ToggleHomeButton(Scene scene)
+        {
+            if (scene.name == "HomeScene_DEV" || scene.name == "BaseScene")
+            {
+                HomeButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                HomeButton.gameObject.SetActive(true);
+            }
         }
 
         IEnumerator FadeImageInternal(float startValue, float endValue, float duration)
@@ -66,6 +88,7 @@ namespace Pocketboy.Common
             }
 
             yield return StartCoroutine(FadeImageInternal(0f, 1f, 0.5f));
+            HomeButton.gameObject.SetActive(false);
 
             AO.allowSceneActivation = true;
             m_IsLoading = false;

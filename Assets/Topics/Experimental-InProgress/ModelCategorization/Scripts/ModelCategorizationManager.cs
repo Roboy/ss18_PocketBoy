@@ -44,8 +44,8 @@ namespace Pocketboy.ModelCategorization
 
         private void PositionPlatforms()
         {
-            PlatformParent.transform.SetParent(LevelManager.Instance.Roboy.ARAnchor.transform);
-            PlatformParent.transform.position = LevelManager.Instance.Roboy.transform.TransformPoint(new Vector3(0.6f, 0f, 0f));
+            PlatformParent.transform.SetParent(LevelManager.Instance.GetAnchorTransform());
+            PlatformParent.transform.position = LevelManager.Instance.Roboy.transform.TransformPoint(new Vector3(0.6f, 0f, 0f));       
         }
 
         private void SpawnModels()

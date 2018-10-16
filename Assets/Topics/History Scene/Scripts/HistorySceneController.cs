@@ -93,9 +93,10 @@ namespace Pocketboy.HistoryScene
             }
             TV.FillContent(tvContent.ToArray());
             Slider.FillSlider(dates.ToArray());
+            // create own anchor for tv as roboy is not destroyed at scene change so the tv does not get loaded into other scenes
+            TV.transform.SetParent(LevelManager.Instance.GetAnchorTransform());
 
             var roboy = LevelManager.Instance.Roboy;
-            TV.transform.parent = RoboyManager.Instance.ARAnchor.transform;
             TV.transform.position = roboy.transform.position + roboy.transform.right * 0.65f;
             TV.transform.forward = roboy.transform.forward;
 

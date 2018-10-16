@@ -27,7 +27,10 @@
         /// </summary>
         public List<GameObject> Spheres;
 
-        public RoboyManager Roboy;
+        /// <summary>
+        /// Reference to an instantiated copy of the Roboy prefab in a scene.
+        /// </summary>
+        public RoboyManager Roboy { get; private set; }
 
         /// <summary>
         /// True if one model of Roboy has been spawned.
@@ -58,6 +61,9 @@
         /// </summary>
         public void Update()
         {
+            if (SceneManager.GetActiveScene().name != "HomeScene_DEV") // TO THIS SOME OTHER WAY
+                return;
+
             if (!m_RoboySpawned)
             {
                 SpawnRoboy();
@@ -66,6 +72,11 @@
             {
                 SpawnLevelSpheres();
             }
+        }
+
+        public Transform GetAnchorTransform()
+        {
+            return ARSessionManager.Instance.FloorPlane.CreateAnchor(ARSessionManager.Instance.FloorPlane.CenterPose).transform;
         }
 
         private void SpawnRoboy()
@@ -115,7 +126,7 @@
 
         private void ResetLevel(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name != "HomeScene")
+            if (scene.name != "HomeScene_DEV")
                 return;
 
             m_LevelSpheresSpawned = false;
