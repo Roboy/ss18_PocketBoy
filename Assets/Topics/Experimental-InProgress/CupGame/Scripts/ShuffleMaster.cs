@@ -13,6 +13,9 @@ namespace Pocketboy.Cupgame
         public GameObject RoboyArm;
 
         [SerializeField]
+        private Button ScanButton;
+
+        [SerializeField]
         private Button StartButton;
         private bool m_ball_spawned;
         private int m_ball_index;
@@ -51,10 +54,23 @@ namespace Pocketboy.Cupgame
 
         private void Start()
         {
+            ScanButton.onClick.AddListener(HandleScan);
+            ScanButton.enabled = true;
             StartButton.onClick.AddListener(HandleStart);
             StartButton.enabled = true;
             m_ball_spawned = false;
             
+        }
+
+        private void HandleScan()
+        {
+            if (ScanButton.enabled)
+            {
+                ScanButton.enabled = false;
+                ScanButton.GetComponent<Image>().color = Color.gray;
+                StartCoroutine(StartLocating());
+
+            }
         }
 
         private void HandleStart()
@@ -62,7 +78,7 @@ namespace Pocketboy.Cupgame
             if (StartButton.enabled)
             {
                 StartButton.enabled = false;
-                StartButton.GetComponent<Image>().color = Color.red;
+                StartButton.GetComponent<Image>().color = Color.gray;
                 StartCoroutine(StartGame());
             }
         }
@@ -137,7 +153,19 @@ namespace Pocketboy.Cupgame
             CupEmitResult(2);
             yield return StartCoroutine(RiseArm());
 
+            
             CupStopEmitting(2);
+            while (counter < hoverTime)
+            {
+                counter += Time.deltaTime;
+                yield return null;
+            }
+            counter = 0.0f;
+            yield return StartCoroutine(MoveArm(0));
+
+            RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = false;
+            ScanButton.enabled = true;
+            ScanButton.GetComponent<Image>().color = Color.blue;
 
 
         }
@@ -268,10 +296,7 @@ namespace Pocketboy.Cupgame
             m_ball_spawned = false;
         }
 
-        private IEnumerator LiftArm()
-        {
-            return null;
-        }
+        
 
         private IEnumerator LowerArm()
         {
