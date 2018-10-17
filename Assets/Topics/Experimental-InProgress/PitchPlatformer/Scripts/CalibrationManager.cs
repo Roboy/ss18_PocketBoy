@@ -8,6 +8,9 @@ using System;
 
 namespace Pocketboy.PitchPlatformer
 {
+    /// <summary>
+    /// CalibrationManager listens to user via microphone input to calibrate the lower and higher boundary of the user pitch.
+    /// </summary>
     [RequireComponent(typeof(MicrophoneFeed))]
     public class CalibrationManager : Singleton<CalibrationManager>
     {
@@ -63,16 +66,34 @@ namespace Pocketboy.PitchPlatformer
 
         private float m_LowPitchReference = 82.407f; // Hertz value of E2
 
+        /// <summary>
+        /// Calibrated high pitch as reference to shift user pitch from [m_CalibratedLowPitch, m_CalibratedHighPitch]
+        /// </summary>
         private float m_CalibratedHighPitch;
 
+        /// <summary>
+        /// Calibrated low pitch as reference to shift user pitch from [m_CalibratedLowPitch, m_CalibratedHighPitch]
+        /// </summary>
         private float m_CalibratedLowPitch;
 
+        /// <summary>
+        /// Allows to collect the samples from the microphone input
+        /// </summary>
         private MicrophoneFeed m_MicrophoneFeed;
 
+        /// <summary>
+        /// Pitch tracker proccess the samples from the microphone feed
+        /// </summary>
         private PitchTracker m_PitchTracker;
 
+        /// <summary>
+        /// Is used to check after calibration of low/high pitch if the opposite pitch is calibrated already to allow the user to proceed to test the calibration
+        /// </summary>
         private bool m_OnePitchCalibrated;
 
+        /// <summary>
+        /// In calibration test mode this is set to true to collect samples from the microphone feed and process it in the pitch tracker
+        /// </summary>
         private bool m_IsListeningForPitches;
 
         void Start()
@@ -94,7 +115,39 @@ namespace Pocketboy.PitchPlatformer
             ShowCalibrationTestButton.onClick.AddListener(ShowCalibrationTestWindow);
             ShowCalibrationButton.onClick.AddListener(ShowCalibrationWindow);
 
-            FinishCalibrationButton.onClick.AddListener(() => CalibrationUI.SetActive(false));
+            FinishCalibrationButton.onClick.AddListener(SaveCalibration);
+
+            LoadCalibration();
+        }
+
+        /// <summary>
+        /// Loads a saved calibration if possible from PlayerPrefs.
+        /// </summary>
+        private void LoadCalibration()
+        {
+            if (PlayerPrefs.GetFloat("LowPitchValue") == default(float)) // if not saved yet, GetFloat returns default value
+                return;
+
+            m_CalibratedLowPitch = PlayerPrefs.GetFloat("LowPitchValue");
+            m_CalibratedHighPitch = PlayerPrefs.GetFloat("HighPitchValue");
+
+            LowPitchVisualization.value = MathUtility.ConvertRange(m_LowPitchReference, m_HighPitchReference, 0f, 1f, m_CalibratedLowPitch);
+            HighPitchVisualization.value = MathUtility.ConvertRange(m_LowPitchReference, m_HighPitchReference, 0f, 1f, m_CalibratedHighPitch);
+        }
+
+        /// <summary>
+        /// Saves the current calibration in PlayerPrefs.
+        /// </summary>
+        private void SaveCalibration()
+        {
+            CalibrationUI.SetActive(false);
+            ForceScreenOrientation.Instance.ResetScreenOrientation(); // the calibration should run in portrait mode, reset this to previous screen orientation when finished
+
+            PlayerPrefs.SetFloat("LowPitchValue", m_CalibratedLowPitch);
+            PlayerPrefs.SetFloat("HighPitchValue", m_CalibratedHighPitch);
+
+            ShowCalibrationTestButton.gameObject.SetActive(true);
+            m_OnePitchCalibrated = true;
         }
 
         private void CalibrateHighPitch()
@@ -131,6 +184,11 @@ namespace Pocketboy.PitchPlatformer
             }, m_LowPitchReference, m_HighPitchReference, LowPitchDuration));
         }
 
+        /// <summary>
+        /// Is used after calibration of low/high pitch to reset the visual parts while calibrating.
+        /// </summary>
+        /// <param name="durationSlider"></param>
+        /// <param name="pitchSlider"></param>
         private void ResetCalibration(Slider durationSlider, Slider pitchSlider = null)
         {
             m_MicrophoneFeed.StopRecording();
@@ -157,6 +215,10 @@ namespace Pocketboy.PitchPlatformer
             m_IsListeningForPitches = false;
         }
 
+        /// <summary>
+        /// In the calibration test window the user moves the pitch bar with his pitch into areas corresponding to the calibration. If the user can move the bar comfortably he can proceed
+        /// to finish the calibration.
+        /// </summary>
         private void ShowCalibrationTestWindow()
         {
             CalibrationWindow.SetActive(false);
@@ -185,17 +247,23 @@ namespace Pocketboy.PitchPlatformer
             StartCoroutine(ListenForPitches());
         }
 
+        /// <summary>
+        /// Listens to microphone input and feeds its samples into the pitch tracker.
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator ListenForPitches()
         {
             m_IsListeningForPitches = true;
             while (m_IsListeningForPitches)
             {
                 m_PitchTracker.ProcessBuffer(m_MicrophoneFeed.GetSamples());
-
                 yield return null;
             }
         }
 
+        /// <summary>
+        /// Returns back from calibration test mode to the initial window.
+        /// </summary>
         private void ShowCalibrationWindow()
         {
             CalibrationWindow.SetActive(true);
@@ -205,6 +273,14 @@ namespace Pocketboy.PitchPlatformer
             m_MicrophoneFeed.StopRecording();
         }
 
+        /// <summary>
+        /// Calculates the pitch average proccessed by PitchTracker and adjusts the pitch bar.
+        /// </summary>
+        /// <param name="onComplete"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <param name="durationSlider"></param>
+        /// <returns></returns>
         IEnumerator GetPitchAverage(Action<float> onComplete, float min, float max, Slider durationSlider)
         {
             float pitches = 0f;
