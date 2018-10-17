@@ -87,4 +87,12 @@ public class TextToSpeechPlugin {
             }
         });
     }
+	
+	public static void stopSpeech()
+    {
+        if(m_TTS == null)
+            return;
+        
+        m_TTS.stop();
+    }
 }

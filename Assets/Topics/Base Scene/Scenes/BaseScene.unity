@@ -208,10 +208,11 @@ MonoBehaviour:
   RoboyPrefab: {fileID: 114511887295326824, guid: 062dd618ba53e60489da5e88ad0fb676,
     type: 2}
   Spheres:
+  - {fileID: 1195705990364126, guid: 2a430e87a3d64204885dd07b4c56f054, type: 2}
   - {fileID: 1057173560752104, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
-  - {fileID: 1660781682682994, guid: ba2cbde2d449f294384abe2f1e0ba244, type: 2}
   - {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a, type: 2}
   - {fileID: 1864275086667500, guid: 116a2719a8d9e9e46919d1c9621d558d, type: 2}
+  - {fileID: 1660781682682994, guid: ba2cbde2d449f294384abe2f1e0ba244, type: 2}
   m_RoboySpawned: 0
   m_LevelSpheresSpawned: 0
 --- !u!1001 &310336377

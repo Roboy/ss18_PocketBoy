@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GoogleARCore;
+using UnityEngine.SceneManagement;
 
 namespace Pocketboy.Common
 {
@@ -64,6 +65,11 @@ namespace Pocketboy.Common
         public void TalkDone()
         {
             m_FaceController.StopTalkAnimation();
+        }
+
+        public void StopTalking()
+        {
+            m_TextToSpeechController.StopTalking();
         }
 
         public void Listen()

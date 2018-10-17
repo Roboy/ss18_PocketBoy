@@ -32,6 +32,16 @@ namespace Pocketboy.Common
             m_TextToSpeechJavaClass.CallStatic("promptSpeechOutputWithCallback", text, gameObject.name, "TalkDoneInternal");
         }
 
+        public void StopTalking()
+        {
+            if (!IsTalking || !m_Initialized)
+                return;
+
+            IsTalking = false;
+            m_TextToSpeechJavaClass.CallStatic("stopSpeech");
+            m_RoboyController.TalkDone();
+        }
+
         private void TalkDoneInternal()
         {            
             IsTalking = false;
