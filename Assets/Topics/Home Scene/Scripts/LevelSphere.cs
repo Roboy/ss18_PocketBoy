@@ -15,7 +15,10 @@ namespace Pocketboy.Common
         private MeshRenderer HologramRenderer;
 
         [SerializeField]
-        private float RotationSpeed = 30f;
+        private float IdleRotationSpeed = 10f;
+
+        [SerializeField]
+        private float LoadRotationSpeed = 40f;
 
         private Material m_HologramMaterial;
 
@@ -54,7 +57,7 @@ namespace Pocketboy.Common
             {
                 m_HologramMaterial.SetFloat("_DissolveValue", Mathf.Lerp(0f, 1f, currentDuration / duration));
                 currentDuration += Time.deltaTime;
-                transform.Rotate(Vector3.up, RotationSpeed * Time.deltaTime);
+                transform.Rotate(Vector3.up, IdleRotationSpeed * Time.deltaTime);
                 yield return null;
             }
             m_HologramMaterial.SetFloat("_DissolveValue", 1f);

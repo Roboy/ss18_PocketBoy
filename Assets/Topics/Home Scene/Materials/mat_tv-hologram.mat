@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: mat_tv-hologram
   m_Shader: {fileID: 4800000, guid: 1094a884facf0c942923104e0369eb04, type: 3}
-  m_ShaderKeywords: _GLITCH_ON _GLOW_ON _SCAN_ON
+  m_ShaderKeywords: _SCAN_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -40,8 +40,8 @@ Material:
     - _HighestVertex: 0.24208032
     - _LowestVertex: -0.2768765
     - _RimPower: 5
-    - _ScanSpeed: 1
-    - _ScanTiling: 0.05
+    - _ScanSpeed: -0.1
+    - _ScanTiling: 1
     m_Colors:
     - _Direction: {r: 0, g: 1, b: 0, a: 0}
     - _DissolveEnd: {r: 0, g: 0.34208032, b: 0, a: 0}
