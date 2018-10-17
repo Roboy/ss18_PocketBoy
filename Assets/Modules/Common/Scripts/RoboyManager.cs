@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 namespace Pocketboy.Common
 {
     /// <summary>
-    /// TODO:: Add functionality e.g. startAnimationXY, SayXY, StopTalking, StopListening
+    /// TODO:: Add functionality e.g. startAnimationXY
     /// </summary>
     public class RoboyManager : PersistentSingleton<RoboyManager>
     {
@@ -34,6 +34,10 @@ namespace Pocketboy.Common
         {
             if(!m_Initialized)
                 LookAtCamera();
+
+            // roboy should stop talking and listening when loading a new scene, we cannot use sceneLoaded event cause some scenes may trigger roboy talking at the start of the scene
+            SceneManager.sceneUnloaded += (scene) => StopTalking();
+            SceneManager.sceneUnloaded += (scene) => StopListening();
         }
 
         void Update()
@@ -70,6 +74,7 @@ namespace Pocketboy.Common
         public void StopTalking()
         {
             m_TextToSpeechController.StopTalking();
+            m_FaceController.StopTalkAnimation();
         }
 
         public void Listen()
@@ -79,10 +84,15 @@ namespace Pocketboy.Common
 
         public void ListenDone(string recognizedText)
         {
-            if (recognizedText.Contains("home") || recognizedText.Contains("beam") || recognizedText.Contains("scotty"))
-            {
-                SceneLoader.Instance.LoadScene("HomeScene");
-            }
+            //if (recognizedText.Contains("home") || recognizedText.Contains("beam") || recognizedText.Contains("scotty"))
+            //{
+            //    SceneLoader.Instance.LoadScene("HomeScene");
+            //}
+        }
+
+        public void StopListening()
+        {
+            m_SpeechToTextController.StopListening();
         }
 
         private void LookAtCamera()

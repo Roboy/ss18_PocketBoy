@@ -39,7 +39,6 @@ namespace Pocketboy.Common
 
             IsTalking = false;
             m_TextToSpeechJavaClass.CallStatic("stopSpeech");
-            m_RoboyController.TalkDone();
         }
 
         private void TalkDoneInternal()
