@@ -52,6 +52,8 @@ namespace Pocketboy.Common
         {
             CalibrateButton.onClick.AddListener(Calibrate);
             ConfirmButton.onClick.AddListener(Confirm);
+
+            WarningManager.Instance.ShowWarning("SUCK DICK");
         }
 
         private void Update()
