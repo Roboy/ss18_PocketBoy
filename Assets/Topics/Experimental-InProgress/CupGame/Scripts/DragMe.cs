@@ -33,7 +33,7 @@ namespace Pocketboy.Cupgame
         private bool m_HoldsBall;
         private bool m_Dragable = false;
         private GameObject m_ball = null;
-
+        private Vector3 m_BoxSize = Vector3.one * 0.5f;
 
         /// <summary>
         /// Offset when on touch down between the touch position and the position to avoid a snap to the center.
@@ -61,11 +61,15 @@ namespace Pocketboy.Cupgame
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (!m_Dragable)
+                return;
             StartDrag(eventData);
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
+            if (!m_Dragable)
+                return;
             StopDrag();
         }
 
@@ -109,7 +113,7 @@ namespace Pocketboy.Cupgame
             }
 
             StartCoroutine(SwapCups());
-            
+
 
         }
 
@@ -145,7 +149,8 @@ namespace Pocketboy.Cupgame
             int layerMask = ~(1 << LayerMask.NameToLayer("Ignore"));
 
             //Collision happen.
-            if (Physics.OverlapBox(transform.position, Vector3.one, Quaternion.identity, layerMask).Length > 0)
+            //if (Physics.OverlapBox(transform.position, m_BoxSize, Quaternion.identity, layerMask).Length > 0)
+            if (Physics.CheckBox(transform.position, m_BoxSize, transform.rotation, layerMask))
             {
 
                 //If colliding and not elevated, increase the height, so that the cups stack
@@ -160,7 +165,8 @@ namespace Pocketboy.Cupgame
             }
 
             //No collisions occur.
-            if (Physics.OverlapBox(transform.position, Vector3.one, Quaternion.identity, layerMask).Length == 0)
+            //if (Physics.OverlapBox(transform.position, m_BoxSize, Quaternion.identity, layerMask).Length == 0)
+                if (!Physics.CheckBox(transform.position, m_BoxSize, transform.rotation, layerMask))
             {
 
                 if (m_Lifted)
@@ -223,7 +229,7 @@ namespace Pocketboy.Cupgame
             ShuffleMaster.Instance.CupsMoveable = false;
             gameObject.layer = LayerMask.NameToLayer("Ignore");
             int layerMask = ~(1 << LayerMask.NameToLayer("Ignore"));
-            Collider[] hitted_Objects = Physics.OverlapBox(transform.position, Vector3.one, Quaternion.identity, layerMask);
+            Collider[] hitted_Objects = Physics.OverlapBox(transform.position, m_BoxSize, Quaternion.identity, layerMask);
 
             if (hitted_Objects.Length == 0)
             {
@@ -239,6 +245,7 @@ namespace Pocketboy.Cupgame
 
                     int index_a = Array.IndexOf(ShuffleMaster.Instance.Cups, gameObject);
                     int index_b = Array.IndexOf(ShuffleMaster.Instance.Cups, hitted_Objects[0].gameObject);
+                    Debug.Log("index_a: " + index_a + "||" + " index_b: " + index_b);
                     int distance = Mathf.Abs(index_a - index_b);
                     if (index_a < index_b)
                     {
@@ -273,10 +280,10 @@ namespace Pocketboy.Cupgame
                         ShuffleMaster.Instance.Cups[index_a] = other_cup;
                         gameObject.GetComponent<DragMe>().resetOriginalPosition();
                         other_cup.GetComponent<DragMe>().resetOriginalPosition();
-                        
+
 
                     }
-                   
+
 
                 }
             }
@@ -392,6 +399,11 @@ namespace Pocketboy.Cupgame
         public void SetDragable(bool b)
         {
             m_Dragable = b;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireCube(transform.position, m_BoxSize);
         }
     }
 }
