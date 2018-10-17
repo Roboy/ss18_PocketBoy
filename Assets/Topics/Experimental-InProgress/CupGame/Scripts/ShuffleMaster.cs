@@ -23,7 +23,7 @@ namespace Pocketboy.Cupgame
         private float counter = 0.0f;
         private float hoverTime = 1.0f;
 
-        private bool m_CupsMoveable;
+        private bool m_CupsMoveable = false;
         public bool CupsMoveable
         {
             get
@@ -266,8 +266,10 @@ namespace Pocketboy.Cupgame
             var ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             ball.GetComponent<Renderer>().material.color = Random.ColorHSV();
             Vector3 pos = Cups[cup_index].transform.position;
+            Vector3 scale = Cups[cup_index].transform.localScale;
             pos.y += Mathf.Abs(pos.y * 0.2f);
             ball.transform.position = pos;
+            ball.transform.localScale = Vector3.one * 0.5f;
             ball.layer = LayerMask.NameToLayer("Ignore");
             Cups[cup_index].GetComponent<DragMe>().HoldBall(ball);
         }
