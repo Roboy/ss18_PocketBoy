@@ -75,7 +75,8 @@ namespace Pocketboy.Common
                 return;
 
             m_SpeechToTextJavaClass.CallStatic("stopListening");
-            Debug.Log("DICK: STOP LISTENING");
+            IsListening = false;
+            ListenButton.image.color = m_InitColor;
         }
 
         private void HandleListening()
@@ -94,7 +95,6 @@ namespace Pocketboy.Common
             IsListening = false;
             ListenButton.image.color = m_InitColor;
             m_RoboyManager.ListenDone(recognizedText.Split(m_Delimiter[0])[0]);
-            Debug.Log("DICK: STOP INTERNAL");
         }
     }
 }
