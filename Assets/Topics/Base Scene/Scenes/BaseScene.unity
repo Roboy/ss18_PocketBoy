@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CalibrationUI: {fileID: 931772396}
-  InstructionText: {fileID: 0}
+  InstructionText: {fileID: 946344452}
   CalibrateButton: {fileID: 2139701667}
   ConfirmButton: {fileID: 1706232263}
   FloorObjectPrefab: {fileID: 1658556683313224, guid: 1dec40727da7faa408692dd43f649652,

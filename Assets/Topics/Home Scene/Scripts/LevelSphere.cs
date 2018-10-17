@@ -18,7 +18,9 @@ namespace Pocketboy.Common
         private float IdleRotationSpeed = 10f;
 
         [SerializeField]
-        private float LoadRotationSpeed = 40f;
+        private float LoadRotationSpeed = 80;
+
+        private float m_CurrentRotationSpeed = 0f;
 
         private Material m_HologramMaterial;
 
@@ -30,6 +32,12 @@ namespace Pocketboy.Common
             {
                 m_HologramMaterial = HologramRenderer.material;
             }
+            m_CurrentRotationSpeed = IdleRotationSpeed;
+        }
+
+        private void Update()
+        {
+            transform.Rotate(Vector3.up, m_CurrentRotationSpeed * Time.deltaTime);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -38,6 +46,7 @@ namespace Pocketboy.Common
             if ((collider = other.GetComponent<LevelSphereCollider>()) != null)
             {
                 m_AnimationCoroutine = StartCoroutine(LoadingAnimation(collider.LoadDuration));
+                m_CurrentRotationSpeed = LoadRotationSpeed;
             }
         }
 
@@ -46,21 +55,21 @@ namespace Pocketboy.Common
             m_HologramMaterial.SetFloat("_DissolveValue", 0f);
             if (m_AnimationCoroutine != null)
             {
+                m_CurrentRotationSpeed = IdleRotationSpeed;
                 StopCoroutine(m_AnimationCoroutine);
             }
         }
 
         private IEnumerator LoadingAnimation(float duration)
         {
-            float currentDuration = 0f;
+            float currentDuration = 0f;          
             while (currentDuration < duration)
             {
                 m_HologramMaterial.SetFloat("_DissolveValue", Mathf.Lerp(0f, 1f, currentDuration / duration));
                 currentDuration += Time.deltaTime;
-                transform.Rotate(Vector3.up, IdleRotationSpeed * Time.deltaTime);
                 yield return null;
             }
-            m_HologramMaterial.SetFloat("_DissolveValue", 1f);
+            m_HologramMaterial.SetFloat("_DissolveValue", 1f);       
             SceneLoader.Instance.LoadScene(SceneName);
         }
         
