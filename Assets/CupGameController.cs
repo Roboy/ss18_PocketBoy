@@ -25,12 +25,11 @@ public class CupGameController : MonoBehaviour {
     public void PositionCups()
     {
         Quaternion locRot = ShuffleMaster.transform.localRotation;
-        
-        ShuffleMaster.transform.SetParent(LevelManager.Instance.GetAnchorTransform(), false);
-        Debug.Log(LevelManager.Instance.GetAnchorTransform().gameObject.layer);
+
+        //ShuffleMaster.transform.SetParent(LevelManager.Instance.GetAnchorTransform());
         
         ShuffleMaster.transform.position = LevelManager.Instance.Roboy.transform.TransformPoint(new Vector3(0.6f, 0f, 0f));
-        //ShuffleMaster.transform.localRotation = locRot;
+        
         
 
     }

@@ -150,7 +150,7 @@ namespace Pocketboy.Cupgame
 
             //Collision happen.
             //if (Physics.OverlapBox(transform.position, m_BoxSize, Quaternion.identity, layerMask).Length > 0)
-            if (Physics.CheckBox(transform.position, m_BoxSize, Quaternion.identity, layerMask))
+            if (Physics.CheckBox(transform.position, m_BoxSize, transform.rotation, layerMask))
             {
 
                 //If colliding and not elevated, increase the height, so that the cups stack
@@ -166,7 +166,7 @@ namespace Pocketboy.Cupgame
 
             //No collisions occur.
             //if (Physics.OverlapBox(transform.position, m_BoxSize, Quaternion.identity, layerMask).Length == 0)
-                if (!Physics.CheckBox(transform.position, m_BoxSize, Quaternion.identity, layerMask))
+                if (!Physics.CheckBox(transform.position, m_BoxSize, transform.rotation, layerMask))
             {
 
                 if (m_Lifted)
