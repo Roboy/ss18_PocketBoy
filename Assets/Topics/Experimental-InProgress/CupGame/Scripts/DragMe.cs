@@ -34,6 +34,8 @@ namespace Pocketboy.Cupgame
         private bool m_Dragable = false;
         private GameObject m_ball = null;
         private Vector3 m_BoxSize = Vector3.one * 0.5f;
+        private bool m_OffGameBoard = false;
+        private GameObject m_AdjacentCup = null;
 
         /// <summary>
         /// Offset when on touch down between the touch position and the position to avoid a snap to the center.
@@ -59,6 +61,16 @@ namespace Pocketboy.Cupgame
             m_HoldsBall = false;
         }
 
+
+        void Update()
+        {
+            if (m_IsTouched)
+            {
+                UpdateDrag();
+            }
+        }
+
+
         public void OnPointerDown(PointerEventData eventData)
         {
             if (!m_Dragable)
@@ -73,12 +85,56 @@ namespace Pocketboy.Cupgame
             StopDrag();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void OnTriggerEnter(Collider other)
         {
-            if (m_IsTouched)
+            
+            
+            if (!m_IsTouched)
+                return;
+
+           
+            if (other.tag == "Cup")
             {
-                UpdateDrag();
+                
+                m_AdjacentCup = other.gameObject;
+                Debug.Log(m_AdjacentCup);
+                return;
+            }
+
+            if (other.tag == "GameBoard")
+            {
+                m_OffGameBoard = false;
+            }
+
+           
+
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (!m_IsTouched)
+                return;
+            if (other.tag == "Cup")
+            {
+                m_AdjacentCup = other.gameObject;
+                return;
+            }
+
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (!m_IsTouched)
+                return;
+            if (other.tag == "Cup")
+            {
+                m_AdjacentCup = null;
+                return;
+            }
+
+            if (other.tag == "GameBoard")
+            {
+                m_OffGameBoard = true;
             }
         }
 
@@ -112,7 +168,16 @@ namespace Pocketboy.Cupgame
                 m_RigidBody.isKinematic = m_KinematicState;
             }
 
-            StartCoroutine(SwapCups());
+            if (m_OffGameBoard)
+            {
+                resetCurrentPosition();
+                m_OffGameBoard = false;
+            }
+            else
+            {
+                StartCoroutine(SwapCups());
+            }
+            
 
 
         }
@@ -143,19 +208,20 @@ namespace Pocketboy.Cupgame
 
         private IEnumerator CheckForElevation()
         {
+            
 
-
-            gameObject.layer = LayerMask.NameToLayer("Ignore");
-            int layerMask = ~(1 << LayerMask.NameToLayer("Ignore"));
+            //gameObject.layer = LayerMask.NameToLayer("Ignore");
+            //int layerMask = ~(1 << LayerMask.NameToLayer("Ignore"));
 
             //Collision happen.
             //if (Physics.OverlapBox(transform.position, m_BoxSize, Quaternion.identity, layerMask).Length > 0)
-            if (Physics.CheckBox(transform.position, m_BoxSize, transform.rotation, layerMask))
+            if (m_AdjacentCup != null)
             {
-
+                Debug.Log(Mathf.Abs(transform.position.y - m_OriginalPosition.y));
                 //If colliding and not elevated, increase the height, so that the cups stack
-                if (transform.position.y == m_OriginalPosition.y)
+                if (!m_Lifted)
                 {
+                    
                     yield return StartCoroutine(ElevateCup(0, gameObject));
                 }
                 else
@@ -166,7 +232,7 @@ namespace Pocketboy.Cupgame
 
             //No collisions occur.
             //if (Physics.OverlapBox(transform.position, m_BoxSize, Quaternion.identity, layerMask).Length == 0)
-                if (!Physics.CheckBox(transform.position, m_BoxSize, transform.rotation, layerMask))
+                if (m_AdjacentCup == null)
             {
 
                 if (m_Lifted)
@@ -177,7 +243,7 @@ namespace Pocketboy.Cupgame
 
             }
 
-            gameObject.layer = LayerMask.NameToLayer("Default");
+            //gameObject.layer = LayerMask.NameToLayer("Default");
             yield return null;
         }
 
@@ -227,15 +293,16 @@ namespace Pocketboy.Cupgame
         private IEnumerator SwapCups()
         {
             ShuffleMaster.Instance.CupsMoveable = false;
-            gameObject.layer = LayerMask.NameToLayer("Ignore");
-            int layerMask = ~(1 << LayerMask.NameToLayer("Ignore"));
-            Collider[] hitted_Objects = Physics.OverlapBox(transform.position, m_BoxSize, Quaternion.identity, layerMask);
+            //gameObject.layer = LayerMask.NameToLayer("Ignore");
+            //int layerMask = ~(1 << LayerMask.NameToLayer("Ignore"));
+            //Collider[] hitted_Objects = Physics.OverlapBox(transform.position, m_BoxSize, Quaternion.identity, layerMask);
 
-            if (hitted_Objects.Length == 0)
+            if (m_AdjacentCup  == null)
             {
                 //no swapping needed.
+                yield return null;
             }
-            if (hitted_Objects.Length > 0)
+            if (m_AdjacentCup != null)
             {
                 RotationDirection dir = RotationDirection.none;
                 RotationLane lan = RotationLane.none;
@@ -244,7 +311,7 @@ namespace Pocketboy.Cupgame
                 {
 
                     int index_a = Array.IndexOf(ShuffleMaster.Instance.Cups, gameObject);
-                    int index_b = Array.IndexOf(ShuffleMaster.Instance.Cups, hitted_Objects[0].gameObject);
+                    int index_b = Array.IndexOf(ShuffleMaster.Instance.Cups, m_AdjacentCup);
                     Debug.Log("index_a: " + index_a + "||" + " index_b: " + index_b);
                     int distance = Mathf.Abs(index_a - index_b);
                     if (index_a < index_b)
@@ -288,7 +355,8 @@ namespace Pocketboy.Cupgame
                 }
             }
             m_Lifted = false;
-            gameObject.layer = LayerMask.NameToLayer("Default");
+            m_AdjacentCup = null;
+            //gameObject.layer = LayerMask.NameToLayer("Default");
             ShuffleMaster.Instance.CupsMoveable = true;
             if (m_ball != null)
             {
@@ -401,10 +469,16 @@ namespace Pocketboy.Cupgame
             m_Dragable = b;
         }
 
-        private void OnDrawGizmos()
+        //private void OnDrawGizmos()
+        //{
+        //    Gizmos.DrawWireCube(transform.position, m_BoxSize);
+        //}
+
+        private void resetCurrentPosition()
         {
-            Gizmos.DrawWireCube(transform.position, m_BoxSize);
+            transform.position = m_OriginalPosition;
         }
+
     }
 }
 

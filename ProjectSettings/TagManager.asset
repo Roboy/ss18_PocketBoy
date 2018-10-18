@@ -18,6 +18,7 @@ TagManager:
   - Deadzone
   - Cup
   - Hand
+  - GameBoard
   layers:
   - Default
   - TransparentFX
