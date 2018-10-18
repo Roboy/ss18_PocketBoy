@@ -60,8 +60,6 @@ namespace Pocketboy.PitchPlatformer
             AudioSettings.GetDSPBufferSize(out dspBufferSize, out dspNumBuffers);
 
             m_AudioSource.timeSamples = (Microphone.GetPosition(m_Device) + AudioSettings.outputSampleRate - 3 * dspBufferSize * dspNumBuffers) % AudioSettings.outputSampleRate;
-
-            Debug.Log("Start");
         }
 
         public void StopRecording()
@@ -74,8 +72,6 @@ namespace Pocketboy.PitchPlatformer
 
             Microphone.End(m_Device);
             m_AudioSource.Stop();
-
-            Debug.Log("Stop");
         }
 
         public float[] GetSamples()

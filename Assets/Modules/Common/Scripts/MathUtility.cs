@@ -71,5 +71,15 @@ namespace Pocketboy.Common
 
             return new Vector2(valX, valY);
         }
+
+        public static float ConvertRange(float oldMin, float oldMax, float newMin, float newMax, float value)
+        {
+            if (oldMin > oldMax || newMin > newMax) // dont accept incorrect ranges
+            {
+                return -1f;
+            }
+            float scale = (newMax - newMin) / (oldMax - oldMin);
+            return newMin + ((value - oldMin) * scale);
+        }
     }
 }
