@@ -77,17 +77,17 @@ public class CollidingObjects : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     void UpdateDrag()
     {
 
-#if UNITY_EDITOR
-        Vector3 m_TouchPositionScreenSpace = Input.mousePosition;
-#elif UNITY_ANDROID
-            m_TouchPositionScreenSpace = Input.touches[0].position;
-#endif
+//#if UNITY_EDITOR
+//        Vector3 m_TouchPositionScreenSpace = Input.mousePosition;
+//#elif UNITY_ANDROID
+//            m_TouchPositionScreenSpace = Input.touches[0].position;
+//#endif
         
 
 
-        Vector3 m_TouchPositionWorldSpace = Camera.main.ScreenToWorldPoint(m_TouchPositionScreenSpace);
-        m_TouchPositionWorldSpace.z = transform.position.z;
-        transform.position = new Vector3(m_TouchPositionWorldSpace.x, transform.position.y, transform.position.z );
+//        Vector3 m_TouchPositionWorldSpace = Camera.main.ScreenToWorldPoint(m_TouchPositionScreenSpace);
+//        m_TouchPositionWorldSpace.z = transform.position.z;
+//        transform.position = new Vector3(m_TouchPositionWorldSpace.x, transform.position.y, transform.position.z );
 
         //if (m_toBePlacedOnFloor) { transform.position = new Vector3(transform.position.x, m_initPos.y, m_initPos.z); }
            

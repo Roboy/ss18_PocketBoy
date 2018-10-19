@@ -11,18 +11,20 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1864275086667500}
   m_IsPrefabAsset: 1
---- !u!1 &1355327282997658
+--- !u!1 &1620501880943946
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4131946091835312}
-  - component: {fileID: 33605714652058604}
-  - component: {fileID: 23358250332889342}
-  m_Layer: 8
-  m_Name: Unicorn_smooth
+  - component: {fileID: 4617655464769726}
+  - component: {fileID: 33026580041762564}
+  - component: {fileID: 23573847471580384}
+  - component: {fileID: 95465789885927450}
+  - component: {fileID: 114142339805801034}
+  m_Layer: 0
+  m_Name: Platform-Hologram
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,19 +49,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4131946091835312
+--- !u!4 &4617655464769726
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1355327282997658}
-  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.16, z: 0.086}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_GameObject: {fileID: 1620501880943946}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.12, z: -0.18}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 4983922715071294}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4983922715071294
 Transform:
   m_ObjectHideFlags: 1
@@ -70,7 +72,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4131946091835312}
+  - {fileID: 4617655464769726}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -109,12 +111,12 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!23 &23358250332889342
+--- !u!23 &23573847471580384
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1355327282997658}
+  m_GameObject: {fileID: 1620501880943946}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -124,7 +126,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: e0aaff26979b3ff4c97fde3bf008e594, type: 2}
+  - {fileID: 2100000, guid: 1c73428d03ced3940af611d51adf2f57, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,6 +146,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33026580041762564
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620501880943946}
+  m_Mesh: {fileID: 4300000, guid: 14373b86d006d104ca0304dc60031b7f, type: 3}
 --- !u!33 &33397084656170382
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -151,13 +160,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1864275086667500}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!33 &33605714652058604
-MeshFilter:
+--- !u!95 &95465789885927450
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1355327282997658}
-  m_Mesh: {fileID: 4300000, guid: 14373b86d006d104ca0304dc60031b7f, type: 3}
+  m_GameObject: {fileID: 1620501880943946}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: cf82897572aa15343bc125f73dcd8667, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114030129862603682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,9 +190,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: RunaroundScene
-  HologramRenderer: {fileID: 0}
+  HologramRenderer: {fileID: 23573847471580384}
   IdleRotationSpeed: 10
   LoadRotationSpeed: 80
+--- !u!114 &114142339805801034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620501880943946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ef2c0b90fbf14469ff1b1d2d7871c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoloMeshFilter: {fileID: 33026580041762564}
+  m_Initialized: 1
 --- !u!135 &135496884588813046
 SphereCollider:
   m_ObjectHideFlags: 1
