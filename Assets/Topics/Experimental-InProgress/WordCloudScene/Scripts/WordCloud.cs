@@ -25,10 +25,31 @@ namespace Pocketboy.Wordcloud
         /// </summary>
         public Material mat_undefined;
 
+
+        /// <summary>
+        /// Default colour, when word is unselected.
+        /// </summary>
+        public Material mat_default;
+        /// <summary>
+        /// Material for the clouds, transparent, so the user can see through
+        /// </summary>
         public Material mat_trans;
 
+        /// <summary>
+        /// Displayed text explaining the context relation for the specific word.
+        /// </summary>
         public GameObject Explanation;
 
+
+        /// <summary>
+        /// Words will spawn inside of clouds, this is the prefab.
+        /// </summary>
+        public GameObject CloudPrefab;
+
+
+        /// <summary>
+        /// Is there already a cloud or not.
+        /// </summary>
         [SerializeField]
         private bool cloud_spawned = false;
 
@@ -89,61 +110,86 @@ namespace Pocketboy.Wordcloud
             }
 
             Renderer[] rr = tmp_word.GetComponentsInChildren<Renderer>();
+            TextMeshProUGUI textfield = Explanation.GetComponent<TextMeshProUGUI>();
 
-            //Visualize the context relation of the word to the topic.
-            switch (related)
+            //The case where the word was clicked before
+            if (tmp_word.isClickedOn() == true)
             {
-                case WordInCloud.CR.yes:
-                    for (int i = 0; i < rr.Length; i++)
+                for (int i = 0; i < rr.Length; i++)
+                {
+                    if (rr[i].gameObject.tag == "NoColorChange")
                     {
-                        if (rr[i].gameObject.tag == "NoColorChange")
-                        {
-                            //Do nothing
-                            //It's the bounding box
-                        }
-                        else
-                        {
-                            rr[i].material = mat_correct;
-                        }
+                        //Do nothing
+                        //It's the bounding box
                     }
-                    break;
-                case WordInCloud.CR.no:
-                    for (int i = 0; i < rr.Length; i++)
+                    else
                     {
-                        if (rr[i].gameObject.tag == "NoColorChange")
-                        {
-                            //Do nothing
-                            //It's the bounding box
-                        }
-                        else
-                        {
-                            rr[i].material = mat_incorrect;
-                        }
+                        rr[i].material = mat_default;
+                    }
 
-                    }
-                    break;
-                case WordInCloud.CR.undefined:
-                    for (int i = 0; i < rr.Length; i++)
-                    {
-                        if (rr[i].gameObject.tag == "NoColorChange")
-                        {
-                            //Do nothing
-                            //It's the bounding box
-                        }
-                        else
-                        {
-                            rr[i].material = mat_undefined;
-                        }
+                    textfield.text = "";
+                }
+            }
+            //The case where it the word is unselected
+            else
+            {
 
-                    }
-                    break;
-                default:
-                    Debug.Log("Error code 42.");
-                    break;
+                //Visualize the context relation of the word to the topic.
+                switch (related)
+                {
+                    case WordInCloud.CR.yes:
+                        for (int i = 0; i < rr.Length; i++)
+                        {
+                            if (rr[i].gameObject.tag == "NoColorChange")
+                            {
+                                //Do nothing
+                                //It's the bounding box
+                            }
+                            else
+                            {
+                                rr[i].material = mat_correct;
+                            }
+                        }
+                        break;
+                    case WordInCloud.CR.no:
+                        for (int i = 0; i < rr.Length; i++)
+                        {
+                            if (rr[i].gameObject.tag == "NoColorChange")
+                            {
+                                //Do nothing
+                                //It's the bounding box
+                            }
+                            else
+                            {
+                                rr[i].material = mat_incorrect;
+                            }
+
+                        }
+                        break;
+                    case WordInCloud.CR.undefined:
+                        for (int i = 0; i < rr.Length; i++)
+                        {
+                            if (rr[i].gameObject.tag == "NoColorChange")
+                            {
+                                //Do nothing
+                                //It's the bounding box
+                            }
+                            else
+                            {
+                                rr[i].material = mat_undefined;
+                            }
+
+                        }
+                        break;
+                    default:
+                        Debug.Log("Error code 42.");
+                        break;
+
+                }
+
+                textfield.text = tmp_content.Explanation;
             }
 
-            TextMeshProUGUI textfield = Explanation.GetComponent<TextMeshProUGUI>();
-            textfield.text = tmp_content.Explanation;
 
         }
 
@@ -227,7 +273,34 @@ namespace Pocketboy.Wordcloud
 
             var currentDistance = 0f;
             var currentAngle = 0f;
-            Bounds tmp = word.gameObject.GetComponent<BoxCollider2D>().bounds;
+            Bounds b_word = word.gameObject.GetComponent<BoxCollider2D>().bounds;
+
+            GameObject boundingbox = GameObject.Instantiate(CloudPrefab);
+            
+
+            
+            boundingbox.gameObject.tag = "NoColorChange";
+            boundingbox.transform.localScale = new Vector3(b_word.size.x, b_word.size.y, 1.0f);
+            if (word.Obj.GetComponent<SimpleHelvetica>().Orientation == SimpleHelvetica.alignment.horizontal)
+            {
+                //If the word is aligned horizontally, we need to scale the cloud again to match
+                boundingbox.transform.localScale = new Vector3(boundingbox.transform.localScale.x, boundingbox.transform.localScale.y * 2.0f, boundingbox.transform.localScale.z);
+            }
+
+            if (word.Obj.GetComponent<SimpleHelvetica>().Orientation == SimpleHelvetica.alignment.vertical)
+            {
+                //If the word is aligned vertical, we need to scale the cloud again to match
+                boundingbox.transform.localScale = new Vector3(boundingbox.transform.localScale.x * 2.0f, boundingbox.transform.localScale.y , boundingbox.transform.localScale.z);
+            }
+            //boundingbox.transform.localScale = new Vector3(tmp.size.x, tmp.size.y, 0.1f);
+            Vector2 offset = word.GetComponent<BoxCollider2D>().offset;
+            boundingbox.transform.position = new Vector3(word.transform.position.x + offset.x, word.transform.position.y + offset.y, word.transform.position.z + 0.01f);
+            boundingbox.transform.parent = word.transform;
+            boundingbox.GetComponent<Renderer>().material = mat_trans;
+            boundingbox.AddComponent<BoxCollider>();
+            Bounds b_cloud = boundingbox.GetComponent<BoxCollider>().bounds;
+            DestroyImmediate(boundingbox.GetComponent<BoxCollider>());
+
 
             while (true)
             {
@@ -236,25 +309,19 @@ namespace Pocketboy.Wordcloud
                 var y = Mathf.Sin(radians) * currentDistance;
                 word.transform.position = new Vector3(word.transform.parent.position.x + x, word.transform.parent.position.y + y, word.transform.parent.position.z);
                 currentDistance += 0.005f;
-                currentAngle += 2.5f;
+                currentAngle += 1.5f;
                 Vector2 pos = new Vector2(word.transform.position.x, word.transform.position.y);
-                Vector2 size = new Vector2(tmp.size.x, tmp.size.y);
+                Vector2 size = new Vector2(b_cloud.size.x, b_cloud.size.y);
                 Vector2 dir = new Vector2(x, y);
-                RaycastHit2D[] r_tmp = Physics2D.BoxCastAll(pos, size * 2, 0.0f, dir);
 
-                if (r_tmp.Length == 1)
+
+                if (!Physics2D.BoxCast(pos, size * 2, 0.0f, Vector2.zero, 0.0f, layerMask))
                 {
-                    GameObject boundingbox = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    boundingbox.transform.parent = word.transform;
-                    boundingbox.gameObject.tag = "NoColorChange";
-                    boundingbox.transform.localScale = new Vector3(tmp.size.x, tmp.size.y, 0.1f);
-                    Vector2 offset = word.GetComponent<BoxCollider2D>().offset;
-                    boundingbox.transform.position = new Vector3(word.transform.position.x + offset.x, word.transform.position.y + offset.y, word.transform.position.z + 0.01f);
-                    boundingbox.GetComponent<Renderer>().material = mat_trans;
-                    DestroyImmediate(boundingbox.GetComponent<BoxCollider>());
+                    //If there are no more collisions end the placing algorithm
+                    word.setSpawnState(true);
                     break;
                 }
-
+                
                 
             }
             word.gameObject.layer = LayerMask.NameToLayer("Words");

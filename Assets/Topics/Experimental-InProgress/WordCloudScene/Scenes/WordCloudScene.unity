@@ -311,8 +311,11 @@ MonoBehaviour:
   mat_correct: {fileID: 2100000, guid: 0049ac7d5fdbee740879570db6eb9472, type: 2}
   mat_incorrect: {fileID: 2100000, guid: c2257a7e436dc3847822932b700a7bf8, type: 2}
   mat_undefined: {fileID: 2100000, guid: 80fa8165d2b269b4b9ebc8bb95e92f99, type: 2}
+  mat_default: {fileID: 2100000, guid: 44e8ae017e6f6bd4cb8b8b1a29eacbde, type: 2}
   mat_trans: {fileID: 2100000, guid: 9d0e3a25ceb1072489d4a32df674d564, type: 2}
   Explanation: {fileID: 1613165211}
+  CloudPrefab: {fileID: 1558642625642840, guid: 37f97c429c175b646889c50882403c22,
+    type: 2}
   cloud_spawned: 0
 --- !u!4 &132088776
 Transform:
