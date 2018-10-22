@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class RadarSensor : MonoBehaviour {
 
-    public GameObject RayPrefab;
     public bool SensorActive = false;
-    public float EmissionRate = 1.0f;
-    public float Lifetime = 3.0f;
+    public Light SpotLight;
 
     private float counter = 0.0f;
 
@@ -55,29 +54,19 @@ public class RadarSensor : MonoBehaviour {
         
     }
 
-    //private void FixedUpdate()
-    //{
-       
 
-    //    if (counter < EmissionRate)
-    //    {
-    //        counter += Time.deltaTime;
-    //        return;
-    //    }
-        
-        
-    //    //reset counter
-    //    counter = 0.0f;
-        
-    //}
-
-    private void SpawnRay()
+    public void ToggleLight(string state)
     {
-        RayPrefab.transform.forward = transform.up;
-        var wave = GameObject.Instantiate(RayPrefab);
-        wave.transform.position = transform.position;
-        wave.gameObject.GetComponent<WaveRay>().lifetime = Lifetime;
-        
+
+        if (state == "ON")
+        {
+            SpotLight.enabled = true;
+        }
+
+        if (state == "OFF")
+        {
+            SpotLight.enabled = false;
+        }
 
     }
 }

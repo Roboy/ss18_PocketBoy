@@ -11,6 +11,7 @@ namespace Pocketboy.Cupgame
 
         public GameObject[] Cups;
         public GameObject RoboyArm;
+        public Material mat_Ball;
 
         [SerializeField]
         private Button ScanButton;
@@ -20,8 +21,9 @@ namespace Pocketboy.Cupgame
         private bool m_ball_spawned;
         private int m_ball_index;
 
-        private float counter = 0.0f;
-        private float hoverTime = 1.0f;
+        private float m_counter = 0.0f;
+        private float m_hoverTime = 3.0f;
+        private float m_handOffset = 0.03f;
 
         private bool m_CupsMoveable = false;
         public bool CupsMoveable
@@ -115,52 +117,43 @@ namespace Pocketboy.Cupgame
         public IEnumerator StartLocating()
         {
             
-            RoboyArm.transform.position = new Vector3(Cups[0].transform.position.x, RoboyArm.transform.position.y, RoboyArm.transform.position.z);
+            RoboyArm.transform.position = new Vector3(Cups[0].transform.position.x + m_handOffset, RoboyArm.transform.position.y, RoboyArm.transform.position.z);
             RoboyArm.SetActive(true);
             RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = false;
             yield return StartCoroutine(LowerArm());
- 
-            while (counter < hoverTime)
+            RoboyArm.GetComponentInChildren<RadarSensor>().ToggleLight("ON");
+
+
+            while (m_counter < m_hoverTime)
             {
-                counter += Time.deltaTime;
+                m_counter += Time.deltaTime;
                 yield return null;
             }
-            counter = 0.0f;
+            m_counter = 0.0f;
 
-            CupEmitResult(0);
+
             yield return StartCoroutine(MoveArm(1));
 
 
-            while (counter < hoverTime)
+            while (m_counter < m_hoverTime)
             {
-                counter += Time.deltaTime;
+                m_counter += Time.deltaTime;
                 yield return null;
             }
-            counter = 0.0f;
+            m_counter = 0.0f;
 
-            CupStopEmitting(0);
-            CupEmitResult(1);
+
             yield return StartCoroutine(MoveArm(2));
 
-            while (counter < hoverTime)
+            while (m_counter < m_hoverTime)
             {
-                counter += Time.deltaTime;
+                m_counter += Time.deltaTime;
                 yield return null;
             }
-            counter = 0.0f;
+            m_counter = 0.0f;
 
-            CupStopEmitting(1);
-            CupEmitResult(2);
+            RoboyArm.GetComponentInChildren<RadarSensor>().ToggleLight("OFF");
             yield return StartCoroutine(RiseArm());
-
-            
-            CupStopEmitting(2);
-            while (counter < hoverTime)
-            {
-                counter += Time.deltaTime;
-                yield return null;
-            }
-            counter = 0.0f;
             yield return StartCoroutine(MoveArm(0));
 
             RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = false;
@@ -264,14 +257,17 @@ namespace Pocketboy.Cupgame
         private void SpawnBall(int cup_index)
         {
             var ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            ball.GetComponent<Renderer>().material.color = Random.ColorHSV();
+            ball.GetComponent<Renderer>().material = mat_Ball;
             Vector3 pos = Cups[cup_index].transform.position;
             Vector3 scale = Cups[cup_index].transform.localScale;
             pos.y += Mathf.Abs(pos.y * 0.2f);
             ball.transform.position = pos;
-            ball.transform.localScale = Vector3.one * 0.5f;
+            ball.transform.localScale = Vector3.one * 0.083f;
+            ball.transform.parent = transform;
+            ball.name = "Ball";
             ball.layer = LayerMask.NameToLayer("Ignore");
             Cups[cup_index].GetComponent<DragMe>().HoldBall(ball);
+            Cups[cup_index].GetComponentInChildren<BouncingFLoor>().iHaveBall = true;
         }
 
         private IEnumerator ShowBall()
@@ -294,6 +290,7 @@ namespace Pocketboy.Cupgame
             for (int i = 0; i < Cups.Length; i++)
             {
                 Cups[i].GetComponent<DragMe>().LoseBall();
+                Cups[i].GetComponentInChildren<BouncingFLoor>().iHaveBall = false;
             }
             m_ball_spawned = false;
         }
@@ -352,7 +349,7 @@ namespace Pocketboy.Cupgame
         {
             float startingPosX = RoboyArm.transform.position.x;
             float currentPosX = RoboyArm.transform.position.x; ;
-            float endPosX = Cups[index_cup].transform.position.x;
+            float endPosX = Cups[index_cup].transform.position.x + m_handOffset;
             float currentDuration = 0.0f;
             float duration = 1.0f;
 
@@ -375,32 +372,6 @@ namespace Pocketboy.Cupgame
             yield return null;
         }
 
-        private void CupEmitResult(int CupIndex)
-        {
-            GameObject Cup = Cups[CupIndex];
-            ParticleSystem PS = Cup.GetComponent<DragMe>().PS;
-            bool hasBall = Cup.GetComponent<DragMe>().HoldsBall;
-
-            if (hasBall)
-            {
-                var main = PS.main;
-                main.startColor = Color.green;
-            }
-            else
-            {
-                var main = PS.main;
-                main.startColor = Color.red;
-            }
-
-            PS.Play();
-        }
-
-        private void CupStopEmitting(int CupIndex)
-        {
-
-            GameObject Cup = Cups[CupIndex];
-            ParticleSystem PS = Cup.GetComponent<DragMe>().PS;
-            PS.Stop();
-        }
+        
     }
 }
