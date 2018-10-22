@@ -260,9 +260,11 @@ namespace Pocketboy.Cupgame
             ball.GetComponent<Renderer>().material = mat_Ball;
             Vector3 pos = Cups[cup_index].transform.position;
             Vector3 scale = Cups[cup_index].transform.localScale;
-            pos.y += Mathf.Abs(pos.y * 0.2f);
-            ball.transform.position = pos;
             ball.transform.localScale = Vector3.one * 0.083f;
+            ball.AddComponent<BoxCollider>();
+            pos.y += Mathf.Abs(ball.transform.GetComponent<BoxCollider>().bounds.size.y / 2.0f);
+            Destroy(ball.GetComponent<BoxCollider>());
+            ball.transform.position = pos;
             ball.transform.parent = transform;
             ball.name = "Ball";
             ball.layer = LayerMask.NameToLayer("Ignore");
