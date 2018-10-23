@@ -36,7 +36,7 @@ namespace Pocketboy.PitchPlatformer
             Destroy(m_Material);
         }
 
-        public void Setup(int note, int accuracy, float lengthPerSecond)
+        public void Setup(int note, int accuracy, float lengthPerSecond, float heightRange)
         {
             m_Note = note;
             m_MinimumNote = note - accuracy;
@@ -45,6 +45,8 @@ namespace Pocketboy.PitchPlatformer
             var duration = transform.localScale.y / lengthPerSecond;
             // when duration is f.e. 5 seconds, we assume 60fps, the stepSize is 1/60 /  5;
             m_StepSize = (1f / 60f) / duration;
+
+            transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(transform.localPosition.y, -heightRange, heightRange), transform.localPosition.z);
         }
 
         public void StartListen()
@@ -80,7 +82,7 @@ namespace Pocketboy.PitchPlatformer
            
             m_Collider.enabled = false;
             m_Material.SetFloat("_DissolveValue", 0f);
-            m_Material.SetColor("_MainColor", Color.red);
+            m_Material.SetColor("_MainColor", Color.green);
             m_Material.SetColor("_HologramColor", Color.red);
         }
 

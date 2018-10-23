@@ -18,6 +18,9 @@ namespace Pocketboy.PitchPlatformer
         private PlatformPlayer Player;
 
         [SerializeField]
+        private Transform SpawnPoint;
+
+        [SerializeField]
         private List<PitchPlatformLevel> Levels = new List<PitchPlatformLevel>();
 
         [SerializeField]
@@ -48,9 +51,10 @@ namespace Pocketboy.PitchPlatformer
 
         void Start()
         {
+#if !UNITY_EDITOR
             LevelsParent.transform.parent = RoboyManager.Instance.ARAnchor.transform;
             LevelsParent.transform.position = RoboyManager.Instance.transform.position + RoboyManager.Instance.transform.right * -0.5f + RoboyManager.Instance.transform.up * (HeightRange * 0.1f);
-
+#endif
             PitchRecognizer = new PitchTracker();
             PitchRecognizer.SampleRate = AudioSettings.outputSampleRate;
 
@@ -103,6 +107,7 @@ namespace Pocketboy.PitchPlatformer
         
         private void SetupLevels()
         {
+            Player.SetSpawnPosition(SpawnPoint.position);
             foreach (var level in Levels)
             {
                 level.Setup(HeightRange, AccuracyThreshold, PlatformLengthPerSecond, Player);
@@ -114,7 +119,7 @@ namespace Pocketboy.PitchPlatformer
         {
             Levels[m_CurrentLevelIndex].Hide();
             m_CurrentLevelIndex = MathUtility.WrapArrayIndex(levelIndex, Levels.Count);
-            Levels[m_CurrentLevelIndex].Show();
+            Levels[m_CurrentLevelIndex].Show();            
         }
 
         public void RepeatLevel()
