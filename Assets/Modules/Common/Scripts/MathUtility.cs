@@ -72,6 +72,15 @@ namespace Pocketboy.Common
             return new Vector2(valX, valY);
         }
 
+        /// <summary>
+        /// Converts value to range between newMin and newMax.
+        /// </summary>
+        /// <param name="oldMin"></param>
+        /// <param name="oldMax"></param>
+        /// <param name="newMin"></param>
+        /// <param name="newMax"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static float ConvertRange(float oldMin, float oldMax, float newMin, float newMax, float value)
         {
             if (oldMin > oldMax || newMin > newMax) // dont accept incorrect ranges
@@ -80,6 +89,24 @@ namespace Pocketboy.Common
             }
             float scale = (newMax - newMin) / (oldMax - oldMin);
             return newMin + ((value - oldMin) * scale);
+        }
+
+        /// <summary>
+        /// Converts value to range between 0 and 1.
+        /// </summary>
+        /// <param name="oldMin"></param>
+        /// <param name="oldMax"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static float NormalizeValue(float oldMin, float oldMax, float value)
+        {
+            if (oldMin > oldMax) // dont accept incorrect ranges
+            {
+                return -1f;
+            }
+
+            float scale = 1f / (oldMax - oldMin);
+            return (value - oldMin) * scale;
         }
     }
 }

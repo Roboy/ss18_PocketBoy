@@ -62,6 +62,10 @@ namespace Pocketboy.PitchPlatformer
         [SerializeField]
         private Button FinishCalibrationButton;
 
+        public int CalibratedHighNote { get; private set; }
+
+        public int CalibratedLowNote { get; private set; }
+
         private float m_HighPitchReference = 523.25f; // Hertz value of C5
 
         private float m_LowPitchReference = 82.407f; // Hertz value of E2
@@ -117,7 +121,7 @@ namespace Pocketboy.PitchPlatformer
 
             FinishCalibrationButton.onClick.AddListener(SaveCalibration);
 
-            LoadCalibration();
+            LoadCalibration();            
         }
 
         /// <summary>
@@ -162,6 +166,13 @@ namespace Pocketboy.PitchPlatformer
                     return;
                 }
                 m_CalibratedHighPitch = value;
+                int midiNote, cents;
+                bool isMidiNote = PitchDsp.PitchToMidiNote(m_CalibratedHighPitch, out midiNote, out cents);
+                if (isMidiNote)
+                {
+                    CalibratedHighNote = midiNote;
+                }
+
                 ResetCalibration(HighPitchDuration, HighPitchVisualization);
                 CheckForCalibrationTest();
             }, m_LowPitchReference, m_HighPitchReference, HighPitchDuration));
@@ -179,6 +190,13 @@ namespace Pocketboy.PitchPlatformer
                     return;
                 }
                 m_CalibratedLowPitch = value;
+                int midiNote, cents;
+                bool isMidiNote = PitchDsp.PitchToMidiNote(m_CalibratedLowPitch, out midiNote, out cents);
+                if (isMidiNote)
+                {
+                    CalibratedLowNote = midiNote;
+                }
+
                 ResetCalibration(LowPitchDuration, LowPitchVisualization);
                 CheckForCalibrationTest();
             }, m_LowPitchReference, m_HighPitchReference, LowPitchDuration));
