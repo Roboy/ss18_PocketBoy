@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using Pocketboy.Common;
 
 namespace Pocketboy.PitchPlatformer
 {
     [RequireComponent(typeof(AudioSource))]
-    public class MicrophoneFeed : MonoBehaviour
+    public class MicrophoneManager : Singleton<MicrophoneManager>
     {
         [SerializeField]
         private bool StartOnAwake;
@@ -38,8 +39,9 @@ namespace Pocketboy.PitchPlatformer
                 StartRecording();
         }
 
-        private void OnDestroy()
+        public override void OnDestroy()
         {
+            base.OnDestroy();
             StopRecording();
         }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Pocketboy.PitchPlatformer
 {
+    [RequireComponent(typeof(BoxCollider))]
     public class PitchPlatform : MonoBehaviour
     {
         private int m_Note;
@@ -16,15 +17,18 @@ namespace Pocketboy.PitchPlatformer
 
         private Material m_Material;
 
+        private BoxCollider m_Collider;
+
         private bool m_IsListening;
 
-        private int Ticks;
-
-        private void Start()
+        private void Awake()
         {
             var renderer = GetComponent<MeshRenderer>();
             m_Material = new Material(renderer.material);
             renderer.material = m_Material;
+
+            m_Collider = GetComponent<BoxCollider>();
+            m_Collider.enabled = false;
         }
 
         private void OnDestroy()
@@ -39,11 +43,8 @@ namespace Pocketboy.PitchPlatformer
             m_MaximumNote = note + accuracy;
 
             var duration = transform.localScale.y / lengthPerSecond;
-            // when duration is f.e. 5 seconds, we assume 60fps, the stepSize is 1/60 * 5;
+            // when duration is f.e. 5 seconds, we assume 60fps, the stepSize is 1/60 /  5;
             m_StepSize = (1f / 60f) / duration;
-            Debug.Log(m_StepSize);
-
-            Debug.Log(m_MinimumNote + " : " + note + " : " + m_MaximumNote);
         }
 
         public void StartListen()
@@ -51,31 +52,46 @@ namespace Pocketboy.PitchPlatformer
             if (m_IsListening)
                 StopListen();
 
+            m_IsListening = true;
             PitchPlatformerManager.Instance.PitchRecognizer.PitchDetected += OnPitchDetected;
+            DisablePlatform();
             StartCoroutine(BuildPlatform());
         }
 
         public void StopListen()
         {
-            PitchPlatformerManager.Instance.PitchRecognizer.PitchDetected -= OnPitchDetected;
+            if (!m_IsListening)
+                return;
+
+            PitchPlatformerManager.Instance.PitchRecognizer.PitchDetected -= OnPitchDetected;               
+        }
+
+
+        public void EnablePlatform()
+        {
+            m_Collider.enabled = true;
+            m_Material.SetFloat("_DissolveValue", 1f);
+            m_Material.SetColor("_MainColor", Color.green);
+            m_Material.SetColor("_HologramColor", Color.green);
+        }
+
+        public void DisablePlatform()
+        {
+           
+            m_Collider.enabled = false;
+            m_Material.SetFloat("_DissolveValue", 0f);
+            m_Material.SetColor("_MainColor", Color.red);
+            m_Material.SetColor("_HologramColor", Color.red);
         }
 
         private void OnPitchDetected(PitchTracker sender, PitchTracker.PitchRecord pitchRecord)
         {
-            //var currentValue = m_Material.GetFloat("_DissolveValue");
-            //m_Material.SetFloat("_DissolveValue", Mathf.Clamp01(currentValue + m_StepSize));
-            //Ticks++;
-            //return;
-
+            PitchPlatformerManager.Instance.SetPitchValue(m_Note, pitchRecord.MidiNote);
             // recognized pitch is within bounds of min and max note
             if (pitchRecord.MidiNote >= m_MinimumNote && pitchRecord.MidiNote <= m_MaximumNote)
             {
                 var currentValue = m_Material.GetFloat("_DissolveValue");
                 m_Material.SetFloat("_DissolveValue", Mathf.Clamp01(currentValue + m_StepSize));
-                Ticks++;
-            }
-            else
-            {
             }
         }
 
@@ -94,9 +110,8 @@ namespace Pocketboy.PitchPlatformer
                 yield return null;
             }
             StopListen();
-            Debug.Log(Time.time - time);
-            m_Material.SetFloat("_DissolveValue", 1f);
-
+            EnablePlatform();
+            PitchPlatformerEvents.OnPlatformFinished();
         }
     }
 }

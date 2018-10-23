@@ -13,7 +13,6 @@ namespace Pocketboy.PitchPlatformer
             if (player != null)
             {
                 PitchPlatformerEvents.OnReachedGoal();
-                Debug.Log("ASDad");
             }
         }
     }
