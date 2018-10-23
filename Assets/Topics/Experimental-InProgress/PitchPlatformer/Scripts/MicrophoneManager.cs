@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using Pocketboy.Common;
 
 namespace Pocketboy.PitchPlatformer
 {
     [RequireComponent(typeof(AudioSource))]
-    public class MicrophoneFeed : MonoBehaviour
+    public class MicrophoneManager : Singleton<MicrophoneManager>
     {
         [SerializeField]
         private bool StartOnAwake;
@@ -38,14 +39,21 @@ namespace Pocketboy.PitchPlatformer
                 StartRecording();
         }
 
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            StopRecording();
+        }
+
         public void StartRecording()
         {
-            Debug.Log("Start");
             if (string.IsNullOrEmpty(m_Device))
             {
                 Debug.Log("No Microphone found!");
                 return;
             }
+            if (Microphone.IsRecording(m_Device))
+                StopRecording();
 
             if (m_AudioSource.isPlaying)
                 m_AudioSource.Stop();
@@ -64,7 +72,7 @@ namespace Pocketboy.PitchPlatformer
 
         public void StopRecording()
         {
-            if (string.IsNullOrEmpty(m_Device))
+            if (string.IsNullOrEmpty(m_Device) || !Microphone.IsRecording(m_Device))
             {
                 Debug.Log("No Microphone found!");
                 return;

@@ -56,19 +56,6 @@ namespace Pocketboy.ModelCategorization
         {
             transform.position = m_RespawnPose.position;
             transform.rotation = m_RespawnPose.rotation;
-            //var rigidbody = GetComponent<Rigidbody>();
-            //if (rigidbody)
-            //{
-            //    Debug.Log("Rigidbody");
-            //    rigidbody.position = m_RespawnPose.position;
-            //    rigidbody.rotation = m_RespawnPose.rotation;
-            //}
-            //else
-            //{
-            //    Debug.Log("Transform");
-            //    transform.position = m_RespawnPose.position;
-            //    transform.rotation = m_RespawnPose.rotation;
-            //}
         }
 
         void OnTriggerEnter(Collider other)

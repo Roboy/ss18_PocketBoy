@@ -11,7 +11,6 @@ namespace Pocketboy.PitchPlatformer
     /// <summary>
     /// CalibrationManager listens to user via microphone input to calibrate the lower and higher boundary of the user pitch.
     /// </summary>
-    [RequireComponent(typeof(MicrophoneFeed))]
     public class CalibrationManager : Singleton<CalibrationManager>
     {
         [SerializeField]
@@ -62,6 +61,10 @@ namespace Pocketboy.PitchPlatformer
         [SerializeField]
         private Button FinishCalibrationButton;
 
+        public int CalibratedHighNote { get; private set; }
+
+        public int CalibratedLowNote { get; private set; }
+
         private float m_HighPitchReference = 523.25f; // Hertz value of C5
 
         private float m_LowPitchReference = 82.407f; // Hertz value of E2
@@ -75,11 +78,6 @@ namespace Pocketboy.PitchPlatformer
         /// Calibrated low pitch as reference to shift user pitch from [m_CalibratedLowPitch, m_CalibratedHighPitch]
         /// </summary>
         private float m_CalibratedLowPitch;
-
-        /// <summary>
-        /// Allows to collect the samples from the microphone input
-        /// </summary>
-        private MicrophoneFeed m_MicrophoneFeed;
 
         /// <summary>
         /// Pitch tracker proccess the samples from the microphone feed
@@ -98,9 +96,6 @@ namespace Pocketboy.PitchPlatformer
 
         void Start()
         {
-            m_MicrophoneFeed = GetComponent<MicrophoneFeed>();
-            m_MicrophoneFeed.StopRecording(); // the user should press a button to calibrate, so we do not need to record all the time
-
             m_PitchTracker = new PitchTracker();
             m_PitchTracker.SampleRate = AudioSettings.outputSampleRate;
 
@@ -117,7 +112,7 @@ namespace Pocketboy.PitchPlatformer
 
             FinishCalibrationButton.onClick.AddListener(SaveCalibration);
 
-            LoadCalibration();
+            LoadCalibration();            
         }
 
         /// <summary>
@@ -152,7 +147,7 @@ namespace Pocketboy.PitchPlatformer
 
         private void CalibrateHighPitch()
         {
-            m_MicrophoneFeed.StartRecording();
+            MicrophoneManager.Instance.StartRecording();
             StartCoroutine(GetPitchAverage((value) => 
             {
                 if (float.IsNaN(value) ||  value < m_CalibratedLowPitch)
@@ -162,6 +157,13 @@ namespace Pocketboy.PitchPlatformer
                     return;
                 }
                 m_CalibratedHighPitch = value;
+                int midiNote, cents;
+                bool isMidiNote = PitchDsp.PitchToMidiNote(m_CalibratedHighPitch, out midiNote, out cents);
+                if (isMidiNote)
+                {
+                    CalibratedHighNote = midiNote;
+                }
+
                 ResetCalibration(HighPitchDuration, HighPitchVisualization);
                 CheckForCalibrationTest();
             }, m_LowPitchReference, m_HighPitchReference, HighPitchDuration));
@@ -169,7 +171,7 @@ namespace Pocketboy.PitchPlatformer
 
         private void CalibrateLowPitch()
         {
-            m_MicrophoneFeed.StartRecording();
+            MicrophoneManager.Instance.StartRecording();
             StartCoroutine(GetPitchAverage((value) => 
             {
                 if (float.IsNaN(value) || value > m_CalibratedHighPitch)
@@ -179,6 +181,13 @@ namespace Pocketboy.PitchPlatformer
                     return;
                 }
                 m_CalibratedLowPitch = value;
+                int midiNote, cents;
+                bool isMidiNote = PitchDsp.PitchToMidiNote(m_CalibratedLowPitch, out midiNote, out cents);
+                if (isMidiNote)
+                {
+                    CalibratedLowNote = midiNote;
+                }
+
                 ResetCalibration(LowPitchDuration, LowPitchVisualization);
                 CheckForCalibrationTest();
             }, m_LowPitchReference, m_HighPitchReference, LowPitchDuration));
@@ -191,7 +200,7 @@ namespace Pocketboy.PitchPlatformer
         /// <param name="pitchSlider"></param>
         private void ResetCalibration(Slider durationSlider, Slider pitchSlider = null)
         {
-            m_MicrophoneFeed.StopRecording();
+            MicrophoneManager.Instance.StopRecording();
             if (pitchSlider != null)
             {
                 pitchSlider.gameObject.SetActive(true);
@@ -225,7 +234,7 @@ namespace Pocketboy.PitchPlatformer
             CalibrationTestWindow.SetActive(true);
             ShowCalibrationButton.gameObject.SetActive(true);
             ShowCalibrationTestButton.gameObject.SetActive(false);
-            m_MicrophoneFeed.StartRecording();
+            MicrophoneManager.Instance.StartRecording();
 
             // LowPitchArea and visualization start from the same point but area can only be max half the size so
             // we have to multiply the area by factor 2 and add a small offset so the threshold for a successful calibration is smaller than the lowest pitch
@@ -256,7 +265,7 @@ namespace Pocketboy.PitchPlatformer
             m_IsListeningForPitches = true;
             while (m_IsListeningForPitches)
             {
-                m_PitchTracker.ProcessBuffer(m_MicrophoneFeed.GetSamples());
+                m_PitchTracker.ProcessBuffer(MicrophoneManager.Instance.GetSamples());
                 yield return null;
             }
         }
@@ -270,7 +279,7 @@ namespace Pocketboy.PitchPlatformer
             CalibrationTestWindow.SetActive(false);
             ShowCalibrationButton.gameObject.SetActive(false);
             ShowCalibrationTestButton.gameObject.SetActive(true);
-            m_MicrophoneFeed.StopRecording();
+            MicrophoneManager.Instance.StopRecording();
         }
 
         /// <summary>
@@ -300,7 +309,7 @@ namespace Pocketboy.PitchPlatformer
             while (currentDuration < m_CalibrationDuration)
             {
                 durationSlider.value = Mathf.Lerp(0f, 1f, currentDuration / m_CalibrationDuration);
-                m_PitchTracker.ProcessBuffer(m_MicrophoneFeed.GetSamples());
+                m_PitchTracker.ProcessBuffer(MicrophoneManager.Instance.GetSamples());
                 if (m_PitchTracker.CurrentPitchRecord.Pitch > 19f)
                     PitchVisualization.value = MathUtility.ConvertRange(min, max, 0f, 1f, pitches / pitchCount);
                 currentDuration += Time.deltaTime;
