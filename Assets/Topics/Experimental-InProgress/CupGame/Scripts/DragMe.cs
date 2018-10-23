@@ -14,7 +14,7 @@ namespace Pocketboy.Cupgame
 
 
         public GameObject PlayingField;
-        public ParticleSystem PS;
+        public BouncingFLoor DeadZone;
         public bool HoldsBall { get { return m_HoldsBall; } }
 
         private bool m_IsTouched;
@@ -97,7 +97,6 @@ namespace Pocketboy.Cupgame
             {
                 
                 m_AdjacentCup = other.gameObject;
-                Debug.Log(m_AdjacentCup);
                 return;
             }
 
@@ -217,7 +216,7 @@ namespace Pocketboy.Cupgame
             //if (Physics.OverlapBox(transform.position, m_BoxSize, Quaternion.identity, layerMask).Length > 0)
             if (m_AdjacentCup != null)
             {
-                Debug.Log(Mathf.Abs(transform.position.y - m_OriginalPosition.y));
+                
                 //If colliding and not elevated, increase the height, so that the cups stack
                 if (!m_Lifted)
                 {
@@ -312,7 +311,6 @@ namespace Pocketboy.Cupgame
 
                     int index_a = Array.IndexOf(ShuffleMaster.Instance.Cups, gameObject);
                     int index_b = Array.IndexOf(ShuffleMaster.Instance.Cups, m_AdjacentCup);
-                    Debug.Log("index_a: " + index_a + "||" + " index_b: " + index_b);
                     int distance = Mathf.Abs(index_a - index_b);
                     if (index_a < index_b)
                     {
@@ -477,6 +475,12 @@ namespace Pocketboy.Cupgame
         private void resetCurrentPosition()
         {
             transform.position = m_OriginalPosition;
+        }
+
+
+        private void OnParticleCollision(GameObject other)
+        {
+            DeadZone.CheckResult();
         }
 
     }
