@@ -49,10 +49,8 @@ namespace Pocketboy.PitchPlatformer
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("asdasd");
             if (other.CompareTag("Deadzone"))
             {
-                Debug.Log("2asdasd");
                 transform.position = m_CurrentSpawnPoint;
                 Stop();
             }

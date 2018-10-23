@@ -39,12 +39,18 @@ namespace Pocketboy.PitchPlatformer
         [SerializeField]
         private GameObject LevelUI;
 
+        [SerializeField]
+        private GameObject LevelsParent;
+
         public PitchTracker PitchRecognizer { get; private set; }
 
         private int m_CurrentLevelIndex = 0;
 
         void Start()
         {
+            LevelsParent.transform.parent = RoboyManager.Instance.ARAnchor.transform;
+            LevelsParent.transform.position = RoboyManager.Instance.transform.position + RoboyManager.Instance.transform.right * -0.5f + RoboyManager.Instance.transform.up * (HeightRange * 0.1f);
+
             PitchRecognizer = new PitchTracker();
             PitchRecognizer.SampleRate = AudioSettings.outputSampleRate;
 
