@@ -63,7 +63,14 @@ namespace Pocketboy.PitchPlatformer
             TeleportTrigger teleportTrigger = null;
             if ((teleportTrigger = other.GetComponent<TeleportTrigger>()) != null)
             {
-                StartCoroutine(TeleportAnimation(teleportTrigger.TeleportGoal));
+                if (teleportTrigger.ShouldTeleportInstantly)
+                {
+                    transform.position = teleportTrigger.TeleportGoal;
+                }
+                else
+                {
+                    StartCoroutine(TeleportAnimation(teleportTrigger.TeleportGoal));
+                }                
             }
 
             if (other.CompareTag("Deadzone"))

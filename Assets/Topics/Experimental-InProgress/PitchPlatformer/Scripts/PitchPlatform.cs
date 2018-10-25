@@ -21,6 +21,8 @@ namespace Pocketboy.PitchPlatformer
 
         private bool m_IsListening;
 
+        private TeleportTrigger m_Teleport;
+
         private void Awake()
         {
             var renderer = GetComponent<MeshRenderer>();
@@ -29,6 +31,14 @@ namespace Pocketboy.PitchPlatformer
 
             m_Collider = GetComponent<BoxCollider>();
             m_Collider.enabled = false;
+
+            m_Teleport = GetComponentInChildren<TeleportTrigger>(true);
+            if (m_Teleport)
+            {
+                m_Teleport.HideGoal();
+                m_Teleport.gameObject.SetActive(false);
+            }
+                
         }
 
         private void OnDestroy()
@@ -75,6 +85,13 @@ namespace Pocketboy.PitchPlatformer
             m_Material.SetFloat("_DissolveValue", 1f);
             m_Material.SetColor("_MainColor", Color.green);
             m_Material.SetColor("_HologramColor", Color.green);
+
+            if (m_Teleport)
+            {
+                m_Teleport.gameObject.SetActive(true);
+                m_Teleport.ShowGoal();
+            }
+                
         }
 
         public void DisablePlatform()
@@ -84,6 +101,13 @@ namespace Pocketboy.PitchPlatformer
             m_Material.SetFloat("_DissolveValue", 0f);
             m_Material.SetColor("_MainColor", Color.green);
             m_Material.SetColor("_HologramColor", Color.red);
+
+            if (m_Teleport)
+            {
+                m_Teleport.gameObject.SetActive(false);
+                m_Teleport.HideGoal();
+            }
+                
         }
 
         private void OnPitchDetected(PitchTracker sender, PitchTracker.PitchRecord pitchRecord)
