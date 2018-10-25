@@ -19,6 +19,7 @@ TagManager:
   - Cup
   - Hand
   - GameBoard
+  - BetZone
   layers:
   - Default
   - TransparentFX

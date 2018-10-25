@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +18,11 @@ namespace Pocketboy.Cupgame
         private Button ScanButton;
 
         [SerializeField]
-        private Button StartButton;
+        private Button ShowBallButton;
+
+        [SerializeField]
+        private Button ShuffleButton;
+
         private bool m_ball_spawned;
         private int m_ball_index;
 
@@ -54,20 +59,22 @@ namespace Pocketboy.Cupgame
             }
         }
 
-       
+
 
         private void Start()
         {
-            ScanButton.onClick.AddListener(HandleScan);
+            ScanButton.onClick.AddListener(Scan);
             ScanButton.enabled = true;
             m_buttonColourDefault = ScanButton.GetComponent<Image>().color;
-            StartButton.onClick.AddListener(HandleStart);
-            StartButton.enabled = true;
+            ShowBallButton.onClick.AddListener(ShowBallPosition);
+            ShowBallButton.enabled = true;
+            ShuffleButton.onClick.AddListener(Shuffle);
+            ShuffleButton.enabled = true;
             m_ball_spawned = false;
-            
+
         }
 
-        private void HandleScan()
+        private void Scan()
         {
             if (ScanButton.enabled)
             {
@@ -79,29 +86,30 @@ namespace Pocketboy.Cupgame
             }
         }
 
-        private void HandleStart()
+        private void ShowBallPosition()
         {
-            if (StartButton.enabled)
+            if (ShowBallButton.enabled)
             {
                 Vibration.CreateOneShot(100, 255);
-                StartButton.enabled = false;
-                StartButton.GetComponent<Image>().color = Color.gray;
+                ShowBallButton.enabled = false;
+                ShowBallButton.GetComponent<Image>().color = Color.gray;
                 StartCoroutine(StartGame());
             }
         }
 
-        private void Update()
+        private void Shuffle()
         {
-            if (Input.GetKeyDown(KeyCode.S))
+            float speed = 0.25f;
+            int amount = 20;
+            if (ShuffleButton.enabled)
             {
-                StartCoroutine(ShowBall());
-            }
+                Vibration.CreateOneShot(100, 255);
+                ShuffleButton.enabled = false;
+                ShuffleButton.GetComponent<Image>().color = Color.gray;
 
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                StartCoroutine(StartLocating());
-            }
+                StartCoroutine(ShuffleCups(amount, speed));
 
+            }
         }
 
         public IEnumerator StartGame()
@@ -110,7 +118,7 @@ namespace Pocketboy.Cupgame
             CupsMoveable = false;
             if (!m_ball_spawned)
             {
-                SpawnBall(Random.Range(0, 3));
+                SpawnBall(UnityEngine.Random.Range(0, 3));
                 m_ball_spawned = true;
             }
             yield return StartCoroutine(LiftAllCups());
@@ -121,7 +129,7 @@ namespace Pocketboy.Cupgame
 
         public IEnumerator StartLocating()
         {
-            
+            CupsMoveable = false;
             RoboyArm.transform.localPosition = new Vector3(Cups[0].transform.localPosition.x + m_handOffset, RoboyArm.transform.localPosition.y, RoboyArm.transform.localPosition.z);
             RoboyArm.SetActive(true);
             RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = false;
@@ -164,13 +172,14 @@ namespace Pocketboy.Cupgame
             RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = false;
             ScanButton.enabled = true;
             ScanButton.GetComponent<Image>().color = m_buttonColourDefault;
+            CupsMoveable = true;
 
 
         }
 
         public IEnumerator LiftAllCups()
         {
-            int random = Random.Range(0, 2);
+            int random = UnityEngine.Random.Range(0, 2);
             if (random == 0)
             {
                 for (int i = 0; i < Cups.Length; i++)
@@ -193,7 +202,7 @@ namespace Pocketboy.Cupgame
 
         public IEnumerator LowerAllCups()
         {
-            int random = Random.Range(0, 2);
+            int random = UnityEngine.Random.Range(0, 2);
             if (random == 0)
             {
                 for (int i = 0; i < Cups.Length; i++)
@@ -212,8 +221,9 @@ namespace Pocketboy.Cupgame
             }
 
             CupsMoveable = true;
-            StartButton.enabled = true;
-            StartButton.GetComponent<Image>().color = m_buttonColourDefault;
+            ShowBallButton.enabled = true;
+            ShowBallButton.GetComponent<Image>().color = m_buttonColourDefault;
+            Wager.Instance.checkForWin();
 
         }
 
@@ -263,7 +273,7 @@ namespace Pocketboy.Cupgame
         {
             var ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             ball.GetComponent<Renderer>().material = mat_Ball;
-            Vector3 pos = Cups[cup_index].transform.localPosition;
+            Vector3 pos = Cups[cup_index].transform.position;
             Vector3 scale = Cups[cup_index].transform.localScale;
             ball.transform.localScale = Vector3.one * 0.083f;
             ball.AddComponent<BoxCollider>();
@@ -302,11 +312,11 @@ namespace Pocketboy.Cupgame
             m_ball_spawned = false;
         }
 
-        
+
 
         private IEnumerator LowerArm()
         {
-            
+
             float startingAngleX = 0.0f;
             float currentAngleX = 0.0f;
             float endAngleX = -90.0f;
@@ -321,7 +331,7 @@ namespace Pocketboy.Cupgame
                 yield return null;
             }
 
-            
+
             RoboyArm.transform.eulerAngles = new Vector3(endAngleX, RoboyArm.transform.eulerAngles.y, RoboyArm.transform.eulerAngles.z);
             RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = true;
             yield return null;
@@ -348,7 +358,7 @@ namespace Pocketboy.Cupgame
 
 
             RoboyArm.transform.eulerAngles = new Vector3(endAngleX, RoboyArm.transform.eulerAngles.y, RoboyArm.transform.eulerAngles.z);
-            
+
             yield return null;
         }
 
@@ -379,6 +389,81 @@ namespace Pocketboy.Cupgame
             yield return null;
         }
 
-        
+        private IEnumerator ShuffleRandom(float speed)
+        {
+            int ignore = UnityEngine.Random.Range(0, 3);
+            GameObject Cup01 = null;
+            GameObject Cup02 = null;
+            float counter = 0.0f;
+
+            for (int i = 0; i < Cups.Length; i++)
+            {
+                if (i == ignore)
+                {
+                    continue;
+                }
+
+                if (Cup01 == null)
+                {
+                    Cup01 = Cups[i];
+                    continue;
+                }
+
+                if (Cup02 == null)
+                {
+                    Cup02 = Cups[i];
+                    break;
+                }
+            }
+
+            Vector3 Pos01 = Cup01.transform.localPosition;
+            Vector3 Pos02 = Cup02.transform.localPosition;
+
+            int decider = UnityEngine.Random.Range(0, 2);
+
+            if (decider == 0)
+            {
+                StartCoroutine(Cup01.GetComponent<DragMe>().MoveCupCircular(Pos02, speed, DragMe.RotationDirection.right, DragMe.RotationLane.back));
+                StartCoroutine(Cup02.GetComponent<DragMe>().MoveCupCircular(Pos01, speed, DragMe.RotationDirection.left, DragMe.RotationLane.front));
+            }
+            if (decider == 1)
+            {
+                StartCoroutine(Cup01.GetComponent<DragMe>().MoveCupCircular(Pos02, speed, DragMe.RotationDirection.left, DragMe.RotationLane.back));
+                StartCoroutine(Cup02.GetComponent<DragMe>().MoveCupCircular(Pos01, speed, DragMe.RotationDirection.right, DragMe.RotationLane.front));
+            }
+
+            
+
+            while (counter < speed)
+            {
+                counter += Time.deltaTime;
+                yield return null;
+            }
+
+            int index_01 = Array.IndexOf(Cups, Cup01);
+            int index_02 = Array.IndexOf(Cups, Cup02);
+
+            Cups[index_01] = Cup02;
+            Cups[index_02] = Cup01;
+            Cup01.GetComponent<DragMe>().resetOriginalPosition();
+            Cup02.GetComponent<DragMe>().resetOriginalPosition();
+
+            ShuffleButton.enabled = true;
+            ShuffleButton.GetComponent<Image>().color = m_buttonColourDefault;
+            yield return null;
+        }
+
+        private IEnumerator ShuffleCups(int amount, float speed)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+
+                yield return StartCoroutine(ShuffleRandom(speed));
+
+            }
+
+            yield return null;
+        }
+
     }
 }

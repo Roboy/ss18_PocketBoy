@@ -416,10 +416,11 @@ namespace Pocketboy.Cupgame
                 resultingAngle = 90.0f * Mathf.Deg2Rad;
             }
 
-            float distance = Vector3.Distance(ShuffleMaster.Instance.Cups[1].transform.localPosition, transform.localPosition);
+            float distance = Vector3.Distance(destination, transform.localPosition) /2.0f;
             Vector3 start = gameObject.transform.localPosition;
-            Vector3 pivotPoint = ShuffleMaster.Instance.Cups[1].transform.localPosition;
+            Vector3 pivotPoint = (transform.localPosition + destination) / 2.0f;
 
+           
 
             while (currentDuration < duration)
             {
@@ -428,11 +429,11 @@ namespace Pocketboy.Cupgame
                 nextPos.x = pivotPoint.x + Mathf.Sin(currentAngle) * distance;
                 if (lan == RotationLane.front)
                 {
-                    nextPos.z = pivotPoint.x + Mathf.Cos(currentAngle) * distance;
+                    nextPos.z = pivotPoint.z + Mathf.Cos(currentAngle) * distance;
                 }
                 if (lan == RotationLane.back)
                 {
-                    nextPos.z = pivotPoint.x - Mathf.Cos(currentAngle) * distance;
+                    nextPos.z = pivotPoint.z - Mathf.Cos(currentAngle) * distance;
                 }
                 gameObject.transform.localPosition = nextPos;
                 currentDuration += Time.deltaTime;
