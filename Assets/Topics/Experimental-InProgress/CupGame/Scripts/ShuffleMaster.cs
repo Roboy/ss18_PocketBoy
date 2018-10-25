@@ -24,6 +24,8 @@ namespace Pocketboy.Cupgame
         private float m_counter = 0.0f;
         private float m_hoverTime = 3.0f;
         private float m_handOffset = 0.03f;
+        private Color m_buttonColourDefault;
+
 
         private bool m_CupsMoveable = false;
         public bool CupsMoveable
@@ -58,6 +60,7 @@ namespace Pocketboy.Cupgame
         {
             ScanButton.onClick.AddListener(HandleScan);
             ScanButton.enabled = true;
+            m_buttonColourDefault = ScanButton.GetComponent<Image>().color;
             StartButton.onClick.AddListener(HandleStart);
             StartButton.enabled = true;
             m_ball_spawned = false;
@@ -68,6 +71,7 @@ namespace Pocketboy.Cupgame
         {
             if (ScanButton.enabled)
             {
+                Vibration.CreateOneShot(500, 10);
                 ScanButton.enabled = false;
                 ScanButton.GetComponent<Image>().color = Color.gray;
                 StartCoroutine(StartLocating());
@@ -79,6 +83,7 @@ namespace Pocketboy.Cupgame
         {
             if (StartButton.enabled)
             {
+                Vibration.CreateOneShot(100, 255);
                 StartButton.enabled = false;
                 StartButton.GetComponent<Image>().color = Color.gray;
                 StartCoroutine(StartGame());
@@ -158,7 +163,7 @@ namespace Pocketboy.Cupgame
 
             RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = false;
             ScanButton.enabled = true;
-            ScanButton.GetComponent<Image>().color = Color.blue;
+            ScanButton.GetComponent<Image>().color = m_buttonColourDefault;
 
 
         }
@@ -208,7 +213,7 @@ namespace Pocketboy.Cupgame
 
             CupsMoveable = true;
             StartButton.enabled = true;
-            StartButton.GetComponent<Image>().color = Color.green;
+            StartButton.GetComponent<Image>().color = m_buttonColourDefault;
 
         }
 

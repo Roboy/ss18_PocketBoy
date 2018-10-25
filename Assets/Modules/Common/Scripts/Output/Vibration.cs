@@ -1,71 +1,81 @@
-﻿/*
- Taken from https://gist.github.com/aVolpe/707c8cf46b1bb8dfb363
- */
-
-
+﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-namespace Pocketboy.Common
+public static class Vibration
 {
-    public class Vibration
-    {
-
 #if UNITY_ANDROID && !UNITY_EDITOR
     public static AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
     public static AndroidJavaObject currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
     public static AndroidJavaObject vibrator = currentActivity.Call<AndroidJavaObject>("getSystemService", "vibrator");
+    public static AndroidJavaClass vibrationEffectClass = new AndroidJavaClass("android.os.VibrationEffect");
+    public static int defaultAmplitude = vibrationEffectClass.GetStatic<int>("DEFAULT_AMPLITUDE");
+    public static AndroidJavaClass androidVersion = new AndroidJavaClass("android.os.Build$VERSION");
+    public static int apiLevel = androidVersion.GetStatic<int>("SDK_INT");
 #else
-        public static AndroidJavaClass unityPlayer;
-        public static AndroidJavaObject currentActivity;
-        public static AndroidJavaObject vibrator;
+    public static AndroidJavaClass unityPlayer;
+    public static AndroidJavaObject vibrator;
+    public static AndroidJavaObject currentActivity;
+    public static AndroidJavaClass vibrationEffectClass;
+    public static int defaultAmplitude;
+    public static int apiLevel;
 #endif
 
-        public static void Vibrate()
+    public static void Vibrate(long milliseconds)
+    {
+        CreateOneShot(milliseconds, defaultAmplitude);
+    }
+
+    public static void CreateOneShot(long milliseconds, int amplitude)
+    {
+        CreateVibrationEffect("createOneShot", new object[] { milliseconds, amplitude });
+    }
+
+    public static void CreateWaveform(long[] timings, int repeat)
+    {
+        CreateVibrationEffect("createWaveform", new object[] { timings, repeat });
+    }
+
+    public static void CreateWaveform(long[] timings, int[] amplitudes, int repeat)
+    {
+        CreateVibrationEffect("createWaveform", new object[] { timings, amplitudes, repeat });
+    }
+
+    public static void CreateVibrationEffect(string function, params object[] args)
+    {
+        if (isAndroid() && HasAmplituideControl())
         {
-            if (isAndroid())
-                vibrator.Call("vibrate");
-            else
-                Handheld.Vibrate();
+            AndroidJavaObject vibrationEffect = vibrationEffectClass.CallStatic<AndroidJavaObject>(function, args);
+            vibrator.Call("vibrate", vibrationEffect);
         }
+        else
+            Handheld.Vibrate();
+    }
 
+    public static bool HasVibrator()
+    {
+        return vibrator.Call<bool>("hasVibrator");
+    }
 
-        public static void Vibrate(long milliseconds)
-        {
-            if (isAndroid())
-                vibrator.Call("vibrate", milliseconds);
-            else
-                Handheld.Vibrate();
-        }
+    public static bool HasAmplituideControl()
+    {
+        if (apiLevel >= 26)
+            return vibrator.Call<bool>("hasAmplitudeControl"); // API 26+ specific
+        else
+            return false; // no amplitude control below API level 26
+    }
 
-        public static void Vibrate(long[] pattern, int repeat)
-        {
-            if (isAndroid())
-                vibrator.Call("vibrate", pattern, repeat);
-            else
-                Handheld.Vibrate();
-        }
+    public static void Cancel()
+    {
+        if (isAndroid())
+            vibrator.Call("cancel");
+    }
 
-        public static bool HasVibrator()
-        {
-            return isAndroid();
-        }
-
-        public static void Cancel()
-        {
-            if (isAndroid())
-                vibrator.Call("cancel");
-        }
-
-        private static bool isAndroid()
-        {
+    private static bool isAndroid()
+    {
 #if UNITY_ANDROID && !UNITY_EDITOR
 	return true;
 #else
-            return false;
+        return false;
 #endif
-        }
     }
-
 }

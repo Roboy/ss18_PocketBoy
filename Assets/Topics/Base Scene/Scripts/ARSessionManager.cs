@@ -60,7 +60,7 @@ namespace Pocketboy.Common
         }
 
         private void Calibrate()
-        {            
+        {
             StartCoroutine(CalibrateFloorInternal());
         }
 
