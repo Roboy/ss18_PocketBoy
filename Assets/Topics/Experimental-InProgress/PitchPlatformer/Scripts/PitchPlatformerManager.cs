@@ -12,16 +12,13 @@ namespace Pocketboy.PitchPlatformer
         private Text PitchValueText;
 
         [SerializeField]
-        private float HeightRange = 0.5f;
+        private float HeightRange = 0.3f;
 
         [SerializeField]
         private PlatformPlayer Player;
 
         [SerializeField]
         private Transform SpawnPoint;
-
-        [SerializeField]
-        private List<PitchPlatformLevel> Levels = new List<PitchPlatformLevel>();
 
         [SerializeField]
         private Slider PitchVisualization;
@@ -49,11 +46,16 @@ namespace Pocketboy.PitchPlatformer
 
         private int m_CurrentLevelIndex = 0;
 
+        private PitchPlatformLevel[] m_Levels;
+
+        private IEnumerator m_AnimationCoroutine;
+
         void Start()
         {
 #if !UNITY_EDITOR
-            LevelsParent.transform.parent = RoboyManager.Instance.ARAnchor.transform;
-            LevelsParent.transform.position = RoboyManager.Instance.transform.position + RoboyManager.Instance.transform.right * -0.5f + RoboyManager.Instance.transform.up * (HeightRange * 0.1f);
+
+            LevelsParent.transform.parent = LevelManager.Instance.GetAnchorTransform();
+            LevelsParent.transform.position = LevelManager.Instance.GetPositionRelativeToRoboy(new Vector3(-0.5f, 0f, 0f));
 #endif
             PitchRecognizer = new PitchTracker();
             PitchRecognizer.SampleRate = AudioSettings.outputSampleRate;
@@ -61,23 +63,37 @@ namespace Pocketboy.PitchPlatformer
             PitchRecognizer.PitchDetected += (sender, pitch) => { PitchValueText.text = pitch.MidiNote.ToString(); };
 
             PitchPlatformerEvents.ReachedGoalEvent += () => LevelUI.SetActive(true);
-            SetupLevels();
-            StartGame();
+            m_Levels = LevelsParent.GetComponentsInChildren<PitchPlatformLevel>(true);
         }
 
-        public void StartGame()
+        public void PauseGame()
         {
-            if (Levels.Count < 1)
-                return;
-           
-            Levels[0].Show();
+            m_Levels[m_CurrentLevelIndex].Hide();
+        }
+
+        public void ResumeGame()
+        {
+            SetupLevels();
+            GoToLevel(m_CurrentLevelIndex);
+        }       
+
+        public void RepeatLevel()
+        {
+            LevelUI.SetActive(false);
+            GoToLevel(m_CurrentLevelIndex);
+        }
+
+        public void NextLevel()
+        {
+            LevelUI.SetActive(false);
+            GoToLevel(m_CurrentLevelIndex + 1);
         }
 
         public void SetPitchValue(int requiredNote, int actualNote)
         {
             float pitchValue = -1f;
             if (requiredNote == actualNote) // actual note is hit
-            {
+            {             
                 pitchValue = 0.5f;
             }
             else if (actualNote < requiredNote) // lower than the required note
@@ -102,13 +118,16 @@ namespace Pocketboy.PitchPlatformer
                     pitchValue = 0.9f;
                 }
             }
-            PitchVisualization.value = pitchValue;
+            if (m_AnimationCoroutine != null)
+                StopCoroutine(m_AnimationCoroutine);
+
+            StartCoroutine(PitchVisualizationAnimation(pitchValue));
         }
-        
+
         private void SetupLevels()
         {
-            Player.SetSpawnPosition(SpawnPoint.position);
-            foreach (var level in Levels)
+            //Player.SetSpawnPosition(SpawnPoint.position);
+            foreach (var level in m_Levels)
             {
                 level.Setup(HeightRange, AccuracyThreshold, PlatformLengthPerSecond, Player);
                 level.Hide();
@@ -117,21 +136,26 @@ namespace Pocketboy.PitchPlatformer
 
         private void GoToLevel(int levelIndex)
         {
-            Levels[m_CurrentLevelIndex].Hide();
-            m_CurrentLevelIndex = MathUtility.WrapArrayIndex(levelIndex, Levels.Count);
-            Levels[m_CurrentLevelIndex].Show();            
+            m_Levels[m_CurrentLevelIndex].Hide();
+            m_CurrentLevelIndex = MathUtility.WrapArrayIndex(levelIndex, m_Levels.Length);
+            m_Levels[m_CurrentLevelIndex].Show();
         }
 
-        public void RepeatLevel()
+        private IEnumerator PitchVisualizationAnimation(float value)
         {
-            LevelUI.SetActive(false);
-            GoToLevel(m_CurrentLevelIndex);
-        }
+            if (PitchVisualization.value == value)
+                yield break;
 
-        public void NextLevel()
-        {
-            LevelUI.SetActive(false);
-            GoToLevel(m_CurrentLevelIndex + 1);
+            float duration = 0.3f;
+            float currentDuration = 0f;
+            float initValue = PitchVisualization.value;
+            while (currentDuration < duration)
+            {
+                currentDuration += Time.deltaTime;
+                PitchVisualization.value = Mathf.Lerp(initValue, value, currentDuration / duration);
+                yield return null;
+            }
+            PitchVisualization.value = value;
         }
     }
 }

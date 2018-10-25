@@ -79,6 +79,11 @@
             return ARSessionManager.Instance.FloorPlane.CreateAnchor(ARSessionManager.Instance.FloorPlane.CenterPose).transform;
         }
 
+        public Vector3 GetPositionRelativeToRoboy(Vector3 position)
+        {
+            return Roboy.transform.TransformDirection(position);
+        }
+
         private void SpawnRoboy()
         {
             if (m_RoboySpawned)

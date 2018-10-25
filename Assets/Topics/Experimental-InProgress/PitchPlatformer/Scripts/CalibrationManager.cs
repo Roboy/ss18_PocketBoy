@@ -94,8 +94,12 @@ namespace Pocketboy.PitchPlatformer
         /// </summary>
         private bool m_IsListeningForPitches;
 
+        private Coroutine m_GetPitchCoroutine;
+
         void Start()
         {
+            ForceScreenOrientation.Instance.SetScreenOrientation(ScreenOrientation.Portrait);
+
             m_PitchTracker = new PitchTracker();
             m_PitchTracker.SampleRate = AudioSettings.outputSampleRate;
 
@@ -112,22 +116,36 @@ namespace Pocketboy.PitchPlatformer
 
             FinishCalibrationButton.onClick.AddListener(SaveCalibration);
 
-            LoadCalibration();            
+            if (LoadCalibration())
+            {
+                Hide();
+            }
         }
 
         /// <summary>
         /// Loads a saved calibration if possible from PlayerPrefs.
         /// </summary>
-        private void LoadCalibration()
+        private bool LoadCalibration()
         {
-            if (PlayerPrefs.GetFloat("LowPitchValue") == default(float)) // if not saved yet, GetFloat returns default value
-                return;
+            if (PlayerPrefs.GetInt("LowMidiNote") == default(int)) // if not saved yet, GetFloat returns default value
+                return false;
 
             m_CalibratedLowPitch = PlayerPrefs.GetFloat("LowPitchValue");
             m_CalibratedHighPitch = PlayerPrefs.GetFloat("HighPitchValue");
 
+            CalibratedLowNote = PlayerPrefs.GetInt("LowMidiNote");
+            CalibratedHighNote = PlayerPrefs.GetInt("HighMidiNote");
+
             LowPitchVisualization.value = MathUtility.ConvertRange(m_LowPitchReference, m_HighPitchReference, 0f, 1f, m_CalibratedLowPitch);
             HighPitchVisualization.value = MathUtility.ConvertRange(m_LowPitchReference, m_HighPitchReference, 0f, 1f, m_CalibratedHighPitch);
+
+            LowPitchVisualization.gameObject.SetActive(true);
+            HighPitchVisualization.gameObject.SetActive(true);
+
+            ShowCalibrationTestButton.gameObject.SetActive(true);
+            m_OnePitchCalibrated = true;
+
+            return true;
         }
 
         /// <summary>
@@ -135,34 +153,45 @@ namespace Pocketboy.PitchPlatformer
         /// </summary>
         private void SaveCalibration()
         {
-            CalibrationUI.SetActive(false);
-            ForceScreenOrientation.Instance.ResetScreenOrientation(); // the calibration should run in portrait mode, reset this to previous screen orientation when finished
-
+            Hide();
             PlayerPrefs.SetFloat("LowPitchValue", m_CalibratedLowPitch);
             PlayerPrefs.SetFloat("HighPitchValue", m_CalibratedHighPitch);
 
-            ShowCalibrationTestButton.gameObject.SetActive(true);
-            m_OnePitchCalibrated = true;
+            PlayerPrefs.SetInt("LowMidiNote", CalibratedLowNote);
+            PlayerPrefs.SetInt("HighMidiNote", CalibratedHighNote);
+        }
+
+        public void Show()
+        {
+            CalibrationUI.SetActive(true);
+            ForceScreenOrientation.Instance.SetScreenOrientation(ScreenOrientation.Portrait);
+            ShowCalibrationWindow();
+            PitchPlatformerManager.Instance.PauseGame();
+        }
+
+        public void Hide()
+        {
+            CalibrationUI.SetActive(false);
+            ForceScreenOrientation.Instance.ResetScreenOrientation(); // the calibration should run in portrait mode, reset this to previous screen orientation when finished
+            PitchPlatformerManager.Instance.ResumeGame();
         }
 
         private void CalibrateHighPitch()
         {
             MicrophoneManager.Instance.StartRecording();
-            StartCoroutine(GetPitchAverage((value) => 
+            m_GetPitchCoroutine = StartCoroutine(GetPitchAverage((value) => 
             {
-                if (float.IsNaN(value) ||  value < m_CalibratedLowPitch)
+                int midiNote, cents;
+                bool isMidiNote = PitchDsp.PitchToMidiNote(m_CalibratedHighPitch, out midiNote, out cents);
+
+                if (float.IsNaN(value) || !isMidiNote || value < m_CalibratedLowPitch )
                 {
                     WarningManager.Instance.ShowWarning("Please try to hum in a higher voice.");
                     ResetCalibration(HighPitchDuration);
                     return;
                 }
                 m_CalibratedHighPitch = value;
-                int midiNote, cents;
-                bool isMidiNote = PitchDsp.PitchToMidiNote(m_CalibratedHighPitch, out midiNote, out cents);
-                if (isMidiNote)
-                {
-                    CalibratedHighNote = midiNote;
-                }
+                CalibratedHighNote = midiNote;
 
                 ResetCalibration(HighPitchDuration, HighPitchVisualization);
                 CheckForCalibrationTest();
@@ -172,21 +201,19 @@ namespace Pocketboy.PitchPlatformer
         private void CalibrateLowPitch()
         {
             MicrophoneManager.Instance.StartRecording();
-            StartCoroutine(GetPitchAverage((value) => 
+            m_GetPitchCoroutine = StartCoroutine(GetPitchAverage((value) => 
             {
-                if (float.IsNaN(value) || value > m_CalibratedHighPitch)
+                int midiNote, cents;
+                bool isMidiNote = PitchDsp.PitchToMidiNote(m_CalibratedLowPitch, out midiNote, out cents);
+
+                if (float.IsNaN(value) || !isMidiNote || value > m_CalibratedHighPitch)
                 {
                     WarningManager.Instance.ShowWarning("Please try to hum in a deeper voice.");
                     ResetCalibration(LowPitchDuration);
                     return;
                 }
                 m_CalibratedLowPitch = value;
-                int midiNote, cents;
-                bool isMidiNote = PitchDsp.PitchToMidiNote(m_CalibratedLowPitch, out midiNote, out cents);
-                if (isMidiNote)
-                {
-                    CalibratedLowNote = midiNote;
-                }
+                CalibratedLowNote = midiNote;
 
                 ResetCalibration(LowPitchDuration, LowPitchVisualization);
                 CheckForCalibrationTest();
@@ -210,6 +237,25 @@ namespace Pocketboy.PitchPlatformer
             durationSlider.value = 0f;
         }
 
+        private void ResetCalibration()
+        {
+            LowPitchDuration.value = 0f;
+            HighPitchDuration.value = 0f;
+
+            PitchVisualization.value = 0.5f;
+
+            MicrophoneManager.Instance.StopRecording();
+        }
+
+        private void StopCalibration()
+        {
+            if (m_GetPitchCoroutine == null)
+                return;
+
+            StopCoroutine(m_GetPitchCoroutine);
+            ResetCalibration();
+        }
+
         /// <summary>
         /// If one pitch (high or low) is not calibrated yet, just save that this pitch is calibrated, otherwise calibration is complete and can be tested
         /// </summary>
@@ -230,6 +276,8 @@ namespace Pocketboy.PitchPlatformer
         /// </summary>
         private void ShowCalibrationTestWindow()
         {
+            StopCalibration();
+
             CalibrationWindow.SetActive(false);
             CalibrationTestWindow.SetActive(true);
             ShowCalibrationButton.gameObject.SetActive(true);
@@ -253,28 +301,16 @@ namespace Pocketboy.PitchPlatformer
             };
 
             m_PitchTracker.PitchDetected += PitchDetected;
-            StartCoroutine(ListenForPitches());
+            m_GetPitchCoroutine = StartCoroutine(ListenForPitches());
         }
-
-        /// <summary>
-        /// Listens to microphone input and feeds its samples into the pitch tracker.
-        /// </summary>
-        /// <returns></returns>
-        private IEnumerator ListenForPitches()
-        {
-            m_IsListeningForPitches = true;
-            while (m_IsListeningForPitches)
-            {
-                m_PitchTracker.ProcessBuffer(MicrophoneManager.Instance.GetSamples());
-                yield return null;
-            }
-        }
-
+        
         /// <summary>
         /// Returns back from calibration test mode to the initial window.
         /// </summary>
         private void ShowCalibrationWindow()
         {
+            StopCalibration();
+
             CalibrationWindow.SetActive(true);
             CalibrationTestWindow.SetActive(false);
             ShowCalibrationButton.gameObject.SetActive(false);
@@ -318,6 +354,20 @@ namespace Pocketboy.PitchPlatformer
 
             m_PitchTracker.PitchDetected -= PitchDetected;           
             onComplete(pitches / pitchCount);
+        }
+
+        /// <summary>
+        /// Listens to microphone input and feeds its samples into the pitch tracker.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator ListenForPitches()
+        {
+            m_IsListeningForPitches = true;
+            while (m_IsListeningForPitches)
+            {
+                m_PitchTracker.ProcessBuffer(MicrophoneManager.Instance.GetSamples());
+                yield return null;
+            }
         }
     }
 

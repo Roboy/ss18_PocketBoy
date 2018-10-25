@@ -9,11 +9,18 @@ namespace Pocketboy.Common
         [SerializeField]
         private ScreenOrientation Orientation;
 
+        [SerializeField]
+        private bool OnAwake;
+
         private ScreenOrientation m_OriginalOrientation;
         // Use this for initialization
         void Awake()
         {
             m_OriginalOrientation = Screen.orientation;
+
+            if (!OnAwake)
+                return;
+            
             Screen.orientation = Orientation;
         }
 
