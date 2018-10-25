@@ -122,7 +122,7 @@ namespace Pocketboy.Cupgame
         public IEnumerator StartLocating()
         {
             
-            RoboyArm.transform.position = new Vector3(Cups[0].transform.position.x + m_handOffset, RoboyArm.transform.position.y, RoboyArm.transform.position.z);
+            RoboyArm.transform.localPosition = new Vector3(Cups[0].transform.localPosition.x + m_handOffset, RoboyArm.transform.localPosition.y, RoboyArm.transform.localPosition.z);
             RoboyArm.SetActive(true);
             RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = false;
             yield return StartCoroutine(LowerArm());
@@ -221,7 +221,7 @@ namespace Pocketboy.Cupgame
         {
             float offset = cup.GetComponent<Renderer>().bounds.size.y;
             offset += (0.1f * offset);
-            float startingHeight = cup.transform.position.y;
+            float startingHeight = cup.transform.localPosition.y;
             float endHeight = startingHeight + offset;
             float currentHeight = startingHeight;
             float currentDuration = 0.0f;
@@ -229,11 +229,11 @@ namespace Pocketboy.Cupgame
             while (currentDuration < duration)
             {
                 currentHeight = Mathf.Lerp(startingHeight, endHeight, currentDuration / duration);
-                cup.transform.position = new Vector3(cup.transform.position.x, currentHeight, cup.transform.position.z);
+                cup.transform.localPosition = new Vector3(cup.transform.localPosition.x, currentHeight, cup.transform.localPosition.z);
                 currentDuration += Time.deltaTime;
                 yield return null;
             }
-            cup.transform.position = new Vector3(cup.transform.position.x, endHeight, cup.transform.position.z);
+            cup.transform.localPosition = new Vector3(cup.transform.localPosition.x, endHeight, cup.transform.localPosition.z);
             yield return null;
 
         }
@@ -242,7 +242,7 @@ namespace Pocketboy.Cupgame
         {
             float offset = cup.GetComponent<Renderer>().bounds.size.y;
             offset += (0.1f * offset);
-            float startingHeight = cup.transform.position.y;
+            float startingHeight = cup.transform.localPosition.y;
             float endHeight = startingHeight - offset;
             float currentHeight = startingHeight;
             float currentDuration = 0.0f;
@@ -250,11 +250,11 @@ namespace Pocketboy.Cupgame
             while (currentDuration < duration)
             {
                 currentHeight = Mathf.Lerp(startingHeight, endHeight, currentDuration / duration);
-                cup.transform.position = new Vector3(cup.transform.position.x, currentHeight, cup.transform.position.z);
+                cup.transform.localPosition = new Vector3(cup.transform.localPosition.x, currentHeight, cup.transform.localPosition.z);
                 currentDuration += Time.deltaTime;
                 yield return null;
             }
-            cup.transform.position = new Vector3(cup.transform.position.x, endHeight, cup.transform.position.z);
+            cup.transform.localPosition = new Vector3(cup.transform.localPosition.x, endHeight, cup.transform.localPosition.z);
             yield return null;
 
         }
@@ -263,7 +263,7 @@ namespace Pocketboy.Cupgame
         {
             var ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             ball.GetComponent<Renderer>().material = mat_Ball;
-            Vector3 pos = Cups[cup_index].transform.position;
+            Vector3 pos = Cups[cup_index].transform.localPosition;
             Vector3 scale = Cups[cup_index].transform.localScale;
             ball.transform.localScale = Vector3.one * 0.083f;
             ball.AddComponent<BoxCollider>();
@@ -354,9 +354,9 @@ namespace Pocketboy.Cupgame
 
         private IEnumerator MoveArm(int index_cup)
         {
-            float startingPosX = RoboyArm.transform.position.x;
-            float currentPosX = RoboyArm.transform.position.x; ;
-            float endPosX = Cups[index_cup].transform.position.x + m_handOffset;
+            float startingPosX = RoboyArm.transform.localPosition.x;
+            float currentPosX = RoboyArm.transform.localPosition.x; ;
+            float endPosX = Cups[index_cup].transform.localPosition.x + m_handOffset;
             float currentDuration = 0.0f;
             float duration = 1.0f;
 
@@ -369,11 +369,11 @@ namespace Pocketboy.Cupgame
             while (currentDuration < duration)
             {
                 currentPosX = Mathf.Lerp(startingPosX, endPosX, currentDuration / duration);
-                RoboyArm.transform.position = new Vector3(currentPosX, RoboyArm.transform.position.y, RoboyArm.transform.position.z);
+                RoboyArm.transform.localPosition = new Vector3(currentPosX, RoboyArm.transform.localPosition.y, RoboyArm.transform.localPosition.z);
                 currentDuration += Time.deltaTime;
                 yield return null;
             }
-            RoboyArm.transform.position = new Vector3(endPosX, RoboyArm.transform.position.y, RoboyArm.transform.position.z);
+            RoboyArm.transform.localPosition = new Vector3(endPosX, RoboyArm.transform.localPosition.y, RoboyArm.transform.localPosition.z);
             RoboyArm.GetComponentInChildren<RadarSensor>().SensorActive = true;
 
             yield return null;
