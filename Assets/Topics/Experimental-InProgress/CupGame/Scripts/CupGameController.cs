@@ -24,12 +24,10 @@ namespace Pocketboy.Cupgame
 
         private void Update()
         {
-            if (LevelManager.Instance.Roboy != null && !m_ShufflerPlaced)
+            if (!m_ShufflerPlaced)
             {
-
                 m_Shuffler.transform.SetParent(LevelManager.Instance.GetAnchorTransform());
-                m_Shuffler.transform.position = LevelManager.Instance.Roboy.transform.TransformPoint(new Vector3(0.6f, 0f, 0f));
-                
+                m_Shuffler.transform.position = LevelManager.Instance.GetPositionRelativeToRoboy(new Vector3(0.6f, 0f, 0f));             
 
                 //var roboy = LevelManager.Instance.Roboy;
                 //m_Shuffler.transform.position = roboy.transform.position;

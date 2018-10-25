@@ -20,31 +20,35 @@
         /// <summary>
         /// Roboy prefab.
         /// </summary>
-        public RoboyManager RoboyPrefab;
+        [SerializeField]
+        private RoboyManager RoboyPrefab;
 
         /// <summary>
         /// Topics to learn about, represented as spheres/ portals to get into the respective training world.
         /// </summary>
-        public List<GameObject> Spheres;
+        [SerializeField]
+        private List<GameObject> Spheres;
 
         /// <summary>
         /// Reference to an instantiated copy of the Roboy prefab in a scene.
         /// </summary>
-        public RoboyManager Roboy { get; private set; }
-
+        private RoboyManager m_Roboy;
         /// <summary>
         /// True if one model of Roboy has been spawned.
         /// </summary>
-        [HideInInspector]
-        public bool m_RoboySpawned = false;
+        private bool m_RoboySpawned = false;
 
-        [HideInInspector]
-        public bool m_LevelSpheresSpawned = false;
+        private bool m_LevelSpheresSpawned = false;
 
         /// <summary>
         /// Reference to the available levels, represented as spheres.
         /// </summary>
         private List<GameObject> m_Levels = new List<GameObject>();
+
+        /// <summary>
+        /// Cached objects under the same anchor as Roboy for the duration of the current scene.
+        /// </summary>
+        private List<GameObject> m_RegisteredGameObjects = new List<GameObject>();
 
         private void OnEnable()
         {
@@ -74,14 +78,27 @@
             }
         }
 
+        /// <summary>
+        /// Creates a new anchor which will be automatically desroyed at scene change. Be aware that this anchor might change the position relative to the the Roboy anchor.
+        /// </summary>
+        /// <returns></returns>
         public Transform GetAnchorTransform()
         {
             return ARSessionManager.Instance.FloorPlane.CreateAnchor(ARSessionManager.Instance.FloorPlane.CenterPose).transform;
         }
 
+        /// <summary>
+        /// Parents the given object under the same anchor as Roboy. Use this function when the relative position to roboy should not change during a scene.
+        /// </summary>
+        public void RegisterGameObjectWithRoboy(GameObject gameObj)
+        {
+            gameObj.transform.SetParent(m_Roboy.ARAnchor.transform.parent);
+            m_RegisteredGameObjects.Add(gameObj);
+        }
+
         public Vector3 GetPositionRelativeToRoboy(Vector3 position)
         {
-            return Roboy.transform.TransformDirection(position);
+            return m_Roboy.transform.TransformDirection(position);
         }
 
         private void SpawnRoboy()
@@ -92,33 +109,33 @@
             m_RoboySpawned = true;
             var plane = ARSessionManager.Instance.FloorPlane;
             var anchor = plane.CreateAnchor(plane.CenterPose);
-            Roboy = Instantiate(RoboyPrefab, plane.CenterPose.position, plane.CenterPose.rotation);
-            Roboy.transform.parent = anchor.transform;
-            Roboy.Initialize(anchor);
+            m_Roboy = Instantiate(RoboyPrefab, plane.CenterPose.position, plane.CenterPose.rotation);
+            m_Roboy.transform.parent = anchor.transform;
+            m_Roboy.Initialize(anchor);
             SpawnLevelSpheres();
         }
 
         private void SpawnLevelSpheres()
         {
-            if (Roboy == null || m_LevelSpheresSpawned)
+            if (m_Roboy == null || m_LevelSpheresSpawned)
                 return;
 
             m_LevelSpheresSpawned = true;
-            var levelSphereInitPosition = new Vector3(Roboy.transform.position.x, Roboy.transform.position.y + 0.5f, Roboy.transform.position.z);
+            var levelSphereInitPosition = new Vector3(m_Roboy.transform.position.x, m_Roboy.transform.position.y + 0.5f, m_Roboy.transform.position.z);
             var levelSphereOffset = Vector3.zero;
             for (int i = 0; i < Spheres.Count; i++)
             {
                 var levelSphere = Instantiate(Spheres[i]);
                 levelSphere.name = "Level" + (i);
 
-                levelSphereOffset = ((float)(i + 1) / Spheres.Count) * Roboy.transform.forward; // WHY FORWARD???? Right does spawns the spheres in front of roboy, dafuq
+                levelSphereOffset = ((float)(i + 1) / Spheres.Count) * m_Roboy.transform.forward; // WHY FORWARD???? Right does spawns the spheres in front of roboy, dafuq
                 if (i % 2 == 1)
                 {
                     levelSphereOffset *= -1;
                 }
 
                 levelSphere.transform.position = levelSphereInitPosition + levelSphereOffset;
-                levelSphere.transform.RotateAround(Roboy.transform.position, Vector3.up, 90.0f);
+                levelSphere.transform.RotateAround(m_Roboy.transform.position, Vector3.up, 90.0f);
                 levelSphere.transform.localScale = levelSphere.transform.localScale * 0.25f;
 
                 var plane = ARSessionManager.Instance.FloorPlane;
@@ -131,6 +148,12 @@
 
         private void ResetLevel(Scene scene, LoadSceneMode mode)
         {
+            for (int i = 0; i < m_RegisteredGameObjects.Count; i++)
+            {
+                Destroy(m_RegisteredGameObjects[i]);
+            }
+            m_RegisteredGameObjects.Clear();
+
             if (scene.name != "HomeScene_DEV")
                 return;
 

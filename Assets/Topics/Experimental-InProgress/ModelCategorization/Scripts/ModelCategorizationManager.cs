@@ -30,11 +30,8 @@ namespace Pocketboy.ModelCategorization
 
         private void Start()
         {
-            if (LevelManager.Instance.Roboy != null)
-            {
-                PositionPlatforms();
-                SpawnModels();                
-            }
+            PositionPlatforms();
+            SpawnModels();                
         }
 
         public void ShowObjectInformation(string name, string explanation)
@@ -44,8 +41,9 @@ namespace Pocketboy.ModelCategorization
 
         private void PositionPlatforms()
         {
-            PlatformParent.transform.SetParent(LevelManager.Instance.GetAnchorTransform());
-            PlatformParent.transform.position = LevelManager.Instance.Roboy.transform.TransformPoint(new Vector3(0.6f, 0f, 0f));       
+            LevelManager.Instance.RegisterGameObjectWithRoboy(PlatformParent.gameObject);
+            PlatformParent.transform.position = LevelManager.Instance.GetPositionRelativeToRoboy(new Vector3(0f, 0f, 0f));
+            PlatformParent.transform.forward = -RoboyManager.Instance.transform.forward;
         }
 
         private void SpawnModels()
@@ -59,7 +57,8 @@ namespace Pocketboy.ModelCategorization
                 if (spawnPositionIndex >= SpawnPositions.Count)
                     break;
 
-                var categorizationModel = Instantiate(CategorizationModelPrefab, LevelManager.Instance.Roboy.ARAnchor.transform);
+                var categorizationModel = Instantiate(CategorizationModelPrefab);
+                LevelManager.Instance.RegisterGameObjectWithRoboy(categorizationModel.gameObject);
                 categorizationModel.Setup(model.ModelPrefab, model.Name, model.Explanation, model.ContentRelatedState, SpawnPositions[spawnPositionIndex]);
 
                 switch (model.ContentRelatedState)

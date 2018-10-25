@@ -96,9 +96,8 @@ namespace Pocketboy.HistoryScene
             // create own anchor for tv as roboy is not destroyed at scene change so the tv does not get loaded into other scenes
             TV.transform.SetParent(LevelManager.Instance.GetAnchorTransform());
 
-            var roboy = LevelManager.Instance.Roboy;
-            TV.transform.position = roboy.transform.position + roboy.transform.right * 0.65f;
-            TV.transform.forward = roboy.transform.forward;
+            TV.transform.position = LevelManager.Instance.GetPositionRelativeToRoboy(new Vector3(0.65f, 0f, 0f));
+            TV.transform.forward = RoboyManager.Instance.transform.forward;
 
             RoboyManager.Instance.Talk("Thank you for tuning in. " +
                 "This programm will tell you about some awesome milestones in the evolution of robots. " +
