@@ -21,6 +21,7 @@ namespace Pocketboy.PitchPlatformer
             m_RigidBody = GetComponent<Rigidbody>();
             m_RigidBody.isKinematic = true;
         }
+        
 
         public void Go()
         {
@@ -37,6 +38,11 @@ namespace Pocketboy.PitchPlatformer
         public void SetSpawnPosition(Vector3 position)
         {
             m_CurrentSpawnPoint = position;
+        }
+
+        public void ResetPosition()
+        {
+            transform.position = m_CurrentSpawnPoint;
         }
 
         private void FixedUpdate()

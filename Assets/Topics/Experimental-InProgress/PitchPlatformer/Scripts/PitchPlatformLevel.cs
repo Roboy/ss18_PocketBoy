@@ -8,10 +8,10 @@ namespace Pocketboy.PitchPlatformer
     public class PitchPlatformLevel : MonoBehaviour
     {
         [SerializeField]
-        private Transform SpawnPoint;
+        private List<PitchPlatform> Platforms = new List<PitchPlatform>();
 
         [SerializeField]
-        private List<PitchPlatform> Platforms = new List<PitchPlatform>();
+        private Collider GoalCollider;
 
         private int m_CurrentPlatformIndex = -1;
 
@@ -26,8 +26,6 @@ namespace Pocketboy.PitchPlatformer
         {
             gameObject.SetActive(true);
 
-            m_Player.SetSpawnPosition(SpawnPoint.position);
-
             foreach (var platform in Platforms)
             {
                 platform.StopListen();
@@ -38,10 +36,10 @@ namespace Pocketboy.PitchPlatformer
             MicrophoneManager.Instance.StartRecording();
 
             m_CurrentPlatformIndex = -1;
-            m_Player.transform.position = SpawnPoint.transform.position;
-            m_Player.Stop();            
-            GoToNextPlatform();
-                    
+            m_Player.ResetPosition();
+            m_Player.Stop();
+            GoalCollider.enabled = false;
+            GoToNextPlatform();                   
         }
 
         public void Hide()
@@ -63,7 +61,7 @@ namespace Pocketboy.PitchPlatformer
 
                 // DEBUG
                 int platformNote = (int)Mathf.Lerp(36, 69, normalizedHeightValue);
-                platform.Setup(platformNote, accuracyThreshold, platformLengthPerSecond);
+                platform.Setup(platformNote, accuracyThreshold, platformLengthPerSecond, heightRange);
             }
             m_Player = player;
         }
@@ -74,6 +72,10 @@ namespace Pocketboy.PitchPlatformer
             {
                 m_CurrentPlatformIndex++;
                 Platforms[m_CurrentPlatformIndex].StartListen();
+            }
+            else
+            {
+                GoalCollider.enabled = true;
             }
         }
     }
