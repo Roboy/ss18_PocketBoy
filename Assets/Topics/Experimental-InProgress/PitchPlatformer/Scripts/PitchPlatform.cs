@@ -21,8 +21,6 @@ namespace Pocketboy.PitchPlatformer
 
         private bool m_IsListening;
 
-        private OnCollisionJump m_JumpTrigger;
-
         private void Awake()
         {
             var renderer = GetComponent<MeshRenderer>();
@@ -31,10 +29,6 @@ namespace Pocketboy.PitchPlatformer
 
             m_Collider = GetComponent<BoxCollider>();
             m_Collider.enabled = false;
-
-            m_JumpTrigger = GetComponentInChildren<OnCollisionJump>(true);
-            if(m_JumpTrigger)
-                m_JumpTrigger.enabled = false;
         }
 
         private void OnDestroy()
@@ -81,8 +75,6 @@ namespace Pocketboy.PitchPlatformer
             m_Material.SetFloat("_DissolveValue", 1f);
             m_Material.SetColor("_MainColor", Color.green);
             m_Material.SetColor("_HologramColor", Color.green);
-            if (m_JumpTrigger)
-                m_JumpTrigger.enabled = true;
         }
 
         public void DisablePlatform()
@@ -92,8 +84,6 @@ namespace Pocketboy.PitchPlatformer
             m_Material.SetFloat("_DissolveValue", 0f);
             m_Material.SetColor("_MainColor", Color.green);
             m_Material.SetColor("_HologramColor", Color.red);
-            if (m_JumpTrigger)
-                m_JumpTrigger.enabled = false;
         }
 
         private void OnPitchDetected(PitchTracker sender, PitchTracker.PitchRecord pitchRecord)

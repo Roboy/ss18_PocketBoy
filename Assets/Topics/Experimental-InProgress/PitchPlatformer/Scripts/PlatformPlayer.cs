@@ -51,7 +51,7 @@ namespace Pocketboy.PitchPlatformer
 
         private void FixedUpdate()
         {
-            if (!m_IsRunning)
+            if (!m_IsRunning && !m_RigidBody.isKinematic)
                 return;
 
             //transform.Translate(Vector3.right * ForwardSpeed * Time.fixedDeltaTime, Space.Self);
@@ -60,30 +60,33 @@ namespace Pocketboy.PitchPlatformer
 
         private void OnTriggerEnter(Collider other)
         {
-            //ParabolaTrigger parabolaTrigger = null;
-            //if ((parabolaTrigger = other.GetComponent<ParabolaTrigger>()) != null)
-            //{
-            //    var middleParabolaPoint = (transform.position + parabolaTrigger.ParabolaGoal) / 2f;
-            //    middleParabolaPoint.y = Mathf.Max(transform.position.y, parabolaTrigger.ParabolaGoal.y) * 1.5f;
-            //    m_ParabolaController.SetPoints(new Vector3[] { transform.position, middleParabolaPoint, parabolaTrigger.ParabolaGoal });
-            //    m_ParabolaController.FollowParabola();
-            //    m_RigidBody.isKinematic = true;
-            //    m_IsJumping = true;
-            //}
-
             TeleportTrigger teleportTrigger = null;
             if ((teleportTrigger = other.GetComponent<TeleportTrigger>()) != null)
             {
-                transform.position = teleportTrigger.TeleportGoal;
-                Debug.Log("asdasd");
+                StartCoroutine(TeleportAnimation(teleportTrigger.TeleportGoal));
             }
-            Debug.Log("asdasd2");
 
             if (other.CompareTag("Deadzone"))
             {
                 ResetPosition();
                 Stop();
             }
+        }
+
+        private IEnumerator TeleportAnimation(Vector3 goalPosition)
+        {
+            m_RigidBody.isKinematic = true;
+            float duration = 0.5f;
+            float currentDuration = 0f;
+            Vector3 initPosition = transform.position;
+            while (currentDuration < duration)
+            {
+                transform.position = Vector3.Lerp(initPosition, goalPosition, currentDuration / duration);
+                currentDuration += Time.deltaTime;
+                yield return null;
+            }
+            transform.position = goalPosition;
+            m_RigidBody.isKinematic = false;
         }
     }
 }
