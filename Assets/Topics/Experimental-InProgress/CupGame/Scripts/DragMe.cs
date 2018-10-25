@@ -56,7 +56,7 @@ namespace Pocketboy.Cupgame
                 m_KinematicState = m_RigidBody.isKinematic;
             }
 
-            m_OriginalPosition = transform.position;
+            m_OriginalPosition = transform.localPosition;
             m_Lifted = false;
             m_HoldsBall = false;
         }
@@ -147,7 +147,7 @@ namespace Pocketboy.Cupgame
             }
 
             m_DistanceToCameraOnTouch = (Camera.main.transform.position - transform.position).magnitude;
-            m_OffsetOnTouch = (Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, m_DistanceToCameraOnTouch)) - transform.position);
+            m_OffsetOnTouch = (Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, m_DistanceToCameraOnTouch)) - transform.localPosition);
             if (m_ball != null)
             {
                 m_ball.GetComponent<Renderer>().enabled = false;
@@ -197,7 +197,8 @@ namespace Pocketboy.Cupgame
                 m_TouchPositionWorldSpace = m_TouchPositionScreenSpace;
                 m_TouchPositionWorldSpace.z = m_DistanceToCameraOnTouch; // transform touch position from 2d to 3d on the plane where the first touch occured.
                 Vector3 NextPosition = Camera.main.ScreenToWorldPoint(m_TouchPositionWorldSpace) - m_OffsetOnTouch;
-                transform.position = new Vector3(NextPosition.x, transform.position.y, transform.position.z);
+                //transform.position = new Vector3(NextPosition.x, transform.position.y, transform.position.z);
+                transform.localPosition = new Vector3(NextPosition.x, transform.localPosition.y, transform.localPosition.z);
                 if (m_ball != null)
                 {
                     m_ball.transform.position = new Vector3(NextPosition.x, m_ball.transform.position.y, transform.position.z);
@@ -249,8 +250,8 @@ namespace Pocketboy.Cupgame
         private IEnumerator ElevateCup(int mode, GameObject cup)
         {
 
-            float startingHeight = cup.transform.position.y;
-            Vector3 currentPos = cup.transform.position;
+            float startingHeight = cup.transform.localPosition.y;
+            Vector3 currentPos = cup.transform.localPosition;
             float offset = gameObject.GetComponent<Renderer>().bounds.size.y;
             offset += (0.1f * offset);
 
@@ -276,15 +277,15 @@ namespace Pocketboy.Cupgame
             //Move the cup over time.
             while (currentDuration < duration)
             {
-                currentPos = cup.transform.position;
+                currentPos = cup.transform.localPosition;
                 currentPos.y = Mathf.Lerp(startingHeight, endHeight, currentDuration / duration);
-                cup.transform.position = currentPos;
+                cup.transform.localPosition = currentPos;
                 currentDuration += Time.deltaTime;
                 yield return null;
             }
 
             //Eliminate accuracy error.
-            cup.transform.position = new Vector3(cup.transform.position.x, endHeight, cup.transform.position.z);
+            cup.transform.localPosition = new Vector3(cup.transform.localPosition.x, endHeight, cup.transform.localPosition.z);
             yield return null;
         }
 
@@ -292,13 +293,11 @@ namespace Pocketboy.Cupgame
         private IEnumerator SwapCups()
         {
             ShuffleMaster.Instance.CupsMoveable = false;
-            //gameObject.layer = LayerMask.NameToLayer("Ignore");
-            //int layerMask = ~(1 << LayerMask.NameToLayer("Ignore"));
-            //Collider[] hitted_Objects = Physics.OverlapBox(transform.position, m_BoxSize, Quaternion.identity, layerMask);
 
             if (m_AdjacentCup  == null)
             {
                 //no swapping needed.
+                transform.localPosition = m_OriginalPosition;
                 yield return null;
             }
             if (m_AdjacentCup != null)
@@ -333,6 +332,10 @@ namespace Pocketboy.Cupgame
                         ShuffleMaster.Instance.Cups[index_a] = other_cup;
                         gameObject.GetComponent<DragMe>().resetOriginalPosition();
                         other_cup.GetComponent<DragMe>().resetOriginalPosition();
+                        if (m_ball != null)
+                        {
+                            m_ball.GetComponent<Renderer>().enabled = true;
+                        }
 
                     }
                     //Cups are far to each other
@@ -345,7 +348,10 @@ namespace Pocketboy.Cupgame
                         ShuffleMaster.Instance.Cups[index_a] = other_cup;
                         gameObject.GetComponent<DragMe>().resetOriginalPosition();
                         other_cup.GetComponent<DragMe>().resetOriginalPosition();
-
+                        if (m_ball != null)
+                        {
+                            m_ball.GetComponent<Renderer>().enabled = true;
+                        }
 
                     }
 
@@ -356,10 +362,7 @@ namespace Pocketboy.Cupgame
             m_AdjacentCup = null;
             //gameObject.layer = LayerMask.NameToLayer("Default");
             ShuffleMaster.Instance.CupsMoveable = true;
-            if (m_ball != null)
-            {
-                m_ball.GetComponent<Renderer>().enabled = true;
-            }
+            
 
             yield return null;
         }
@@ -371,21 +374,21 @@ namespace Pocketboy.Cupgame
                 m_ball.GetComponent<Renderer>().enabled = false;
             }
             float currentDuration = 0.0f;
-            Vector3 start = gameObject.transform.position;
+            Vector3 start = gameObject.transform.localPosition;
 
             while (currentDuration < duration)
             {
-                gameObject.transform.position = Vector3.Lerp(start, destination, currentDuration / duration);
+                gameObject.transform.localPosition = Vector3.Lerp(start, destination, currentDuration / duration);
                 currentDuration += Time.deltaTime;
                 yield return null;
             }
 
-            gameObject.transform.position = destination;
+            gameObject.transform.localPosition = destination;
 
             if (m_ball != null)
             {
                 m_ball.GetComponent<Renderer>().enabled = true;
-                m_ball.transform.position = new Vector3(gameObject.transform.position.x, m_ball.transform.position.y, gameObject.transform.position.z);
+                m_ball.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, m_ball.transform.localPosition.y, gameObject.transform.localPosition.z);
             }
 
         }
@@ -413,41 +416,42 @@ namespace Pocketboy.Cupgame
                 resultingAngle = 90.0f * Mathf.Deg2Rad;
             }
 
-            float distance = Vector3.Distance(ShuffleMaster.Instance.Cups[1].transform.position, transform.position);
-            Vector3 start = gameObject.transform.position;
-            Vector3 pivotPoint = ShuffleMaster.Instance.Cups[1].transform.position;
+            float distance = Vector3.Distance(destination, transform.localPosition) /2.0f;
+            Vector3 start = gameObject.transform.localPosition;
+            Vector3 pivotPoint = (transform.localPosition + destination) / 2.0f;
 
+           
 
             while (currentDuration < duration)
             {
                 currentAngle = Mathf.Lerp(startingAngle, resultingAngle, currentDuration / duration);
-                Vector3 nextPos = gameObject.transform.position;
+                Vector3 nextPos = gameObject.transform.localPosition;
                 nextPos.x = pivotPoint.x + Mathf.Sin(currentAngle) * distance;
                 if (lan == RotationLane.front)
                 {
-                    nextPos.z = pivotPoint.x + Mathf.Cos(currentAngle) * distance;
+                    nextPos.z = pivotPoint.z + Mathf.Cos(currentAngle) * distance;
                 }
                 if (lan == RotationLane.back)
                 {
-                    nextPos.z = pivotPoint.x - Mathf.Cos(currentAngle) * distance;
+                    nextPos.z = pivotPoint.z - Mathf.Cos(currentAngle) * distance;
                 }
-                gameObject.transform.position = nextPos;
+                gameObject.transform.localPosition = nextPos;
                 currentDuration += Time.deltaTime;
                 yield return null;
             }
 
-            gameObject.transform.position = destination;
+            gameObject.transform.localPosition = destination;
 
             if (m_ball != null)
             {
                 m_ball.GetComponent<Renderer>().enabled = true;
-                m_ball.transform.position = new Vector3(gameObject.transform.position.x, m_ball.transform.position.y, gameObject.transform.position.z);
+                m_ball.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, m_ball.transform.localPosition.y, gameObject.transform.localPosition.z);
             }
         }
 
         public void resetOriginalPosition()
         {
-            m_OriginalPosition = gameObject.transform.position;
+            m_OriginalPosition = gameObject.transform.localPosition;
         }
 
         public void HoldBall(GameObject ball)
@@ -467,14 +471,10 @@ namespace Pocketboy.Cupgame
             m_Dragable = b;
         }
 
-        //private void OnDrawGizmos()
-        //{
-        //    Gizmos.DrawWireCube(transform.position, m_BoxSize);
-        //}
-
+       
         private void resetCurrentPosition()
         {
-            transform.position = m_OriginalPosition;
+            transform.localPosition = m_OriginalPosition;
         }
 
 
