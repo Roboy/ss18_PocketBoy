@@ -26,8 +26,16 @@ namespace Pocketboy.Cupgame
         {
             if (!m_ShufflerPlaced)
             {
-                m_Shuffler.transform.SetParent(LevelManager.Instance.GetAnchorTransform());
-                m_Shuffler.transform.position = LevelManager.Instance.GetPositionRelativeToRoboy(new Vector3(0.6f, 0f, 0f));             
+                Transform RoboyAnchor = LevelManager.Instance.GetRoboyAnchor();
+                m_Shuffler.transform.rotation = RoboyAnchor.rotation;
+                m_Shuffler.transform.position = RoboyAnchor.position;
+                LevelManager.Instance.RegisterGameObjectWithRoboy(m_Shuffler);
+
+                Vector3 direction = LevelManager.Instance.GetRoboy().transform.forward;
+                m_Shuffler.transform.rotation = Quaternion.LookRotation(direction * -1.0f);
+                //m_Shuffler.transform.position += m_Shuffler.transform.forward.normalized * (-1.0f);
+                m_Shuffler.transform.position += m_Shuffler.transform.right.normalized * (-0.75f);
+
 
                 //var roboy = LevelManager.Instance.Roboy;
                 //m_Shuffler.transform.position = roboy.transform.position;
@@ -37,7 +45,7 @@ namespace Pocketboy.Cupgame
                 //m_Shuffler.transform.position -= 1.5f * roboy.transform.forward;
                 ////Move the cloud above roboy
                 //m_Shuffler.transform.position += 0.5f * roboy.transform.up;
-                
+
 
                 //Reset the init positions of the cup
                 DragMe[] dms = m_Shuffler.GetComponentsInChildren<DragMe>();
@@ -45,6 +53,7 @@ namespace Pocketboy.Cupgame
                 {
                     d.resetOriginalPosition();
                 }
+                Wager.Instance.resetOriginPosition();
                 m_ShufflerPlaced = true;
             }
         }

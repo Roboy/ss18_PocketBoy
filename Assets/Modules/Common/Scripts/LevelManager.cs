@@ -92,7 +92,7 @@
         /// </summary>
         public void RegisterGameObjectWithRoboy(GameObject gameObj)
         {
-            gameObj.transform.SetParent(m_Roboy.ARAnchor.transform.parent);
+            gameObj.transform.SetParent(m_Roboy.ARAnchor.transform);
             m_RegisteredGameObjects.Add(gameObj);
         }
 
@@ -100,6 +100,17 @@
         {
             return m_Roboy.transform.TransformDirection(position);
         }
+
+        public Transform GetRoboyAnchor()
+        {
+            return m_Roboy.ARAnchor.transform;
+        }
+
+        public GameObject GetRoboy()
+        {
+            return m_Roboy.gameObject;
+        }
+        
 
         private void SpawnRoboy()
         {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Pocketboy.Common;
+using TMPro;
 
 namespace Pocketboy.Cupgame
 {
@@ -12,6 +13,8 @@ namespace Pocketboy.Cupgame
         private bool m_IsTouched = false;
         private bool m_Dragable = true;
         public List<BoxCollider> BetZones;
+        public TextMeshProUGUI ResultText;
+        
 
         [SerializeField]
         private GameObject ZoneToBetOn = null;
@@ -73,6 +76,7 @@ namespace Pocketboy.Cupgame
         {
             m_IsTouched = true;
             ToggleBetZones("ON");
+            ToggleLight("ON");
 
             m_DistanceToCameraOnTouch = (Camera.main.transform.position - transform.position).magnitude;
             m_OffsetOnTouch = (Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, m_DistanceToCameraOnTouch)) - transform.localPosition);
@@ -105,12 +109,14 @@ namespace Pocketboy.Cupgame
             m_DistanceToCameraOnTouch = 0f;
             m_OffsetOnTouch = Vector3.zero;
             ToggleBetZones("OFF");
+            ToggleLight("OFF");
 
            
             if (ZoneToBetOn !=null)
             {
                 //Place coins at the resprective cup position
                 transform.position = ZoneToBetOn.transform.position;
+                StartCoroutine(checkForWin());
                 return;
             }
 
@@ -170,28 +176,56 @@ namespace Pocketboy.Cupgame
             }
         }
 
-        private void resetCurrentPosition()
+        public void ToggleLight(string operation)
+        {
+            foreach (BoxCollider bc in BetZones)
+            {
+                Light li = bc.gameObject.GetComponent<Light>();
+                if (operation == "ON") {li.enabled = true; }
+                if (operation == "OFF") { li.enabled = false; }
+
+            }
+        }
+
+        public void resetCurrentPosition()
         {
             transform.localPosition = m_OriginalPosition;
         }
 
-        public void checkForWin()
+        public void resetOriginPosition()
         {
+            m_OriginalPosition = transform.localPosition;
+        }
+
+        public IEnumerator checkForWin()
+        {
+            //Show the text on GUI
+            ResultText.text = "checking";
+            ResultText.enabled = true;
+
             if (ZoneToBetOn == null)
             {
-                Debug.Log("You Loose!");
-                return;
+                
+                ResultText.text = "You Lose!";
+                yield return null;
             }
 
+            StartCoroutine(ShuffleMaster.Instance.RevealBall());
+            float counter = 0.0f;
+            while (counter < 1.5f)
+            {
+                counter += Time.deltaTime;
+                yield return null;
+            }
 
             GameObject Cup = ZoneToBetOn.gameObject.transform.parent.gameObject;
             if (Cup.GetComponent<DragMe>().HoldsBall)
             {
-                Debug.Log("You Win!");
+                ResultText.text = "You Win!";
             }
             else
             {
-                Debug.Log("You Lose!");
+                ResultText.text = "You Lose!";
             }
         }
 
