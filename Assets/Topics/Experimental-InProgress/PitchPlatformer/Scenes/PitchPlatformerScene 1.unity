@@ -567,48 +567,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4473705896986310, guid: 4540f66d447229745899f6ca16c6c1ed,
     type: 2}
   m_PrefabInternal: {fileID: 75848595}
---- !u!1 &78641440
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 78641442}
-  - component: {fileID: 78641441}
-  m_Layer: 0
-  m_Name: ForceScreenOrientation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &78641441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 78641440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0ee6ab968fb1d46a7f624ef62d32cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Orientation: 0
-  OnAwake: 0
---- !u!4 &78641442
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 78641440}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -39}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &83047942
 GameObject:
   m_ObjectHideFlags: 0
@@ -8034,6 +7992,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1569911943570128, guid: 16b6613daa928f345a7aa3699c5eb3da, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223459765679302186, guid: 16b6613daa928f345a7aa3699c5eb3da,
+        type: 2}
+      propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
