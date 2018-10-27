@@ -120,6 +120,10 @@ namespace Pocketboy.PitchPlatformer
             {
                 Hide();
             }
+            else
+            {
+                Show();
+            }
         }
 
         /// <summary>
@@ -127,7 +131,7 @@ namespace Pocketboy.PitchPlatformer
         /// </summary>
         private bool LoadCalibration()
         {
-            if (PlayerPrefs.GetInt("LowMidiNote") == default(int)) // if not saved yet, GetFloat returns default value
+            if (PlayerPrefs.GetInt("LowMidiNote") == default(int)) // if not saved yet, GetInt returns default value
                 return false;
 
             m_CalibratedLowPitch = PlayerPrefs.GetFloat("LowPitchValue");

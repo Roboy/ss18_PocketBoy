@@ -20,8 +20,7 @@ namespace Pocketboy.Wordcloud
 
         private void Initialize()
         {
-            LevelManager.Instance.RegisterGameObjectWithRoboy(m_WC.gameObject);
-            m_WC.transform.position = LevelManager.Instance.GetPositionRelativeToRoboy(new Vector3(-1f, 0.5f, -1.5f));
+            LevelManager.Instance.RegisterGameObjectWithRoboy(m_WC.gameObject, new Vector3(-1f, 0.5f, -1.5f));
 
             //var roboy = LevelManager.Instance.m_Roboy;
             //m_WC.transform.position = roboy.transform.position;

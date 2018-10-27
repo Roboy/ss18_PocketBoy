@@ -52,11 +52,12 @@ namespace Pocketboy.PitchPlatformer
 
         void Start()
         {
-#if !UNITY_EDITOR
+            if (LevelManager.InstanceExists)
+            {
+                LevelManager.Instance.RegisterGameObjectWithRoboy(LevelsParent, new Vector3(-1f, 0.2f, HeightRange * 1.1f));
+                LevelsParent.transform.right = RoboyManager.Instance.transform.right;
+            }
 
-            LevelsParent.transform.parent = LevelManager.Instance.GetAnchorTransform();
-            LevelsParent.transform.position = LevelManager.Instance.GetPositionRelativeToRoboy(new Vector3(-0.5f, 0f, 0f));
-#endif
             PitchRecognizer = new PitchTracker();
             PitchRecognizer.SampleRate = AudioSettings.outputSampleRate;
 

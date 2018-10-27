@@ -79,15 +79,6 @@
         }
 
         /// <summary>
-        /// Creates a new anchor which will be automatically desroyed at scene change. Be aware that this anchor might change the position relative to the the Roboy anchor.
-        /// </summary>
-        /// <returns></returns>
-        public Transform GetAnchorTransform()
-        {
-            return ARSessionManager.Instance.FloorPlane.CreateAnchor(ARSessionManager.Instance.FloorPlane.CenterPose).transform;
-        }
-
-        /// <summary>
         /// Parents the given object under the same anchor as Roboy. Use this function when the relative position to roboy should not change during a scene.
         /// </summary>
         public void RegisterGameObjectWithRoboy(GameObject gameObj)
@@ -96,21 +87,18 @@
             m_RegisteredGameObjects.Add(gameObj);
         }
 
-        public Vector3 GetPositionRelativeToRoboy(Vector3 position)
+        public void RegisterGameObjectWithRoboy(GameObject gameObj, Vector3 relativePosition)
         {
-            return m_Roboy.transform.TransformDirection(position);
+            RegisterGameObjectWithRoboy(gameObj);
+            gameObj.transform.position = m_Roboy.transform.TransformPoint(relativePosition);
         }
 
-        public Transform GetRoboyAnchor()
+        public void RegisterGameObjectWithRoboy(GameObject gameObj, Vector3 relativePosition, Quaternion relativeRotation)
         {
-            return m_Roboy.ARAnchor.transform;
+            RegisterGameObjectWithRoboy(gameObj);
+            gameObj.transform.position = m_Roboy.transform.TransformPoint(relativePosition);
+            gameObj.transform.rotation = m_Roboy.transform.rotation * relativeRotation;
         }
-
-        public GameObject GetRoboy()
-        {
-            return m_Roboy.gameObject;
-        }
-        
 
         private void SpawnRoboy()
         {

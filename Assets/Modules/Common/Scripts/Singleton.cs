@@ -51,8 +51,18 @@ namespace Pocketboy.Common
                                 _instance.gameObject.name);
                         }
                     }
-
                     return _instance;
+                }
+            }
+        }
+
+        public static bool InstanceExists {
+            get
+            {
+                lock (_lock)
+                {
+                    var instance = (T)FindObjectOfType(typeof(T));
+                    return instance != null;
                 }
             }
         }

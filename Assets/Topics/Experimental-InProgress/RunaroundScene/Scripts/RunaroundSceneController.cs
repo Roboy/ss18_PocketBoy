@@ -30,8 +30,7 @@ namespace Pocketboy.Runaround
 
         private void Initialize()
         {
-            LevelManager.Instance.RegisterGameObjectWithRoboy(m_GM.gameObject);
-            m_GM.transform.position = LevelManager.Instance.GetPositionRelativeToRoboy(new Vector3(-2f, -0.5f, 1f));
+            LevelManager.Instance.RegisterGameObjectWithRoboy(m_GM.gameObject, new Vector3(-2f, -0.5f, 1f));
             m_GM.transform.forward = RoboyManager.Instance.transform.forward * (-1f);
             //m_GM.transform.position = roboy.transform.position - roboy.transform.right * 2.0f;
             //m_GM.transform.position += 1.0f * roboy.transform.forward;

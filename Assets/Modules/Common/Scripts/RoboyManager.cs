@@ -62,6 +62,9 @@ namespace Pocketboy.Common
 
         public void Talk(string text)
         {
+            if (string.IsNullOrEmpty(text))
+                return;
+
             m_TextToSpeechController.Talk(text);
             m_FaceController.StartTalkAnimation();
         }
