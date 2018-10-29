@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 400058}
   - component: {fileID: 9500000}
   m_Layer: 0
-  m_Name: brokenglass
+  m_Name: CrackedGlass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3052,7 +3052,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100058}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: b9f2dfd43f7faa14698cced293cc9c73, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0

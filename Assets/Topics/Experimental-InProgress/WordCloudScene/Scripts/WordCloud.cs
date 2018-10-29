@@ -7,7 +7,7 @@ using TMPro;
 namespace Pocketboy.Wordcloud
 {
 
-    public class WordCloud : MonoBehaviour
+    public class WordCloud : Singleton<WordCloud>
     {
 
         public Word WordPrefab;
@@ -51,7 +51,10 @@ namespace Pocketboy.Wordcloud
         /// Is there already a cloud or not.
         /// </summary>
         [SerializeField]
-        private bool cloud_spawned = false;
+        private bool m_CloudSpawned = false;
+
+        private float m_CurrentDistance = 0f;
+        private float m_CurrentAngle = 0f;
 
         /// <summary>
         /// Deletes the current WordCloud.
@@ -65,7 +68,9 @@ namespace Pocketboy.Wordcloud
                     Destroy(t.gameObject);
                 }
             }
-            cloud_spawned = false;
+            m_CloudSpawned = false;
+            m_CurrentAngle = 0.0f;
+            m_CurrentDistance = 0.0f;
             TextMeshProUGUI textfield = Explanation.GetComponent<TextMeshProUGUI>();
             textfield.text = "Please start again!";
         }
@@ -199,62 +204,57 @@ namespace Pocketboy.Wordcloud
         /// <returns></returns>
         private IEnumerator CreateWords()
         {
-            //if (cloud_spawned)
+            //if (m_CloudSpawned)
             //{
-            //    //use the current transform
-            //    //change nothing
-            //}
-            //else
-            //{
-            //    transform.parent = null;
-            //    //cloudposition = camera forward position
-            //    GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-            //    transform.position = camera.transform.position;
-            //    transform.position = camera.transform.forward * 5.0f;
-            //    transform.parent = LevelManager.Instance.Roboy.transform.parent;
-
+            //    yield return null;
             //}
 
-            foreach (WordInCloud w in Content.Words)
-            {
-                var word = Instantiate(WordPrefab, transform);
-                SimpleHelvetica Word3D = word.Obj.GetComponent<SimpleHelvetica>();
-                Word3D.Text = w.Word;
-                word.Text = Word3D.Text;
-                word.name = "Word-" + Word3D.Text;
-                if (Word3D.Text.Length > 4)
+
+            //if (!m_CloudSpawned)
+            //{
+
+                foreach (WordInCloud w in Content.Words)
                 {
-                    Word3D.Orientation = SimpleHelvetica.alignment.horizontal;
-                }
-                if (Word3D.Text.Length < 4)
-                {
-                    int n = Random.Range(0, 6);
-                    if (n < 5)
-                    {
-                        Word3D.Orientation = SimpleHelvetica.alignment.vertical;
-                    }
-                    if (n >= 5)
+                    var word = Instantiate(WordPrefab, transform);
+                    SimpleHelvetica Word3D = word.Obj.GetComponent<SimpleHelvetica>();
+                    Word3D.Text = w.Word;
+                    word.Text = Word3D.Text;
+                    word.name = "Word-" + Word3D.Text;
+                    if (Word3D.Text.Length > 4)
                     {
                         Word3D.Orientation = SimpleHelvetica.alignment.horizontal;
                     }
+                    if (Word3D.Text.Length < 4)
+                    {
+                        int n = Random.Range(0, 6);
+                        if (n < 5)
+                        {
+                            Word3D.Orientation = SimpleHelvetica.alignment.vertical;
+                        }
+                        if (n >= 5)
+                        {
+                            Word3D.Orientation = SimpleHelvetica.alignment.horizontal;
+                        }
+                    }
+                    Word3D.GenerateText();
+                    Word3D.AddBoxCollider();
+                    word.transform.localScale = Word3D.transform.localScale;
+
+
+                    //Add Collider
+                    BoxCollider2D tmp_collider = word.gameObject.AddComponent<BoxCollider2D>();
+                    tmp_collider.size = Word3D.GetComponent<BoxCollider2D>().size;
+                    tmp_collider.offset = Word3D.GetComponent<BoxCollider2D>().offset;
+                    Word3D.RemoveBoxCollider();
+                    word.transform.parent = transform;
+
+                    yield return StartCoroutine(PlaceWord(word));
+
+
                 }
-                Word3D.GenerateText();
-                Word3D.AddBoxCollider();
-                word.transform.localScale = Word3D.transform.localScale;
+                m_CloudSpawned = true;
 
-
-                //Add Collider
-                BoxCollider2D tmp_collider = word.gameObject.AddComponent<BoxCollider2D>();
-                tmp_collider.size = Word3D.GetComponent<BoxCollider2D>().size;
-                tmp_collider.offset = Word3D.GetComponent<BoxCollider2D>().offset;
-                Word3D.RemoveBoxCollider();
-                word.transform.parent = transform;
-
-                yield return StartCoroutine(PlaceWord(word));
-
-
-            }
-            cloud_spawned = true;
+            //}
             yield return null;
 
 
@@ -271,26 +271,26 @@ namespace Pocketboy.Wordcloud
             word.gameObject.layer = LayerMask.NameToLayer("Ignore");
             int layerMask = ~(1 << LayerMask.NameToLayer("Ignore"));
 
-            var currentDistance = 0f;
-            var currentAngle = 0f;
+            //var currentDistance = 0f;
+            //var currentAngle = 0f;
             Bounds b_word = word.gameObject.GetComponent<BoxCollider2D>().bounds;
 
             GameObject boundingbox = GameObject.Instantiate(CloudPrefab);
-            
 
-            
+
+
             boundingbox.gameObject.tag = "NoColorChange";
             boundingbox.transform.localScale = new Vector3(b_word.size.x, b_word.size.y, 1.0f);
             if (word.Obj.GetComponent<SimpleHelvetica>().Orientation == SimpleHelvetica.alignment.horizontal)
             {
                 //If the word is aligned horizontally, we need to scale the cloud again to match
-                boundingbox.transform.localScale = new Vector3(boundingbox.transform.localScale.x, boundingbox.transform.localScale.y * 2.0f, boundingbox.transform.localScale.z);
+                boundingbox.transform.localScale = new Vector3(boundingbox.transform.localScale.x, boundingbox.transform.localScale.y * 1.5f, boundingbox.transform.localScale.z);
             }
 
             if (word.Obj.GetComponent<SimpleHelvetica>().Orientation == SimpleHelvetica.alignment.vertical)
             {
                 //If the word is aligned vertical, we need to scale the cloud again to match
-                boundingbox.transform.localScale = new Vector3(boundingbox.transform.localScale.x * 2.0f, boundingbox.transform.localScale.y , boundingbox.transform.localScale.z);
+                boundingbox.transform.localScale = new Vector3(boundingbox.transform.localScale.x * 1.5f, boundingbox.transform.localScale.y, boundingbox.transform.localScale.z);
             }
             //boundingbox.transform.localScale = new Vector3(tmp.size.x, tmp.size.y, 0.1f);
             Vector2 offset = word.GetComponent<BoxCollider2D>().offset;
@@ -304,25 +304,25 @@ namespace Pocketboy.Wordcloud
 
             while (true)
             {
-                var radians = currentAngle * Mathf.Deg2Rad;
-                var x = Mathf.Cos(radians) * currentDistance;
-                var y = Mathf.Sin(radians) * currentDistance;
+                var radians = m_CurrentAngle * Mathf.Deg2Rad;
+                var x = Mathf.Cos(radians) * m_CurrentDistance;
+                var y = Mathf.Sin(radians) * m_CurrentDistance;
                 word.transform.position = new Vector3(word.transform.parent.position.x + x, word.transform.parent.position.y + y, word.transform.parent.position.z);
-                currentDistance += 0.005f;
-                currentAngle += 1.5f;
+                m_CurrentDistance += 0.005f;
+                m_CurrentAngle += 1.5f;
                 Vector2 pos = new Vector2(word.transform.position.x, word.transform.position.y);
                 Vector2 size = new Vector2(b_cloud.size.x, b_cloud.size.y);
                 Vector2 dir = new Vector2(x, y);
 
 
-                if (!Physics2D.BoxCast(pos, size * 2, 0.0f, Vector2.zero, 0.0f, layerMask))
+                if (!Physics2D.BoxCast(pos, size * 1.5f, 0.0f, Vector2.zero, 0.0f, layerMask))
                 {
                     //If there are no more collisions end the placing algorithm
                     word.setSpawnState(true);
                     break;
                 }
-                
-                
+
+
             }
             word.gameObject.layer = LayerMask.NameToLayer("Words");
             yield return null;

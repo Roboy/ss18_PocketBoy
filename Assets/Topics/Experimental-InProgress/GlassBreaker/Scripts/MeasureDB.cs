@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -26,9 +27,14 @@ public class MeasureDB : MonoBehaviour {
     private float _fSample;
 
     private Vector3 m_originalScale;
+    private int m_LastCrackTier;
+    private int m_CurrentCrackTier = 0;
+    private bool m_CheckingForCracks = false;
+    private bool m_VolumeCalibrated = false;
 
     void Start()
     {
+        m_LastCrackTier = m_CurrentCrackTier;
         m_originalScale = transform.localScale;
         _samples = new float[QSamples];
         _spectrum = new float[QSamples];
@@ -60,6 +66,49 @@ public class MeasureDB : MonoBehaviour {
     void Update()
     {
         AnalyzeSound();
+
+        if (!m_CheckingForCracks && m_VolumeCalibrated)
+        {
+            StartCoroutine(CheckForCracks());
+        }
+        
+    }
+
+    private IEnumerator CheckForCracks()
+    {
+        
+        m_CheckingForCracks = true;
+        int volumeTier = 0;
+
+        if (DbValue >= m_dbTreshold && DbValue < m_dbTreshold + 5.0f)
+            volumeTier = 0;
+        if (DbValue >= m_dbTreshold + 5.0f && DbValue < m_dbTreshold + 15.0f)
+            volumeTier = 1;
+        if (DbValue >= m_dbTreshold + 15.0f && DbValue < m_dbTreshold + 27.5f)
+            volumeTier = 2;
+        if (DbValue >= m_dbTreshold + 27.5f && DbValue < m_dbTreshold + 32.5f)
+            volumeTier = 3;
+        if (DbValue >= m_dbTreshold + 32.5f && DbValue < m_dbTreshold + 35.0f)
+            volumeTier = 4;
+        if (DbValue >= m_dbTreshold + 35.0f && DbValue < m_dbTreshold + 36.5f)
+            volumeTier = 5;
+        if (DbValue >= m_dbTreshold + 36.5f && DbValue < m_dbTreshold + 38.0)
+            volumeTier = 6;
+        if (DbValue >= m_dbTreshold + 38.0f)
+            volumeTier = 7;
+       
+
+
+
+        if (volumeTier > m_CurrentCrackTier)
+        {
+            m_CurrentCrackTier += 1;
+            ScreenHealthController.Instance.SetScreenCrackTier(m_CurrentCrackTier);
+            
+        }
+        m_CheckingForCracks = false;
+        yield return null;
+
     }
 
     void AnalyzeSound()
@@ -105,7 +154,16 @@ public class MeasureDB : MonoBehaviour {
 
     public void CalibrateMicrophone()
     {
-        m_dbTreshold = DbValue + 10.0f;
+        m_VolumeCalibrated = true;
+        m_CurrentCrackTier = 0;
+        m_dbTreshold = DbValue + 5.0f;
+        ScreenHealthController.Instance.SetScreenCrackTier(0);
+    }
+
+    public void ResetTier()
+    {
+        m_CurrentCrackTier = 0;
+        ScreenHealthController.Instance.SetScreenCrackTier(0);
     }
 }
 
