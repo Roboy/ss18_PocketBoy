@@ -1,63 +1,41 @@
 fileFormatVersion: 2
-guid: 56eb9ccbe399c0a45874eac124c615d0
+guid: b62ae67d3fdd5d1469c646c459773aec
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Flag
-    100004: Stand
-    100006: Cube
-    100008: Border
-    100010: Pole
     400000: //RootNode
-    400002: Flag
-    400004: Stand
-    400006: Cube
-    400008: Border
-    400010: Pole
-    2100000: mat_flag
-    2100002: mat_stand
-    2100004: mat_border
-    2100006: mat_ground
-    2100008: mat_flag__roboybooksketch_jpg_png
-    2300000: Flag
-    2300002: Stand
-    2300004: Cube
-    2300006: Border
-    2300008: Pole
-    3300000: Flag
-    3300002: Stand
-    3300004: Cube
-    3300006: Border
-    3300008: Pole
-    4300000: Flag
-    4300002: Stand
-    4300004: Cube
-    4300006: Border
-    4300008: Pole
+    2100000: unnamed
+    2100002: mat_sign
+    2100004: mat_s
+    2100006: mat_main
+    2100008: mat_circle
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Robots
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat_border
-    second: {fileID: 2100000, guid: 3b6e97d645b84ab409d7623325bb9ed8, type: 2}
+      name: mat_circle
+    second: {fileID: 2100000, guid: 669d08099b0336348bf18fd0de8dc32e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat_flag
-    second: {fileID: 2100000, guid: 1516ad2ce48968f4987468a0b8ff488f, type: 2}
+      name: mat_main
+    second: {fileID: 2100000, guid: 3ecfe7c10f1daa44a80bad80daac4dcf, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat_ground
-    second: {fileID: 2100000, guid: 043a4a195f61ba04888093a08aafd99f, type: 2}
+      name: mat_s
+    second: {fileID: 2100000, guid: c49c36e4b88590d488f6a06c621ec992, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat_stand
-    second: {fileID: 2100000, guid: 3dac03257f4dc1e4c98350ad2b78ac01, type: 2}
+      name: mat_sign
+    second: {fileID: 2100000, guid: 7d4888dec65150c408448153648edc7c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -88,7 +66,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -108,7 +86,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.1
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
