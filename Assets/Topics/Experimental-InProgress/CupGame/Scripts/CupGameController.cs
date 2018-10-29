@@ -7,20 +7,10 @@ namespace Pocketboy.Cupgame
 {
     public class CupGameController : MonoBehaviour
     {
-
-
         [SerializeField]
         GameObject m_Shuffler;
-
         bool m_ShufflerPlaced = false;
 
-
-        void Start()
-        {
-
-
-
-        }
 
         private void Update()
         {

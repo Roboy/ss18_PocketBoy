@@ -7038,9 +7038,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: 
-  CharacterSpacing: 0.05
+  CharacterSpacing: 0.005
   LineSpacing: 0.001
-  SpaceWidth: 0.2
+  SpaceWidth: 0.1
   BoxColliderIsTrigger: 0
   Orientation: 1
   Mass: 1

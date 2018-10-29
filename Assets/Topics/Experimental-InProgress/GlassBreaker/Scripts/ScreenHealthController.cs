@@ -2,26 +2,71 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Pocketboy.Common;
+using System;
 
-public class ScreenHealthController : MonoBehaviour {
+public class ScreenHealthController : Singleton<ScreenHealthController> {
 
     public Image CrackSprite;
     public Sprite[] CrackImages;
-    public Slider ValueSlider;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameObject Screen;
+    public GameObject DBMeasurement;
 
-    public void UpdateCracks()
-    {
-        CrackSprite.sprite = CrackImages[(int)ValueSlider.value];
+    [SerializeField]
+    private Button m_CalibrateButton;
+    [SerializeField]
+    private Button m_ResetButton;
+
+    // Use this for initialization
+    void Start () {
+        m_CalibrateButton.onClick.AddListener(HandleCalibration);
+        m_ResetButton.onClick.AddListener(HandleReset);
+
+        GameObject cam = GameObject.FindWithTag("MainCamera");
+        Screen.transform.SetParent(cam.transform);
+        Screen.transform.localRotation = cam.transform.localRotation;
+        Screen.transform.localPosition =  cam.transform.forward.normalized * 2.0f;
+        
 
     }
+
+   
+
+    private void HandleCalibration()
+    {
+        Vibration.Vibrate(100);
+        DBMeasurement.GetComponent<MeasureDB>().CalibrateMicrophone();
+    }
+
+
+    private void HandleReset()
+    {
+        Vibration.Vibrate(100);
+        Screen.SetActive(true);
+        //Screen.GetComponentInChildren<Break>().ResetScreen();
+        DBMeasurement.GetComponent<MeasureDB>().ResetTier();
+    }
+
+
+    public void SetScreenCrackTier(int tier)
+    {
+        if (tier < 0)
+        {
+            CrackSprite.sprite = CrackImages[0];
+            return;
+        }
+
+        if ( tier > 6)
+        {
+            CrackSprite.sprite = CrackImages[0];
+            Screen.SetActive(false);
+            Screen.GetComponentInChildren<Break>().BreakScreen();
+            return;
+        }
+
+        CrackSprite.sprite = CrackImages[tier];
+
+    }
+
 }

@@ -11,15 +11,17 @@ namespace Pocketboy.Wordcloud
 
         [SerializeField]
         private WordCloud m_WC;
+        private bool m_CloudSpawned = false;
 
 
-        private void Awake()
-        {
-            Initialize();
-        }
+        
 
         private void Initialize()
         {
+<<<<<<< HEAD
+            LevelManager.Instance.RegisterGameObjectWithRoboy(m_WC.gameObject);
+            m_WC.transform.position = LevelManager.Instance.GetPositionRelativeToRoboy(new Vector3(1.0f, 0.0f, -2.5f));
+=======
             LevelManager.Instance.RegisterGameObjectWithRoboy(m_WC.gameObject, new Vector3(-1f, 0.5f, -1.5f));
 
             //var roboy = LevelManager.Instance.m_Roboy;
@@ -32,8 +34,18 @@ namespace Pocketboy.Wordcloud
             //m_WC.transform.position += 0.5f * roboy.transform.up;
             ////m_WC.transform.forward = roboy.transform.forward * (-1f);
             //m_WC.transform.parent = roboy.transform.parent;
+>>>>>>> 8b85f2a7c81e5a38c413d52490f84a9ce30b3b28
         }
 
+
+        private void Update()
+        {
+            if (!m_CloudSpawned)
+            {
+                Initialize();
+                m_CloudSpawned = true;
+            }
+        }
 
     }
 }

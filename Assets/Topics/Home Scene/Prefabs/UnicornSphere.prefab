@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 135496884588813046}
   - component: {fileID: 114030129862603682}
   m_Layer: 8
-  m_Name: UnicornSphere 1
+  m_Name: UnicornSphere
   m_TagString: Levelsphere
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1620501880943946}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.12, z: -0.18}
+  m_LocalPosition: {x: 0, y: 0.133, z: -0.136}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 4983922715071294}
@@ -126,7 +126,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 1c73428d03ced3940af611d51adf2f57, type: 2}
+  - {fileID: 2100000, guid: e0aaff26979b3ff4c97fde3bf008e594, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
