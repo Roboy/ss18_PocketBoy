@@ -68,8 +68,5 @@ public class HologramDissolveScript : MonoBehaviour {
         m_DissolveEnd = new Vector3(0f, max + 0.1f, 0f);
         m_HighestVertex = max;
         m_LowestVertex = min;
-
-        Debug.Log(m_HighestVertex);
-        Debug.Log(m_LowestVertex);
     }
 }
