@@ -17,8 +17,13 @@ namespace Pocketboy.Common
 
         public bool IsListening { get { return m_SpeechToTextController.IsListening; } }
 
+        public Vector3 InstructionPosition { get { return InstructionTransformPosition.position; } }
+
         [SerializeField]
         private Transform Head;
+
+        [SerializeField]
+        private Transform InstructionTransformPosition;
 
         private Coroutine m_MouthAnimation;
 
@@ -43,6 +48,19 @@ namespace Pocketboy.Common
         void Update()
         {
             Head.LookAt(Camera.main.transform.position);
+        }
+
+        private void OnApplicationFocus(bool focus)
+        {
+            if (focus)
+            {
+                // Application is focused here
+            }
+            else
+            {
+                StopTalking();
+                StopListening();
+            }
         }
 
         public void Initialize(Anchor anchor)

@@ -34,7 +34,7 @@ namespace Pocketboy.Common
         public bool PreviousPage(TMP_Text text)
         {
             int previousPage = text.pageToDisplay;
-            text.pageToDisplay = Mathf.Max(0, text.pageToDisplay - 1);
+            text.pageToDisplay = Mathf.Max(1, text.pageToDisplay - 1);
             return previousPage != text.pageToDisplay;
         }
     }

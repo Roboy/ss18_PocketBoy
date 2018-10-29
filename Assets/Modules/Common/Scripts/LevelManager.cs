@@ -50,14 +50,10 @@
         /// </summary>
         private List<GameObject> m_RegisteredGameObjects = new List<GameObject>();
 
-        private void OnEnable()
+        private void Awake()
         {
+            SceneManager.sceneUnloaded += DeleteRegisteredObjects;
             SceneManager.sceneLoaded += ResetLevel;
-        }
-
-        private void OnDisable()
-        {
-            SceneManager.sceneLoaded -= ResetLevel;
         }
 
         /// <summary>
@@ -147,18 +143,21 @@
 
         private void ResetLevel(Scene scene, LoadSceneMode mode)
         {
-            for (int i = 0; i < m_RegisteredGameObjects.Count; i++)
-            {
-                Destroy(m_RegisteredGameObjects[i]);
-            }
-            m_RegisteredGameObjects.Clear();
-
             if (scene.name != "HomeScene_DEV")
                 return;
 
             m_LevelSpheresSpawned = false;
         }
 
+
+        private void DeleteRegisteredObjects(Scene scene)
+        {
+            for (int i = 0; i < m_RegisteredGameObjects.Count; i++)
+            {
+                Destroy(m_RegisteredGameObjects[i]);
+            }
+            m_RegisteredGameObjects.Clear();
+        }
 
     }
 

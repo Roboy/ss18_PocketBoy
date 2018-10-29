@@ -46,7 +46,7 @@ namespace Pocketboy.Common
 
             InstructionText.text = text;
             InstructionText.pageToDisplay = 1;
-            SetupTextsPerPages();
+            StartCoroutine(SetupTextsPerPages());
             HelpButton.gameObject.SetActive(true);
         }
 
@@ -56,6 +56,7 @@ namespace Pocketboy.Common
                 return;
 
             m_IsActive = true;
+            transform.position = RoboyManager.Instance.InstructionPosition;
             InstructionText.pageToDisplay = 1;            
             InstructionCanvas.gameObject.SetActive(true);
             HelpButton.interactable = false;
@@ -73,17 +74,27 @@ namespace Pocketboy.Common
             RoboyManager.Instance.StopTalking();
         }
 
-        private void SetupTextsPerPages()
+        private IEnumerator SetupTextsPerPages()
         {
             m_TextsPerPage.Clear();
-            foreach (var page in InstructionText.textInfo.pageInfo)
+
+            // HACK: pageInfo.lastCharacterIndex will get updated as soon as text gets active in the scene
+            // activate object with 0 scale so its not visible
+            Vector3 cachedScale = InstructionCanvas.transform.localScale;
+            InstructionCanvas.transform.localScale = Vector3.zero;
+            InstructionCanvas.gameObject.SetActive(true);
+
+            while (InstructionText.textInfo.pageInfo[0].lastCharacterIndex == 0)
+                yield return null;
+
+            for (int i = 0; i < InstructionText.textInfo.pageCount; i++)
             {
-                Debug.Log(page.firstCharacterIndex + " : " + page.lastCharacterIndex);
+                var page = InstructionText.textInfo.pageInfo[i];
                 m_TextsPerPage.Add(InstructionText.text.Substring(page.firstCharacterIndex, page.lastCharacterIndex - page.firstCharacterIndex + 1));
             }
 
-            foreach (var a in m_TextsPerPage)
-                Debug.Log(a);
+            InstructionCanvas.gameObject.SetActive(false);
+            InstructionCanvas.transform.localScale = cachedScale;
         }
 
         public void NextInstruction()
@@ -120,7 +131,7 @@ namespace Pocketboy.Common
                 return;
 
             RoboyManager.Instance.StopTalking();
-            RoboyManager.Instance.Talk(m_TextsPerPage[InstructionText.pageToDisplay]);
+            RoboyManager.Instance.Talk(m_TextsPerPage[InstructionText.pageToDisplay-1]); // TextMeshPro text pages go from [1, pageCount]
         }
     }
 }
