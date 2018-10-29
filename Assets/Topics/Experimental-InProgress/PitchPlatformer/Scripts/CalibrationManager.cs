@@ -98,7 +98,7 @@ namespace Pocketboy.PitchPlatformer
 
         void Start()
         {
-            ForceScreenOrientation.Instance.SetScreenOrientation(ScreenOrientation.Portrait);
+            ForceScreenOrientation.SetScreenOrientation(ScreenOrientation.Portrait);
 
             m_PitchTracker = new PitchTracker();
             m_PitchTracker.SampleRate = AudioSettings.outputSampleRate;
@@ -120,6 +120,10 @@ namespace Pocketboy.PitchPlatformer
             {
                 Hide();
             }
+            else
+            {
+                Show();
+            }
         }
 
         /// <summary>
@@ -127,7 +131,7 @@ namespace Pocketboy.PitchPlatformer
         /// </summary>
         private bool LoadCalibration()
         {
-            if (PlayerPrefs.GetInt("LowMidiNote") == default(int)) // if not saved yet, GetFloat returns default value
+            if (PlayerPrefs.GetInt("LowMidiNote") == default(int)) // if not saved yet, GetInt returns default value
                 return false;
 
             m_CalibratedLowPitch = PlayerPrefs.GetFloat("LowPitchValue");
@@ -164,7 +168,7 @@ namespace Pocketboy.PitchPlatformer
         public void Show()
         {
             CalibrationUI.SetActive(true);
-            ForceScreenOrientation.Instance.SetScreenOrientation(ScreenOrientation.Portrait);
+            ForceScreenOrientation.SetScreenOrientation(ScreenOrientation.Portrait);
             ShowCalibrationWindow();
             PitchPlatformerManager.Instance.PauseGame();
         }
@@ -172,7 +176,7 @@ namespace Pocketboy.PitchPlatformer
         public void Hide()
         {
             CalibrationUI.SetActive(false);
-            ForceScreenOrientation.Instance.ResetScreenOrientation(); // the calibration should run in portrait mode, reset this to previous screen orientation when finished
+            ForceScreenOrientation.ResetScreenOrientation(); // the calibration should run in portrait mode, reset this to previous screen orientation when finished
             PitchPlatformerManager.Instance.ResumeGame();
         }
 

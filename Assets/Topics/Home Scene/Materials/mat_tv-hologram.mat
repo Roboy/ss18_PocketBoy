@@ -4,7 +4,7 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: mat_tv-hologram
   m_Shader: {fileID: 4800000, guid: 1094a884facf0c942923104e0369eb04, type: 3}
@@ -46,6 +46,6 @@ Material:
     - _Direction: {r: 0, g: 1, b: 0, a: 0}
     - _DissolveEnd: {r: 0, g: 0.34208032, b: 0, a: 0}
     - _DissolveStart: {r: 0, g: -0.2868765, b: 0, a: 0}
-    - _HologramColor: {r: 0, g: 0.911196, b: 1, a: 1}
+    - _HologramColor: {r: 0, g: 0.90588236, b: 0.9137255, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}

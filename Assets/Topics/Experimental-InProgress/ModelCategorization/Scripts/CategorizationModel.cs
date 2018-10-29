@@ -39,6 +39,10 @@ namespace Pocketboy.ModelCategorization
 
                     m_IsOnPlatform = true;
                 }
+                else
+                {
+                    Handheld.Vibrate();
+                }
             }
         }
 
@@ -52,7 +56,7 @@ namespace Pocketboy.ModelCategorization
             ResetPose();
         }
 
-        private void ResetPose() // TO DO DA FUQ
+        private void ResetPose()
         {
             transform.position = m_RespawnPose.position;
             transform.rotation = m_RespawnPose.rotation;
@@ -69,6 +73,7 @@ namespace Pocketboy.ModelCategorization
 
             if (other.CompareTag("Deadzone"))
             {
+                Handheld.Vibrate();
                 ResetPose();
             }
 

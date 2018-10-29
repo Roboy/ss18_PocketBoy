@@ -16,15 +16,11 @@ namespace Pocketboy.Cupgame
         {
             if (!m_ShufflerPlaced)
             {
-                Transform RoboyAnchor = LevelManager.Instance.GetRoboyAnchor();
-                m_Shuffler.transform.rotation = RoboyAnchor.rotation;
-                m_Shuffler.transform.position = RoboyAnchor.position;
-                LevelManager.Instance.RegisterGameObjectWithRoboy(m_Shuffler);
-
-                Vector3 direction = LevelManager.Instance.GetRoboy().transform.forward;
+                LevelManager.Instance.RegisterGameObjectWithRoboy(m_Shuffler, Vector3.zero, Quaternion.identity);
+                Vector3 direction = RoboyManager.Instance.transform.forward;
                 m_Shuffler.transform.rotation = Quaternion.LookRotation(direction * -1.0f);
                 //m_Shuffler.transform.position += m_Shuffler.transform.forward.normalized * (-1.0f);
-                m_Shuffler.transform.position += m_Shuffler.transform.right.normalized * (-0.75f);
+                m_Shuffler.transform.position += m_Shuffler.transform.right * (-0.75f);
 
 
                 //var roboy = LevelManager.Instance.Roboy;

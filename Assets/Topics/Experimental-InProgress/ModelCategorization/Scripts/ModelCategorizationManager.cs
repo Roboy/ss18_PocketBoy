@@ -41,8 +41,7 @@ namespace Pocketboy.ModelCategorization
 
         private void PositionPlatforms()
         {
-            LevelManager.Instance.RegisterGameObjectWithRoboy(PlatformParent.gameObject);
-            PlatformParent.transform.position = LevelManager.Instance.GetPositionRelativeToRoboy(new Vector3(0f, 0f, 0f));
+            LevelManager.Instance.RegisterGameObjectWithRoboy(PlatformParent.gameObject, new Vector3(0f, 0f, 0f));
             PlatformParent.transform.forward = -RoboyManager.Instance.transform.forward;
         }
 

@@ -39,9 +39,8 @@ namespace Pocketboy.PitchPlatformer
                 StartRecording();
         }
 
-        public override void OnDestroy()
+        public void OnDestroy()
         {
-            base.OnDestroy();
             StopRecording();
         }
 

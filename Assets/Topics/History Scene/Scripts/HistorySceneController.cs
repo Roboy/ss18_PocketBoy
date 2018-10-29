@@ -93,10 +93,8 @@ namespace Pocketboy.HistoryScene
             }
             TV.FillContent(tvContent.ToArray());
             Slider.FillSlider(dates.ToArray());
-            // create own anchor for tv as roboy is not destroyed at scene change so the tv does not get loaded into other scenes
-            TV.transform.SetParent(LevelManager.Instance.GetAnchorTransform());
 
-            TV.transform.position = LevelManager.Instance.GetPositionRelativeToRoboy(new Vector3(0.65f, 0f, 0f));
+            LevelManager.Instance.RegisterGameObjectWithRoboy(TV.gameObject, new Vector3(0.65f, 0f, 0f));
             TV.transform.forward = RoboyManager.Instance.transform.forward;
 
             RoboyManager.Instance.Talk("Thank you for tuning in. " +

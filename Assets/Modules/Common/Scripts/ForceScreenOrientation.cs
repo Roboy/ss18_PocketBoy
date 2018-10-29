@@ -4,37 +4,16 @@ using UnityEngine;
 
 namespace Pocketboy.Common
 {
-    public class ForceScreenOrientation : Singleton<ForceScreenOrientation>
+    public class ForceScreenOrientation
     {
-        [SerializeField]
-        private ScreenOrientation Orientation;
-
-        [SerializeField]
-        private bool OnAwake;
-
-        private ScreenOrientation m_OriginalOrientation;
-        // Use this for initialization
-        void Awake()
-        {
-            m_OriginalOrientation = Screen.orientation;
-
-            if (!OnAwake)
-                return;
-            
-            Screen.orientation = Orientation;
-        }
-
-        void OnDisable()
-        {
-            ResetScreenOrientation();
-        }
+        private static ScreenOrientation m_OriginalOrientation = ScreenOrientation.AutoRotation;
         
-        public void SetScreenOrientation(ScreenOrientation orientation)
+        public static void SetScreenOrientation(ScreenOrientation orientation)
         {
             Screen.orientation = orientation;
         }
 
-        public void ResetScreenOrientation()
+        public static void ResetScreenOrientation()
         {
             Screen.orientation = m_OriginalOrientation;
         }
