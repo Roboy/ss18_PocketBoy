@@ -3161,7 +3161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: GlassBreakerScene
-  HologramRenderer: {fileID: 0}
+  HologramRenderer: {fileID: 23508192527101772}
   IdleRotationSpeed: 10
   LoadRotationSpeed: 80
 --- !u!135 &135620198152682376
