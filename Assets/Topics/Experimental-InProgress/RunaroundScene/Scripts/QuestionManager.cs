@@ -10,13 +10,14 @@ namespace Pocketboy.Runaround
 
     public class QuestionManager : Singleton<QuestionManager>
     {
+        public GameObject AnswerArea;
         public List<RunaroundQuestion> Questions;
         public Image QuestionImage;
         public Sprite QuestionDefaultSprite;
         public Material mat_QuestionTransparent;
         public Material mat_QuestionSolid;
         public Image[] answer_Images;
-        private RunaroundQuestion m_currentQuestion;
+        private RunaroundQuestion m_currentQuestion = null;
 
         public void NavigateQuestion(string tag)
         {
@@ -35,9 +36,26 @@ namespace Pocketboy.Runaround
             return m_currentQuestion;
         }
 
+        public void ToggleAnswersVisibility(string operation)
+        {
+            if (operation == "ON")
+            {
+                AnswerArea.SetActive(true);
+            }
+
+            if (operation == "OFF")
+            {
+                AnswerArea.SetActive(false);
+            }
+
+
+        }
+
         public void LoadQuestion(int index)
         {
+            ToggleAnswersVisibility("OFF");
             m_currentQuestion = Questions[index];
+            StartCoroutine(GameMaster.Instance.ResetGame());
             QuestionImage.GetComponentInChildren<TextMeshProUGUI>().text = m_currentQuestion.QuestionText;
 
             //Try to load image for question.
@@ -57,17 +75,20 @@ namespace Pocketboy.Runaround
                 //Assign the same material as the corresponding floor.
                 answer_Images[i].material = GameMaster.Instance.dic_mat_floors[i];
                 answer_Images[i].material.shader = Shader.Find("UI/Unlit/Transparent");
+                answer_Images[i].GetComponentInChildren<TextMeshProUGUI>().text = m_currentQuestion.QuestionAnswers[i];
+
                 //Try to load image for every single answer.
-                if (m_currentQuestion.AnswerImages.Length > 0)
+                if (!m_currentQuestion.AnswerImagesPresent)
                 {
-                    answer_Images[i].sprite = m_currentQuestion.AnswerImages[i];
+                    answer_Images[i].sprite = QuestionDefaultSprite;
+
                 }
                 else
                 {
-                    answer_Images[i].sprite = QuestionDefaultSprite;
+                    answer_Images[i].sprite = m_currentQuestion.AnswerImages[i];
                 }
-                answer_Images[i].GetComponentInChildren< TextMeshProUGUI >().text = m_currentQuestion.QuestionAnswers[i];
                 
+
             }
         }
 
@@ -82,6 +103,7 @@ namespace Pocketboy.Runaround
             {
                 index += 1;
             }
+
             LoadQuestion(index);
         }
         public void PreviousQuestion()
@@ -95,10 +117,11 @@ namespace Pocketboy.Runaround
             {
                 index -= 1;
             }
+
             LoadQuestion(index);
         }
 
     }
 
-   
+
 }

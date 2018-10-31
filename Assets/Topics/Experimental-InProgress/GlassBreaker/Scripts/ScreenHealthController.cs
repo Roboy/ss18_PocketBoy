@@ -18,20 +18,23 @@ public class ScreenHealthController : Singleton<ScreenHealthController> {
     [SerializeField]
     private Button m_ResetButton;
 
+    public Text debugText;
+
+
     // Use this for initialization
     void Start () {
         m_CalibrateButton.onClick.AddListener(HandleCalibration);
         m_ResetButton.onClick.AddListener(HandleReset);
 
         GameObject cam = GameObject.FindWithTag("MainCamera");
+        Screen.transform.rotation = cam.transform.rotation;
         Screen.transform.SetParent(cam.transform);
-        Screen.transform.localRotation = cam.transform.localRotation;
-        Screen.transform.localPosition =  cam.transform.forward.normalized * 2.0f;
-        
+
+        Screen.transform.localPosition = cam.transform.forward.normalized * 0.15f;
+        LevelManager.Instance.RegisterObjectWithLevel(Screen);
+
 
     }
-
-   
 
     private void HandleCalibration()
     {

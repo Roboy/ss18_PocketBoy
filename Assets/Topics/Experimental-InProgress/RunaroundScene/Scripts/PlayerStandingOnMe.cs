@@ -20,6 +20,7 @@ namespace Pocketboy.Runaround
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log(other.name);
             if (other.tag == "Player")
             {
                 GameMaster.Instance.CheckPosition(m_ans);
@@ -37,6 +38,7 @@ namespace Pocketboy.Runaround
 
         private void OnTriggerExit(Collider other)
         {
+            Debug.Log(other.name);
             if (other.tag == "Player")
             {
                 GameMaster.Instance.ResetPlane(m_ans);

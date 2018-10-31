@@ -11,6 +11,7 @@ namespace Pocketboy.Runaround
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            
             QuestionManager.Instance.NavigateQuestion(gameObject.tag);
         }
     }

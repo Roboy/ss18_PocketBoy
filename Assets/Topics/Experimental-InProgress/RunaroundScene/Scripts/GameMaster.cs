@@ -77,8 +77,7 @@ namespace Pocketboy.Runaround
         private Vector3 m_CurrentPlayerPosition;
         private Vector3 m_PreviousPlayerPosition;
         private float m_CurrentDistance;
-
-        
+        private bool m_GameHasEnded = false;
 
         public void SetInitProperties()
         {
@@ -103,6 +102,7 @@ namespace Pocketboy.Runaround
 
         public void StartRunaround(int correctAns)
         {
+            QuestionManager.Instance.ToggleAnswersVisibility("ON");
             Coroutine game = StartCoroutine(PlayRunaround(correctAns));
             if (!m_TimerText.IsActive())
             {
@@ -168,6 +168,7 @@ namespace Pocketboy.Runaround
             StartCoroutine(DisplayResult());
             //Make the timer disappear again
             m_TimerText.gameObject.SetActive(false);
+            m_GameHasEnded = true;
 
         }
 
@@ -277,13 +278,16 @@ namespace Pocketboy.Runaround
 
         }
 
-        private IEnumerator ResetGame()
+        public IEnumerator ResetGame()
         {
             //Deactivate the previous result
             m_Outcome.gameObject.SetActive(false);
             //Reset game outcome
             m_playerWon = false;
+            //Reset player answer
             m_playerAnswer = null;
+            //Reset game state
+            m_GameHasEnded = false;
             //Reset score
             m_Score.text = "0";
             //Reset the planes to original colour
@@ -335,6 +339,8 @@ namespace Pocketboy.Runaround
 
         public void CheckPosition(RunaroundAnswer ans)
         {
+            if (m_GameHasEnded)
+                return;
             //Store the players answer
             m_playerAnswer = ans;
             //Indicate the position of the player on the field

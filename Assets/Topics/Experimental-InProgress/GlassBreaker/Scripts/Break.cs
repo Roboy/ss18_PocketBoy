@@ -6,11 +6,14 @@ public class Break : MonoBehaviour
     public Transform brokenObject;
     public float magnitudeCol, radius, power, upwards;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+            BreakScreen();
+    }
+
     public void BreakScreen()
     {
-        //Deactivate the screen
-        //gameObject.SetActive(false);
-
 
         var brokenPieces = Instantiate(brokenObject, transform.position, transform.rotation);
         brokenObject.localScale = transform.localScale;
@@ -28,12 +31,6 @@ public class Break : MonoBehaviour
 
         Destroy(brokenPieces.gameObject, 5.0f);
 
-    }
-
-    public void ResetScreen()
-    {
-        //Make the original screen visible again
-        //gameObject.SetActive(true);
     }
 
   

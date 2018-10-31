@@ -32,39 +32,20 @@ public class MeasureDB : MonoBehaviour {
     private bool m_CheckingForCracks = false;
     private bool m_VolumeCalibrated = false;
 
+    private bool m_Initialized = false;
+
     void Start()
     {
-        m_LastCrackTier = m_CurrentCrackTier;
-        m_originalScale = transform.localScale;
-        _samples = new float[QSamples];
-        _spectrum = new float[QSamples];
-        _fSample = AudioSettings.outputSampleRate;
-        audioSource = GetComponent<AudioSource>();
-        if (useMicrophone)
-        {
-            if (Microphone.devices.Length > 0)
-            {
-                
-                selectedDevice = Microphone.devices[0].ToString();
-                audioSource.outputAudioMixerGroup = mixerGroupMicrophone;
-                audioSource.clip = Microphone.Start(selectedDevice, true, 600, AudioSettings.outputSampleRate);
-            }
-            else
-            {
-                useMicrophone = false;
-            }
-        }
-        if (!useMicrophone)
-        {
-            audioSource.outputAudioMixerGroup = mixerGroupMaster;
-            audioSource.clip = audioClip;
-        }
-
-        audioSource.Play();
+        
     }
 
     void Update()
     {
+        if (!m_Initialized)
+        {
+            Initialize();
+        }
+
         AnalyzeSound();
 
         if (!m_CheckingForCracks && m_VolumeCalibrated)
@@ -84,17 +65,17 @@ public class MeasureDB : MonoBehaviour {
             volumeTier = 0;
         if (DbValue >= m_dbTreshold + 5.0f && DbValue < m_dbTreshold + 15.0f)
             volumeTier = 1;
-        if (DbValue >= m_dbTreshold + 15.0f && DbValue < m_dbTreshold + 27.5f)
+        if (DbValue >= m_dbTreshold + 15.0f && DbValue < m_dbTreshold + 25.0f)
             volumeTier = 2;
-        if (DbValue >= m_dbTreshold + 27.5f && DbValue < m_dbTreshold + 32.5f)
+        if (DbValue >= m_dbTreshold + 25.0f && DbValue < m_dbTreshold + 30.0f)
             volumeTier = 3;
-        if (DbValue >= m_dbTreshold + 32.5f && DbValue < m_dbTreshold + 35.0f)
+        if (DbValue >= m_dbTreshold + 30.0f && DbValue < m_dbTreshold + 32.5f)
             volumeTier = 4;
-        if (DbValue >= m_dbTreshold + 35.0f && DbValue < m_dbTreshold + 36.5f)
+        if (DbValue >= m_dbTreshold + 32.5f && DbValue < m_dbTreshold + 35.0f)
             volumeTier = 5;
-        if (DbValue >= m_dbTreshold + 36.5f && DbValue < m_dbTreshold + 38.0)
+        if (DbValue >= m_dbTreshold + 35.0f && DbValue < m_dbTreshold + 37.5)
             volumeTier = 6;
-        if (DbValue >= m_dbTreshold + 38.0f)
+        if (DbValue >= m_dbTreshold + 40.0f)
             volumeTier = 7;
        
 
@@ -144,19 +125,19 @@ public class MeasureDB : MonoBehaviour {
         }
         PitchValue = freqN * (_fSample / 2) / QSamples; // convert index to frequency
 
-        if (DbValue > m_dbTreshold)
-        { transform.localScale = m_originalScale + (1.0f - DbValue / m_dbTreshold) * m_originalScale; }
-        else
-        {
-          transform.localScale = m_originalScale;
-        }
+        //if (DbValue > m_dbTreshold)
+        //{ transform.localScale = m_originalScale + (1.0f - DbValue / m_dbTreshold) * m_originalScale; }
+        //else
+        //{
+        //  transform.localScale = m_originalScale;
+        //}
     }
 
     public void CalibrateMicrophone()
     {
         m_VolumeCalibrated = true;
         m_CurrentCrackTier = 0;
-        m_dbTreshold = DbValue + 5.0f;
+        m_dbTreshold = DbValue;
         ScreenHealthController.Instance.SetScreenCrackTier(0);
     }
 
@@ -164,6 +145,41 @@ public class MeasureDB : MonoBehaviour {
     {
         m_CurrentCrackTier = 0;
         ScreenHealthController.Instance.SetScreenCrackTier(0);
+    }
+
+    private void Initialize()
+    {
+        m_LastCrackTier = m_CurrentCrackTier;
+        m_originalScale = transform.localScale;
+        _samples = new float[QSamples];
+        _spectrum = new float[QSamples];
+        _fSample = AudioSettings.outputSampleRate;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Stop();
+
+        if (useMicrophone)
+        {
+            if (Microphone.devices.Length > 0)
+            {
+
+                selectedDevice = Microphone.devices[0].ToString();
+                audioSource.outputAudioMixerGroup = mixerGroupMicrophone;
+                audioSource.loop = true;
+                audioSource.clip = Microphone.Start(selectedDevice, true, 1, AudioSettings.outputSampleRate);
+            }
+            else
+            {
+                useMicrophone = false;
+            }
+        }
+        if (!useMicrophone)
+        {
+            audioSource.outputAudioMixerGroup = mixerGroupMaster;
+            audioSource.clip = audioClip;
+        }
+
+        audioSource.Play();
+        m_Initialized = true;
     }
 }
 

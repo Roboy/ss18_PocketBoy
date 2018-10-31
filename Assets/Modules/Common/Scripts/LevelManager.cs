@@ -50,9 +50,15 @@
         /// </summary>
         private List<GameObject> m_RegisteredGameObjects = new List<GameObject>();
 
+        /// <summary>
+        /// Objects in the scene that need to be destroyed when exiting a scene, that are not attached to Roboy.
+        /// </summary>
+        private List<GameObject> m_ObjectsToDestroyOnUnload = new List<GameObject>();
+
         private void Awake()
         {
             SceneManager.sceneUnloaded += DeleteRegisteredObjects;
+            SceneManager.sceneUnloaded += DeleteOtherObjects;
             SceneManager.sceneLoaded += ResetLevel;
         }
 
@@ -72,6 +78,15 @@
             {
                 SpawnLevelSpheres();
             }
+        }
+
+        /// <summary>
+        /// Add objects that should be destroyed on exiting the scene.
+        /// </summary>
+        /// <param name="gameObj"></param>
+        public void RegisterObjectWithLevel(GameObject gameObj)
+        {
+            m_ObjectsToDestroyOnUnload.Add(gameObj);
         }
 
         /// <summary>
@@ -157,6 +172,15 @@
                 Destroy(m_RegisteredGameObjects[i]);
             }
             m_RegisteredGameObjects.Clear();
+        }
+
+        private void DeleteOtherObjects(Scene scene)
+        {
+            for (int i = 0; i < m_ObjectsToDestroyOnUnload.Count; i++)
+            {
+                Destroy(m_ObjectsToDestroyOnUnload[i]);
+            }
+            m_ObjectsToDestroyOnUnload.Clear();
         }
 
     }
