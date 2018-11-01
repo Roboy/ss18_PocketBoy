@@ -44,6 +44,10 @@ namespace Pocketboy.PitchPlatformer
 
         public PitchTracker PitchRecognizer { get; private set; }
 
+        public int CurrentPlatformInCurrentLevel { get { return m_Levels[m_CurrentLevelIndex].CurrentPlatformIndex; } }
+
+        public int GoalIndexInCurrentLevel { get { return m_Levels[m_CurrentLevelIndex].GoalPlatformIndex; } }
+
         private int m_CurrentLevelIndex = 0;
 
         private PitchPlatformLevel[] m_Levels;
@@ -54,8 +58,8 @@ namespace Pocketboy.PitchPlatformer
         {
             if (LevelManager.InstanceExists)
             {
-                LevelManager.Instance.RegisterGameObjectWithRoboy(LevelsParent, new Vector3(-1f, 0.2f, HeightRange * 1.1f));
-                LevelsParent.transform.right = RoboyManager.Instance.transform.right;
+                LevelManager.Instance.RegisterGameObjectWithRoboy(LevelsParent, new Vector3(-1f, 0.2f, HeightRange * 1.1f), Quaternion.identity);
+                
             }
 
             PitchRecognizer = new PitchTracker();
@@ -127,10 +131,9 @@ namespace Pocketboy.PitchPlatformer
 
         private void SetupLevels()
         {
-            //Player.SetSpawnPosition(SpawnPoint.position);
             foreach (var level in m_Levels)
             {
-                level.Setup(HeightRange, AccuracyThreshold, PlatformLengthPerSecond, Player);
+                level.Setup(HeightRange, AccuracyThreshold, PlatformLengthPerSecond);
                 level.Hide();
             }
         }

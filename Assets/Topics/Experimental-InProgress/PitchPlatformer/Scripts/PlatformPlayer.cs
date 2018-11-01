@@ -8,39 +8,58 @@ namespace Pocketboy.PitchPlatformer
     public class PlatformPlayer : MonoBehaviour
     {
         [SerializeField]
-        private float ForwardForce = 1f;
+        private Transform LevelsParent; 
 
         [SerializeField]
-        private float ForwardSpeed = 10f;
+        private float ForwardForce = 1f;
+
+        //[SerializeField] // will be used later? when real roboy model arrives
+        //private float ForwardSpeed = 10f;
 
         private Rigidbody m_RigidBody;
 
-        private bool m_IsRunning;
+        private int m_CurrentPlatform = -1;
 
-        private Vector3 m_CurrentSpawnPoint;
+        private int m_LastBuiltPlatform = -1;
+
+        private bool m_IsRunning = false;
 
         private void Awake()
         {
             m_RigidBody = GetComponent<Rigidbody>();
             m_RigidBody.isKinematic = true;
-        }
-        
 
-        public void Go()
-        {
-            m_RigidBody.isKinematic = false;
-            m_IsRunning = true;
+            PitchPlatformerEvents.PlatformFinishedEvent += GoToNextPlatform;
+            PitchPlatformerEvents.ReachedGoalEvent += Reset;
+            PitchPlatformerEvents.ShowLevelEvent += ResetPosition;
         }
 
-        public void Stop()
+        private void FixedUpdate()
         {
-            m_RigidBody.isKinematic = true;
-            m_IsRunning = false;
+            Debug.Log(m_CurrentPlatform + " : " + PitchPlatformerManager.Instance.CurrentPlatformInCurrentLevel + " : " + PitchPlatformerManager.Instance.GoalIndexInCurrentLevel);
+            if (!m_IsRunning || (m_CurrentPlatform > -1 && m_CurrentPlatform == m_LastBuiltPlatform - 1 
+                && m_CurrentPlatform < PitchPlatformerManager.Instance.GoalIndexInCurrentLevel ))
+            {
+                m_RigidBody.isKinematic = true;
+                return;
+            }
+                
+            m_RigidBody.AddForce(LevelsParent.right * ForwardForce);
         }
 
-        public void SetSpawnPosition(Vector3 position)
+        private void OnTriggerEnter(Collider other)
         {
-            m_CurrentSpawnPoint = position;
+            TeleportTrigger teleportTrigger = null;
+            if ((teleportTrigger = other.GetComponent<TeleportTrigger>()) != null)
+            {
+                transform.position = teleportTrigger.TeleportGoal;
+                m_CurrentPlatform++;
+            }
+
+            if (other.CompareTag("Deadzone"))
+            {
+                ResetPosition();
+            }
         }
 
         public void ResetPosition()
@@ -49,35 +68,22 @@ namespace Pocketboy.PitchPlatformer
             transform.localRotation = Quaternion.identity;
         }
 
-        private void FixedUpdate()
+        private void GoToNextPlatform()
         {
-            if (!m_IsRunning && !m_RigidBody.isKinematic)
-                return;
-
-            //transform.Translate(Vector3.right * ForwardSpeed * Time.fixedDeltaTime, Space.Self);
-            m_RigidBody.AddForce(Vector3.right * ForwardForce);
+            if(!m_IsRunning) // still in spawn position
+            {
+                m_IsRunning = true;
+                m_RigidBody.isKinematic = false;
+            }
+            
+            m_LastBuiltPlatform++;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void Reset()
         {
-            TeleportTrigger teleportTrigger = null;
-            if ((teleportTrigger = other.GetComponent<TeleportTrigger>()) != null)
-            {
-                if (teleportTrigger.ShouldTeleportInstantly)
-                {
-                    transform.position = teleportTrigger.TeleportGoal;
-                }
-                else
-                {
-                    StartCoroutine(TeleportAnimation(teleportTrigger.TeleportGoal));
-                }                
-            }
-
-            if (other.CompareTag("Deadzone"))
-            {
-                ResetPosition();
-                Stop();
-            }
+            m_CurrentPlatform = -1;
+            m_IsRunning = false;
+            m_RigidBody.isKinematic = true;
         }
 
         private IEnumerator TeleportAnimation(Vector3 goalPosition)

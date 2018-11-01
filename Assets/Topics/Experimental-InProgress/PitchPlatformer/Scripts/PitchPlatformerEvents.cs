@@ -8,7 +8,7 @@ namespace Pocketboy.PitchPlatformer
     {
         public delegate void PitchPlatformerDelegate();
 
-        public static event PitchPlatformerDelegate ReachedGoalEvent, PlatformFinishedEvent;
+        public static event PitchPlatformerDelegate ReachedGoalEvent, PlatformFinishedEvent, ShowLevelEvent;
 
         public static void OnReachedGoal()
         {
@@ -23,6 +23,14 @@ namespace Pocketboy.PitchPlatformer
             if (PlatformFinishedEvent != null)
             {
                 PlatformFinishedEvent();
+            }
+        }
+
+        public static void OnShowLevel()
+        {
+            if (ShowLevelEvent != null)
+            {
+                ShowLevelEvent();
             }
         }
     }
