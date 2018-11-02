@@ -10,9 +10,9 @@ namespace Pocketboy.PitchPlatformer
         [SerializeField]
         private Collider GoalCollider;
 
-        public int CurrentPlatformIndex { get { return m_CurrentPlatformIndex; } }
-
         public int GoalPlatformIndex { get { return m_Platforms.Length - 1; } }
+
+        public PitchPlatform CurrentPlatform { get { return m_Platforms[m_CurrentPlatformIndex]; } }
 
         private int m_CurrentPlatformIndex = -1;
 

@@ -44,8 +44,6 @@ namespace Pocketboy.PitchPlatformer
 
         public PitchTracker PitchRecognizer { get; private set; }
 
-        public int CurrentPlatformInCurrentLevel { get { return m_Levels[m_CurrentLevelIndex].CurrentPlatformIndex; } }
-
         public int GoalIndexInCurrentLevel { get { return m_Levels[m_CurrentLevelIndex].GoalPlatformIndex; } }
 
         private int m_CurrentLevelIndex = 0;
@@ -69,6 +67,16 @@ namespace Pocketboy.PitchPlatformer
 
             PitchPlatformerEvents.ReachedGoalEvent += () => LevelUI.SetActive(true);
             m_Levels = LevelsParent.GetComponentsInChildren<PitchPlatformLevel>(true);
+        }
+
+        private void Update()
+        {
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                m_Levels[m_CurrentLevelIndex].CurrentPlatform.ForceBuild();
+            }
+#endif
         }
 
         public void PauseGame()

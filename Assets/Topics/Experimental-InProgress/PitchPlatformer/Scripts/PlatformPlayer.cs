@@ -20,9 +20,9 @@ namespace Pocketboy.PitchPlatformer
 
         private int m_CurrentPlatform = -1;
 
-        private int m_LastBuiltPlatform = -1;
-
         private bool m_IsRunning = false;
+
+        private int m_TeleportsLeft = 0;
 
         private void Awake()
         {
@@ -36,14 +36,12 @@ namespace Pocketboy.PitchPlatformer
 
         private void FixedUpdate()
         {
-            Debug.Log(m_CurrentPlatform + " : " + PitchPlatformerManager.Instance.CurrentPlatformInCurrentLevel + " : " + PitchPlatformerManager.Instance.GoalIndexInCurrentLevel);
-            if (!m_IsRunning || (m_CurrentPlatform > -1 && m_CurrentPlatform == m_LastBuiltPlatform - 1 
-                && m_CurrentPlatform < PitchPlatformerManager.Instance.GoalIndexInCurrentLevel ))
+            if (!m_IsRunning || m_TeleportsLeft <= 0 && m_CurrentPlatform != PitchPlatformerManager.Instance.GoalIndexInCurrentLevel)
             {
                 m_RigidBody.isKinematic = true;
                 return;
             }
-                
+
             m_RigidBody.AddForce(LevelsParent.right * ForwardForce);
         }
 
@@ -52,8 +50,16 @@ namespace Pocketboy.PitchPlatformer
             TeleportTrigger teleportTrigger = null;
             if ((teleportTrigger = other.GetComponent<TeleportTrigger>()) != null)
             {
-                transform.position = teleportTrigger.TeleportGoal;
+                if (teleportTrigger.ShouldTeleportInstantly)
+                {
+                    transform.position = teleportTrigger.TeleportGoal;
+                }
+                else
+                {
+                    StartCoroutine(TeleportAnimation(teleportTrigger.TeleportGoal));
+                }               
                 m_CurrentPlatform++;
+                m_TeleportsLeft--;
             }
 
             if (other.CompareTag("Deadzone"))
@@ -70,13 +76,13 @@ namespace Pocketboy.PitchPlatformer
 
         private void GoToNextPlatform()
         {
+            m_TeleportsLeft++;
+
             if(!m_IsRunning) // still in spawn position
             {
-                m_IsRunning = true;
-                m_RigidBody.isKinematic = false;
+                m_IsRunning = true;                
             }
-            
-            m_LastBuiltPlatform++;
+            m_RigidBody.isKinematic = false;
         }
 
         private void Reset()
@@ -89,7 +95,7 @@ namespace Pocketboy.PitchPlatformer
         private IEnumerator TeleportAnimation(Vector3 goalPosition)
         {
             m_RigidBody.isKinematic = true;
-            float duration = 0.5f;
+            float duration = 0.1f;
             float currentDuration = 0f;
             Vector3 initPosition = transform.position;
             while (currentDuration < duration)

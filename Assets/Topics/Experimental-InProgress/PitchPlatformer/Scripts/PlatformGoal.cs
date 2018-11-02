@@ -6,6 +6,8 @@ namespace Pocketboy.PitchPlatformer
 {
     public class PlatformGoal : MonoBehaviour
     {
+        [SerializeField]
+        private ParticleSystem GoalReachedParticle;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -13,6 +15,7 @@ namespace Pocketboy.PitchPlatformer
             if (player != null)
             {
                 PitchPlatformerEvents.OnReachedGoal();
+                Instantiate(GoalReachedParticle, transform);
             }
         }
     }
