@@ -1,24 +1,15 @@
 fileFormatVersion: 2
-guid: 7fff6d6134094a14a8db7a617a90eda6
+guid: ff1251278fa202c42982c21012bfa98d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Cross
-    100002: //RootNode
-    100004: Robots
-    400000: Cross
-    400002: //RootNode
-    400004: Robots
-    2100000: mat_cross
-    2100002: mat_s
-    2100004: mat_main
-    2100006: mat_circle
-    2300000: Cross
-    2300002: Robots
-    3300000: Cross
-    3300002: Robots
-    4300000: Cross
-    4300002: Robots
+    100000: //RootNode
+    400000: //RootNode
+    2100000: mat_circle
+    2100002: mat_main
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cube_001
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
@@ -30,18 +21,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat_cross
-    second: {fileID: 2100000, guid: a740a21f996725e40bf3977396ca81dc, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: mat_main
     second: {fileID: 2100000, guid: 065bee43fbd300a459b12f0549485174, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat_s
-    second: {fileID: 2100000, guid: 04d3ca66fbda81647bb948c8e357afa7, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
