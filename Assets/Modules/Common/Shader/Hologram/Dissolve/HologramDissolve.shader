@@ -4,7 +4,7 @@
 	{
 		_MainColor("Main Color", Color) = (1,1,1,1)
 		// General
-		_Brightness("Brightness", Range(0.1, 6.0)) = 3.0
+		_Brightness("Brightness", Range(0.1, 6.0)) = 1.0
 		_Alpha("Alpha", Range(0.0, 1.0)) = 1.0
 		_Direction("Direction", Vector) = (0,1,0,0)
 		// Main Color
@@ -164,18 +164,6 @@
 
 			col.rgb *= _Brightness;
 
-			//// Calculate the threshhold value
-			//float shiftedDissolveValue = shiftRange(-100, 0, -1, 1, i.dGeometry);
-			//float shiftedVertexValue = shiftRange(_LeftestVertex, _RightestVertex, 0, 3.14, i.worldVertex.x);
-			//float threshholdValue = sin(shiftedVertexValue - frac(_Time.x) * _WaveSpeed);
-		 //
-			//if (shiftedDissolveValue < threshholdValue - _DissolveTransitionSize)
-			//{
-			//	fixed4 defaultRimColor = fixed4(1, 1, 1, 1) * pow(rim, 5);
-			//	fixed4 defaultColor = tex2D(_MainTex, i.uv) * _MainColor + defaultRimColor;
-			//	defaultColor.a = texColor.a;
-			//	return defaultColor;
-			//}
 			float thresholdTransitionValue = shiftRange(0, 1, _LowestVertex, _HighestVertex, _DissolveTransitionSize);
 			if (i.dGeometry < 0.0) 
 			{
@@ -191,7 +179,7 @@
 				{
 					fixed4 defaultRimColor = fixed4(1, 1, 1, 1) * pow(rim, 5);
 					fixed4 defaultColor = tex2D(_MainTex, i.uv) * _MainColor + defaultRimColor;
-					defaultColor.a = texColor.a * _Alpha;
+					defaultColor.a = texColor.a * _Alpha * _MainColor.a;
 					defaultColor.rgb *= _Brightness;
 					return defaultColor;
 				}
