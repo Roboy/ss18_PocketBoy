@@ -57,6 +57,8 @@ namespace Pocketboy.Common
 
             m_IsActive = true;
             transform.position = RoboyManager.Instance.InstructionPosition;
+            transform.rotation = RoboyManager.Instance.transform.rotation;
+            transform.forward = -transform.forward;
             InstructionText.pageToDisplay = 1;            
             InstructionCanvas.gameObject.SetActive(true);
             HelpButton.interactable = false;
@@ -87,10 +89,13 @@ namespace Pocketboy.Common
             while (InstructionText.textInfo.pageInfo[0].lastCharacterIndex == 0)
                 yield return null;
 
+            yield return new WaitForEndOfFrame();
+
             for (int i = 0; i < InstructionText.textInfo.pageCount; i++)
             {
                 var page = InstructionText.textInfo.pageInfo[i];
-                m_TextsPerPage.Add(InstructionText.text.Substring(page.firstCharacterIndex, page.lastCharacterIndex - page.firstCharacterIndex + 1));
+                var pageText = InstructionText.text.Substring(page.firstCharacterIndex, page.lastCharacterIndex - page.firstCharacterIndex + 1);
+                m_TextsPerPage.Add(pageText);
             }
 
             InstructionCanvas.gameObject.SetActive(false);

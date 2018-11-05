@@ -46,6 +46,14 @@ namespace Pocketboy.PitchPlatformer
             Destroy(m_Material);
         }
 
+        public void ForceBuild()
+        {
+            if (!m_IsListening)
+                return;
+
+            m_Material.SetFloat("_DissolveValue", 1f);
+        }
+
         public void Setup(int note, int accuracy, float lengthPerSecond, float heightRange)
         {
             m_Note = note;

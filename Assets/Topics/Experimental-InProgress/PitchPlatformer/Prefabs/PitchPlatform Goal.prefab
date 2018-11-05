@@ -37,9 +37,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1529358284033378}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.009, y: 0.11, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.405, y: 0.036999978, z: -0.4}
+  m_LocalScale: {x: 0.099999994, y: 0.10000008, z: 0.09999999}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -121,3 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ba941339e43bb94780ecbad1dd16400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GoalReachedParticle: {fileID: 198831927762027086, guid: cb898ec344c3c984dbc7264eab9ec1b9,
+    type: 2}

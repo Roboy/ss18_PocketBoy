@@ -1,18 +1,18 @@
 fileFormatVersion: 2
-guid: b62ae67d3fdd5d1469c646c459773aec
+guid: 283a5e230efa8f947b9e5d54a60f0cdd
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: unnamed
-    2100002: mat_sign
-    2100004: mat_s
-    2100006: mat_main
-    2100008: mat_circle
+    2100000: mat_main
+    2100002: mat_circle
+    2100004: mat_flash
+    2100006: mat_leftEye
+    2100008: mat_rightEye
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Robots
+    4300000: Cube_001
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
@@ -24,18 +24,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: mat_flash
+    second: {fileID: 2100000, guid: 6621e97e62baed94083dee1b1c987a28, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_leftEye
+    second: {fileID: 2100000, guid: 9ff9c67028356cf4a8c812cc73b91895, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: mat_main
     second: {fileID: 2100000, guid: 3ecfe7c10f1daa44a80bad80daac4dcf, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mat_s
-    second: {fileID: 2100000, guid: c49c36e4b88590d488f6a06c621ec992, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mat_sign
-    second: {fileID: 2100000, guid: 7d4888dec65150c408448153648edc7c, type: 2}
+      name: mat_rightEye
+    second: {fileID: 2100000, guid: b0430eafce0c2ac45a29dbec47a1f6f7, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

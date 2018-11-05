@@ -7,9 +7,11 @@ ModelImporter:
     400000: //RootNode
     2100000: mat_questionMark
     2100002: mat_circle
+    2100004: mat_main
     2300000: //RootNode
     3300000: //RootNode
     4300000: QuestionMark
+    4300002: Cube_001
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
@@ -18,6 +20,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: mat_circle
     second: {fileID: 2100000, guid: 2c3e2fed43da9024290e31940060e791, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_main
+    second: {fileID: 2100000, guid: 470499bed1b61f84f980885ab9e44165, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -73,7 +80,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.1
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

@@ -10,9 +10,11 @@ namespace Pocketboy.PitchPlatformer
         [SerializeField]
         private Collider GoalCollider;
 
-        private int m_CurrentPlatformIndex = -1;
+        public int GoalPlatformIndex { get { return m_Platforms.Length - 1; } }
 
-        private PlatformPlayer m_Player;
+        public PitchPlatform CurrentPlatform { get { return m_Platforms[m_CurrentPlatformIndex]; } }
+
+        private int m_CurrentPlatformIndex = -1;
 
         private PitchPlatform[] m_Platforms;
 
@@ -22,9 +24,8 @@ namespace Pocketboy.PitchPlatformer
         }
 
         public void Show()
-        {
+        {    
             gameObject.SetActive(true);
-
             foreach (var platform in m_Platforms)
             {
                 platform.StopListen();
@@ -35,10 +36,9 @@ namespace Pocketboy.PitchPlatformer
             MicrophoneManager.Instance.StartRecording();
 
             m_CurrentPlatformIndex = -1;
-            m_Player.ResetPosition();
-            m_Player.Stop();
             GoalCollider.enabled = false;
-            GoToNextPlatform();                   
+            GoToNextPlatform();
+            PitchPlatformerEvents.OnShowLevel();
         }
 
         public void Hide()
@@ -49,7 +49,7 @@ namespace Pocketboy.PitchPlatformer
             gameObject.SetActive(false);
         }
 
-        public void Setup(float heightRange, int accuracyThreshold, float platformLengthPerSecond, PlatformPlayer player)
+        public void Setup(float heightRange, int accuracyThreshold, float platformLengthPerSecond)
         {
             m_Platforms = GetComponentsInChildren<PitchPlatform>(true);
             foreach (var platform in m_Platforms)
@@ -62,7 +62,6 @@ namespace Pocketboy.PitchPlatformer
                 //int platformNote = (int)Mathf.Lerp(36, 69, normalizedHeightValue);
                 platform.Setup(platformNote, accuracyThreshold, platformLengthPerSecond, heightRange);
             }
-            m_Player = player;
         }
 
         private void GoToNextPlatform()
