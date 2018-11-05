@@ -110,7 +110,7 @@
             gameObj.transform.position = m_Roboy.transform.TransformPoint(relativePosition);
             gameObj.transform.rotation = m_Roboy.transform.rotation * relativeRotation;
         }
-
+        
         private void SpawnRoboy()
         {
             if (m_RoboySpawned)

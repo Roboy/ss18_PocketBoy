@@ -108,5 +108,11 @@ namespace Pocketboy.Common
             float scale = 1f / (oldMax - oldMin);
             return (value - oldMin) * scale;
         }
+
+        public static float GetEllipseCircumference(float semiMajor, float semiMinor)
+        {
+            float lambda = (semiMajor - semiMinor) / (semiMajor + semiMinor);
+            return (semiMajor + semiMinor) * Mathf.PI * (1 + (3 * lambda * lambda) / (10 + Mathf.Sqrt(4 - 3 * lambda * lambda)));
+        }
     }
 }

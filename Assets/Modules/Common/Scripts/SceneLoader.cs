@@ -16,6 +16,8 @@ namespace Pocketboy.Common
 
         private bool m_IsLoading = false;
 
+        private bool m_SavedHomeButtonState;
+
         private void Awake()
         {
             HomeButton.onClick.AddListener(() => LoadScene("HomeScene_DEV"));
@@ -43,6 +45,17 @@ namespace Pocketboy.Common
                 return;
 
             StartCoroutine(LoadSceneAsync(sceneName));
+        }
+
+        public void ShowUI()
+        {
+            HomeButton.gameObject.SetActive(m_SavedHomeButtonState);
+        }
+
+        public void HideUI()
+        {
+            m_SavedHomeButtonState = HomeButton.gameObject.activeSelf;
+            HomeButton.gameObject.SetActive(false);
         }
 
         void FadeOutImage()

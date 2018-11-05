@@ -48,6 +48,8 @@ namespace Pocketboy.Common
 
         private bool m_IsQuitting = false;
 
+        private SessionStatus m_PreviousStatus = SessionStatus.None;
+
         private void Start()
         {
             CalibrateButton.onClick.AddListener(Calibrate);
@@ -158,6 +160,20 @@ namespace Pocketboy.Common
             {
                 return;
             }
+
+            if (Session.Status != m_PreviousStatus)
+            {
+                if (Session.Status == SessionStatus.LostTracking)
+                {
+                    SceneLoader.Instance.HideUI();
+                }
+                else if (Session.Status == SessionStatus.Tracking)
+                {
+                    SceneLoader.Instance.ShowUI();
+                }
+            }
+
+            m_PreviousStatus = Session.Status;
 
             // Quit if ARCore was unable to connect and give Unity some time for the toast to appear.
             if (Session.Status == SessionStatus.ErrorPermissionNotGranted)
