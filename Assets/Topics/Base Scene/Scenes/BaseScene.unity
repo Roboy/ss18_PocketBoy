@@ -166,7 +166,7 @@ Prefab:
     - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
         type: 2}
       propertyPath: Spheres.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4365924198581326, guid: 2b68885390b2ac346adfcd7a9d92fd1b, type: 2}
       propertyPath: m_LocalPosition.x
@@ -264,7 +264,7 @@ Prefab:
         type: 2}
       propertyPath: Spheres.Array.data[2]
       value: 
-      objectReference: {fileID: 1359520476956792, guid: c23cad7112d8c5046a049d33594a860a,
+      objectReference: {fileID: 1489700391209872, guid: 2b95c97aefc063a41a2f3caf8ddaa086,
         type: 2}
     - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
         type: 2}
@@ -281,6 +281,12 @@ Prefab:
     - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
         type: 2}
       propertyPath: Spheres.Array.data[5]
+      value: 
+      objectReference: {fileID: 1588444124024096, guid: 9e8d968771e566b4da3958236f44de85,
+        type: 2}
+    - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
+        type: 2}
+      propertyPath: Spheres.Array.data[6]
       value: 
       objectReference: {fileID: 1195705990364126, guid: 2a430e87a3d64204885dd07b4c56f054,
         type: 2}
