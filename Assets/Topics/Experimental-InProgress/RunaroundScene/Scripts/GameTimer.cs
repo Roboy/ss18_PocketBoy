@@ -8,7 +8,7 @@ using TMPro;
 public class GameTimer : MonoBehaviour {
 
     public float Time = 5.0f;
-    public TextMeshPro Text;
+    public TextMeshProUGUI Text;
     public Button StartButton;
 
     public IEnumerator Countdown(float time)

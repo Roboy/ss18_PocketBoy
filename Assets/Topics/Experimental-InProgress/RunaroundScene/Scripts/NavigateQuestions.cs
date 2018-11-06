@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 namespace Pocketboy.Runaround
@@ -11,8 +12,10 @@ namespace Pocketboy.Runaround
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            
-            QuestionManager.Instance.NavigateQuestion(gameObject.tag);
+            if (gameObject.GetComponent<Button>().enabled)
+            {
+                QuestionManager.Instance.NavigateQuestion(gameObject.tag);
+            }
         }
     }
 }

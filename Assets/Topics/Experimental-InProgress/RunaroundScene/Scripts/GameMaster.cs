@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Pocketboy.Common;
+using UnityEngine.UI;
 
 namespace Pocketboy.Runaround
 {
@@ -35,17 +36,27 @@ namespace Pocketboy.Runaround
         /// Additional feedback where the player is currently Standing.
         /// </summary>
         public Material mat_position;
-
         public Material mat_currentAnswer;
-
+       
+        public Color m_colWinning;
+        public Color m_colLoosing;
 
 
         [SerializeField]
-        private TextMeshPro m_TimerText;
+        private TextMeshProUGUI m_TimerText;
         [SerializeField]
-        private TextMeshPro m_Outcome;
+        private TextMeshProUGUI m_Outcome;
         [SerializeField]
-        private TextMeshPro m_Score;
+        private TextMeshProUGUI m_Score;
+        [SerializeField]
+        private GameObject m_HUD;
+        [SerializeField]
+        private Button m_NextButton;
+        [SerializeField]
+        private Button m_PreviousButton;
+
+
+
         /// <summary>
         /// Reference to floors original materials with id.
         /// </summary>
@@ -78,6 +89,7 @@ namespace Pocketboy.Runaround
         private Vector3 m_PreviousPlayerPosition;
         private float m_CurrentDistance;
         private bool m_GameHasEnded = false;
+        private Color m_ButtonDefaultColor;
 
         public void SetInitProperties()
         {
@@ -96,22 +108,26 @@ namespace Pocketboy.Runaround
                 dic_plane_scale.Add(i, scale);
          
             }
-            
+
+            m_ButtonDefaultColor = m_NextButton.GetComponent<Image>().color;
 
         }
 
         public void StartRunaround(int correctAns)
         {
             QuestionManager.Instance.ToggleAnswersVisibility("ON");
+            ToggleButtons("OFF");
+            ToggleHUDvisibility("ON");
             Coroutine game = StartCoroutine(PlayRunaround(correctAns));
             if (!m_TimerText.IsActive())
             {
                 m_TimerText.gameObject.SetActive(true);
             }
-            GameObject score = m_Score.gameObject.transform.parent.gameObject;
-            if (!score.activeInHierarchy)
+
+            
+            if (!m_Score.gameObject.activeInHierarchy)
             {
-                score.SetActive(true);
+                m_Score.gameObject.SetActive(true);
             }
 
             StartCoroutine(this.GetComponent<GameTimer>().Countdown(duration));
@@ -155,7 +171,7 @@ namespace Pocketboy.Runaround
                     //highlight the new plane
                     m_highlightedPlane.GetComponent<Renderer>().material = mat_highlighted;
                     //slow down the highlighting with math power of function
-                    current_speed += current_speed * current_speed;
+                    //current_speed += current_speed * current_speed;
                     counter += current_speed;
                     yield return new WaitForSeconds(current_speed);
                 }
@@ -183,13 +199,13 @@ namespace Pocketboy.Runaround
             while (time > 0.0f)
             {
                 //Standing still is penalized
-                if (m_CurrentDistance < 0.5)
+                if (m_CurrentDistance < 0.005)
                 {
                     m_CurrentMultiplier = -7;
                 }
 
                 //Moving not quite enough
-                if (m_CurrentDistance > 0.5 && m_CurrentDistance < 1)
+                if (m_CurrentDistance > 0.005 && m_CurrentDistance < 0.1)
                 {
                     m_CurrentMultiplier = 0;
                 }
@@ -228,13 +244,15 @@ namespace Pocketboy.Runaround
                 {
                     m_playerWon = true;
                     m_Outcome.text = "You win!";
+                    m_Outcome.GetComponent<TextMeshProUGUI>().color = m_colWinning;
                 }
                 else
                 {
                     m_playerWon = false;
                     m_Outcome.text = "You loose!";
+                    m_Outcome.GetComponent<TextMeshProUGUI>().color = m_colLoosing;
                 }
-                m_Outcome.gameObject.SetActive(true);
+                ToggleResultText("ON");
             }
 
             foreach(RunaroundAnswer ans in AnswerPlanes)
@@ -273,7 +291,7 @@ namespace Pocketboy.Runaround
 
             }
 
-
+            ToggleButtons("ON");
 
 
         }
@@ -322,7 +340,7 @@ namespace Pocketboy.Runaround
             {
                 m_CurrentPlayerPosition = other.transform.position;
                 float distance = Vector3.Distance(m_CurrentPlayerPosition, m_PreviousPlayerPosition);
-                m_CurrentDistance = 3000 * distance;
+                m_CurrentDistance = 1000 * distance;
                 m_PreviousPlayerPosition = m_CurrentPlayerPosition;
             }
 
@@ -364,6 +382,46 @@ namespace Pocketboy.Runaround
             QuestionManager.Instance.answer_Images[AnswerPlanes.IndexOf(ans)].material = dic_mat_floors[AnswerPlanes.IndexOf(ans)];
         }
 
+        public void ToggleHUDvisibility(string operation)
+        {
+            if (operation == "ON")
+            {
+                m_HUD.SetActive(true);
+            }
+            if (operation == "OFF")
+            {
+                m_HUD.SetActive(false);
+            }
+        }
 
+        public void ToggleButtons(string operation)
+        {
+            if (operation == "ON")
+            {
+                m_NextButton.enabled = true;
+                m_PreviousButton.enabled = true;
+                m_NextButton.GetComponent<Image>().color = m_ButtonDefaultColor;
+                m_PreviousButton.GetComponent<Image>().color = m_ButtonDefaultColor;
+            }
+            if (operation == "OFF")
+            {
+                m_NextButton.enabled = false;
+                m_PreviousButton.enabled = false;
+                m_NextButton.GetComponent<Image>().color = Color.grey;
+                m_PreviousButton.GetComponent<Image>().color = Color.grey;
+            }
+        }
+
+        public void ToggleResultText(string operation)
+        {
+            if (operation == "ON")
+            {
+                m_Outcome.gameObject.SetActive(true);
+            }
+            if (operation == "OFF")
+            {
+                m_Outcome.gameObject.SetActive(false);
+            }
+        }
     }
 }

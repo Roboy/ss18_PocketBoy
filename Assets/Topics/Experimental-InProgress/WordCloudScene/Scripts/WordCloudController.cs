@@ -18,7 +18,7 @@ namespace Pocketboy.Wordcloud
 
         private void Initialize()
         {
-            LevelManager.Instance.RegisterGameObjectWithRoboy(m_WC.gameObject, new Vector3(1.0f, 0.0f, -2.5f));
+            LevelManager.Instance.RegisterGameObjectWithRoboy(m_WC.gameObject, new Vector3(1.0f, 0.0f, -1.5f));
         }
 
 

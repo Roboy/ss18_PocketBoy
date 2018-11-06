@@ -54,6 +54,8 @@ namespace Pocketboy.Runaround
         public void LoadQuestion(int index)
         {
             ToggleAnswersVisibility("OFF");
+            GameMaster.Instance.ToggleHUDvisibility("OFF");
+            GameMaster.Instance.ToggleResultText("OFF");
             m_currentQuestion = Questions[index];
             StartCoroutine(GameMaster.Instance.ResetGame());
             QuestionImage.GetComponentInChildren<TextMeshProUGUI>().text = m_currentQuestion.QuestionText;

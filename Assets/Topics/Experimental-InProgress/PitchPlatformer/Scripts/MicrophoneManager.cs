@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Pocketboy.Common;
 
-namespace Pocketboy.PitchPlatformer
+namespace Pocketboy.Common
 {
     [RequireComponent(typeof(AudioSource))]
     public class MicrophoneManager : Singleton<MicrophoneManager>
@@ -85,6 +85,11 @@ namespace Pocketboy.PitchPlatformer
         {
             m_AudioSource.GetOutputData(m_Samples, 0);
             return m_Samples;
+        }
+
+        public void FillSamples(ref float[] samples)
+        {
+            m_AudioSource.GetOutputData(samples, 0);
         }
     }
 }
