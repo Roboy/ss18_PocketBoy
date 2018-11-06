@@ -9,77 +9,78 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1265645496623854}
+  m_RootGameObject: {fileID: 1499276212878396}
   m_IsPrefabAsset: 1
---- !u!1 &1265645496623854
+--- !u!1 &1499276212878396
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4900840069597158}
-  - component: {fileID: 33506522681788390}
-  - component: {fileID: 23508192527101772}
-  - component: {fileID: 135620198152682376}
-  - component: {fileID: 114504168334655742}
+  - component: {fileID: 4516007547596530}
+  - component: {fileID: 33682844546525900}
+  - component: {fileID: 23733319395041362}
+  - component: {fileID: 135790739299009002}
+  - component: {fileID: 114981202043483420}
   m_Layer: 8
-  m_Name: GlassBreakerSphere
+  m_Name: GlassBreakerScene
   m_TagString: Levelsphere
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1768700763915494
+--- !u!1 &1641135111146272
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4201481446443082}
-  - component: {fileID: 33726630026869354}
-  - component: {fileID: 23998411374902320}
+  - component: {fileID: 4499434046120626}
+  - component: {fileID: 33061504589273048}
+  - component: {fileID: 23782000300964676}
+  - component: {fileID: 95472414121169302}
   m_Layer: 0
-  m_Name: damagedScreen
+  m_Name: shattered_glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4201481446443082
+--- !u!4 &4499434046120626
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1768700763915494}
-  m_LocalRotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_GameObject: {fileID: 1641135111146272}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
-  m_Father: {fileID: 4900840069597158}
+  m_Father: {fileID: 4516007547596530}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4900840069597158
+--- !u!4 &4516007547596530
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265645496623854}
+  m_GameObject: {fileID: 1499276212878396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4201481446443082}
+  - {fileID: 4499434046120626}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23508192527101772
+--- !u!23 &23733319395041362
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265645496623854}
+  m_GameObject: {fileID: 1499276212878396}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -109,12 +110,12 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!23 &23998411374902320
+--- !u!23 &23782000300964676
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1768700763915494}
+  m_GameObject: {fileID: 1641135111146272}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -124,7 +125,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: c1f355b15b2ec124bb1bfea3200fe385, type: 2}
+  - {fileID: 2100000, guid: 840cc47a0f3ef564bb1f7c2b73e2f3e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,41 +145,59 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33506522681788390
+--- !u!33 &33061504589273048
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265645496623854}
+  m_GameObject: {fileID: 1641135111146272}
+  m_Mesh: {fileID: 4300000, guid: 4c50453cd2649ac4c9ba72f249de7ca5, type: 3}
+--- !u!33 &33682844546525900
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1499276212878396}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!33 &33726630026869354
-MeshFilter:
+--- !u!95 &95472414121169302
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1768700763915494}
-  m_Mesh: {fileID: 4300000, guid: 1f0b167368d24014bb01033008c2989d, type: 3}
---- !u!114 &114504168334655742
+  m_GameObject: {fileID: 1641135111146272}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 4c50453cd2649ac4c9ba72f249de7ca5, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114981202043483420
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265645496623854}
+  m_GameObject: {fileID: 1499276212878396}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0169c21a919a89d45923b30a2d793c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SceneName: GlassBreakerScene
-  HologramRenderer: {fileID: 23998411374902320}
+  HologramRenderer: {fileID: 23782000300964676}
   IdleRotationSpeed: 10
   LoadRotationSpeed: 80
---- !u!135 &135620198152682376
+--- !u!135 &135790739299009002
 SphereCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265645496623854}
+  m_GameObject: {fileID: 1499276212878396}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
