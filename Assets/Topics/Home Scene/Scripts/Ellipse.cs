@@ -8,10 +8,10 @@ namespace Pocketboy.Common
     public class Ellipse : MonoBehaviour
     {
         [SerializeField]
-        private float SemiMajor = 2;
+        private float SemiMajor = 0.2f;
 
         [SerializeField]
-        private float SemiMinor = 1;
+        private float SemiMinor = 0.1f;
 
         [SerializeField]
         private int Resolution = 100;
@@ -64,6 +64,7 @@ namespace Pocketboy.Common
             }
         }
 
+        [SerializeField, HideInInspector]
         private Vector3[] m_CurrentPath;
 
         [SerializeField, HideInInspector]
@@ -105,20 +106,12 @@ namespace Pocketboy.Common
 
             m_SavedEllipse = new EllipseObject(SemiMajor, SemiMinor, Resolution, path);
             m_SavedPathInspector = GetWorldPath(SemiMajor, SemiMinor, Resolution);
+
+            //OnDrawGizmosSelected();
         }
 
-        private void OnDrawGizmosSelected()
+        public void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.green;
-            if (!m_SavedEllipse.Equals(default(EllipseObject)))
-            {
-                float radius = MathUtility.GetApproximateEllipseCircumference(m_SavedEllipse.SemiMajor, m_SavedEllipse.SemiMinor) / m_SavedEllipse.Resolution * 0.1f;
-                for (int i = 0; i < m_SavedPathInspector.Length; i++)
-                {
-                    Gizmos.DrawWireSphere(m_SavedPathInspector[i], radius);
-                }
-            }
-
             Gizmos.color = Color.red;
 
             if (!IsValid(SemiMajor, SemiMinor, Resolution))
@@ -131,6 +124,16 @@ namespace Pocketboy.Common
             for (int i = 0; i < m_CurrentPath.Length; i++)
             {
                 Gizmos.DrawWireSphere(m_CurrentPath[i], pathSphereRadius);
+            }
+
+            Gizmos.color = Color.green;
+            if (!m_SavedEllipse.Equals(default(EllipseObject)))
+            {
+                float radius = MathUtility.GetApproximateEllipseCircumference(m_SavedEllipse.SemiMajor, m_SavedEllipse.SemiMinor) / m_SavedEllipse.Resolution * 0.1f;
+                for (int i = 0; i < m_SavedPathInspector.Length; i++)
+                {
+                    Gizmos.DrawWireSphere(m_SavedPathInspector[i], radius);
+                }
             }
         }
 

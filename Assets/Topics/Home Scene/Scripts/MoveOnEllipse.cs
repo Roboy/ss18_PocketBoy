@@ -16,7 +16,7 @@ namespace Pocketboy.Common
         private bool IsLocal = false;
 
         [SerializeField]
-        private float CycleDuration = 1f;
+        private float CycleDuration = 5f;
 
         private Vector3[] m_Path;
 
@@ -39,6 +39,11 @@ namespace Pocketboy.Common
                 StartMoving();
         }
 
+        private void OnDrawGizmosSelected()
+        {
+            EllipseObject.OnDrawGizmosSelected();
+        }
+
         public void StartMoving()
         {
             if (EllipseObject == null)
@@ -47,8 +52,19 @@ namespace Pocketboy.Common
             StartCoroutine(Move());
         }
 
+        public void ResumeMoving()
+        {
+            if (m_MovementState != State.Paused)
+                return;
+
+            m_MovementState = State.Moving;
+        }
+
         public void PauseMoving()
         {
+            if (m_MovementState != State.Moving)
+                return;
+
             m_MovementState = State.Paused;
         }
 

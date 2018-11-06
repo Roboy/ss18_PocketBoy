@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 namespace Pocketboy.Common
 {
-    [CustomEditor(typeof(Ellipse))]
+    [CustomEditor(typeof(Ellipse)), CanEditMultipleObjects]
     public class EllipseEditor : Editor
     {
         private Ellipse m_Ellipse;
@@ -21,6 +22,7 @@ namespace Pocketboy.Common
             if (GUILayout.Button("Save Ellipse"))
             {
                 m_Ellipse.SaveEllipse();
+                EditorUtility.SetDirty(m_Ellipse);
             }
         }
     }
