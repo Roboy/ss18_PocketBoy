@@ -14,6 +14,8 @@ namespace Pocketboy.Common
         [SerializeField]
         private Button HomeButton;
 
+        public bool IsLoadingTriggered { get; set; }
+
         private bool m_IsLoading = false;
 
         private bool m_SavedHomeButtonState;
@@ -105,6 +107,7 @@ namespace Pocketboy.Common
 
             AO.allowSceneActivation = true;
             m_IsLoading = false;
+            IsLoadingTriggered = false;
         }
     }
 }

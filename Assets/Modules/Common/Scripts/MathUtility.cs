@@ -109,10 +109,23 @@ namespace Pocketboy.Common
             return (value - oldMin) * scale;
         }
 
-        public static float GetEllipseCircumference(float semiMajor, float semiMinor)
+        public static float GetApproximateEllipseCircumference(float semiMajor, float semiMinor)
         {
+            if (semiMajor == 0f || semiMinor == 0f)
+                return 0f;
+
             float lambda = (semiMajor - semiMinor) / (semiMajor + semiMinor);
             return (semiMajor + semiMinor) * Mathf.PI * (1 + (3 * lambda * lambda) / (10 + Mathf.Sqrt(4 - 3 * lambda * lambda)));
+        }
+
+        public static float GetPathLength(Vector3[] path)
+        {
+            float length = 0;
+            for (int i = 0; i < path.Length - 1; i++)
+            {
+                length += (path[i + 1] - path[i]).magnitude;
+            }
+            return length;
         }
     }
 }

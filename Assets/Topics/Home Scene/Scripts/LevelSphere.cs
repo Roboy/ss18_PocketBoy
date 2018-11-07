@@ -26,6 +26,8 @@ namespace Pocketboy.Common
 
         private Coroutine m_AnimationCoroutine;
 
+        private Renderer m_Renderer;
+
         private void Start()
         {
             if (HologramRenderer.material.HasProperty("_DissolveValue"))
@@ -33,6 +35,7 @@ namespace Pocketboy.Common
                 m_HologramMaterial = HologramRenderer.material;
             }
             m_CurrentRotationSpeed = IdleRotationSpeed;
+            m_Renderer = GetComponent<Renderer>();
         }
 
         private void Update()
@@ -43,8 +46,9 @@ namespace Pocketboy.Common
         private void OnTriggerEnter(Collider other)
         {
             LevelSphereCollider collider;
-            if ((collider = other.GetComponent<LevelSphereCollider>()) != null)
+            if ((collider = other.GetComponent<LevelSphereCollider>()) != null && m_Renderer.isVisible && !SceneLoader.Instance.IsLoadingTriggered)
             {
+                SceneLoader.Instance.IsLoadingTriggered = true;
                 m_AnimationCoroutine = StartCoroutine(LoadingAnimation(collider.LoadDuration));
                 m_CurrentRotationSpeed = LoadRotationSpeed;
             }
@@ -55,13 +59,14 @@ namespace Pocketboy.Common
             m_HologramMaterial.SetFloat("_DissolveValue", 0f);
             if (m_AnimationCoroutine != null)
             {
+                SceneLoader.Instance.IsLoadingTriggered = false;
                 m_CurrentRotationSpeed = IdleRotationSpeed;
                 StopCoroutine(m_AnimationCoroutine);
             }
         }
 
         private IEnumerator LoadingAnimation(float duration)
-        {
+        {        
             float currentDuration = 0f;          
             while (currentDuration < duration)
             {

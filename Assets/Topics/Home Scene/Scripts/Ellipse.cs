@@ -8,10 +8,10 @@ namespace Pocketboy.Common
     public class Ellipse : MonoBehaviour
     {
         [SerializeField]
-        private float SemiMajor = 2;
+        private float SemiMajor = 0.2f;
 
         [SerializeField]
-        private float SemiMinor = 1;
+        private float SemiMinor = 0.1f;
 
         [SerializeField]
         private int Resolution = 100;
@@ -29,10 +29,49 @@ namespace Pocketboy.Common
             get { return GetLocalPath(SemiMajor, SemiMinor, Resolution); }
         }
 
+        public Vector3[] SavedPath
+        {
+            get
+            {
+                if (!m_SavedEllipse.Equals(default(EllipseObject)))
+                    return m_SavedEllipse.Path;
+                else
+                    return null;
+            }
+        }
+
+        public float CurrentPathLength { get { return MathUtility.GetApproximateEllipseCircumference(SemiMajor, SemiMinor); } }
+
+        public float SavedPathLengthApproximate
+        {
+            get
+            {
+                if (!m_SavedEllipse.Equals(default(EllipseObject)))
+                    return MathUtility.GetApproximateEllipseCircumference(m_SavedEllipse.SemiMajor, m_SavedEllipse.SemiMinor);
+                else
+                    return 0f;
+            }
+        }
+
+        public float SavedPathLength
+        {
+            get
+            {
+                if (!m_SavedEllipse.Equals(default(EllipseObject)))
+                    return MathUtility.GetPathLength(m_SavedEllipse.Path);
+                else
+                    return 0f;
+            }
+        }
+
+        [SerializeField, HideInInspector]
         private Vector3[] m_CurrentPath;
 
         [SerializeField, HideInInspector]
         private EllipseObject m_SavedEllipse;
+
+        [SerializeField, HideInInspector]
+        private Vector3[] m_SavedPathInspector;
 
         [Serializable]
         private struct EllipseObject
@@ -59,31 +98,42 @@ namespace Pocketboy.Common
                 return;
             }
 
-            m_SavedEllipse = new EllipseObject(SemiMajor, SemiMinor, Resolution, GetWorldPath(SemiMajor, SemiMinor, Resolution));
+            Vector3[] path = new Vector3[Resolution];
+            if (IsLocal)
+                path = GetLocalPath(SemiMajor, SemiMinor, Resolution);
+            else
+                path = GetWorldPath(SemiMajor, SemiMinor, Resolution);
+
+            m_SavedEllipse = new EllipseObject(SemiMajor, SemiMinor, Resolution, path);
+            m_SavedPathInspector = GetWorldPath(SemiMajor, SemiMinor, Resolution);
+
+            //OnDrawGizmosSelected();
         }
 
-        private void OnDrawGizmosSelected()
+        public void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.green;
-            if (!m_SavedEllipse.Equals(default(EllipseObject)))
-            {
-                float radius = MathUtility.GetEllipseCircumference(m_SavedEllipse.SemiMajor, m_SavedEllipse.SemiMinor) / m_SavedEllipse.Resolution * 0.1f;
-                for (int i = 0; i < m_SavedEllipse.Path.Length; i++)
-                {
-                    Gizmos.DrawWireSphere(m_SavedEllipse.Path[i], radius);
-                }
-            }
-
             Gizmos.color = Color.red;
 
             if (!IsValid(SemiMajor, SemiMinor, Resolution))
                 return;
             
-            float pathSphereRadius = MathUtility.GetEllipseCircumference(SemiMajor, SemiMinor) / Resolution * 0.1f;
+            float pathSphereRadius = MathUtility.GetApproximateEllipseCircumference(SemiMajor, SemiMinor) / Resolution * 0.1f;
+
             m_CurrentPath = GetWorldPath(SemiMajor, SemiMinor, Resolution);
+
             for (int i = 0; i < m_CurrentPath.Length; i++)
             {
                 Gizmos.DrawWireSphere(m_CurrentPath[i], pathSphereRadius);
+            }
+
+            Gizmos.color = Color.green;
+            if (!m_SavedEllipse.Equals(default(EllipseObject)))
+            {
+                float radius = MathUtility.GetApproximateEllipseCircumference(m_SavedEllipse.SemiMajor, m_SavedEllipse.SemiMinor) / m_SavedEllipse.Resolution * 0.1f;
+                for (int i = 0; i < m_SavedPathInspector.Length; i++)
+                {
+                    Gizmos.DrawWireSphere(m_SavedPathInspector[i], radius);
+                }
             }
         }
 
@@ -102,8 +152,8 @@ namespace Pocketboy.Common
 
         private Vector3[] GetWorldPath(float semiMajor, float semiMinor, int resolution)
         {
-            Vector3[] positions = new Vector3[resolution + 1];
-            for (int i = 0; i <= resolution; i++)
+            Vector3[] positions = new Vector3[resolution];
+            for (int i = 0; i < resolution; i++)
             {
                 float angle = i / (float)resolution * 2f * Mathf.PI;
                 positions[i] = new Vector3(semiMajor * Mathf.Cos(angle), semiMinor * Mathf.Sin(angle), 0f);
@@ -114,12 +164,11 @@ namespace Pocketboy.Common
 
         private Vector3[] GetLocalPath(float semiMajor, float semiMinor, int resolution)
         {
-            Vector3[] positions = new Vector3[resolution + 1];
-            for (int i = 0; i <= resolution; i++)
+            Vector3[] positions = new Vector3[resolution];
+            for (int i = 0; i < resolution; i++)
             {
                 float angle = i / (float)resolution * 2f * Mathf.PI;
                 positions[i] = new Vector3(semiMajor * Mathf.Cos(angle), semiMinor * Mathf.Sin(angle), 0f);
-                positions[i] = transform.rotation * positions[i];
             }
             return positions;
         }

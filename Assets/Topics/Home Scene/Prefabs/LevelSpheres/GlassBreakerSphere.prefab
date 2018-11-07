@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135790739299009002}
   - component: {fileID: 114981202043483420}
   m_Layer: 8
-  m_Name: GlassBreakerScene
+  m_Name: GlassBreakerSphere
   m_TagString: Levelsphere
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
