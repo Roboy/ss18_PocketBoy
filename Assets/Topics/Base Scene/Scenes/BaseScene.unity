@@ -163,11 +163,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
-        type: 2}
-      propertyPath: PlanetSystems.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4365924198581326, guid: 2b68885390b2ac346adfcd7a9d92fd1b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -225,24 +220,6 @@ Prefab:
       propertyPath: DetectedPlaneGenerator
       value: 
       objectReference: {fileID: 2141514914}
-    - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
-        type: 2}
-      propertyPath: PlanetSystems.Array.data[0]
-      value: 
-      objectReference: {fileID: 114405581393563084, guid: 3c015cadf31dc1440a1b676c40bb2416,
-        type: 2}
-    - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
-        type: 2}
-      propertyPath: PlanetSystems.Array.data[1]
-      value: 
-      objectReference: {fileID: 114405581393563084, guid: 3c015cadf31dc1440a1b676c40bb2416,
-        type: 2}
-    - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
-        type: 2}
-      propertyPath: PlanetSystems.Array.data[2]
-      value: 
-      objectReference: {fileID: 114405581393563084, guid: 3c015cadf31dc1440a1b676c40bb2416,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b68885390b2ac346adfcd7a9d92fd1b, type: 2}
   m_IsPrefabAsset: 0

@@ -498,6 +498,10 @@ MonoBehaviour:
   - {fileID: 1660781682682994, guid: ba2cbde2d449f294384abe2f1e0ba244, type: 2}
   - {fileID: 1588444124024096, guid: 9e8d968771e566b4da3958236f44de85, type: 2}
   - {fileID: 1489700391209872, guid: 2b95c97aefc063a41a2f3caf8ddaa086, type: 2}
+  PlanetSystems:
+  - {fileID: 114405581393563084, guid: 27b8dc5c22a260248bb506606e122196, type: 2}
+  - {fileID: 114405581393563084, guid: 3c015cadf31dc1440a1b676c40bb2416, type: 2}
+  - {fileID: 114405581393563084, guid: 6d32645edd46556449ad2d422b482a86, type: 2}
 --- !u!114 &114155854200937020
 MonoBehaviour:
   m_ObjectHideFlags: 1

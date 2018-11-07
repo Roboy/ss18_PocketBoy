@@ -24,12 +24,6 @@
         private RoboyManager RoboyPrefab;
 
         /// <summary>
-        /// Topics to learn about, represented as spheres/ portals to get into the respective training world.
-        /// </summary>
-        [SerializeField]
-        private List<GameObject> Spheres;
-
-        /// <summary>
         /// Planetsystems include the LevelSpheres which represent a topic to learn about in form of a scene.
         /// </summary>
         [SerializeField]
@@ -39,19 +33,8 @@
         /// Reference to an instantiated copy of the Roboy prefab in a scene.
         /// </summary>
         private RoboyManager m_Roboy;
-        /// <summary>
-        /// True if one model of Roboy has been spawned.
-        /// </summary>
-        private bool m_RoboySpawned = false;
-
-        private bool m_LevelSpheresSpawned = false;
 
         private bool m_PlanetSystemsSpawned = false;
-
-        /// <summary>
-        /// Reference to the available levels, represented as spheres.
-        /// </summary>
-        private List<GameObject> m_Levels = new List<GameObject>();
 
         /// <summary>
         /// Cached objects under the same anchor as Roboy for the duration of the current scene.
@@ -78,7 +61,7 @@
             if (SceneManager.GetActiveScene().name != "HomeScene_DEV") // TO THIS SOME OTHER WAY
                 return;
 
-            if (!m_RoboySpawned)
+            if (!RoboyManager.InstanceExists)
             {
                 SpawnRoboy();
             }
@@ -135,10 +118,9 @@
 
         private void SpawnRoboy()
         {
-            if (m_RoboySpawned)
+            if (RoboyManager.InstanceExists)
                 return;
 
-            m_RoboySpawned = true;
             var plane = ARSessionManager.Instance.FloorPlane;
             var anchor = plane.CreateAnchor(plane.CenterPose);
             m_Roboy = Instantiate(RoboyPrefab, plane.CenterPose.position, plane.CenterPose.rotation);
@@ -167,45 +149,13 @@
                 Debug.Log(i + ":" + planetSystemOffset);
                 PositionGameObjectRelativeToRoboy(planetSystem.gameObject, planetSystemInitPosition + planetSystemOffset, true);
             }
-        }
-
-        private void SpawnLevelSpheres()
-        {
-            if (m_Roboy == null || m_LevelSpheresSpawned)
-                return;
-
-            m_LevelSpheresSpawned = true;
-            var levelSphereInitPosition = new Vector3(m_Roboy.transform.position.x, m_Roboy.transform.position.y + 0.5f, m_Roboy.transform.position.z);
-            var levelSphereOffset = Vector3.zero;
-            for (int i = 0; i < Spheres.Count; i++)
-            {
-                var levelSphere = Instantiate(Spheres[i]);
-                levelSphere.name = "Level" + (i);
-
-                levelSphereOffset = ((float)(i + 1) / Spheres.Count) * m_Roboy.transform.forward; // WHY FORWARD???? Right does spawns the spheres in front of roboy, dafuq
-                if (i % 2 == 1)
-                {
-                    levelSphereOffset *= -1;
-                }
-
-                levelSphere.transform.position = levelSphereInitPosition + levelSphereOffset;
-                levelSphere.transform.RotateAround(m_Roboy.transform.position, Vector3.up, 90.0f);
-                levelSphere.transform.localScale = levelSphere.transform.localScale * 0.25f;
-
-                var plane = ARSessionManager.Instance.FloorPlane;
-                var anchor = plane.CreateAnchor(plane.CenterPose);
-
-                levelSphere.transform.parent = anchor.transform;
-                m_Levels.Add(levelSphere);
-            }
-        }
+        }  
 
         private void ResetLevel(Scene scene, LoadSceneMode mode)
         {
             if (scene.name != "HomeScene_DEV")
                 return;
 
-            m_LevelSpheresSpawned = false;
             m_PlanetSystemsSpawned = false;
         }
 
@@ -227,7 +177,5 @@
             }
             m_ObjectsToDestroyOnUnload.Clear();
         }
-
     }
-
 }
