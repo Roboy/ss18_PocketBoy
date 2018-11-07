@@ -262,7 +262,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 46040520}
   m_LocalRotation: {x: 0.28384182, y: -0, z: -0, w: 0.9588711}
-  m_LocalPosition: {x: 0, y: 0.38, z: -0.74}
+  m_LocalPosition: {x: 0.34, y: 0.79, z: -1.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2377,7 +2377,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4763118031527582, guid: 8ed94148600f33647a196cb36df7c511, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4763118031527582, guid: 8ed94148600f33647a196cb36df7c511, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2514,7 +2514,7 @@ Prefab:
         type: 2}
       propertyPath: Mat_Ball
       value: 
-      objectReference: {fileID: 2100000, guid: 9fc20c21f219a2e4688e842cb8d13c18, type: 2}
+      objectReference: {fileID: 2100000, guid: 9d9ab7a857cdbf441ae99848283b72fd, type: 2}
     - target: {fileID: 114743274340082772, guid: 8ed94148600f33647a196cb36df7c511,
         type: 2}
       propertyPath: m_Difficulty

@@ -340,7 +340,7 @@ namespace Pocketboy.Runaround
             {
                 m_CurrentPlayerPosition = other.transform.position;
                 float distance = Vector3.Distance(m_CurrentPlayerPosition, m_PreviousPlayerPosition);
-                m_CurrentDistance = 1000 * distance;
+                m_CurrentDistance = 10000 * distance;
                 m_PreviousPlayerPosition = m_CurrentPlayerPosition;
             }
 
