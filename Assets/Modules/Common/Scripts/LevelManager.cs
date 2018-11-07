@@ -30,6 +30,12 @@
         private List<GameObject> Spheres;
 
         /// <summary>
+        /// Planetsystems include the LevelSpheres which represent a topic to learn about in form of a scene.
+        /// </summary>
+        [SerializeField]
+        private PlanetSystem[] PlanetSystems;
+
+        /// <summary>
         /// Reference to an instantiated copy of the Roboy prefab in a scene.
         /// </summary>
         private RoboyManager m_Roboy;
@@ -39,6 +45,8 @@
         private bool m_RoboySpawned = false;
 
         private bool m_LevelSpheresSpawned = false;
+
+        private bool m_PlanetSystemsSpawned = false;
 
         /// <summary>
         /// Reference to the available levels, represented as spheres.
@@ -74,9 +82,9 @@
             {
                 SpawnRoboy();
             }
-            else if (!m_LevelSpheresSpawned)
+            else if (!m_PlanetSystemsSpawned)
             {
-                SpawnLevelSpheres();
+                SpawnPlanetSystems();
             }
         }
 
@@ -101,16 +109,30 @@
         public void RegisterGameObjectWithRoboy(GameObject gameObj, Vector3 relativePosition)
         {
             RegisterGameObjectWithRoboy(gameObj);
-            gameObj.transform.position = m_Roboy.transform.TransformPoint(relativePosition);
+            PositionGameObjectRelativeToRoboy(gameObj, relativePosition);
         }
 
         public void RegisterGameObjectWithRoboy(GameObject gameObj, Vector3 relativePosition, Quaternion relativeRotation)
         {
             RegisterGameObjectWithRoboy(gameObj);
+            PositionGameObjectRelativeToRoboy(gameObj, relativePosition, relativeRotation);
+        }
+
+        public void PositionGameObjectRelativeToRoboy(GameObject gameObj, Vector3 relativePosition, bool createAnchor = false)
+        {
+            if (createAnchor)
+            {
+                gameObj.transform.parent = ARSessionManager.Instance.FloorPlane.CreateAnchor(ARSessionManager.Instance.FloorPlane.CenterPose).transform;
+            }               
             gameObj.transform.position = m_Roboy.transform.TransformPoint(relativePosition);
+        }
+
+        public void PositionGameObjectRelativeToRoboy(GameObject gameObj, Vector3 relativePosition, Quaternion relativeRotation, bool createAnchor = false)
+        {
+            PositionGameObjectRelativeToRoboy(gameObj, relativePosition, createAnchor);
             gameObj.transform.rotation = m_Roboy.transform.rotation * relativeRotation;
         }
-        
+
         private void SpawnRoboy()
         {
             if (m_RoboySpawned)
@@ -122,7 +144,29 @@
             m_Roboy = Instantiate(RoboyPrefab, plane.CenterPose.position, plane.CenterPose.rotation);
             m_Roboy.transform.parent = anchor.transform;
             m_Roboy.Initialize(anchor);
-            SpawnLevelSpheres();
+            SpawnPlanetSystems();
+        }
+
+        private void SpawnPlanetSystems()
+        {
+            if (!RoboyManager.InstanceExists || m_PlanetSystemsSpawned)
+                return;
+
+            m_PlanetSystemsSpawned = true;
+            var planetSystemOffset = Vector3.zero;
+            var planetSystemInitPosition = Vector3.up * 0.5f + Vector3.forward * 0.5f;
+            for (int i = 0; i < PlanetSystems.Length; i++)
+            {
+                var planetSystem = Instantiate(PlanetSystems[i]);       
+                int offsetMultiplicator = Mathf.CeilToInt(i / 2f);
+                if (i % 2 == 0)
+                {
+                    offsetMultiplicator *= -1;                    
+                }
+                planetSystemOffset = offsetMultiplicator * Vector3.right * 0.5f;
+                Debug.Log(i + ":" + planetSystemOffset);
+                PositionGameObjectRelativeToRoboy(planetSystem.gameObject, planetSystemInitPosition + planetSystemOffset, true);
+            }
         }
 
         private void SpawnLevelSpheres()
@@ -162,6 +206,7 @@
                 return;
 
             m_LevelSpheresSpawned = false;
+            m_PlanetSystemsSpawned = false;
         }
 
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Pocketboy.Common
 {
+    [RequireComponent(typeof(MoveOnEllipse), typeof(ScaleController))]
     public class Planet : MonoBehaviour
     {
         private MoveOnEllipse m_MovementController;
@@ -18,20 +19,20 @@ namespace Pocketboy.Common
 
         public void ZoomIn()
         {
-            if(m_MovementController != null)
-                m_MovementController.PauseMoving();
-
-            if(m_ScaleController != null)
-                m_ScaleController.Scale();
+            m_MovementController.PauseMoving();
+            m_ScaleController.Scale();
         }
 
         public void ZoomOut()
         {
-            if (m_MovementController != null)
-                m_MovementController.ResumeMoving();
+            m_MovementController.ResumeMoving();
+            m_ScaleController.ResetScale();
+        }
 
-            if (m_ScaleController != null)
-                m_ScaleController.ResetScale();
+        public void Setup(Ellipse ellipse, float cycleDuration, float scaleFactor)
+        {
+            m_MovementController.SetEllipse(ellipse, cycleDuration, Random.Range(0f, 1f), true);
+            m_ScaleController.SetScaleFactor(scaleFactor);
         }
     }
 }

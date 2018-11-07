@@ -22,6 +22,20 @@ namespace Pocketboy.Common
 
         private float m_AverageVelocity;
 
+        private float m_StartPositionInPercentage = 0f;
+
+        private int m_CurrentPointIndex;
+
+        private int m_NextPointIndex;
+
+        private float m_NextDistance = 0f;
+
+        private float m_TimeForNextStep = 0f;
+
+        private float m_CurrentTime;
+
+        private Vector3 m_CurrentPosition;
+
         private enum State
         {
             Stopped,
@@ -33,10 +47,37 @@ namespace Pocketboy.Common
 
         private void Awake()
         {
-            Setup();
-
             if (OnAwake)
-                StartMoving();
+            {
+                Setup();
+                StartMoving();               
+            }
+        }
+
+        private void Update()
+        {
+            if (m_MovementState != State.Moving)
+                return;
+
+            if (m_CurrentTime >= m_TimeForNextStep) // reached next point
+            {
+                m_CurrentPointIndex = m_NextPointIndex;
+                m_NextPointIndex = MathUtility.WrapArrayIndex(m_NextPointIndex + 1, m_Path.Length);
+
+                m_NextDistance = (m_Path[m_CurrentPointIndex] - m_Path[m_NextPointIndex]).magnitude;
+                m_TimeForNextStep = m_NextDistance / m_AverageVelocity;
+
+                m_CurrentTime = 0f;
+            }
+
+            m_CurrentTime += Time.deltaTime;
+            m_CurrentPosition = Vector3.Lerp(m_Path[m_CurrentPointIndex], m_Path[m_NextPointIndex], m_CurrentTime / m_TimeForNextStep); // lerp between currentPoint and next point of the ellipse path
+            if (!IsLocal)
+                transform.position = m_CurrentPosition;
+            else
+                transform.localPosition = m_CurrentPosition;
+                
+            
         }
 
         private void OnDrawGizmosSelected()
@@ -49,15 +90,28 @@ namespace Pocketboy.Common
             if (EllipseObject == null)
                 return;
 
-            StartCoroutine(Move());
+            m_MovementState = State.Moving;
+
+            m_CurrentPointIndex = MathUtility.WrapArrayIndex((int)((m_Path.Length - 1) * m_StartPositionInPercentage), m_Path.Length); // convert value from [0,1] to [0, m_Path.Length-1] for the starting point
+            m_NextPointIndex = MathUtility.WrapArrayIndex(m_CurrentPointIndex + 1, m_Path.Length);
+
+            m_NextDistance = (m_Path[m_CurrentPointIndex] - m_Path[m_NextPointIndex]).magnitude;
+            m_TimeForNextStep = m_NextDistance / m_AverageVelocity;
         }
 
         public void ResumeMoving()
         {
-            if (m_MovementState != State.Paused)
-                return;
-
-            m_MovementState = State.Moving;
+            switch (m_MovementState)
+            {
+                case State.Stopped:
+                    StartMoving();
+                    break;
+                case State.Paused:
+                    m_MovementState = State.Moving;
+                    break;
+                case State.Moving:
+                    break;
+            }
         }
 
         public void PauseMoving()
@@ -73,6 +127,15 @@ namespace Pocketboy.Common
             m_MovementState = State.Stopped;
         }
 
+        public void SetEllipse(Ellipse ellipseObject, float cycleDuration, float startPositionInPercentage, bool isLocal)
+        {
+            EllipseObject = ellipseObject;
+            CycleDuration = cycleDuration;
+            IsLocal = isLocal;
+            m_StartPositionInPercentage = Mathf.Clamp01(startPositionInPercentage);
+            Setup();           
+        }
+
         private void Setup()
         {
             m_Path = EllipseObject.SavedPath; // get the saved path, if not saved yet, get the runtime path, can be either in world or local space
@@ -86,49 +149,6 @@ namespace Pocketboy.Common
 
             m_AverageVelocity = EllipseObject.SavedPathLength / CycleDuration;
         }
-
-        private IEnumerator Move()
-        {
-            m_MovementState = State.Moving;
-            int currentPointIndex = 0;
-            int nextPointIndex = 1;
-
-            float nextDistance = (m_Path[currentPointIndex] - m_Path[nextPointIndex]).magnitude;
-            float timeForNextStep = nextDistance / m_AverageVelocity;
-            
-            float currentTime = 0f;
-            Vector3 currentPosition;
-     
-
-            while (m_MovementState != State.Stopped)
-            {
-                if (m_MovementState == State.Paused)
-                {
-                    yield return null;
-                }
-
-                else
-                {
-                    if (currentTime >= timeForNextStep) // reached next point
-                    {
-                        currentPointIndex = nextPointIndex;
-                        nextPointIndex = MathUtility.WrapArrayIndex(nextPointIndex + 1, m_Path.Length);
-
-                        nextDistance = (m_Path[currentPointIndex] - m_Path[nextPointIndex]).magnitude;
-                        timeForNextStep = nextDistance / m_AverageVelocity;
-
-                        currentTime = 0f;
-                    }
-
-                    currentTime += Time.deltaTime;
-                    currentPosition = Vector3.Lerp(m_Path[currentPointIndex], m_Path[nextPointIndex], currentTime / timeForNextStep); // lerp between currentPoint and next point of the ellipse path
-                    if (!IsLocal)
-                        transform.position = currentPosition;
-                    else
-                        transform.localPosition = currentPosition;
-                    yield return null;
-                }
-            }
-        }
+        
     }
 }

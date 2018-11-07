@@ -7,7 +7,16 @@ namespace Pocketboy.Common
     public class PlanetSystem : MonoBehaviour
     {
         [SerializeField]
-        private LevelSphere[] LevelSpheres;
+        private GameObject PathsParent;
+
+        [SerializeField]
+        private Sun SunPrefab;
+
+        [SerializeField]
+        private TrailRenderer TrailPrefab;
+
+        [SerializeField]
+        private LevelSphere[] LevelSpherePrefabs;
 
         [SerializeField]
         private float LevelSphereSize = 0.025f;
@@ -15,18 +24,27 @@ namespace Pocketboy.Common
         [SerializeField]
         private float LevelSphereScaleFactor = 2f;
 
+        [SerializeField]
+        private float MinCycleDuration = 2f;
+
+        private Sun m_Sun;
+
         private Collider m_Collider;
 
         private List<Planet> m_Planets = new List<Planet>();
+
+        private Ellipse[] m_EllipsePaths;
 
         private void Awake()
         {
             m_Collider = GetComponent<Collider>();
             m_Collider.isTrigger = true;
 
-            SetupLevelSpheres();
+            m_Sun = Instantiate(SunPrefab, transform);
 
-            //m_Planets = GetComponentsInChildren<Planet>(true);
+            SetupPlanetPaths();
+            SetupLevelSpheres();
+            ResumeMoving();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -45,12 +63,9 @@ namespace Pocketboy.Common
             }
         }
 
-        private void SetupLevelSpheres()
+        private void OnEnable()
         {
-            for (int i = 0; i < LevelSpheres.Length; i++)
-            {
-                
-            }
+            ResumeMoving();
         }
 
         private void ResumeMoving()
@@ -58,6 +73,7 @@ namespace Pocketboy.Common
             for (int i = 0; i < m_Planets.Count; i++)
             {
                 m_Planets[i].ZoomOut();
+                m_Sun.ZoomOut();
             }
         }
 
@@ -66,7 +82,37 @@ namespace Pocketboy.Common
             for (int i = 0; i < m_Planets.Count; i++)
             {
                 m_Planets[i].ZoomIn();
+                m_Sun.ZoomIn();
             }
+        }
+
+        private void SetupPlanetPaths()
+        {
+            //var paths = Instantiate(PathsParent, transform);
+            m_EllipsePaths = PathsParent.GetComponentsInChildren<Ellipse>(true);
+        }
+
+        private void SetupLevelSpheres()
+        {
+            for (int i = 0; i < LevelSpherePrefabs.Length && i < m_EllipsePaths.Length; i++)
+            {
+                var levelSphere = Instantiate(LevelSpherePrefabs[i], transform);
+                SetupLevelSphere(levelSphere, i);
+            }
+        }
+
+        private void SetupLevelSphere(LevelSphere levelSphere, int index)
+        {
+            levelSphere.transform.localScale = Vector3.one * LevelSphereSize;
+            var trail = Instantiate(TrailPrefab, levelSphere.transform);
+
+            Planet planet = null;
+            if ((planet = levelSphere.GetComponent<Planet>()) == null)
+            {
+                planet = levelSphere.gameObject.AddComponent<Planet>();
+            }
+            planet.Setup(m_EllipsePaths[index], MinCycleDuration * Mathf.Pow(2f, index), LevelSphereScaleFactor); // outer planets are slower than inner planets
+            m_Planets.Add(planet);
         }
     }
 }

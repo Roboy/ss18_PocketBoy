@@ -18,6 +18,11 @@ namespace Pocketboy.Common
             m_OriginalScale = transform.localScale;
         }
 
+        public void SetScaleFactor(float scaleFactor)
+        {
+            ScaleFactor = scaleFactor;
+        }
+
         public void Scale()
         {
             if (m_CurrentScaleAnimation != null)
