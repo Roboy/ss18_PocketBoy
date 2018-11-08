@@ -21,6 +21,7 @@ TagManager:
   - GameBoard
   - BetZone
   - PlanetSystemCollider
+  - Wall
   layers:
   - Default
   - TransparentFX
