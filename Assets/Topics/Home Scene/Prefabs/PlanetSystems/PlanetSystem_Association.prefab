@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PathsParent: {fileID: 1586690203550210, guid: e628b1efa1efa3d4599ab8e4f9ad36af,
     type: 2}
-  SunPrefab: {fileID: 114115281959483826, guid: 74fc88b5e904df64f83c4c61ea5e1177,
+  SunPrefab: {fileID: 114642845688147020, guid: d5206bad025e7db4f83d0433e0ed4fc5,
     type: 2}
   TrailPrefab: {fileID: 96344137357182958, guid: eca94092779b72c4ea5b73e4b8b6cb2e,
     type: 2}
