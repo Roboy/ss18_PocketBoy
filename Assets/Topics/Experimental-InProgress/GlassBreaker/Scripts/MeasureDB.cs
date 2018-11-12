@@ -115,7 +115,7 @@ namespace Pocketboy.Glassbreaker {
             DbValue += DbOffset;
             if (DbValue < -160) DbValue = -160; // clamp it to -160dB min
                                                 // get sound spectrum
-            ScreenHealthController.Instance.PrintDebugText(DbValue.ToString());
+            ScreenHealthController.Instance.PrintDebugText(DbValue.ToString("f2"));
             
             //GetComponent<AudioSource>().GetSpectrumData(_spectrum, 0, FFTWindow.BlackmanHarris);
             //float maxV = 0;

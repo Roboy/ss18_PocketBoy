@@ -21,6 +21,8 @@ namespace Pocketboy.MovementProgramming
         public Color Col_Highlighted;
 
         [SerializeField]
+        private GameObject m_RoboyInMaze;
+        [SerializeField]
         private Button m_ForwardButton;
         [SerializeField]
         private Button m_RotateRightButton;
@@ -40,6 +42,10 @@ namespace Pocketboy.MovementProgramming
 
         private List<Button> m_Buttons = new List<Button>();
         private int m_CountSelectedLines = 0;
+        private bool m_LineExecuting = false;
+        private MazeRunner m_Player;
+        private Coroutine m_currentCoroutine;
+        private RectTransform m_currentVisualLineOfCode;
 
         // Use this for initialization
         void Start()
@@ -48,7 +54,7 @@ namespace Pocketboy.MovementProgramming
             m_RotateRightButton.onClick.AddListener(InstructionRight);
             m_RotateLefttButton.onClick.AddListener(InstructionLeft);
             m_DeleteButton.onClick.AddListener(DeleteInsctruction);
-            m_StartButton.onClick.AddListener(ExecuteInstructionCode);
+            m_StartButton.onClick.AddListener(delegate { m_currentCoroutine = StartCoroutine(ExecuteInstructionCode()); });
             m_MoveUpButton.onClick.AddListener(MoveInsctructionUp);
             m_MoveDownButton.onClick.AddListener(MoveInstructionDown);
 
@@ -59,13 +65,46 @@ namespace Pocketboy.MovementProgramming
             m_Buttons.Add(m_StartButton);
             m_Buttons.Add(m_MoveUpButton);
             m_Buttons.Add(m_MoveDownButton);
+
+            m_Player = m_RoboyInMaze.GetComponent<MazeRunner>();
         }
 
 
-        private void ExecuteInstructionCode()
+        private IEnumerator ExecuteInstructionCode()
         {
+            if (m_LinesOfCode.Count == 0)
+                yield return null;
+
+            ToggleButtons("OFF");
+
+            LineOfCode currentLine;
+            TextMeshProUGUI currentInstruction;
             //Start executing the instructions one by one
+            foreach (RectTransform rt in m_LinesOfCode)
+            {
+                m_currentVisualLineOfCode = rt;
+                currentLine = rt.GetComponent<LineOfCode>();
+                currentInstruction = rt.GetComponent<TextMeshProUGUI>();
+                currentInstruction.color = Col_Highlighted;
+
+                if (currentLine.operation == "Forward")
+                {
+                    yield return StartCoroutine(m_Player.GoForward());
+                }
+                else
+                {
+                    yield return StartCoroutine(m_Player.TurnAround(currentLine.operation));
+                }
+
+                currentInstruction.color = Col_Default;
+                
+            }
+
+            m_currentVisualLineOfCode = null;
+            ToggleButtons("ON");
+            yield return null;
         }
+
 
 
         private void InstructionForward()
@@ -285,11 +324,17 @@ namespace Pocketboy.MovementProgramming
             //Beginning of the Code, only allow down movement
             if (m_LinesOfCode.IndexOf(m_SelectedLines[0]) == 0)
             {
-                m_MoveUpButton.gameObject.SetActive(false);
+                m_MoveUpButton.gameObject.SetActive(true);
+                m_MoveUpButton.enabled = false;
+                m_MoveUpButton.GetComponent<Image>().color = Color.grey;
+
                 m_MoveDownButton.gameObject.SetActive(true);
-                newPanelPos = MoveLinesPanel.anchoredPosition;
-                newPanelPos.y = m_SelectedLines[0].anchoredPosition.y + Mathf.Abs(m_MoveDownButton.GetComponent<RectTransform>().anchoredPosition.y);
-                MoveLinesPanel.anchoredPosition = newPanelPos;
+                m_MoveDownButton.enabled = true;
+                m_MoveDownButton.GetComponent<Image>().color = Col_Selected;
+
+                //newPanelPos = MoveLinesPanel.anchoredPosition;
+                //newPanelPos.y = m_SelectedLines[0].anchoredPosition.y + Mathf.Abs(m_MoveDownButton.GetComponent<RectTransform>().anchoredPosition.y);
+                //MoveLinesPanel.anchoredPosition = newPanelPos;
                 return;
             }
 
@@ -297,19 +342,63 @@ namespace Pocketboy.MovementProgramming
             if (m_LinesOfCode.IndexOf(m_SelectedLines[0]) == m_LinesOfCode.Count - 1)
             {
                 m_MoveUpButton.gameObject.SetActive(true);
-                m_MoveDownButton.gameObject.SetActive(false);
-                newPanelPos = MoveLinesPanel.anchoredPosition;
-                newPanelPos.y = m_SelectedLines[0].anchoredPosition.y - Mathf.Abs(m_MoveUpButton.GetComponent<RectTransform>().anchoredPosition.y);
-                MoveLinesPanel.anchoredPosition = newPanelPos;
+                m_MoveUpButton.enabled = true;
+                m_MoveUpButton.GetComponent<Image>().color = Col_Selected;
+
+                m_MoveDownButton.gameObject.SetActive(true);
+                m_MoveDownButton.enabled = false;
+                m_MoveDownButton.GetComponent<Image>().color = Color.grey;
+
+                //newPanelPos = MoveLinesPanel.anchoredPosition;
+                //newPanelPos.y = m_SelectedLines[0].anchoredPosition.y - Mathf.Abs(m_MoveUpButton.GetComponent<RectTransform>().anchoredPosition.y);
+                //MoveLinesPanel.anchoredPosition = newPanelPos;
                 return;
             }
 
             m_MoveUpButton.gameObject.SetActive(true);
-            m_MoveDownButton.gameObject.SetActive(true);
-            newPanelPos = MoveLinesPanel.anchoredPosition;
-            newPanelPos.y = m_SelectedLines[0].anchoredPosition.y;
-            MoveLinesPanel.anchoredPosition = newPanelPos;
+            m_MoveUpButton.enabled = true;
+            m_MoveUpButton.GetComponent<Image>().color = Col_Selected;
 
+            m_MoveDownButton.gameObject.SetActive(true);
+            m_MoveDownButton.enabled = true;
+            m_MoveDownButton.GetComponent<Image>().color = Col_Selected;
+            //newPanelPos = MoveLinesPanel.anchoredPosition;
+            //newPanelPos.y = m_SelectedLines[0].anchoredPosition.y;
+            //MoveLinesPanel.anchoredPosition = newPanelPos;
+
+        }
+
+        public void StopExecution()
+        {
+            //Stop executing the code
+            StopCoroutine(m_currentCoroutine);
+            //Remove visual highlight of the line
+            m_currentVisualLineOfCode.GetComponent<TextMeshProUGUI>().color = Col_Default;
+            m_currentVisualLineOfCode = null;
+            //Reset player to init pose
+            m_Player.ResetPlayerPose();
+            ToggleButtons("ON");
+
+        }
+
+        public void ToggleButtons(string operation)
+        {
+            foreach (Button b in m_Buttons)
+            {
+
+                if (operation == "ON")
+                {
+                    b.GetComponent<Image>().color = Col_Selected;
+                    b.enabled = true;
+                    
+                }
+
+                if (operation == "OFF")
+                {
+                    b.GetComponent<Image>().color = Color.grey;
+                    b.enabled = false;
+                }
+            }
         }
     }
 }
