@@ -52,12 +52,12 @@ namespace Pocketboy.MovementProgramming
                     }
                     else if (hit.transform.tag == "Deadzone")
                     {
-                        CodeManager.Instance.StopExecution();
+                        CodeManager.Instance.StopExecution(false);
                         break;
                     }
                     else if (hit.transform.tag == "WinningZone")
                     {
-                        CodeManager.Instance.StopExecution();
+                        CodeManager.Instance.StopExecution(true);
                         break;
                     }
 
