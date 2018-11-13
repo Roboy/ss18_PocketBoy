@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0169c21a919a89d45923b30a2d793c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: ModelCategorizationScene
+  SceneName: JointGame
   HologramRenderer: {fileID: 23026748134604866}
   IdleRotationSpeed: 10
   LoadRotationSpeed: 80

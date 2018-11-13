@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 83cdbcf55ec9e1344ab936e50544e18c
+guid: 66c2d20562c05bb4e9b798dadb938e54
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,7 +8,7 @@ ModelImporter:
     2100000: mat_arrow
     2300000: //RootNode
     3300000: //RootNode
-    4300000: curved-arrow-xz
+    4300000: Cube
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}

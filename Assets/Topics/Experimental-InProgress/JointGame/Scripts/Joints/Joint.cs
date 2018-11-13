@@ -26,6 +26,12 @@ namespace Pocketboy.JointGame
             m_IdleRotation = transform.rotation;
         }
 
+        private void OnEnable()
+        {
+            transform.position = m_IdlePosition;
+            transform.rotation = m_IdleRotation;
+        }
+
         public void ApplyMotion(Transform effector)
         {
             effector.SetParent(EffectorParent);

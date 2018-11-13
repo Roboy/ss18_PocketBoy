@@ -45,87 +45,42 @@ namespace Pocketboy.JointGame
         [SerializeField]
         private Joint RevolvingJoint;
 
-        [Header("Arrows")]
-
         [SerializeField]
-        private Transform LinearMotionArrow;
+        private Transform LevelsParent;
 
-        [SerializeField]
-        private Transform OrthogonalMotionArrow;
-
-        [SerializeField]
-        private Transform RotationalMotionArrow;
-
-        [SerializeField]
-        private Transform TwistMotionArrow;
-
-        [SerializeField]
-        private Transform RevolvingMotionArrow;
+        private List<JointGameLevel> m_Levels = new List<JointGameLevel>();
 
         /// <summary>
         /// Joint chosen by the user.
         /// </summary>
         private Joint m_CurrentUserJoint;
 
-        /// <summary>
-        /// Correct joint of the current level.
-        /// </summary>
-        private Joint m_CurrentLevelJoint;
-
-        private List<Transform> m_Levels = new List<Transform>();
+        private int m_CurrentLevelIndex = 0;
 
         private void Awake()
         {
             AddSubscribers();
+            SetupLevels();
+
+            if (LevelManager.InstanceExists)
+            {
+                LevelManager.Instance.RegisterGameObjectWithRoboy(LevelsParent.gameObject, Vector3.right * 0.2f + Vector3.forward * 0.3f, Quaternion.identity);
+                LevelsParent.forward = -LevelsParent.forward;
+            }
+        }
+
+        private void Start()
+        {
+            StartGame();
         }
 
         private void AddSubscribers()
         {
-            LinearJointButton.onClick.AddListener(AddLinearJoint);
-            OrthogonalJointButton.onClick.AddListener(AddOrthogonalJoint);
-            RotationalJointButton.onClick.AddListener(AddRotationalJoint);
-            TwistJointButton.onClick.AddListener(AddTwistJoint);
-            RevolvingJointButton.onClick.AddListener(AddRevolvingJoint);
-        }
-
-        private void AddLinearJoint()
-        {
-            if (m_CurrentUserJoint == LinearJoint)
-                return;
-
-            AddJoint(LinearJoint);
-        }
-
-        private void AddOrthogonalJoint()
-        {
-            if (m_CurrentUserJoint == OrthogonalJoint)
-                return;
-
-            AddJoint(OrthogonalJoint);
-        }
-
-        private void AddRotationalJoint()
-        {
-            if (m_CurrentUserJoint == RotationalJoint)
-                return;
-
-            AddJoint(RotationalJoint);
-        }
-
-        private void AddTwistJoint()
-        {
-            if (m_CurrentUserJoint == TwistJoint)
-                return;
-
-            AddJoint(TwistJoint);
-        }
-
-        private void AddRevolvingJoint()
-        {
-            if (m_CurrentUserJoint == RevolvingJoint)
-                return;
-
-            AddJoint(RevolvingJoint);
+            LinearJointButton.onClick.AddListener( () => AddJoint(LinearJoint));
+            OrthogonalJointButton.onClick.AddListener(() => AddJoint(OrthogonalJoint));
+            RotationalJointButton.onClick.AddListener(() => AddJoint(RotationalJoint));
+            TwistJointButton.onClick.AddListener(() => AddJoint(TwistJoint));
+            RevolvingJointButton.onClick.AddListener(() => AddJoint(RevolvingJoint));
         }
 
         private void AddJoint(Joint joint)
@@ -140,11 +95,53 @@ namespace Pocketboy.JointGame
             joint.ApplyMotion(EndEffector);
 
             m_CurrentUserJoint = joint;
+
+            if (m_Levels[m_CurrentLevelIndex].CheckJoint(m_CurrentUserJoint))
+            {
+                ShowNextLevel();
+            }
+            else
+            {
+                Handheld.Vibrate();
+            }
         }
 
         private void SetupLevels()
         {
+            foreach (Transform child in LevelsParent)
+            {
+                JointGameLevel level = null;
+                if ((level = child.GetComponent<JointGameLevel>()) != null)
+                {
+                    m_Levels.Add(level);
+                }
+            }
+        }
 
+        private void StartGame()
+        {
+            m_Levels[m_CurrentLevelIndex].Hide();
+            m_CurrentLevelIndex = 0;
+            m_Levels.Shuffle();
+            m_Levels[0].Show();
+        }
+
+        private void ShowLevel(int index)
+        {
+            m_Levels[m_CurrentLevelIndex].Hide();
+            m_CurrentLevelIndex = MathUtility.WrapArrayIndex(index, m_Levels.Count); ;
+            m_Levels[m_CurrentLevelIndex].Show();
+        }
+
+        private void ShowNextLevel()
+        {
+            if (m_CurrentLevelIndex == m_Levels.Count - 1)
+            {
+                StartGame();
+                return;
+            }
+            
+            ShowLevel(m_CurrentLevelIndex + 1);
         }
     }
 }
