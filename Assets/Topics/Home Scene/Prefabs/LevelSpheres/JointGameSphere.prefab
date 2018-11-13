@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4584233771401392}
   - component: {fileID: 33813891153799450}
   - component: {fileID: 23848195419131276}
-  - component: {fileID: 114546638728894740}
   m_Layer: 0
   m_Name: JointGame-hologram
   m_TagString: Untagged
@@ -125,7 +124,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 732aaeddfb679174b85ca5ef910ff676, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -159,19 +158,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1020834163302074}
   m_Mesh: {fileID: 4300000, guid: d793b4a4bf740454a8b5d281ced694ae, type: 3}
---- !u!114 &114546638728894740
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1020834163302074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ef2c0b90fbf14469ff1b1d2d7871c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HoloMeshFilter: {fileID: 33813891153799450}
-  m_Initialized: 1
 --- !u!114 &114615876313410518
 MonoBehaviour:
   m_ObjectHideFlags: 1
