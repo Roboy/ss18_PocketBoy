@@ -54,12 +54,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PathsParent: {fileID: 1586690203550210, guid: e628b1efa1efa3d4599ab8e4f9ad36af,
     type: 2}
-  SunPrefab: {fileID: 114642845688147020, guid: d5206bad025e7db4f83d0433e0ed4fc5,
+  SunPrefab: {fileID: 114944241327744922, guid: feb16635417398f4cb328dc323950eea,
     type: 2}
   TrailPrefab: {fileID: 96344137357182958, guid: eca94092779b72c4ea5b73e4b8b6cb2e,
     type: 2}
   LevelSpherePrefabs:
   - {fileID: 114496713990713876, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
+  - {fileID: 114615876313410518, guid: 00fde2b96e3b0c243916f0f1c454758c, type: 2}
   LevelSphereSize: 0.025
   LevelSphereScaleFactor: 2.5
   MinCycleDuration: 5
