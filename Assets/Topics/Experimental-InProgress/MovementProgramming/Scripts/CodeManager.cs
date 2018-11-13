@@ -19,9 +19,13 @@ namespace Pocketboy.MovementProgramming
         public Color Col_Default;
         public Color Col_Selected;
         public Color Col_Highlighted;
+        [HideInInspector]
+        public int m_NumberOfTries = 0;
 
         [SerializeField]
         private GameObject m_RoboyInMaze;
+        [SerializeField]
+        private TextMeshProUGUI m_AttemptCounter;
         [SerializeField]
         private Button m_ForwardButton;
         [SerializeField]
@@ -46,6 +50,7 @@ namespace Pocketboy.MovementProgramming
         private MazeRunner m_Player;
         private Coroutine m_currentCoroutine;
         private RectTransform m_currentVisualLineOfCode;
+        
 
         // Use this for initialization
         void Start()
@@ -76,6 +81,7 @@ namespace Pocketboy.MovementProgramming
                 yield return null;
 
             ToggleButtons("OFF");
+            UpdateAttemptCounter(1);
 
             LineOfCode currentLine;
             TextMeshProUGUI currentInstruction;
@@ -100,6 +106,7 @@ namespace Pocketboy.MovementProgramming
                 
             }
 
+            
             m_currentVisualLineOfCode = null;
             ToggleButtons("ON");
             yield return null;
@@ -368,7 +375,7 @@ namespace Pocketboy.MovementProgramming
 
         }
 
-        public void StopExecution()
+        public void StopExecution(bool winning)
         {
             //Stop executing the code
             StopCoroutine(m_currentCoroutine);
@@ -400,5 +407,42 @@ namespace Pocketboy.MovementProgramming
                 }
             }
         }
+
+        public void ExchangeRoboyInMaze(GameObject Roboy)
+        {
+            m_RoboyInMaze = Roboy;
+        }
+
+        public void UpdateAttemptCounter(int amount)
+        {
+            m_NumberOfTries += amount;
+            string count;
+
+            if(m_NumberOfTries == 0)
+            {
+                m_AttemptCounter.text = "";
+                return;
+            }
+
+            switch (m_NumberOfTries)
+            {
+                case 1:
+                    count = "one";
+                    break;
+                case 2:
+                    count = "two";
+                    break;
+                case 3:
+                    count = "three";
+                    break;
+                default:
+                    count = m_NumberOfTries.ToString();
+                    break;
+            }
+
+            m_AttemptCounter.text = "You tried " + count + " time(s).";
+        }
+
+        
     }
 }

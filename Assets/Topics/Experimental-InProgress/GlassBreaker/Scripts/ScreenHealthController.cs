@@ -37,10 +37,12 @@ namespace Pocketboy.Glassbreaker
             m_ResetButton.onClick.AddListener(HandleReset);
             m_CalibrateButton.onClick.AddListener(HandleCalibration);
             GameObject cam = GameObject.FindWithTag("MainCamera");
-            Screen.transform.rotation = cam.transform.rotation;
             Screen.transform.SetParent(cam.transform);
+            Screen.transform.rotation = cam.transform.rotation;
+            Screen.transform.position = cam.transform.position;
+            
 
-            Screen.transform.localPosition = cam.transform.forward.normalized * 0.15f;
+            Screen.transform.position += cam.transform.forward.normalized * 0.15f;
             LevelManager.Instance.RegisterObjectWithLevel(Screen);
 
 

@@ -23,6 +23,7 @@ TagManager:
   - PlanetSystemCollider
   - Wall
   - WinningZone
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX
