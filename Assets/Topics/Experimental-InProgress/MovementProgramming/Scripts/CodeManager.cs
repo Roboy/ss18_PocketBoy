@@ -106,7 +106,23 @@ namespace Pocketboy.MovementProgramming
                 
             }
 
-            
+            //Check for winning/losing state
+            RaycastHit hit = new RaycastHit();
+            if (Physics.SphereCast(m_Player.transform.localPosition, m_Player.transform.localScale.z / 2.0f, m_Player.transform.forward, out hit, m_Player.transform.localScale.z * 0.1f))
+            {
+                
+                if (hit.transform.tag == "WinningZone")
+                {
+                    Debug.Log("You pay, you win!");
+                }
+            }
+            else
+            {
+                Debug.Log("You are still stuck!");
+                m_Player.ResetPlayerPose();
+
+            }
+
             m_currentVisualLineOfCode = null;
             ToggleButtons("ON");
             yield return null;
@@ -375,7 +391,7 @@ namespace Pocketboy.MovementProgramming
 
         }
 
-        public void StopExecution(bool winning)
+        public void StopExecution()
         {
             //Stop executing the code
             StopCoroutine(m_currentCoroutine);

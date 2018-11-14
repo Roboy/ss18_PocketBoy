@@ -31,8 +31,10 @@ namespace Pocketboy.MovementProgramming
 
         public void Initialize()
         {
-            SpawnPlayer();
+            LevelManager.Instance.RegisterGameObjectWithRoboy(this.gameObject, Vector3.zero, Quaternion.identity);
             LoadMaze();
+            SpawnPlayer();
+            
         }
         public void LoadMaze()
         {
@@ -43,11 +45,10 @@ namespace Pocketboy.MovementProgramming
 
             var maze = GameObject.Instantiate(m_MazePrefabs[levelNumber]);
             maze.name = m_MazePrefabs[levelNumber].name;
+            maze.transform.parent = this.transform;
             m_Maze = maze;
 
-            m_Player.transform.localScale = maze.GetComponent<Maze>().m_PlayerSpawn.transform.localScale;
-            m_Player.transform.localPosition = maze.GetComponent<Maze>().m_PlayerSpawn.transform.localPosition;
-            m_Player.transform.localRotation = Quaternion.LookRotation(maze.GetComponent<Maze>().m_PlayerSpawn.transform.forward);
+           
 
             CodeManager.Instance.m_NumberOfTries = 0;
             CodeManager.Instance.UpdateAttemptCounter(0);
@@ -60,6 +61,12 @@ namespace Pocketboy.MovementProgramming
 
             var player = GameObject.Instantiate(m_PlayerPrefab);
             player.name = m_PlayerPrefab.name;
+            player.transform.parent = m_Maze.transform;
+            Transform playerspawn = m_Maze.GetComponent<Maze>().m_PlayerSpawn.transform;
+
+            player.transform.localScale = playerspawn.localScale;
+            player.transform.localPosition = playerspawn.localPosition;
+            player.transform.localRotation = Quaternion.LookRotation(playerspawn.forward);
             m_Player = player;
             CodeManager.Instance.ExchangeRoboyInMaze(m_Player);
         }

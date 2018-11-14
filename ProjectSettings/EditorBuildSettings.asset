@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Topics/Experimental-InProgress/JointGame/Scenes/JointGame.unity
     guid: 53f3d511bbae46b43b1cb38e1bfaec7f
+  - enabled: 1
+    path: Assets/Topics/Experimental-InProgress/MovementProgramming/Scenes/MovementProgrammingScene.unity
+    guid: 29840f48601f87f4b9ef46a4bc10b4ba
   m_configObjects: {}

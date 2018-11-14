@@ -61,6 +61,7 @@ MonoBehaviour:
   LevelSpherePrefabs:
   - {fileID: 114496713990713876, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
   - {fileID: 114615876313410518, guid: 00fde2b96e3b0c243916f0f1c454758c, type: 2}
+  - {fileID: 114019739532799838, guid: 228477b212fd466418f9a42031ea5cbf, type: 2}
   LevelSphereSize: 0.025
   LevelSphereScaleFactor: 2.5
   MinCycleDuration: 5
