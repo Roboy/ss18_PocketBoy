@@ -34,10 +34,11 @@ namespace Pocketboy.Common
             m_PageController = GetComponent<PageController>();
             DontDestroyOnLoad(gameObject.transform.root);
 
+            HelpButton.onClick.AddListener(ToggleInstruction);
+
             SceneManager.sceneUnloaded += (scene) =>
             {
                 HelpButton.gameObject.SetActive(false);
-                HelpButton.interactable = true;
                 m_SceneCanvases.Clear();
             };
         }
@@ -53,6 +54,18 @@ namespace Pocketboy.Common
             HelpButton.gameObject.SetActive(true);
         }
 
+        private void ToggleInstruction()
+        {
+            if (!m_IsActive)
+            {
+                ShowInstruction();
+            }
+            else
+            {
+                HideInstruction();
+            }
+        }
+
         public void ShowInstruction()
         {
             if (m_IsActive)
@@ -66,7 +79,6 @@ namespace Pocketboy.Common
             transform.forward = -transform.forward;
             InstructionText.pageToDisplay = 1;            
             InstructionCanvas.gameObject.SetActive(true);
-            HelpButton.interactable = false;
             ReadInstruction();
         }
 
@@ -79,7 +91,6 @@ namespace Pocketboy.Common
             ToggleSceneCanvases(true);
             SceneLoader.Instance.ShowUI();
             InstructionCanvas.gameObject.SetActive(false);
-            HelpButton.interactable = true;
             RoboyManager.Instance.StopTalking();
         }
 
