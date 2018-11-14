@@ -46,9 +46,11 @@ namespace Pocketboy.JointGame
         public void StopMotion()
         {
             if (MotionJoint != null)
+            {
                 MotionJoint.StopMotion();
-
-            MotionJoint.gameObject.SetActive(false);
+                MotionJoint.gameObject.SetActive(false);
+            }
+            
             ResetEffector();
         }
 
