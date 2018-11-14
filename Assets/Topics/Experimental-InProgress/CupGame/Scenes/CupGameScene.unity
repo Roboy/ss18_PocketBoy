@@ -1004,6 +1004,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1564705475692446, guid: e2d6b3b19ec76cf4597662442e622f9b, type: 2}
+      propertyPath: m_TagString
+      value: SceneUI
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2d6b3b19ec76cf4597662442e622f9b, type: 2}
   m_IsPrefabAsset: 0

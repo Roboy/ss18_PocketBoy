@@ -24,6 +24,7 @@ TagManager:
   - Wall
   - WinningZone
   - PlayerSpawn
+  - SceneUI
   layers:
   - Default
   - TransparentFX
