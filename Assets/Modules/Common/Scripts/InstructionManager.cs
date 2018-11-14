@@ -27,6 +27,8 @@ namespace Pocketboy.Common
 
         private List<string> m_TextsPerPage = new List<string>();
 
+        private List<Canvas> m_SceneCanvases = new List<Canvas>();
+
         private void Awake()
         {
             m_PageController = GetComponent<PageController>();
@@ -36,6 +38,7 @@ namespace Pocketboy.Common
             {
                 HelpButton.gameObject.SetActive(false);
                 HelpButton.interactable = true;
+                m_SceneCanvases.Clear();
             };
         }
 
@@ -56,6 +59,8 @@ namespace Pocketboy.Common
                 return;
 
             m_IsActive = true;
+            SceneLoader.Instance.HideUI();
+            ToggleSceneCanvases(false);
             transform.position = RoboyManager.Instance.InstructionPosition;
             transform.rotation = RoboyManager.Instance.transform.rotation;
             transform.forward = -transform.forward;
@@ -71,6 +76,8 @@ namespace Pocketboy.Common
                 return;
 
             m_IsActive = false;
+            ToggleSceneCanvases(true);
+            SceneLoader.Instance.ShowUI();
             InstructionCanvas.gameObject.SetActive(false);
             HelpButton.interactable = true;
             RoboyManager.Instance.StopTalking();
@@ -125,7 +132,7 @@ namespace Pocketboy.Common
         }
 
         public void Unmute()
-        {          
+        {
             m_IsMuted = false;
             ReadInstruction();
         }
@@ -137,6 +144,32 @@ namespace Pocketboy.Common
 
             RoboyManager.Instance.StopTalking();
             RoboyManager.Instance.Talk(m_TextsPerPage[InstructionText.pageToDisplay-1]); // TextMeshPro text pages go from [1, pageCount]
+        }
+
+        private void ToggleSceneCanvases(bool enabledState)
+        {
+            if (m_SceneCanvases.Count == 0)
+            {
+                FindSceneCanvases();
+            }
+            foreach (var canvas in m_SceneCanvases)
+            {
+                canvas.enabled = enabledState;
+            }                     
+        }
+
+        private void FindSceneCanvases()
+        {
+            m_SceneCanvases.Clear();
+            var sceneCanvases = GameObject.FindGameObjectsWithTag("SceneUI");
+            foreach (var sceneCanvas in sceneCanvases)
+            {
+                var canvas = sceneCanvas.GetComponent<Canvas>();
+                if (canvas)
+                {
+                    m_SceneCanvases.Add(canvas);
+                }
+            }
         }
     }
 }
