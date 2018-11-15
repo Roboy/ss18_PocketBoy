@@ -86,13 +86,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1011273565674394}
-  m_LocalRotation: {x: 0.17997622, y: -0, z: -0, w: 0.983671}
+  m_LocalRotation: {x: 0.04797812, y: 0, z: 0, w: 0.99884844}
   m_LocalPosition: {x: 0, y: 0.826, z: -0.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4459272654498424}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 20.737001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5.5, y: 0, z: 0}
 --- !u!4 &4056823798965396
 Transform:
   m_ObjectHideFlags: 1
@@ -112,7 +112,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1069394283580008}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -121,7 +121,7 @@ Transform:
   - {fileID: 4056823798965396}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4630067617229218
 Transform:
   m_ObjectHideFlags: 1
@@ -145,10 +145,10 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
-  m_projectionMatrixMode: 1
+  m_projectionMatrixMode: 2
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -157,7 +157,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 200
-  field of view: 75
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -336,5 +336,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a812fdbd0833ba64e8dd9c335fa4a995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 0.75
+  MovementSpeed: 0.0075
   TurningSpeed: 0.5

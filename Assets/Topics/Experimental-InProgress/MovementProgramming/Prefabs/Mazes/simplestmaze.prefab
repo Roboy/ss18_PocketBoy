@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33572842852756162}
   - component: {fileID: 23132271879253332}
   - component: {fileID: 64250285062338116}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Walls
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4292596190981528}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: DeadZones
   m_TagString: Deadzone
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4755201877306352}
   - component: {fileID: 65902840785482014}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WinningZone
   m_TagString: WinningZone
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1840356250581872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.876}
+  m_LocalPosition: {x: 0, y: 0.1, z: 3.876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4561744899127718}
@@ -187,7 +187,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1222316845445888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.295, y: 0.5, z: -2.313}
+  m_LocalPosition: {x: 2.295, y: 0.15, z: -2.313}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 4561744899127718}

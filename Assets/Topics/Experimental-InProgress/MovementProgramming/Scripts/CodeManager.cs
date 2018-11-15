@@ -108,7 +108,8 @@ namespace Pocketboy.MovementProgramming
 
             //Check for winning/losing state
             RaycastHit hit = new RaycastHit();
-            if (Physics.SphereCast(m_Player.transform.localPosition, m_Player.transform.localScale.z / 2.0f, m_Player.transform.forward, out hit, m_Player.transform.localScale.z * 0.1f))
+            int layermask = LayerMask.GetMask("MazeObjects");
+            if (Physics.SphereCast(transform.position, (transform.lossyScale.z / 2.0f) * 1.1f, transform.forward, out hit, (transform.lossyScale.z / 2.0f) * 0.1f, layermask))
             {
                 
                 if (hit.transform.tag == "WinningZone")

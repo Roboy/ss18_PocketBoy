@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4594315311033932}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: DeadZones
   m_TagString: Deadzone
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 33662185072085090}
   - component: {fileID: 23921058668847710}
   - component: {fileID: 64027897048289278}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Walls
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4246613473931284}
   - component: {fileID: 65298588392446940}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WinningZone
   m_TagString: WinningZone
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1944089215445540}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.4, y: 0.5, z: -4.4}
+  m_LocalPosition: {x: 4.4, y: 0.15, z: -4.4}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 4712200341772704}

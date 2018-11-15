@@ -17,7 +17,7 @@ namespace Pocketboy.MovementProgramming
 
         private void Start()
         {
-            m_InitPose = new Pose(transform.localPosition, transform.localRotation);
+            SetInitPose();
         }
 
         public bool IsMoving()
@@ -27,19 +27,35 @@ namespace Pocketboy.MovementProgramming
 
         public void ResetPlayerPose()
         {
-            transform.localPosition = m_InitPose.position;
-            transform.localRotation = m_InitPose.rotation;
+            transform.position = m_InitPose.position;
+            transform.rotation = m_InitPose.rotation;
         }
 
-
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(transform.position, (transform.lossyScale.z / 2.0f) * 1.1f);
+        }
         public IEnumerator GoForward()
         {
             m_PlayerMoving = true;
+            RaycastHit hit = new RaycastHit();
+            int layermask = LayerMask.GetMask("MazeObjects");
+            Debug.Log(layermask);
+
             while (m_PlayerMoving)
             {
-                RaycastHit hit = new RaycastHit();
-                if (Physics.SphereCast(transform.localPosition, transform.localScale.z / 2.0f, transform.forward, out hit, transform.localScale.z * 0.1f))
+                RaycastHit[] hits = Physics.SphereCastAll(transform.position, (transform.lossyScale.z / 2.0f) * 1.1f, transform.forward, (transform.lossyScale.z / 2.0f) * 0.1f, layermask);
+                string output = "";
+                foreach (RaycastHit h in hits)
                 {
+                    output += " // ";
+                    output += h.collider.name;
+                }
+                Debug.Log(output);
+
+                if (Physics.SphereCast(transform.position, (transform.lossyScale.z / 2.0f) * 1.1f, transform.forward, out hit, (transform.lossyScale.z / 2.0f) * 0.1f, layermask))
+                {
+                    Debug.Log("Spherecasting!");
                     string tag = hit.transform.tag;
                     if (tag == null)
                     {
@@ -63,7 +79,7 @@ namespace Pocketboy.MovementProgramming
                 }
 
                 //If there is no wall, continue on moving forward
-                transform.localPosition += transform.forward.normalized * Time.deltaTime * MovementSpeed;
+                transform.position += transform.forward * Time.deltaTime * MovementSpeed;
                 yield return null;
             }
 
@@ -102,6 +118,11 @@ namespace Pocketboy.MovementProgramming
 
             m_PlayerMoving = false;
             yield return null;
+        }
+
+        public void SetInitPose()
+        {
+            m_InitPose = new Pose(transform.position, transform.rotation);
         }
     }
 }

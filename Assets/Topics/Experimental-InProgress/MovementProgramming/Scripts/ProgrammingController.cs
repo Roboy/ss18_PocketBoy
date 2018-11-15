@@ -46,28 +46,35 @@ namespace Pocketboy.MovementProgramming
             var maze = GameObject.Instantiate(m_MazePrefabs[levelNumber]);
             maze.name = m_MazePrefabs[levelNumber].name;
             maze.transform.parent = this.transform;
+            Vector3 pos = this.transform.position;
+            pos.x -= 0.25f;
+            pos.z -= 0.25f;
+            maze.transform.position = pos;
             m_Maze = maze;
-
-           
-
             CodeManager.Instance.m_NumberOfTries = 0;
             CodeManager.Instance.UpdateAttemptCounter(0);
+            
         }
 
         public void SpawnPlayer()
         {
-            if (m_Player != null)
-                Destroy(m_Player);
+            //if (m_Player != null)
+            //    Destroy(m_Player);
 
-            var player = GameObject.Instantiate(m_PlayerPrefab);
-            player.name = m_PlayerPrefab.name;
-            player.transform.parent = m_Maze.transform;
+
+            if (m_Player == null)
+            {
+                var player = GameObject.Instantiate(m_PlayerPrefab);
+                player.name = m_PlayerPrefab.name;
+                player.transform.parent = this.transform;
+                m_Player = player;
+            }
             Transform playerspawn = m_Maze.GetComponent<Maze>().m_PlayerSpawn.transform;
 
-            player.transform.localScale = playerspawn.localScale;
-            player.transform.localPosition = playerspawn.localPosition;
-            player.transform.localRotation = Quaternion.LookRotation(playerspawn.forward);
-            m_Player = player;
+            m_Player.transform.localScale = playerspawn.lossyScale;
+            m_Player.transform.position = playerspawn.position;
+            m_Player.transform.rotation = playerspawn.rotation;
+            m_Player.GetComponent<MazeRunner>().SetInitPose();
             CodeManager.Instance.ExchangeRoboyInMaze(m_Player);
         }
     }
