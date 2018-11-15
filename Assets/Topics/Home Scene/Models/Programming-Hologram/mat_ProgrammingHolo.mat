@@ -32,7 +32,7 @@ Material:
     - _DissolveTransitionSize: 0
     - _DissolveValue: 0
     - _FlickerSpeed: 1
-    - _Fold: 5
+    - _Fold: 7
     - _GlitchIntensity: 0
     - _GlitchSpeed: 1
     - _GlowSpeed: 1
@@ -47,5 +47,5 @@ Material:
     - _DissolveEnd: {r: 0, g: 5.2785, b: 0, a: 0}
     - _DissolveStart: {r: 0, g: -5.1885004, b: 0, a: 0}
     - _HologramColor: {r: 0, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 0.9647059}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}

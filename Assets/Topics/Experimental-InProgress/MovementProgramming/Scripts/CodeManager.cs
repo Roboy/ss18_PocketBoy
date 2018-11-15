@@ -107,21 +107,15 @@ namespace Pocketboy.MovementProgramming
             }
 
             //Check for winning/losing state
-            RaycastHit hit = new RaycastHit();
-            int layermask = LayerMask.GetMask("MazeObjects");
-            if (Physics.SphereCast(transform.position, (transform.lossyScale.z / 2.0f) * 1.1f, transform.forward, out hit, (transform.lossyScale.z / 2.0f) * 0.1f, layermask))
+            if (m_Player.m_GoalHit)
             {
-                
-                if (hit.transform.tag == "WinningZone")
-                {
-                    Debug.Log("You pay, you win!");
-                }
+                m_AttemptCounter.text = ("You escaped with " + m_NumberOfTries + " attempts.");
+                m_Player.m_GoalHit = false;
             }
             else
             {
-                Debug.Log("You are still stuck!");
+                m_AttemptCounter.text = ("You are still stuck with " + m_NumberOfTries + " attempts.");
                 m_Player.ResetPlayerPose();
-
             }
 
             m_currentVisualLineOfCode = null;
@@ -138,12 +132,12 @@ namespace Pocketboy.MovementProgramming
 
         private void InstructionRight()
         {
-            CreateInstruction("Right");
+            CreateInstruction("Turn Right");
         }
 
         private void InstructionLeft()
         {
-            CreateInstruction("Left");
+            CreateInstruction("Turn Left");
         }
 
 
@@ -201,6 +195,27 @@ namespace Pocketboy.MovementProgramming
                 m_LinesOfCode.Remove(rt);
                 Destroy(rt.gameObject);
             }
+            ToBeRemoved.Clear();
+
+            //Update remaining visual instructions
+            updateNames();
+            updatePositions();
+            updatePanelSize();
+
+            m_SelectedLines.Clear();
+            ToggleLineMovement();
+        }
+
+        public void DeleteAllInstructions()
+        {
+            List<RectTransform> ToBeRemoved = m_LinesOfCode;
+            foreach (RectTransform rt in ToBeRemoved)
+            {
+                //m_LinesOfCode.Remove(rt);
+                Destroy(rt.gameObject);
+            }
+            m_LinesOfCode.Clear();
+
             ToBeRemoved.Clear();
 
             //Update remaining visual instructions
@@ -337,7 +352,6 @@ namespace Pocketboy.MovementProgramming
         /// </summary>
         private void ToggleLineMovement()
         {
-            Vector3 newPanelPos;
             if (m_SelectedLines.Count != 1)
             {
                 m_MoveUpButton.gameObject.SetActive(false);
@@ -355,10 +369,6 @@ namespace Pocketboy.MovementProgramming
                 m_MoveDownButton.gameObject.SetActive(true);
                 m_MoveDownButton.enabled = true;
                 m_MoveDownButton.GetComponent<Image>().color = Col_Selected;
-
-                //newPanelPos = MoveLinesPanel.anchoredPosition;
-                //newPanelPos.y = m_SelectedLines[0].anchoredPosition.y + Mathf.Abs(m_MoveDownButton.GetComponent<RectTransform>().anchoredPosition.y);
-                //MoveLinesPanel.anchoredPosition = newPanelPos;
                 return;
             }
 
@@ -372,10 +382,6 @@ namespace Pocketboy.MovementProgramming
                 m_MoveDownButton.gameObject.SetActive(true);
                 m_MoveDownButton.enabled = false;
                 m_MoveDownButton.GetComponent<Image>().color = Color.grey;
-
-                //newPanelPos = MoveLinesPanel.anchoredPosition;
-                //newPanelPos.y = m_SelectedLines[0].anchoredPosition.y - Mathf.Abs(m_MoveUpButton.GetComponent<RectTransform>().anchoredPosition.y);
-                //MoveLinesPanel.anchoredPosition = newPanelPos;
                 return;
             }
 
@@ -386,9 +392,6 @@ namespace Pocketboy.MovementProgramming
             m_MoveDownButton.gameObject.SetActive(true);
             m_MoveDownButton.enabled = true;
             m_MoveDownButton.GetComponent<Image>().color = Col_Selected;
-            //newPanelPos = MoveLinesPanel.anchoredPosition;
-            //newPanelPos.y = m_SelectedLines[0].anchoredPosition.y;
-            //MoveLinesPanel.anchoredPosition = newPanelPos;
 
         }
 

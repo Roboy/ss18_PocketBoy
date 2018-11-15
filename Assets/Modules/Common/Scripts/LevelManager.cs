@@ -146,7 +146,6 @@
                     offsetMultiplicator *= -1;                    
                 }
                 planetSystemOffset = offsetMultiplicator * Vector3.right * 0.5f;
-                Debug.Log(i + ":" + planetSystemOffset);
                 PositionGameObjectRelativeToRoboy(planetSystem.gameObject, planetSystemInitPosition + planetSystemOffset, true);
             }
         }  

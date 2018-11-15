@@ -10,10 +10,16 @@ namespace Pocketboy.MovementProgramming
 
         public float MovementSpeed = 0.1f;
         public float TurningSpeed = 0.5f;
+        [HideInInspector]
+        public bool m_GoalHit = false;
+        [HideInInspector]
+        public bool m_DeadzoneHit = false;
 
         private bool m_PlayerMoving = false;
         private bool m_WallHit = false;
+        
         private Pose m_InitPose;
+
 
         private void Start()
         {
@@ -31,61 +37,27 @@ namespace Pocketboy.MovementProgramming
             transform.rotation = m_InitPose.rotation;
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawWireSphere(transform.position, (transform.lossyScale.z / 2.0f) * 1.1f);
-        }
+       
         public IEnumerator GoForward()
         {
             m_PlayerMoving = true;
-            RaycastHit hit = new RaycastHit();
-            int layermask = LayerMask.GetMask("MazeObjects");
-            Debug.Log(layermask);
 
             while (m_PlayerMoving)
             {
-                RaycastHit[] hits = Physics.SphereCastAll(transform.position, (transform.lossyScale.z / 2.0f) * 1.1f, transform.forward, (transform.lossyScale.z / 2.0f) * 0.1f, layermask);
-                string output = "";
-                foreach (RaycastHit h in hits)
-                {
-                    output += " // ";
-                    output += h.collider.name;
-                }
-                Debug.Log(output);
 
-                if (Physics.SphereCast(transform.position, (transform.lossyScale.z / 2.0f) * 1.1f, transform.forward, out hit, (transform.lossyScale.z / 2.0f) * 0.1f, layermask))
-                {
-                    Debug.Log("Spherecasting!");
-                    string tag = hit.transform.tag;
-                    if (tag == null)
-                    {
-                        continue;
-                    }
-                    else if (hit.transform.tag == "Wall")
-                    {
-                        break;
-                    }
-                    else if (hit.transform.tag == "Deadzone")
-                    {
-                        CodeManager.Instance.StopExecution();
-                        break;
-                    }
-                    else if (hit.transform.tag == "WinningZone")
-                    {
-                        break;
-                    }
-
-
-                }
+                if (m_WallHit || m_GoalHit || m_DeadzoneHit)
+                    break;
 
                 //If there is no wall, continue on moving forward
                 transform.position += transform.forward * Time.deltaTime * MovementSpeed;
                 yield return null;
             }
 
+           
             m_PlayerMoving = false;
             yield return null;
         }
+
 
         public IEnumerator TurnAround(string direction)
         {
@@ -97,11 +69,11 @@ namespace Pocketboy.MovementProgramming
             float currentDuration = 0.0f;
             float Duration = TurningSpeed;
 
-            if (direction == "Left")
+            if (direction == "Turn Left")
             {
                 turnAngleY = initialAngleY - 90.0f;
             }
-            if (direction == "Right")
+            if (direction == "Turn Right")
             {
                 turnAngleY = initialAngleY + 90.0f;
             }
@@ -123,6 +95,63 @@ namespace Pocketboy.MovementProgramming
         public void SetInitPose()
         {
             m_InitPose = new Pose(transform.position, transform.rotation);
+        }
+
+
+        private void OnCollisionEnter(Collision collision)
+        {
+
+            if (collision.transform.tag == "Wall")
+            {
+                m_WallHit = true;
+            }
+
+            if (collision.transform.tag == "WinningZone")
+            {
+                m_GoalHit = true;
+            }
+
+            if (collision.transform.tag == "Deadzone")
+            {
+                m_DeadzoneHit = true;
+            }
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+
+            if (collision.transform.tag == "Wall")
+            {
+                m_WallHit = true;
+            }
+
+            if (collision.transform.tag == "WinningZone")
+            {
+                m_GoalHit = true;
+            }
+
+            if (collision.transform.tag == "Deadzone")
+            {
+                m_DeadzoneHit = true;
+            }
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (collision.transform.tag == "Wall")
+            {
+                m_WallHit = false;
+            }
+
+            if (collision.transform.tag == "WinningZone")
+            {
+                m_GoalHit = false;
+            }
+
+            if (collision.transform.tag == "Deadzone")
+            {
+                m_DeadzoneHit = false;
+            }
         }
     }
 }

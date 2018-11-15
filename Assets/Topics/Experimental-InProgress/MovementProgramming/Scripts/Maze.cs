@@ -9,6 +9,7 @@ public class Maze : MonoBehaviour {
     public GameObject m_DeadZones;
     public GameObject m_WinningZone;
     public GameObject m_PlayerSpawn;
+    public float m_PlayerSpeed;
     
     
 
