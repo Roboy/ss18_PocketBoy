@@ -85,6 +85,8 @@ namespace Pocketboy.MovementProgramming
 
             LineOfCode currentLine;
             TextMeshProUGUI currentInstruction;
+            m_Player.m_GoalHit = false;
+
             //Start executing the instructions one by one
             foreach (RectTransform rt in m_LinesOfCode)
             {
@@ -102,17 +104,20 @@ namespace Pocketboy.MovementProgramming
                     yield return StartCoroutine(m_Player.TurnAround(currentLine.operation));
                 }
 
+                if (m_Player.m_GoalHit)
+                {
+                    m_AttemptCounter.text = ("You escaped with " + m_NumberOfTries + " attempts.");
+                    currentInstruction.color = Col_Default;
+                    break;
+                }
+
+
                 currentInstruction.color = Col_Default;
                 
             }
 
             //Check for winning/losing state
-            if (m_Player.m_GoalHit)
-            {
-                m_AttemptCounter.text = ("You escaped with " + m_NumberOfTries + " attempts.");
-                m_Player.m_GoalHit = false;
-            }
-            else
+            if (!m_Player.m_GoalHit)
             {
                 m_AttemptCounter.text = ("You are still stuck with " + m_NumberOfTries + " attempts.");
                 m_Player.ResetPlayerPose();

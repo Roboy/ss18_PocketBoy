@@ -29,10 +29,10 @@ Material:
     m_Floats:
     - _Alpha: 1
     - _Brightness: 1
-    - _DissolveTransitionSize: 0
+    - _DissolveTransitionSize: 0.1
     - _DissolveValue: 0
     - _FlickerSpeed: 1
-    - _Fold: 5
+    - _Fold: 7
     - _GlitchIntensity: 0
     - _GlitchSpeed: 1
     - _GlowSpeed: 1
@@ -40,8 +40,8 @@ Material:
     - _HighestVertex: 2.21471
     - _LowestVertex: -1.991807
     - _RimPower: 5
-    - _ScanSpeed: 1
-    - _ScanTiling: 0.05
+    - _ScanSpeed: -0.1
+    - _ScanTiling: 1
     m_Colors:
     - _Direction: {r: 0, g: 1, b: 0, a: 0}
     - _DissolveEnd: {r: 0, g: 2.31471, b: 0, a: 0}

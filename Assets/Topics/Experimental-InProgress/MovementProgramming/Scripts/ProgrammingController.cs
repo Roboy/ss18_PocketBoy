@@ -31,7 +31,7 @@ namespace Pocketboy.MovementProgramming
 
         public void Initialize()
         {
-            LevelManager.Instance.RegisterGameObjectWithRoboy(this.gameObject, Vector3.zero, Quaternion.identity);
+            LevelManager.Instance.RegisterGameObjectWithRoboy(this.gameObject, new Vector3(-1.0f, 0.05f, 0.0f), Quaternion.identity);
             LoadMaze();
             SpawnPlayer();
             
@@ -43,13 +43,8 @@ namespace Pocketboy.MovementProgramming
 
             int levelNumber = m_DifficultyLevel.value;
 
-            var maze = GameObject.Instantiate(m_MazePrefabs[levelNumber]);
+            var maze = GameObject.Instantiate(m_MazePrefabs[levelNumber], this.transform.position, this.transform.rotation, this.transform);
             maze.name = m_MazePrefabs[levelNumber].name;
-            maze.transform.parent = this.transform;
-            Vector3 pos = this.transform.position;
-            pos.x -= 0.9f;
-            pos.z -= 0.2f;
-            maze.transform.position = pos;
             m_Maze = maze;
             CodeManager.Instance.m_NumberOfTries = 0;
             CodeManager.Instance.UpdateAttemptCounter(0);
