@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pocketboy.Common;
+using TMPro;
 
 namespace Pocketboy.ModelCategorization
 {
@@ -28,15 +29,49 @@ namespace Pocketboy.ModelCategorization
         [SerializeField]
         private List<Transform> SpawnPositions = new List<Transform>();
 
+        [Header("UI Stuff")]
+
+        [SerializeField]
+        private GameObject ObjectInformation;
+
+        [SerializeField]
+        private GameObject NameParent;
+
+        [SerializeField]
+        private TextMeshProUGUI NameText;
+
+        [SerializeField]
+        private GameObject ExplanationParent;
+
+        [SerializeField]
+        private TextMeshProUGUI ExplanationText;
+
+        private float m_ObjectInformationDisplayTime = 2f;
+
         private void Start()
         {
             PositionPlatforms();
             SpawnModels();                
         }
 
-        public void ShowObjectInformation(string name, string explanation)
+        public void ShowObjectName(string objectName)
         {
+            StartCoroutine(ShowInformation(NameParent, NameText, objectName));
+        }
 
+        public void ShowObjectExplanation(string explanation)
+        {
+            StartCoroutine(ShowInformation(ExplanationParent, ExplanationText, explanation));
+        }
+
+        private IEnumerator ShowInformation(GameObject informationGO, TextMeshProUGUI informationText, string information)
+        {
+            ObjectInformation.gameObject.SetActive(true);
+            informationGO.SetActive(true);
+            informationText.text = information;
+            yield return new WaitForSeconds(m_ObjectInformationDisplayTime);
+            ObjectInformation.gameObject.SetActive(false);
+            informationGO.SetActive(false);
         }
 
         private void PositionPlatforms()
