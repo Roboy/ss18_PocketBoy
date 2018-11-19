@@ -559,6 +559,7 @@ MonoBehaviour:
   - {fileID: 114405581393563084, guid: 27b8dc5c22a260248bb506606e122196, type: 2}
   - {fileID: 114405581393563084, guid: 3c015cadf31dc1440a1b676c40bb2416, type: 2}
   - {fileID: 114405581393563084, guid: 6d32645edd46556449ad2d422b482a86, type: 2}
+  - {fileID: 114398170101170238, guid: ddd18bc85705436428542ce05bb1c9d0, type: 2}
 --- !u!114 &114155854200937020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -908,7 +909,7 @@ MonoBehaviour:
   FloorObjectPrefab: {fileID: 1658556683313224, guid: 1dec40727da7faa408692dd43f649652,
     type: 2}
   DetectedPlaneGenerator: {fileID: 0}
-  SceneAfterCalibration: HomeScene_DEV
+  SceneAfterCalibration: HomeScene
 --- !u!114 &114418575066013714
 MonoBehaviour:
   m_ObjectHideFlags: 1

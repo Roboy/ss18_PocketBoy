@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pocketboy.Common;
 using TMPro;
+using UnityEngine.EventSystems;
 
 namespace Pocketboy.ModelCategorization
 {
@@ -46,7 +47,11 @@ namespace Pocketboy.ModelCategorization
         [SerializeField]
         private TextMeshProUGUI ExplanationText;
 
-        private float m_ObjectInformationDisplayTime = 2f;
+        private float m_ObjectInformationDisplayTime = 5f;
+
+        private GameObject m_CurrentInformationGO;
+
+        private Coroutine m_CurrentShowRoutine;
 
         private void Start()
         {
@@ -56,12 +61,33 @@ namespace Pocketboy.ModelCategorization
 
         public void ShowObjectName(string objectName)
         {
-            StartCoroutine(ShowInformation(NameParent, NameText, objectName));
+            //ObjectInformation.gameObject.SetActive(true);
+            //NameParent.SetActive(true);
+            //NameText.text = objectName;
+            //m_CurrentInformationGO = NameParent;
+
+            if (m_CurrentShowRoutine != null)
+                StopCoroutine(m_CurrentShowRoutine);
+            m_CurrentShowRoutine = StartCoroutine(ShowInformation(NameParent, NameText, objectName));
         }
 
         public void ShowObjectExplanation(string explanation)
         {
-            StartCoroutine(ShowInformation(ExplanationParent, ExplanationText, explanation));
+            //ObjectInformation.gameObject.SetActive(true);
+            //ExplanationParent.SetActive(true);
+            //ExplanationText.text = explanation;
+            //m_CurrentInformationGO = ExplanationParent;
+
+            if (m_CurrentShowRoutine != null)
+                StopCoroutine(m_CurrentShowRoutine);
+            m_CurrentShowRoutine = StartCoroutine(ShowInformation(ExplanationParent, ExplanationText, explanation));
+        }
+
+        private void HideObjectInformation()
+        {
+            ObjectInformation.gameObject.SetActive(false);
+            if (m_CurrentInformationGO != null)
+                m_CurrentInformationGO.SetActive(false);
         }
 
         private IEnumerator ShowInformation(GameObject informationGO, TextMeshProUGUI informationText, string information)
