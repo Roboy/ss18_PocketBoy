@@ -22,7 +22,7 @@ namespace Pocketboy.Common
 
         private void Awake()
         {
-            HomeButton.onClick.AddListener(() => LoadScene("HomeScene_DEV"));
+            HomeButton.onClick.AddListener(() => LoadScene("HomeScene"));
         }
 
         private void OnEnable()
@@ -67,7 +67,7 @@ namespace Pocketboy.Common
 
         void ToggleHomeButton(Scene scene)
         {
-            if (scene.name == "HomeScene_DEV" || scene.name == "BaseScene")
+            if (scene.name == "HomeScene" || scene.name == "BaseScene")
             {
                 HomeButton.gameObject.SetActive(false);
             }

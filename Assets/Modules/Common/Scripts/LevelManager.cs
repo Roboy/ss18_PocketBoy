@@ -58,7 +58,7 @@
         /// </summary>
         public void Update()
         {
-            if (SceneManager.GetActiveScene().name != "HomeScene_DEV") // TO THIS SOME OTHER WAY
+            if (SceneManager.GetActiveScene().name != "HomeScene") // TO THIS SOME OTHER WAY
                 return;
 
             if (!RoboyManager.InstanceExists)
@@ -152,7 +152,7 @@
 
         private void ResetLevel(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name != "HomeScene_DEV")
+            if (scene.name != "HomeScene")
                 return;
 
             m_PlanetSystemsSpawned = false;
