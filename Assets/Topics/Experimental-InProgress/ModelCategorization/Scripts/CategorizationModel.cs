@@ -23,13 +23,14 @@ namespace Pocketboy.ModelCategorization
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            ModelCategorizationManager.Instance.ShowObjectInformation(m_Name, m_Explanation);
+            ModelCategorizationManager.Instance.ShowObjectName(m_Name);
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
             if (!m_IsOnPlatform && m_Platform != null)
             {
+                ModelCategorizationManager.Instance.ShowObjectName(m_Explanation);
                 bool isOnCorrentPlatform = m_Platform.CheckContent(m_ContentRelatedState);
                 if (isOnCorrentPlatform)
                 {
