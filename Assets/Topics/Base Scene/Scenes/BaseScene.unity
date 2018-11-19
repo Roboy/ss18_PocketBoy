@@ -120,6 +120,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
+        type: 2}
+      propertyPath: PlanetSystems.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4365924198581326, guid: 2b68885390b2ac346adfcd7a9d92fd1b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -182,6 +187,12 @@ Prefab:
       propertyPath: m_CullingMask.m_Bits
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
+        type: 2}
+      propertyPath: PlanetSystems.Array.data[3]
+      value: 
+      objectReference: {fileID: 114398170101170238, guid: ddd18bc85705436428542ce05bb1c9d0,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b68885390b2ac346adfcd7a9d92fd1b, type: 2}
   m_IsPrefabAsset: 0
@@ -317,7 +328,7 @@ RectTransform:
   - {fileID: 2139701666}
   - {fileID: 1706232262}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1231,7 +1242,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4055847820020234, guid: 6a35c744e5010405c847fad90282d2be, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1654175882956584, guid: 6a35c744e5010405c847fad90282d2be, type: 2}
       propertyPath: m_IsActive
