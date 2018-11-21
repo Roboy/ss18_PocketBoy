@@ -175,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 1238778000511206}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4939402601180474}
   - {fileID: 4902167758484852}
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_DeadZones: {fileID: 1195066514788026}
   m_WinningZone: {fileID: 1611579937814758}
   m_PlayerSpawn: {fileID: 1944089215445540}
-  m_PlayerSpeed: 0.2
+  m_PlayerSpeed: 0.4
 --- !u!212 &212043722429818524
 SpriteRenderer:
   m_ObjectHideFlags: 1

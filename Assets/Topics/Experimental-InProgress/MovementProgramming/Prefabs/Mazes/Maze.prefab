@@ -175,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 1462486821908948}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4213020029345938}
   - {fileID: 4897174051394094}
@@ -266,7 +266,7 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1009484288776484}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_DeadZones: {fileID: 1114541279413648}
   m_WinningZone: {fileID: 1660648988655722}
   m_PlayerSpawn: {fileID: 1009484288776484}
-  m_PlayerSpeed: 0.1
+  m_PlayerSpeed: 0.2
 --- !u!212 &212862911928844208
 SpriteRenderer:
   m_ObjectHideFlags: 1

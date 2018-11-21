@@ -1699,11 +1699,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1094195148}
     m_Modifications:
-    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 224232892417715760, guid: 91f63ea7457c88140aafd2853a4be823,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -1794,6 +1789,20 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1325082272076486, guid: 91f63ea7457c88140aafd2853a4be823, type: 2}
+      propertyPath: m_Name
+      value: DifficultyDropdownMaze
+      objectReference: {fileID: 0}
+    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1458416482}
+    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
+        type: 2}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1458416482}
     - target: {fileID: 114470134853713762, guid: 91f63ea7457c88140aafd2853a4be823,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -1803,61 +1812,6 @@ Prefab:
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114470134853713762, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_inputSource
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1458416482}
-    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadMaze
-      objectReference: {fileID: 0}
-    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1458416482}
-    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SpawnPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 114164450168737286, guid: 91f63ea7457c88140aafd2853a4be823,
-        type: 2}
-      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91f63ea7457c88140aafd2853a4be823, type: 2}

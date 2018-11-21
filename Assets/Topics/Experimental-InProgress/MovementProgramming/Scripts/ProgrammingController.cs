@@ -32,7 +32,7 @@ namespace Pocketboy.MovementProgramming
         public void Initialize()
         {
             if (LevelManager.InstanceExists)
-                LevelManager.Instance.RegisterGameObjectWithRoboy(this.gameObject, new Vector3(-1.0f, 0.05f, 0.0f), Quaternion.identity);
+                LevelManager.Instance.RegisterGameObjectWithRoboy(this.gameObject, new Vector3(-2.0f, 0.05f, 0.0f), Quaternion.identity);
 
             LoadMaze();
             SpawnPlayer();
