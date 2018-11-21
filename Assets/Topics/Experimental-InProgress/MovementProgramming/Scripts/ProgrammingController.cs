@@ -31,7 +31,9 @@ namespace Pocketboy.MovementProgramming
 
         public void Initialize()
         {
-            LevelManager.Instance.RegisterGameObjectWithRoboy(this.gameObject, new Vector3(-1.0f, 0.05f, 0.0f), Quaternion.identity);
+            if (LevelManager.InstanceExists)
+                LevelManager.Instance.RegisterGameObjectWithRoboy(this.gameObject, new Vector3(-1.0f, 0.05f, 0.0f), Quaternion.identity);
+
             LoadMaze();
             SpawnPlayer();
             

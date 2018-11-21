@@ -49,8 +49,9 @@ namespace Pocketboy.MovementProgramming
         private bool m_LineExecuting = false;
         private MazeRunner m_Player;
         private Coroutine m_currentCoroutine;
-        private RectTransform m_currentVisualLineOfCode;
-        
+        private RectTransform m_CurrentVisualLineOfCode;
+        private bool m_ExecutingCode;
+        private int m_CurrentInstructionIndex;
 
         // Use this for initialization
         void Start()
@@ -59,7 +60,7 @@ namespace Pocketboy.MovementProgramming
             m_RotateRightButton.onClick.AddListener(InstructionRight);
             m_RotateLefttButton.onClick.AddListener(InstructionLeft);
             m_DeleteButton.onClick.AddListener(DeleteInsctruction);
-            m_StartButton.onClick.AddListener(delegate { m_currentCoroutine = StartCoroutine(ExecuteInstructionCode()); });
+            m_StartButton.onClick.AddListener(ExecuteInstructionCode);
             m_MoveUpButton.onClick.AddListener(MoveInsctructionUp);
             m_MoveDownButton.onClick.AddListener(MoveInstructionDown);
 
@@ -74,59 +75,128 @@ namespace Pocketboy.MovementProgramming
             m_Player = m_RoboyInMaze.GetComponent<MazeRunner>();
         }
 
-
-        private IEnumerator ExecuteInstructionCode()
+        private void Update()
         {
-            if (m_LinesOfCode.Count == 0)
-                yield return null;
+            if (!m_ExecutingCode || m_Player.ExecutingAction || m_LinesOfCode.Count == 0 || m_CurrentVisualLineOfCode == null)
+                return;
 
+            ExecuteInstructionCodeInternal();
+        }
+
+        public void NextInstruction()
+        {
+            var currentInstruction = m_CurrentVisualLineOfCode.GetComponent<TextMeshProUGUI>();
+            currentInstruction.color = Col_Default;
+
+            if (m_CurrentInstructionIndex == m_LinesOfCode.Count - 1)
+            {
+                if (!m_Player.m_GoalHit)
+                {
+                    m_AttemptCounter.text = ("You are still stuck with " + m_NumberOfTries + " attempts.");
+                    m_Player.ResetPlayerPose();
+                    m_ExecutingCode = false;
+                }
+
+                m_CurrentVisualLineOfCode = null;
+                ToggleButtons("ON");
+            }
+            else
+            {
+                m_CurrentInstructionIndex++;
+                m_CurrentVisualLineOfCode = m_LinesOfCode[m_CurrentInstructionIndex];
+            }
+
+        }
+
+        private void ExecuteInstructionCode()
+        {
+            m_ExecutingCode = true;
             ToggleButtons("OFF");
             UpdateAttemptCounter(1);
-
-            LineOfCode currentLine;
-            TextMeshProUGUI currentInstruction;
+            m_CurrentInstructionIndex = 0;
+            m_CurrentVisualLineOfCode = m_LinesOfCode[m_CurrentInstructionIndex];
             m_Player.m_GoalHit = false;
-
-            //Start executing the instructions one by one
-            foreach (RectTransform rt in m_LinesOfCode)
-            {
-                m_currentVisualLineOfCode = rt;
-                currentLine = rt.GetComponent<LineOfCode>();
-                currentInstruction = rt.GetComponent<TextMeshProUGUI>();
-                currentInstruction.color = Col_Highlighted;
-
-                if (currentLine.operation == "Forward")
-                {
-                    yield return StartCoroutine(m_Player.GoForward());
-                }
-                else
-                {
-                    yield return StartCoroutine(m_Player.TurnAround(currentLine.operation));
-                }
-
-                if (m_Player.m_GoalHit)
-                {
-                    m_AttemptCounter.text = ("You escaped with " + m_NumberOfTries + " attempts.");
-                    currentInstruction.color = Col_Default;
-                    break;
-                }
-
-
-                currentInstruction.color = Col_Default;
-                
-            }
-
-            //Check for winning/losing state
-            if (!m_Player.m_GoalHit)
-            {
-                m_AttemptCounter.text = ("You are still stuck with " + m_NumberOfTries + " attempts.");
-                m_Player.ResetPlayerPose();
-            }
-
-            m_currentVisualLineOfCode = null;
-            ToggleButtons("ON");
-            yield return null;
         }
+
+        private void ExecuteInstructionCodeInternal()
+        {
+            if (!m_ExecutingCode || m_CurrentVisualLineOfCode == null || m_Player.ExecutingAction)
+                return;
+
+            var currentLine = m_CurrentVisualLineOfCode.GetComponent<LineOfCode>();
+            var currentInstruction = m_CurrentVisualLineOfCode.GetComponent<TextMeshProUGUI>();
+            currentInstruction.color = Col_Highlighted;
+            if (currentLine.operation == "Forward")
+            {
+                m_Player.GoForward();
+            }
+            else
+            {
+                m_Player.TurnAround(currentLine.operation);
+            }
+
+            if (m_Player.m_GoalHit)
+            {
+                m_AttemptCounter.text = ("You escaped with " + m_NumberOfTries + " attempts.");
+                currentInstruction.color = Col_Default;
+                m_ExecutingCode = false;
+                return;
+            }
+        }
+
+
+        //private IEnumerator ExecuteInstructionCode()
+        //{
+        //    if (m_LinesOfCode.Count == 0)
+        //        yield return null;
+
+        //    ToggleButtons("OFF");
+        //    UpdateAttemptCounter(1);
+
+        //    LineOfCode currentLine;
+        //    TextMeshProUGUI currentInstruction;
+        //    m_Player.m_GoalHit = false;
+
+        //    //Start executing the instructions one by one
+        //    foreach (RectTransform rt in m_LinesOfCode)
+        //    {
+        //        m_CurrentVisualLineOfCode = rt;
+        //        currentLine = rt.GetComponent<LineOfCode>();
+        //        currentInstruction = rt.GetComponent<TextMeshProUGUI>();
+        //        currentInstruction.color = Col_Highlighted;
+
+        //        if (currentLine.operation == "Forward")
+        //        {
+        //            m_Player.GoForward();
+        //        }
+        //        else
+        //        {
+        //            m_Player.TurnAround(currentLine.operation);
+        //        }
+
+        //        if (m_Player.m_GoalHit)
+        //        {
+        //            m_AttemptCounter.text = ("You escaped with " + m_NumberOfTries + " attempts.");
+        //            currentInstruction.color = Col_Default;
+        //            break;
+        //        }
+
+
+        //        currentInstruction.color = Col_Default;
+                
+        //    }
+
+        //    //Check for winning/losing state
+        //    if (!m_Player.m_GoalHit)
+        //    {
+        //        m_AttemptCounter.text = ("You are still stuck with " + m_NumberOfTries + " attempts.");
+        //        m_Player.ResetPlayerPose();
+        //    }
+
+        //    m_CurrentVisualLineOfCode = null;
+        //    ToggleButtons("ON");
+        //    yield return null;
+        //}
 
 
 
@@ -402,11 +472,10 @@ namespace Pocketboy.MovementProgramming
 
         public void StopExecution()
         {
-            //Stop executing the code
-            StopCoroutine(m_currentCoroutine);
+            m_ExecutingCode = false;
             //Remove visual highlight of the line
-            m_currentVisualLineOfCode.GetComponent<TextMeshProUGUI>().color = Col_Default;
-            m_currentVisualLineOfCode = null;
+            m_CurrentVisualLineOfCode.GetComponent<TextMeshProUGUI>().color = Col_Default;
+            m_CurrentVisualLineOfCode = null;
             //Reset player to init pose
             m_Player.ResetPlayerPose();
             ToggleButtons("ON");

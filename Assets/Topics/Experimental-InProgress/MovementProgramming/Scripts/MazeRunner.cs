@@ -9,16 +9,24 @@ namespace Pocketboy.MovementProgramming
     {
 
         public float MovementSpeed = 0.1f;
-        public float TurningSpeed = 0.5f;
+        public float TurningDuration = 0.5f;
         [HideInInspector]
         public bool m_GoalHit = false;
         [HideInInspector]
         public bool m_DeadzoneHit = false;
 
+        public bool ExecutingAction { get; private set; }
+
         private bool m_PlayerMoving = false;
+        private bool m_PlayerTurning = false;
         private bool m_WallHit = false;
         
         private Pose m_InitPose;
+
+        private float m_InitAngle = 0f;
+        private float m_TargetAngle = 0f;
+
+        private float m_CurrentDuration;
 
 
         private void Start()
@@ -35,61 +43,80 @@ namespace Pocketboy.MovementProgramming
         {
             transform.position = m_InitPose.position;
             transform.rotation = m_InitPose.rotation;
-        }
 
-       
-        public IEnumerator GoForward()
-        {
-            m_PlayerMoving = true;
-
-            while (m_PlayerMoving)
-            {
-
-                if (m_WallHit || m_GoalHit || m_DeadzoneHit)
-                    break;
-
-                //If there is no wall, continue on moving forward
-                transform.position += transform.forward * Time.deltaTime * MovementSpeed;
-                yield return null;
-            }
-
-           
+            m_PlayerTurning = false;
             m_PlayerMoving = false;
-            yield return null;
+            ExecutingAction = false;
         }
 
-
-        public IEnumerator TurnAround(string direction)
+        private void Update()
         {
-            m_PlayerMoving = true;
+            if (m_PlayerMoving)
+            {
+                GoForwardInternal();
+            }              
+            else if(m_PlayerTurning)
+            {
+                TurnAroundInternal();
+            }
+        }
 
-            float turnAngleY = 0.0f;
-            float currentTurnAngleY = 0.0f;
-            float initialAngleY = transform.localEulerAngles.y;
-            float currentDuration = 0.0f;
-            float Duration = TurningSpeed;
+        public void GoForward()
+        {
+            ExecutingAction = true;
+            m_PlayerMoving = true;
+        }
+
+        public void TurnAround(string direction)
+        {
+            ExecutingAction = true;
+            m_PlayerTurning = true;
+            m_InitAngle = transform.localEulerAngles.y;
+            m_CurrentDuration = 0f;
 
             if (direction == "Turn Left")
             {
-                turnAngleY = initialAngleY - 90.0f;
+                m_TargetAngle = m_InitAngle - 90.0f;
             }
             if (direction == "Turn Right")
             {
-                turnAngleY = initialAngleY + 90.0f;
-            }
+                m_TargetAngle = m_InitAngle + 90.0f;
+            }         
+        }
 
-            while (currentDuration < Duration)
+        private void GoForwardInternal()
+        {
+            if (!m_PlayerMoving)
+                return;
+
+            if (m_WallHit || m_GoalHit || m_DeadzoneHit)
             {
-                currentTurnAngleY = Mathf.Lerp(initialAngleY, turnAngleY, currentDuration / Duration);
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, currentTurnAngleY, transform.localEulerAngles.z);
-                currentDuration += Time.deltaTime;
-                yield return null;
+                m_PlayerMoving = false;
+                ExecutingAction = false;
+                CodeManager.Instance.NextInstruction();
+                return;
             }
+            transform.position += transform.forward * Time.deltaTime * MovementSpeed;
+        }
 
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, turnAngleY, transform.localEulerAngles.z);
+        public void TurnAroundInternal()
+        {
+            if (!m_PlayerTurning)
+                return;
 
-            m_PlayerMoving = false;
-            yield return null;
+            if (m_CurrentDuration < TurningDuration)
+            {
+                var currentAngle = Mathf.Lerp(m_InitAngle, m_TargetAngle, m_CurrentDuration / TurningDuration);
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, currentAngle, transform.localEulerAngles.z);
+                m_CurrentDuration += Time.deltaTime;
+            }
+            else
+            {
+                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, m_TargetAngle, transform.localEulerAngles.z);
+                m_PlayerTurning = false;
+                ExecutingAction = false;
+                CodeManager.Instance.NextInstruction();
+            }
         }
 
         public void SetInitPose()
