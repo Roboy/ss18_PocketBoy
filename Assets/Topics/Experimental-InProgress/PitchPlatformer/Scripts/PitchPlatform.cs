@@ -23,6 +23,8 @@ namespace Pocketboy.PitchPlatformer
 
         private TeleportTrigger m_Teleport;
 
+        private bool m_BuildingPlatform = false;
+
         private void Awake()
         {
             var renderer = GetComponent<MeshRenderer>();
@@ -37,8 +39,13 @@ namespace Pocketboy.PitchPlatformer
             {
                 m_Teleport.HideGoal();
                 m_Teleport.gameObject.SetActive(false);
-            }
-                
+            }               
+        }
+
+        private void Update()
+        {
+            if (m_BuildingPlatform)
+                BuildPlatform();
         }
 
         private void OnDestroy()
@@ -75,7 +82,7 @@ namespace Pocketboy.PitchPlatformer
             m_IsListening = true;
             PitchPlatformerManager.Instance.PitchRecognizer.PitchDetected += OnPitchDetected;
             DisablePlatform();
-            StartCoroutine(BuildPlatform());
+            StartBuildingPlatform();
         }
 
         public void StopListen()
@@ -130,23 +137,29 @@ namespace Pocketboy.PitchPlatformer
             }
         }
 
-        private IEnumerator BuildPlatform()
+        private void StartBuildingPlatform()
         {
             m_Material.SetFloat("_DissolveValue", 0f);
-            var currentValue = 0f;
-            var time = Time.time;
-            var stepDecrement = m_StepSize / 10f;
-            while (currentValue < 1f)
+            m_BuildingPlatform = true;
+        }
+
+        private void BuildPlatform()
+        {
+            if (!m_BuildingPlatform)
+                return;
+
+            var currentValue = m_Material.GetFloat("_DissolveValue");
+            if (currentValue < 1f)
             {
-                if (currentValue == 0f)
-                    time = Time.time;
-                currentValue = m_Material.GetFloat("_DissolveValue");
-                m_Material.SetFloat("_DissolveValue", Mathf.Clamp01(currentValue - stepDecrement));
-                yield return null;
+                m_Material.SetFloat("_DissolveValue", Mathf.Clamp01(currentValue - m_StepSize / 10f));
             }
-            StopListen();
-            EnablePlatform();
-            PitchPlatformerEvents.OnPlatformFinished();
+            else
+            {
+                StopListen();
+                EnablePlatform();
+                PitchPlatformerEvents.OnPlatformFinished();
+                m_BuildingPlatform = false;
+            }
         }
     }
 }

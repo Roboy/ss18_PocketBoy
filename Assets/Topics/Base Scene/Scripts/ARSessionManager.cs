@@ -38,6 +38,9 @@ namespace Pocketboy.Common
         [SerializeField]
         private string SceneAfterCalibration;
 
+        [SerializeField]
+        private GameObject TrackingLostMessage;
+
         public DetectedPlane FloorPlane { get; private set; }
 
         public float FloorHeight { get; private set; }
@@ -120,6 +123,9 @@ namespace Pocketboy.Common
                     FloorHeight = hit.Pose.position.y;
                     FloorPlane = hit.Trackable as DetectedPlane;
 
+                    // Small delay so ARCore has time to localize the Anchor in the real map. ????? May be not necessary
+                    yield return new WaitForSeconds(1f);
+
                     // As soon as an object is created on the floor the user can confirm the plane as the floor plane.
                     ConfirmButton.gameObject.SetActive(true);
                 }
@@ -165,10 +171,14 @@ namespace Pocketboy.Common
             {
                 if (Session.Status == SessionStatus.LostTracking)
                 {
+                    Debug.Log("Lost");
+                    TrackingLostMessage.SetActive(true);
                     SceneLoader.Instance.HideUI();
                 }
                 else if (Session.Status == SessionStatus.Tracking)
                 {
+                    Debug.Log("Regained");
+                    TrackingLostMessage.SetActive(false);
                     SceneLoader.Instance.ShowUI();
                 }
             }
