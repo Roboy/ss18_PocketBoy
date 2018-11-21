@@ -61,7 +61,7 @@
             if (SceneManager.GetActiveScene().name != "HomeScene") // TO THIS SOME OTHER WAY
                 return;
 
-            if (!RoboyManager.InstanceExists)
+            if (m_Roboy == null)
             {
                 SpawnRoboy();
             }
