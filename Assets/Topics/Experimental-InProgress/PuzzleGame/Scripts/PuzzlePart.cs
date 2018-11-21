@@ -93,11 +93,13 @@ namespace Pocketboy.PuzzleGame
                 m_DistanceToCameraOnTouch = 0f;
                 m_OffsetOnTouch = Vector3.zero;
 
+                //Piece is not at the desired location, drops to the ground.
                 if (!m_TargetReached)
                 {
                     m_RigidBody.isKinematic = false;
                     m_RigidBody.useGravity = true;
                 }
+                //Piece is at the desired location.
                 if (m_TargetReached)
                 {
                     if (m_LastHittedTarget != null)
@@ -111,7 +113,7 @@ namespace Pocketboy.PuzzleGame
 
                     }
                 }
-
+                //Piece was dragged outside the assembling area.
                 if (m_OutsideArea)
                 {
                     transform.position = m_Intermediateposition;
@@ -215,6 +217,7 @@ namespace Pocketboy.PuzzleGame
             {
                 if (collision.transform.tag == "Floor")
                 {
+                    //Dropped piece hits floor, needs to be kinetic again for pickup
                     StayPut();
                 }
             }

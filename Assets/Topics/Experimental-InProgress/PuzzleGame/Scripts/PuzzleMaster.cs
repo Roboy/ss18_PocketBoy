@@ -35,7 +35,6 @@ namespace Pocketboy.PuzzleGame
         public void Initialize()
         {
             m_NumberOfParts = m_RoboyTarget.GetComponentsInChildren<RoboyPartTarget>().Length;
-            Debug.Log(m_NumberOfParts);
             m_NumberOfCorrectParts = 0;
 
         }

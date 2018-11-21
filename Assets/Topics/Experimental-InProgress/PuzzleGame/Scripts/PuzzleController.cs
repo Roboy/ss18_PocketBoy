@@ -23,7 +23,7 @@ namespace Pocketboy.PuzzleGame {
 
         private void Awake()
         {
-            LevelManager.Instance.RegisterGameObjectWithRoboy(PM.gameObject, new Vector3(-1.5f, 0.05f, 0.0f));
+            //LevelManager.Instance.RegisterGameObjectWithRoboy(PM.gameObject, new Vector3(-1.5f, 0.05f, 0.0f));
         }
         private void Start()
         {
