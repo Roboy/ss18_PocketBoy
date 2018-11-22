@@ -16,6 +16,8 @@ namespace Pocketboy.MovementProgramming
         public RectTransform DisplayPanel;
         public RectTransform MoveLinesPanel;
 
+        public Scrollbar VerticalScrollbar;
+
         public Color Col_Default;
         public Color Col_Selected;
         public Color Col_Highlighted;
@@ -77,10 +79,16 @@ namespace Pocketboy.MovementProgramming
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                ScrollDown();
+            }
+
             if (!m_ExecutingCode || m_Player.ExecutingAction || m_LinesOfCode.Count == 0 || m_CurrentVisualLineOfCode == null)
                 return;
 
             ExecuteInstructionCodeInternal();
+            
         }
 
         public void NextInstruction()
@@ -249,6 +257,9 @@ namespace Pocketboy.MovementProgramming
             LOC.GetComponent<TextMeshProUGUI>().text = line.operation;
             //Add the whole construct to the list that can be managed
             m_LinesOfCode.Add(LOC);
+            //Scroll down if instruction is added.
+            StartCoroutine(ScrollDown());
+
 
         }
 
@@ -535,6 +546,12 @@ namespace Pocketboy.MovementProgramming
             }
 
             m_AttemptCounter.text = "You tried " + count + " time(s).";
+        }
+
+        private IEnumerator ScrollDown()
+        {
+            yield return new WaitForEndOfFrame();
+           VerticalScrollbar.value = 0f;
         }
 
         
