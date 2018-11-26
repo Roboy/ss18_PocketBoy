@@ -100,11 +100,15 @@ namespace Pocketboy.MovementProgramming
             {
                 if (!m_Player.m_GoalHit)
                 {
-                    m_AttemptCounter.text = ("You are still stuck with " + m_NumberOfTries + " attempts.");
+                    m_AttemptCounter.text = ("Noch kein Ausweg in Sicht, mit " + m_NumberOfTries + " Versuchen.");
                     m_Player.ResetPlayerPose();
-                    m_ExecutingCode = false;
+                }
+                else
+                {
+                    m_AttemptCounter.text = ("Du bist entkommen, mit " + m_NumberOfTries + " Versuchen."); 
                 }
 
+                m_ExecutingCode = false;
                 m_CurrentVisualLineOfCode = null;
                 ToggleButtons("ON");
             }
@@ -134,7 +138,7 @@ namespace Pocketboy.MovementProgramming
             var currentLine = m_CurrentVisualLineOfCode.GetComponent<LineOfCode>();
             var currentInstruction = m_CurrentVisualLineOfCode.GetComponent<TextMeshProUGUI>();
             currentInstruction.color = Col_Highlighted;
-            if (currentLine.operation == "Forward")
+            if (currentLine.operation == "geradeaus")
             {
                 m_Player.GoForward();
             }
@@ -143,84 +147,24 @@ namespace Pocketboy.MovementProgramming
                 m_Player.TurnAround(currentLine.operation);
             }
 
-            if (m_Player.m_GoalHit)
-            {
-                m_AttemptCounter.text = ("You escaped with " + m_NumberOfTries + " attempts.");
-                currentInstruction.color = Col_Default;
-                m_ExecutingCode = false;
-                return;
-            }
+            
         }
-
-
-        //private IEnumerator ExecuteInstructionCode()
-        //{
-        //    if (m_LinesOfCode.Count == 0)
-        //        yield return null;
-
-        //    ToggleButtons("OFF");
-        //    UpdateAttemptCounter(1);
-
-        //    LineOfCode currentLine;
-        //    TextMeshProUGUI currentInstruction;
-        //    m_Player.m_GoalHit = false;
-
-        //    //Start executing the instructions one by one
-        //    foreach (RectTransform rt in m_LinesOfCode)
-        //    {
-        //        m_CurrentVisualLineOfCode = rt;
-        //        currentLine = rt.GetComponent<LineOfCode>();
-        //        currentInstruction = rt.GetComponent<TextMeshProUGUI>();
-        //        currentInstruction.color = Col_Highlighted;
-
-        //        if (currentLine.operation == "Forward")
-        //        {
-        //            m_Player.GoForward();
-        //        }
-        //        else
-        //        {
-        //            m_Player.TurnAround(currentLine.operation);
-        //        }
-
-        //        if (m_Player.m_GoalHit)
-        //        {
-        //            m_AttemptCounter.text = ("You escaped with " + m_NumberOfTries + " attempts.");
-        //            currentInstruction.color = Col_Default;
-        //            break;
-        //        }
-
-
-        //        currentInstruction.color = Col_Default;
-                
-        //    }
-
-        //    //Check for winning/losing state
-        //    if (!m_Player.m_GoalHit)
-        //    {
-        //        m_AttemptCounter.text = ("You are still stuck with " + m_NumberOfTries + " attempts.");
-        //        m_Player.ResetPlayerPose();
-        //    }
-
-        //    m_CurrentVisualLineOfCode = null;
-        //    ToggleButtons("ON");
-        //    yield return null;
-        //}
 
 
 
         private void InstructionForward()
         {
-            CreateInstruction("Forward");
+            CreateInstruction("geradeaus");
         }
 
         private void InstructionRight()
         {
-            CreateInstruction("Turn Right");
+            CreateInstruction("rechts drehen");
         }
 
         private void InstructionLeft()
         {
-            CreateInstruction("Turn Left");
+            CreateInstruction("links drehen");
         }
 
 
@@ -529,23 +473,8 @@ namespace Pocketboy.MovementProgramming
                 return;
             }
 
-            switch (m_NumberOfTries)
-            {
-                case 1:
-                    count = "one";
-                    break;
-                case 2:
-                    count = "two";
-                    break;
-                case 3:
-                    count = "three";
-                    break;
-                default:
-                    count = m_NumberOfTries.ToString();
-                    break;
-            }
-
-            m_AttemptCounter.text = "You tried " + count + " time(s).";
+            count = m_NumberOfTries.ToString();
+            m_AttemptCounter.text = "Versuch Nr. " + count;
         }
 
         private IEnumerator ScrollDown()

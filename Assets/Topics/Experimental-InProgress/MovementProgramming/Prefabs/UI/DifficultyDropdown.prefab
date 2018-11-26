@@ -400,11 +400,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Easy
+    - m_Text: leicht
       m_Image: {fileID: 0}
-    - m_Text: Medium
+    - m_Text: mittel
       m_Image: {fileID: 0}
-    - m_Text: Hard
+    - m_Text: schwer
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

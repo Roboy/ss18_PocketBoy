@@ -74,11 +74,11 @@ namespace Pocketboy.MovementProgramming
             m_InitAngle = transform.localEulerAngles.y;
             m_CurrentDuration = 0f;
 
-            if (direction == "Turn Left")
+            if (direction == "links drehen")
             {
                 m_TargetAngle = m_InitAngle - 90.0f;
             }
-            if (direction == "Turn Right")
+            if (direction == "rechts drehen")
             {
                 m_TargetAngle = m_InitAngle + 90.0f;
             }         
