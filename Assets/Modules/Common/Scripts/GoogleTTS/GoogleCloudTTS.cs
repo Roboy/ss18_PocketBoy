@@ -18,6 +18,8 @@ namespace Pocketboy.GoogleCloud
 
         private bool m_IsAPIKeyValid = false;
 
+        private AudioSource m_AudioSource;
+
         public bool IsAvailable()
         {
             return Configuration != null && !string.IsNullOrEmpty(Configuration.APIKey);
@@ -30,6 +32,7 @@ namespace Pocketboy.GoogleCloud
 
         private IEnumerator SynthesizeTextInternal(string text, AudioSource audioSource, Action<string, bool> audioPlayingDoneCallback)
         {
+
             UnityWebRequest request = null;
             yield return StartCoroutine(SendMessage(text, result => request = result));
 
@@ -41,10 +44,16 @@ namespace Pocketboy.GoogleCloud
             }
 
             var audioClip = GetAudioClip(request.downloadHandler.text);
-            audioSource.PlayOneShot(audioClip);
-            while (audioSource.isPlaying)
+
+            if (m_AudioSource != null)
+                m_AudioSource.Stop();
+
+            m_AudioSource = audioSource;
+            m_AudioSource.PlayOneShot(audioClip);
+            while (m_AudioSource.isPlaying)
                 yield return null;
 
+            m_AudioSource = null;
             audioPlayingDoneCallback(text, true);
         }
 
