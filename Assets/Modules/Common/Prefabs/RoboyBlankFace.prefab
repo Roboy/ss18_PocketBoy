@@ -667,6 +667,7 @@ GameObject:
   - component: {fileID: 114455735964236218}
   - component: {fileID: 114886915146198062}
   - component: {fileID: 114965669192027534}
+  - component: {fileID: 114608103160394770}
   m_Layer: 31
   m_Name: RoboyBlankFace
   m_TagString: Roboy
@@ -3393,6 +3394,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114608103160394770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1643478755086712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e6b60add521fe42a78b9ea9fffdff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Configuration: {fileID: 11400000, guid: 047cf8ec165e3d7419c68cec4ca6fef9, type: 2}
 --- !u!114 &114630423260729428
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -9,9 +9,6 @@ namespace Pocketboy.Common
     {
         public bool IsTalking { get; private set; }
 
-        [SerializeField]
-        private GoogleCloud.GoogleCloudTTS m_GoogleCloudTTS;
-
         [SerializeField, HideInInspector]
         private RoboyManager m_RoboyController;
 
@@ -23,7 +20,7 @@ namespace Pocketboy.Common
 
         private AudioSource m_AudioSource;
 
-        private bool m_GoogleCloudAvailable;
+        private GoogleCloud.GoogleCloudTTS m_GoogleCloudTTS;
 
         private void Awake()
         {
@@ -84,6 +81,8 @@ namespace Pocketboy.Common
             m_AudioSource = GetComponent<AudioSource>();
             m_AudioSource.playOnAwake = false;
             m_AudioSource.loop = false;
+
+            m_GoogleCloudTTS = GetComponent<GoogleCloud.GoogleCloudTTS>();
 
             try
             {
