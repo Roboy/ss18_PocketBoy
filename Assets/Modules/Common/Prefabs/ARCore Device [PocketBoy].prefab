@@ -622,7 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d56a73da356824d9684d459272dda2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoboyPrefab: {fileID: 114511887295326824, guid: 062dd618ba53e60489da5e88ad0fb676,
+  RoboyPrefab: {fileID: 114455735964236218, guid: 13c3b06e49741744996d24ad5c5f11c6,
     type: 2}
   PlanetSystems:
   - {fileID: 114405581393563084, guid: 27b8dc5c22a260248bb506606e122196, type: 2}
