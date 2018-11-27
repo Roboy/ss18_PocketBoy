@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 0.2
-  TurningSpeed: 0.5
+  TurningDuration: 0.5
   m_GoalHit: 0
   m_DeadzoneHit: 0
 --- !u!135 &135692562247466676
@@ -338,5 +338,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0.5}
