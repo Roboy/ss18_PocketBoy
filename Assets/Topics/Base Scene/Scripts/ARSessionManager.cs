@@ -123,6 +123,7 @@ namespace Pocketboy.Common
                     FloorHeight = hit.Pose.position.y;
                     FloorPlane = hit.Trackable as DetectedPlane;
 
+                    ConfirmButton.gameObject.SetActive(false);
                     // Small delay so ARCore has time to localize the Anchor in the real map. ????? May be not necessary
                     yield return new WaitForSeconds(1f);
 

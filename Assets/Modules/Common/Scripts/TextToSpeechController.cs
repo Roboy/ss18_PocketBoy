@@ -9,6 +9,9 @@ namespace Pocketboy.Common
     {
         public bool IsTalking { get; private set; }
 
+        [SerializeField]
+        private GoogleCloud.GoogleCloudTTS m_GoogleCloudTTS;
+
         [SerializeField, HideInInspector]
         private RoboyManager m_RoboyController;
 
@@ -17,6 +20,10 @@ namespace Pocketboy.Common
 
         [SerializeField, HideInInspector]
         private bool m_Initialized;
+
+        private AudioSource m_AudioSource;
+
+        private bool m_GoogleCloudAvailable;
 
         private void Awake()
         {
@@ -29,7 +36,14 @@ namespace Pocketboy.Common
                 return;
 
             IsTalking = true;
-            m_TextToSpeechJavaClass.CallStatic("promptSpeechOutputWithCallback", text, gameObject.name, "TalkDoneInternal");
+            if (m_GoogleCloudTTS != null && m_GoogleCloudTTS.IsAvailable())
+            {
+                m_GoogleCloudTTS.SynthesizeText(text, m_AudioSource, TalkDoneGoogleTTS);
+            }
+            else
+            {
+                TalkNative(text);
+            }
         }
 
         public void StopTalking()
@@ -41,14 +55,36 @@ namespace Pocketboy.Common
             m_TextToSpeechJavaClass.CallStatic("stopSpeech");
         }
 
-        private void TalkDoneInternal()
+        private void TalkNative(string text)
+        {
+            m_TextToSpeechJavaClass.CallStatic("promptSpeechOutputWithCallback", text, gameObject.name, "TalkDoneNative");
+        }
+
+        private void TalkDoneNative()
         {            
             IsTalking = false;
             m_RoboyController.TalkDone();
         }
 
+        private void TalkDoneGoogleTTS(string text, bool isSuccess)
+        {
+            if (!isSuccess)
+            {
+                TalkNative(text);
+            }
+            else
+            {
+                IsTalking = false;
+                m_RoboyController.TalkDone();
+            }          
+        }
+
         private void Initialize()
         {
+            m_AudioSource = GetComponent<AudioSource>();
+            m_AudioSource.playOnAwake = false;
+            m_AudioSource.loop = false;
+
             try
             {
                 m_TextToSpeechJavaClass = new AndroidJavaClass(Pocketboy.SpeechPlugin.SpeechPlugin.PACKAGE_NAME + "." + Pocketboy.SpeechPlugin.SpeechPlugin.TEXT_TO_SPEECH_CLASS);
