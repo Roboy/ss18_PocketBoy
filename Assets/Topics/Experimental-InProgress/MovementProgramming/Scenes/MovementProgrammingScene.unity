@@ -2310,7 +2310,7 @@ MonoBehaviour:
   m_MazePrefabs:
   - {fileID: 1651972406210376, guid: 84862d80997754143b0208fd6aa0671c, type: 2}
   - {fileID: 1238778000511206, guid: 25f37a90cb0a1ba43adca717a87d0a38, type: 2}
-  - {fileID: 1462486821908948, guid: fc89669f42194b8459991ea4eda1c605, type: 2}
+  - {fileID: 1035427583752768, guid: 58694ab7b2d25c748ad9dee9ddc6ba98, type: 2}
   m_Player: {fileID: 0}
   m_Maze: {fileID: 0}
   m_DifficultyLevel: {fileID: 2074433912}
