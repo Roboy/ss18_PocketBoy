@@ -1358,6 +1358,14 @@ Prefab:
       propertyPath: InitialModule.startRotationX.scalar
       value: 1.5707963
       objectReference: {fileID: 0}
+    - target: {fileID: 1616842990225430, guid: 8ed94148600f33647a196cb36df7c511, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846647511793370, guid: 8ed94148600f33647a196cb36df7c511, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ed94148600f33647a196cb36df7c511, type: 2}
   m_IsPrefabAsset: 0

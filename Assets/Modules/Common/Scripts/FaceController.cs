@@ -12,9 +12,15 @@ namespace Pocketboy.Common
         [SerializeField]
         private float Speed = 0.1f;
 
+        [SerializeField]
+        private Animator m_Animator;
+
         private SpriteRenderer m_Renderer;
 
         private bool m_MouthAnimation;
+
+        private bool m_Talking;
+        private bool m_GlassesOn;
 
         private void Awake()
         {
@@ -24,6 +30,8 @@ namespace Pocketboy.Common
         private void Initialize()
         {
             m_Renderer = GetComponent<SpriteRenderer>();
+            m_Talking = false;
+            m_GlassesOn = false;
 
         }
 
@@ -52,6 +60,23 @@ namespace Pocketboy.Common
                 }
             }
             m_Renderer.sprite = Mouths[0];
+        }
+
+        public void DisplayEmotion(string emotion)
+        {
+
+            if (emotion == "talking")
+            {
+                m_Talking = !m_Talking;
+                m_Animator.SetBool("talking", m_Talking);
+            }
+
+            if (emotion == "dealwithit")
+            {
+                m_GlassesOn = !m_GlassesOn;
+                m_Animator.SetBool("dealwithit", m_GlassesOn);
+            }
+
         }
     }
 }

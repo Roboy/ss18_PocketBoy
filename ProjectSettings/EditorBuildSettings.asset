@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Topics/Experimental-InProgress/CupGame/Scenes/CupGameScene.unity
     guid: daa2f2a05c1fa51419bd399b0364814d
   - enabled: 1
+    path: Assets/Topics/Experimental-InProgress/PitchPlatformer/Scenes/PitchPlatformerScene.unity
+    guid: 07b8615fa77ef2a4eb0c548dda38ebfd
+  - enabled: 1
     path: Assets/Topics/Experimental-InProgress/GlassBreaker/Scenes/GlassBreakerScene.unity
     guid: 4ff84145ce5530c448a915b500b980ce
   - enabled: 1

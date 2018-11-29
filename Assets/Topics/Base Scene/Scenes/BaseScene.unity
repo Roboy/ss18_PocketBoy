@@ -181,6 +181,17 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 20981164879789616, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2147745591
+      objectReference: {fileID: 0}
+    - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
+        type: 2}
+      propertyPath: UnityFacePrefab
+      value: 
+      objectReference: {fileID: 1338144976260320, guid: 2ea0ff23bdf325844894706dd2c36b8b,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b68885390b2ac346adfcd7a9d92fd1b, type: 2}
   m_IsPrefabAsset: 0

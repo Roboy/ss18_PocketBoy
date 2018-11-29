@@ -24,6 +24,12 @@
         private RoboyManager RoboyPrefab;
 
         /// <summary>
+        /// Animated face rendered in a texture, that gets then projected on Roboys shell.
+        /// </summary>
+        [SerializeField]
+        private GameObject UnityFacePrefab;
+
+        /// <summary>
         /// Planetsystems include the LevelSpheres which represent a topic to learn about in form of a scene.
         /// </summary>
         [SerializeField]
@@ -69,6 +75,7 @@
             {
                 SpawnPlanetSystems();
             }
+           
         }
 
         /// <summary>
@@ -126,7 +133,10 @@
             m_Roboy = Instantiate(RoboyPrefab, plane.CenterPose.position, plane.CenterPose.rotation);
             m_Roboy.transform.parent = anchor.transform;
             m_Roboy.Initialize(anchor);
+            var face = Instantiate(UnityFacePrefab);
+            face.gameObject.transform.SetParent(m_Roboy.ARAnchor.transform);
             SpawnPlanetSystems();
+ 
         }
 
         private void SpawnPlanetSystems()
@@ -148,7 +158,8 @@
                 planetSystemOffset = offsetMultiplicator * Vector3.right * 0.5f;
                 PositionGameObjectRelativeToRoboy(planetSystem.gameObject, planetSystemInitPosition + planetSystemOffset, true);
             }
-        }  
+        }
+
 
         private void ResetLevel(Scene scene, LoadSceneMode mode)
         {
