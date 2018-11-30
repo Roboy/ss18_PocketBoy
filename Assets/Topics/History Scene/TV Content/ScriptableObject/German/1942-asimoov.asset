@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -13,7 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TVContent: {fileID: 32900000, guid: 0393bf094842a024f97f1b8f1f3eddd2, type: 3}
   Date: 1942
-  Text: A robot may not injure a human being or, through inaction, allow a human being
-    to come to harm. A robot must obey orders given it by human beings except where
-    such orders would conflict with the First Law. A robot must protect its own existence
-    as long as such protection does not conflict with the First or Second Law.
+  Text: "Ein Roboter darf keinen Menschen verletzen oder durch Unt\xE4tigkeit zulassen,
+    dass einem Menschen Schaden zugef\xFCgt wird. Ein Roboter muss seinen Befehlen
+    gehorchen \u2013 es sei denn, ein Befehl verletzt die erste Regel. Ein Roboter
+    muss seine Existenz besch\xFCtzen, solange dies nicht die erste oder zweite Regel
+    verletzt."

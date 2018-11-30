@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
-  m_Name: 1961-unimate
+  m_Name: 1988-consight
   m_EditorClassIdentifier: 
-  TVContent: {fileID: 2800000, guid: b7be487786365144bba84c19b6d78c25, type: 3}
-  Date: 1961
-  Text: Unimate is the first robot that can be programmed.
+  TVContent: {fileID: 2800000, guid: 00b842f0a1d273349b6104a40a0df8ac, type: 3}
+  Date: 1988
+  Text: "Der erste Roboter der verschiedene Objekte auf einem Flie\xDFband sortieren
+    kann. Er benutzt daf\xFCr visuelle Sensoren."

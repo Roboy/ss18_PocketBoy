@@ -524,6 +524,66 @@ Prefab:
       propertyPath: Slider
       value: 
       objectReference: {fileID: 1765729255}
+    - target: {fileID: 114100785204626300, guid: 2f76324e5d14e3f49a95ff5b715e8877,
+        type: 2}
+      propertyPath: Content.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 41c1650ecb8fa7c47816acd1c9d1fa62,
+        type: 2}
+    - target: {fileID: 114100785204626300, guid: 2f76324e5d14e3f49a95ff5b715e8877,
+        type: 2}
+      propertyPath: Content.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5eac389f9897f4c428c4ff640977b2db,
+        type: 2}
+    - target: {fileID: 114100785204626300, guid: 2f76324e5d14e3f49a95ff5b715e8877,
+        type: 2}
+      propertyPath: Content.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 957879abd1087cf46bb0637709afe890,
+        type: 2}
+    - target: {fileID: 114100785204626300, guid: 2f76324e5d14e3f49a95ff5b715e8877,
+        type: 2}
+      propertyPath: Content.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: bf617160084c05949a98b85368f0ecf9,
+        type: 2}
+    - target: {fileID: 114100785204626300, guid: 2f76324e5d14e3f49a95ff5b715e8877,
+        type: 2}
+      propertyPath: Content.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9aef16e163f63654292664667c296485,
+        type: 2}
+    - target: {fileID: 114100785204626300, guid: 2f76324e5d14e3f49a95ff5b715e8877,
+        type: 2}
+      propertyPath: Content.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: a2958eafdbaff4149af17ae19b770de6,
+        type: 2}
+    - target: {fileID: 114100785204626300, guid: 2f76324e5d14e3f49a95ff5b715e8877,
+        type: 2}
+      propertyPath: Content.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: bc7b0a5f1023dbf46874b8a16703e024,
+        type: 2}
+    - target: {fileID: 114100785204626300, guid: 2f76324e5d14e3f49a95ff5b715e8877,
+        type: 2}
+      propertyPath: Content.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0f0d450bb8fbe3341b0644eea167c0c0,
+        type: 2}
+    - target: {fileID: 114100785204626300, guid: 2f76324e5d14e3f49a95ff5b715e8877,
+        type: 2}
+      propertyPath: Content.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: f7e9a8ffb7b33ec41a1472170585f49c,
+        type: 2}
+    - target: {fileID: 114100785204626300, guid: 2f76324e5d14e3f49a95ff5b715e8877,
+        type: 2}
+      propertyPath: Content.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 70203df448f342b478781521ffdaaebf,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f76324e5d14e3f49a95ff5b715e8877, type: 2}
   m_IsPrefabAsset: 0

@@ -3,14 +3,14 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
-  m_Name: 1939-elektro
+  m_Name: 1961-unimate
   m_EditorClassIdentifier: 
-  TVContent: {fileID: 2800000, guid: e3d0d9934ad562e4ba23e025510fa287, type: 3}
-  Date: 1939
-  Text: Elektro is an early human looking robot, that can talk, walk and smoke.
+  TVContent: {fileID: 2800000, guid: b7be487786365144bba84c19b6d78c25, type: 3}
+  Date: 1961
+  Text: Unimate is the first robot that can be programmed.
