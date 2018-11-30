@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 460792592}
   - component: {fileID: 460792593}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Instruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -369,7 +369,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff927058ee224914e8b28a6110949255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InstructionText: Simon sucks dick a lot.
+  InstructionText: "Was verbindest Du mit den Begriffen Robotik und Roboter? Zeig
+    es mir, indem Du auf die einzelen Wolken tippst! Wenn Du eine Wolke ber\xFChrst,
+    gebe ich Dir mehr Informationen zu dem Wort, das in ihr geschrieben steht. "
 --- !u!1 &771270227
 GameObject:
   m_ObjectHideFlags: 0

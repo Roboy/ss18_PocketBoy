@@ -78,7 +78,7 @@ namespace Pocketboy.Common
 
         private IEnumerator CalibrateFloorInternal()
         {
-            InstructionText.text = "Tap on a plane to place an object.";
+            InstructionText.text = "Mache kleine Bewegungen bis eine Fläche erscheint. Tippe auf die Fläche.";
             CalibrateButton.gameObject.SetActive(false);
 
             DetectedPlaneGenerator.SetActive(true);
@@ -108,7 +108,7 @@ namespace Pocketboy.Common
                     if (!(hit.Trackable is DetectedPlane))
                         continue;
 
-                    InstructionText.text = "Press the confirm button to select this plane as the floor.";
+                    InstructionText.text = "Tippe auf Bestätigen, um die Fläche als Boden auszuwählen.";
 
                     // Only one object can indicate which plane is the floor plane
                     if (lastAnchor != null)

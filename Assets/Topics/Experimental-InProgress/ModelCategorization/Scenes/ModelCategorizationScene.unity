@@ -247,7 +247,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff927058ee224914e8b28a6110949255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InstructionText: 'This dimension contains various models and three platforms. '
+  InstructionText: "Wie sieht Roboter aus? Zeig es mir, indem Du ein Objekt aufhebst
+    und es in eine von drei Zonen tr\xE4gst. Lege das Objekt in die gr\xFCne Zone,
+    wenn Du denkst, es ist ein Roboter, in die rote, wenn nicht. Wenn Du unischer
+    bist, gibt es die  blaue Zone. Jede Zone hat eine Flagge, legst du ein Objekt
+    in die passende Zone, bewegt sich die Flagge nach oben. Erkunde die Umgebung,
+    um alle Objekte zu finden!"
 --- !u!4 &241174046
 Transform:
   m_ObjectHideFlags: 0
