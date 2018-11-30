@@ -25,6 +25,7 @@ TagManager:
   - WinningZone
   - PlayerSpawn
   - SceneUI
+  - FaceAnimator
   layers:
   - Default
   - TransparentFX

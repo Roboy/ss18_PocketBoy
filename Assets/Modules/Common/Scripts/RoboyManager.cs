@@ -43,6 +43,7 @@ namespace Pocketboy.Common
             // roboy should stop talking and listening when loading a new scene, we cannot use sceneLoaded event cause some scenes may trigger roboy talking at the start of the scene
             SceneManager.sceneUnloaded += (scene) => StopTalking();
             SceneManager.sceneUnloaded += (scene) => StopListening();
+            
         }
 
         void Update()

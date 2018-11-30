@@ -4,21 +4,12 @@ using UnityEngine;
 
 namespace Pocketboy.Common
 {
-    public class FaceController : MonoBehaviour
+    public class FaceController : Singleton<FaceController>
     {
-        [SerializeField]
-        private List<Sprite> Mouths = new List<Sprite>();
 
-        [SerializeField]
-        private float Speed = 0.1f;
-
-        [SerializeField]
-        private Animator m_Animator;
-
-        private SpriteRenderer m_Renderer;
+        public Animator m_Animator;
 
         private bool m_MouthAnimation;
-
         private bool m_Talking;
         private bool m_GlassesOn;
 
@@ -29,7 +20,6 @@ namespace Pocketboy.Common
 
         private void Initialize()
         {
-            m_Renderer = GetComponent<SpriteRenderer>();
             m_Talking = false;
             m_GlassesOn = false;
 
@@ -40,37 +30,28 @@ namespace Pocketboy.Common
             if (m_MouthAnimation)
                 return;
 
+            if (m_Animator == null)
+            {
+                m_Animator = GameObject.FindGameObjectWithTag("FaceAnimator").GetComponent<Animator>();
+            }
+
             m_MouthAnimation = true;
-            StartCoroutine(StartTalkAnimationInternal());
+            m_Animator.SetBool("talking", true);
         }
 
         public void StopTalkAnimation()
         {
-            m_MouthAnimation = false;
-        }
-
-        private IEnumerator StartTalkAnimationInternal()
-        {
-            while (m_MouthAnimation)
+            if (m_Animator == null)
             {
-                for (int i = 0; i < Mouths.Count; i++)
-                {
-                    m_Renderer.sprite = Mouths[i];
-                    yield return new WaitForSeconds(Speed);
-                }
+                m_Animator = GameObject.FindGameObjectWithTag("FaceAnimator").GetComponent<Animator>();
             }
-            m_Renderer.sprite = Mouths[0];
+
+            m_MouthAnimation = false;
+            m_Animator.SetBool("talking", false);
         }
 
         public void DisplayEmotion(string emotion)
         {
-
-            if (emotion == "talking")
-            {
-                m_Talking = !m_Talking;
-                m_Animator.SetBool("talking", m_Talking);
-            }
-
             if (emotion == "dealwithit")
             {
                 m_GlassesOn = !m_GlassesOn;
