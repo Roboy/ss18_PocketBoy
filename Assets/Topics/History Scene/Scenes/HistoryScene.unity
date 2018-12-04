@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff927058ee224914e8b28a6110949255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InstructionText: "Zeit f\xFCr eine kleine Geschichtsstunde! Schaue mit mir diese
+  InstructionText: "Zeit f\xFCr eine kurze Geschichtsstunde! Schaue mit mir diese
     tolle Fernsehsendung und entdecke die gr\xF6\xDFten Ereignisse in der Entwicklung
     von Robotern. Tippe auf die Pfeile auf dem Fernseher um zwischen den Ereignissen
     zu springen. Wenn ich etwas nochmal erz\xE4hlen soll, tippe einfach auf den Wiederholen

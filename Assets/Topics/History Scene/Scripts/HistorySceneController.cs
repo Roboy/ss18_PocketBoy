@@ -97,9 +97,15 @@ namespace Pocketboy.HistoryScene
             LevelManager.Instance.RegisterGameObjectWithRoboy(TV.gameObject, new Vector3(0.65f, 0f, 0f));
             TV.transform.forward = RoboyManager.Instance.transform.forward;
 
-            RoboyManager.Instance.Talk("Thank you for tuning in. " +
-                "This programm will tell you about some awesome milestones in the evolution of robots. " +
-                "In order to change the milestones just click on the buttons attached to the television.");
+            //German localization
+            RoboyManager.Instance.Talk("Vielen Dank fürs Einschalten. " +
+                "Ich bin Roboy und zusammen werden wir eine kleine Zeitreise durch die Entwicklung der Robotik machen. " +
+                "Mit den Pfeiltasten am Fernseher kannst du vor und zurück, tippe einfach darauf, um den nächsten Beitrag zu starten.");
+
+            ////English localization
+            //RoboyManager.Instance.Talk("Thank you for tuning in. " +
+            //   "This programm will tell you about some awesome milestones in the evolution of robots. " +
+            //   "In order to change the milestones just click on the buttons attached to the television.");
         }
     }
 }
