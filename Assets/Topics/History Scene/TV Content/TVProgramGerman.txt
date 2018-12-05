@@ -15,7 +15,7 @@ am Computer entworfen und anschließend zusammengebaut.
 Ich bestehe aus mechanischen und elektrischen Bauteilen. Viele meiner Körperteile sind 3d gedruckt.
 
 #4 Roboy DJ
-Einer meiner größten Hobbys ist Musik machen. Ich habe Kameras, mit denen ich die Noten
+Einer meiner größten Hobbys ist Musik machen. Ich habe Kameras als Augen, mit denen ich die Noten
 sehen und das Instrument erkennen kann. Für das Spielen der Noten habe ich in meinen Körperteilen 
 magnetische Sensoren, die mir helfen, meine Hände richtig am Instrument zu platzieren und zu bewegen.
 
@@ -53,7 +53,22 @@ nicht umsonst, deswegen muss ich lernen, geld zu erkennen und zu zählen. Ob Gel
 weiß ich über meine Berührungssensoren.
 
 #10 Roboy baut Roboy
+Ich hätte gerne mehr Geschwister, sodass ich nicht mehr so alleine bin. Deshalb werde ich in Zukunft
+einfach Roboter wie mich bauen. Oder mich selber reparieren, wenn etwas kaputt geht. Für den Zusammenbau
+brauche ich Werkzeuge, doch meinen Händen fehlen noch das notwendige Feingefühl und die Kraft dafür. Hier
+könnten mir Elektromagneten helfen, meine Haltung zu verändern.
 
 #11 Roboy auf dem Mars
+Ich mag die Erde, aber wäre es nicht schön den Mars zu besuchen? Für die Erkundung eines fremden Planeten
+brauche ich eine Haut, die meine Bauteile und Sensoren schützt. Dann habe ich aber das Problem, dass meine
+Motoren überhitzen, deshalb brauche ich eine Kühlsystem. Außerdem gibt es auf dem Mars noch keine Steckdosen,
+aus denen ich Energie bekomme. Somit benötige ich auch Akkus, die über die Sonnenergie geladen werden könnte.
+Außerdem müsste ich komplett selbständig denken können, weil auf dem Mars noch keine Menschen leben, die mich
+programmieren könnten.
 
-#12 Asimov Gesetze
+#12 Asimovs Gesetze
+Jeder muss sich an Gesetze halten, ich und alle anderen Roboter leben nach den Gesetzen von Asimov.
+Davon gibt es drei Stück und sie sagen Folgendes aus.
+Erstens, ein Roboter darf keinen Menschen verletzen oder zulassen, dass einem Menschen Schaden zugefügt wird.
+Zweitens, ein Roboter muss seinen Befehlen gehorchen, es sei denn, ein Befehl verletzt die erste Regel.
+Drittens, ein Roboter muss seine eigenes Leben beschützen, solange dies nicht die erste oder zweite Regel verletzt.

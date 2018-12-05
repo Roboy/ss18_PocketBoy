@@ -47,7 +47,7 @@ navigate on foreign planet, communicate with other
 robots -> interface; scientific tests
 
 #12 I live by the same laws as all robots,
-the asimov laws. These are bla.
+the asimov laws. These the following.
 
 
 
