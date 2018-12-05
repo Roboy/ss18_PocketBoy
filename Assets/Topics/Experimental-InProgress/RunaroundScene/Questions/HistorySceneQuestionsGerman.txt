@@ -37,7 +37,7 @@ B: Als Schnittstelle, um Rezepte zu bekommen.
 C: Damit ich meine Freunde um Hilfe fragen kann.
 
 #7
-Frage: Als Doktor untersuche ich die auch mit einem Radarsensor, warum?
+Frage: Als Doktor untersuche ich dich auch mit einem Radarsensor, warum?
 A: Ich messe wie glücklich du bist.
 B: Ich messe damit deine Körpertemperatur.
 C: Ich messe damit deinen Herzschlag.
@@ -52,12 +52,12 @@ C: Radarsensor.
 Frage: Was fehlt meiner Hand noch, um Werkzeuge zu benutzen?
 A: Feingefühl und Kraft.
 B: Mehr Finger und Kraft.
-C: Natürliche Magnete.
+C: Dauerhafte Magnete.
 
 #10
-Frage: Warum brauche ich eine Haut für einen Ausflug auf den Mars?
+Frage: Warum brauche ich eine Haut für einen Ausflug zum Mars?
 A: Ich möchte nicht nackt aussehen, wenn ich reise.
-B: Meine Bauteilen müssen vor Staub geschützt werden.
+B: Meine Bauteile müssen vor Staub geschützt werden.
 C: Meine Kühlflüssigkeit darf nicht ausslaufen.
 
 #11
