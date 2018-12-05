@@ -1,0 +1,73 @@
+Runaround Fragen für History Scene Inhalt
+
+#1
+Frage: Was ist Roboy?
+A: Ein humanoider Roboter.
+B: Ein Industrieroboter.
+C: Ein Putzroboter.
+
+#2
+Frage: Wie entstehen Körperteile für Roboy?
+A: Sie wachsen im Labor.
+B: Sie sind 3D gedruckt.
+C: Sie sind aus Stein gemeißelt.
+
+#3
+Frage: Was mache ich mit meinen Kameras im Kopf?
+A: Ich mache Bilder für Instagram.
+B: Musikinstrumente und andere Objekte erkennen.
+C: Ich schaue mir die Sterne an.
+
+#4
+Frage: Was brauche ich, wenn ich von A nach B mit meinem Dreirad fahre?
+A: Künstliche Intelligenz und schwache Motoren.
+B: Echte Intelligenz und starke Motoren.
+C: Künstliche Intelligenz und starke Motoren.
+
+#5
+Frage: Wenn du mit mir redest, wie machst du das?
+A: Ich benutze Zeichensprache.
+B: Ich benutze das Dialogsystem.
+C: Ich benutze das Monologsystem.
+
+#6
+Frage: Wofür brauche ich das Internet beim Kochen?
+A: Ich schaue Kochvideos auf youcook.com an.
+B: Als Schnittstelle, um Rezepte zu bekommen.
+C: Damit ich meine Freunde um Hilfe fragen kann.
+
+#7
+Frage: Als Doktor untersuche ich dich auch mit einem Radarsensor, warum?
+A: Ich messe wie glücklich du bist.
+B: Ich messe damit deine Körpertemperatur.
+C: Ich messe damit deinen Herzschlag.
+
+#8
+Frage: Wie erkenne ich, ob ich was in der Hand halte?
+A: Berührungssensor.
+B: Ich schaue mit meinen Kameras nach.
+C: Radarsensor.
+
+#9
+Frage: Was fehlt meiner Hand noch, um Werkzeuge zu benutzen?
+A: Feingefühl und Kraft.
+B: Mehr Finger und Kraft.
+C: Dauerhafte Magnete.
+
+#10
+Frage: Warum brauche ich eine Haut für einen Ausflug zum Mars?
+A: Ich möchte nicht nackt aussehen, wenn ich reise.
+B: Meine Bauteile müssen vor Staub geschützt werden.
+C: Meine Kühlflüssigkeit darf nicht ausslaufen.
+
+#11
+Frage: Woher bekommen die meisten Roboter ihre Energie?
+A: Strom.
+B: Benzin.
+C: Gas.
+
+#12
+Frage: Auch Roboter müssen sich an Gesetze halten, an welche?
+A: Newtons Gesetze.
+B: Asimovs Gesetze.
+C: Roboter Grundgesetz.

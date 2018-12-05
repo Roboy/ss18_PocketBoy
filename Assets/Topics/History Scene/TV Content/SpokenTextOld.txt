@@ -1,0 +1,38 @@
+Elektro is an early human looking robot, that can talk, walk and smoke.
+Elektro ist ein früher menschlich aussehender Roboter, der reden, laufen und rauchen kann.
+
+A robot may not injure a human being or, through inaction, allow a human being to come to harm. 
+A robot must obey orders given it by human beings except where such orders would conflict with 
+the First Law. A robot must protect its own existence as long as such protection does not 
+conflict with the First or Second Law.
+
+Ein Roboter darf keinen Menschen verletzen oder durch Untätigkeit zulassen, dass einem Menschen Schaden zugefügt wird.
+Ein Roboter muss seinen Befehlen gehorchen – es sei denn, ein Befehl verletzt die erste Regel.
+Ein Roboter muss seine Existenz beschützen, solange dies nicht die erste oder zweite Regel verletzt.
+
+Unimate is the first robot that can be programmed.
+Unimate is der erste programmiergare Roboter.
+
+In 1973 the first full sized humanoid robot is created. His name is Wabot one.
+Im Jahr Neunzehnhundert und Dreiundsiebzig wird der erste Robotor in Lebensgröße gebaut, sein Name Ist Wabot One.
+
+This is an electric industrial robot controlled for the first time by a microcomputer.
+Das ist ein elektrischer Industrieroboter, der erstmals durch einen Mikrocomputer gesteuert wird.
+
+In 1984 robots start playing the piano. But I am way better at playing the xylophone than Wabot two.
+Im Jahr Neunzehnhundert und Vierundachtzig fangen Roboter an, Klavier zu spielen. Aber ich kann viel besser Xylophon spielen als Wabot Two.
+
+First robot sorting out different objects from a assembly line with the help of visual sensory.
+Der erste Roboter der verschiedene Objekte auf einem Fließband sortieren kann. Er benutzt dafür visuelle Sensoren.
+
+Asimo can walk and even run in a circle. A lot of research is done with it.
+Asimo kann laufen und sogar im Kreis rennen. Viel Forschung wird mit ihm betrieben.
+
+Baxter is a collaborative robot with a face projected on a display. 
+This makes him more friendly to interact with. He also has a little brother called Sawyer.
+
+Baxter ist ein aushilfsfreundlicher Roboter, dessen Gesicht auf einem Bildschirm angezeigt wird.
+Dies macht die Arbeiten mit ihm angenehmer. Er hat auch noch einen Bruder mit dem Namen Sawyer.
+
+I was born, a robot as good as the human body.
+Ich wurde geboren, ein Roboter, der bald so gut wie der menschliche Körper sein wird.

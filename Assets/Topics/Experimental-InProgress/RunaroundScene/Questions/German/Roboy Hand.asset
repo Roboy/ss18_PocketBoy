@@ -3,18 +3,20 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b652b4bb282897347a09800a497ee6cd, type: 3}
-  m_Name: Question-Origin
+  m_Name: Roboy Hand
   m_EditorClassIdentifier: 
-  QuestionText: What is Roboy?
+  QuestionText: Wie erkenne ich, ob ich was in der Hand halte?
   QuestionAnswers:
-  - He is an alien.
-  - A humanoid robot.
-  - Just an illusion.
-  CorrectAnswerID: 1
+  - "Ber\xFChrungssensor."
+  - Ich schaue mit meinen Kameras nach.
+  - Radarsensor.
+  CorrectAnswerID: 0
   QuestionImage: {fileID: 0}
+  AnswerImagesPresent: 0
+  AnswerImages: []

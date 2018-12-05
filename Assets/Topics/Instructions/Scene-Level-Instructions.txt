@@ -6,7 +6,7 @@ Siehst Du die kleinen Planeten vor mir?
 Jeder Planet bringt dich in eine andere Welt,
 in der Du neue Aufgaben bekommst.
 Um auf dem Planeten zu landen, bewege dein
-Handy in die nähe des Planeten und Du wirst
+Handy in die Nähe des Planeten und Du wirst
 teleportiert!
 
 ##MOVEMENT-PROGRAMMING##
@@ -28,7 +28,7 @@ Antworten zu sehen und das Spiel zu starten.
 
 ##HISTORY-LESSON##
 
-Zeit für eine kleine Geschichtsstunde! Schaue mit mir diese tolle
+Zeit für eine kurze Geschichtsstunde! Schaue mit mir diese tolle
 Fernsehsendung und entdecke die größten Ereignisse in der Entwicklung
 von Robotern. Tippe auf die Pfeile auf dem Fernseher um zwischen den
 Ereignissen zu springen. Wenn ich etwas nochmal erzählen soll, tippe einfach

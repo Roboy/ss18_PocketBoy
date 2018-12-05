@@ -1,0 +1,74 @@
+#1 Intro
+Mein Name ist Roboy, ich bin ein humanoider Roboter mit Sehnen und Muskeln.
+Es hat lange gedauert, bis Roboter so aussahen wie ich und
+die gleichen Fähigkeiten entwickelt haben. Blicken wir doch kurz zurück!
+
+#2 Vergangenheit
+Elektro ist einer der ersten Roboter, er funktioniert aber nur ferngesteuert.
+Einige Jahre später kann Wabot mithilfe von Sensoren seine Umgebung wahrnehmen, über die Zeit entwickelt
+er Feingefühl und spielt Klavier. Den nächsten Meilenstein stellt Asimo dar. Er kann sehr gut laufen,
+die Energie dafür bekommt er aus einem Akku in seinem Rucksack.
+
+#3 Zusammenbau
+Und dann war auch schone meine Zeit gekommen! Viele Studenten haben mich über lange Zeit 
+am Computer entworfen und anschließend zusammengebaut.
+Ich bestehe aus mechanischen und elektrischen Bauteilen. Viele meiner Körperteile sind 3d gedruckt.
+
+#4 Roboy DJ
+Einer meiner größten Hobbys ist Musik machen. Ich habe Kameras als Augen, mit denen ich die Noten
+sehen und das Instrument erkennen kann. Für das Spielen der Noten habe ich in meinen Körperteilen 
+magnetische Sensoren, die mir helfen, meine Hände richtig am Instrument zu platzieren und zu bewegen.
+
+#5 Roboy Rikshaw
+Ich mag es sehr, meinen Freunden zu helfen. Deshalb werde ich lernen, ein Drei-Rad zu fahren
+und Gäste mitzunehmen. Dafür brauche ich aber Kameras, die Distanz wahrnehmen können, um keine 
+Hindernisse zu treffen. Außerdem benötige ich eine große Portion an künstlicher Intelligenz,
+um den Weg von A nach B zu finden. Starke Motoren in den Beinen helfen mir zu treten.
+
+#6 Roboy Eiscreme
+Mit meinem Drei-Rad spiele ich aber nicht nur Taxi, sondern ich werde damit auch Eiscreme verkaufen!
+Damit du deine Lieblingssorte bekommst, muss ich das Sprechen lernen, dafür brauche ich neben einem
+Dialogsystem auch Mikrofone, um dich zu verstehen. Bevor ich dir die richtige Sorte in die Waffel
+setzen kann, müssen meine Augen aber auf die Erkennung von Farbe trainiert werden.
+
+#7 Chefkoch
+Ich wollte schon immer Koch werden. Doch bisher fehlen mir noch ein paar Bauteile dafür.
+Für das Kochen brauche ich Temperatur- und Geschmackssensoren. Vieler meiner Zutaten sind im Kühlschrank 
+zu dem ich laufen muss, dafür brauche ich gute Balance, die habe ich noch nicht.
+Ich bin mit dem Internet verbunden, von dort bekomme ich die Rezepte für leckeres Essen. Guten Appetit!
+
+#8 Doktor Roboy
+Ich mag es nicht, wenn meine Freunde krank sind. Deswegen werde ich Medizin studieren und Arzt werden.
+Als Erstes muss ich wissen, was du für eine Krankheit hast. Mit einem Radarsensor kann ich deinen Puls
+messen ohne dich zu berühren.Zudem messe ich deine Temperatur, nach der ersten Untersuchung
+schaue ich im Internet nach einer Lösung, die dich Gesund macht. Mein Gesicht kann verschiedene Gefühle
+zeigen, damit du dich wohlfühlst, obwohl du vielleicht besorgt bist.
+
+#9 Roboy Kellner
+Nachdem ich das Kochen gelernt habe, möchte ich nun das Essen im Roboy Restaurant an die Tische
+bringen. Durch das Dialogsystem kann ich Bestellung aufnehmen und durch meine künstliche Intelligenz
+verarbeiten. Dann laufe ich in die Küche, bereite das Essen zu und laufe zurück. Dabei muss ich sehr 
+aufpassen die Teller nicht fallen zu lassen, dafür brauche ich noch mehr Balance. Essen ist leider
+nicht umsonst, deswegen muss ich lernen, geld zu erkennen und zu zählen. Ob Geld in meiner Hand liegt,
+weiß ich über meine Berührungssensoren.
+
+#10 Roboy baut Roboy
+Ich hätte gerne mehr Geschwister, sodass ich nicht mehr so alleine bin. Deshalb werde ich in Zukunft
+einfach Roboter wie mich bauen. Oder mich selber reparieren, wenn etwas kaputt geht. Für den Zusammenbau
+brauche ich Werkzeuge, doch meinen Händen fehlen noch das notwendige Feingefühl und die Kraft dafür. Hier
+könnten mir Elektromagneten helfen, meine Haltung zu verändern.
+
+#11 Roboy auf dem Mars
+Ich mag die Erde, aber wäre es nicht schön den Mars zu besuchen? Für die Erkundung eines fremden Planeten
+brauche ich eine Haut, die meine Bauteile und Sensoren schützt. Dann habe ich aber das Problem, dass meine
+Motoren überhitzen, deshalb brauche ich eine Kühlsystem. Außerdem gibt es auf dem Mars noch keine Steckdosen,
+aus denen ich Energie bekomme. Somit benötige ich auch Akkus, die über die Sonnenergie geladen werden könnte.
+Außerdem müsste ich komplett selbständig denken können, weil auf dem Mars noch keine Menschen leben, die mich
+programmieren könnten.
+
+#12 Asimovs Gesetze
+Jeder muss sich an Gesetze halten, ich und alle anderen Roboter leben nach den Gesetzen von Asimov.
+Davon gibt es drei Stück und sie sagen Folgendes aus.
+Erstens, ein Roboter darf keinen Menschen verletzen oder zulassen, dass einem Menschen Schaden zugefügt wird.
+Zweitens, ein Roboter muss seinen Befehlen gehorchen, es sei denn, ein Befehl verletzt die erste Regel.
+Drittens, ein Roboter muss seine eigenes Leben beschützen, solange dies nicht die erste oder zweite Regel verletzt.
