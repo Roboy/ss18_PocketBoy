@@ -34,7 +34,7 @@ public class TextToSpeechPlugin {
             public void onInit(int status) {
                 if(status == TextToSpeech.SUCCESS)
                 {
-                    int languageSetSuccess = m_TTS.setLanguage(Locale.US);
+                    int languageSetSuccess = m_TTS.setLanguage(Locale.GERMAN);
                     if(languageSetSuccess == TextToSpeech.LANG_MISSING_DATA || languageSetSuccess == TextToSpeech.LANG_NOT_SUPPORTED)
                     {
                         return;
@@ -55,7 +55,7 @@ public class TextToSpeechPlugin {
             public void onInit(int status) {
                 if(status == TextToSpeech.SUCCESS)
                 {
-                    int languageSetSuccess = m_TTS.setLanguage(Locale.US);
+                    int languageSetSuccess = m_TTS.setLanguage(Locale.GERMAN);
                     if(languageSetSuccess == TextToSpeech.LANG_MISSING_DATA || languageSetSuccess == TextToSpeech.LANG_NOT_SUPPORTED)
                     {
                         return;

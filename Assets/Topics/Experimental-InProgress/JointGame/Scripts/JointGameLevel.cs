@@ -7,20 +7,33 @@ namespace Pocketboy.JointGame
     public class JointGameLevel : MonoBehaviour
     {
         [SerializeField]
-        private Joint CorrectJoint;
-
-        [SerializeField]
         private RoboticArmController RoboticArm;
 
-        public bool CheckJoint(Joint joint)
+        public int Points {
+            get {
+                if (m_Points != null)
+                    return m_Points.Length;
+                else
+                    return -1;
+            }
+        }
+
+        private JointGamePoint[] m_Points;
+
+        private int m_HittedPointCount;
+
+        private void Awake()
         {
-            return joint == CorrectJoint;
+            m_Points = GetComponentsInChildren<JointGamePoint>(true);
         }
 
         public void Show()
         {
             gameObject.SetActive(true);
-            RoboticArm.StartMotion();
+            foreach(var point in m_Points)
+            {
+                point.gameObject.SetActive(true);
+            }
         }
 
         public void Hide()
@@ -30,7 +43,6 @@ namespace Pocketboy.JointGame
 
             RoboticArm.StopMotion();
             gameObject.SetActive(false);
-        }
-        
+        }        
     }
 }

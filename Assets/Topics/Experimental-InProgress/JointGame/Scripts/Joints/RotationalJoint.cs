@@ -9,35 +9,32 @@ namespace Pocketboy.JointGame
         [SerializeField]
         private float RotationLimit = 0f;
 
+        [SerializeField]
+        private Transform MovingLink;
+
+        private Vector3 m_EulerAngles;
+
+        private float m_CurrentTimer;
+
         private void Start()
         {
             RotationLimit = Mathf.Clamp(RotationLimit, -89f, 89f); // HACK TO AVOID ROTATION BUGS WITH HIGHER ANGLES THAN 90 DEGREES        
         }
 
-        protected override IEnumerator MotionAnimation()
+        protected override void StartMotion()
         {
-            if (m_IsMoving)
-                yield break;
+            if (IsMoving)
+                return;
 
-            m_IsMoving = true;
-            float currentDuration = MotionDuration / 2f;
-            Quaternion startRotation = transform.rotation * Quaternion.AngleAxis(-RotationLimit, Vector3.forward);
-            Quaternion endRotation = transform.rotation * Quaternion.AngleAxis(RotationLimit, Vector3.forward);
-            while (m_IsMoving)
-            {
-                if (currentDuration >= MotionDuration)
-                {
-                    var temp = startRotation;
-                    startRotation = endRotation;
-                    endRotation = temp;
-                    transform.rotation = startRotation;
-                    currentDuration = 0f;
-                }
-                transform.rotation = Quaternion.Lerp(startRotation, endRotation, currentDuration / MotionDuration);
-                currentDuration += Time.deltaTime;
-                yield return null;
-            }
-            m_IsMoving = false;
+            m_CurrentTimer = 0f;
+            IsMoving = true;
+        }
+
+        protected override void UpdateMotion()
+        {
+            m_CurrentTimer += Time.fixedDeltaTime;
+            m_EulerAngles.z = Mathf.PingPong(m_CurrentTimer / (MotionDuration * 2f), 2 * RotationLimit) - RotationLimit;
+            MovingLink.localEulerAngles = m_EulerAngles;
         }
     }
 }

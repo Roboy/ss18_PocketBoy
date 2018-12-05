@@ -6,6 +6,27 @@ using UnityEngine.SceneManagement;
 
 namespace Pocketboy.Common
 {
+    public class RoboyEvents
+    {
+        public delegate void RoboyTalkingDelegate();
+        public static event RoboyTalkingDelegate RoboyStartedTalkingEvent, RoboyFinishedTalkingEvent, RoboyStoppedTalkingEvent;
+
+        public static void OnRoboyStartedTalking()
+        {
+            RoboyStartedTalkingEvent?.Invoke();
+        }
+
+        public static void OnRoboyFinishedTalking()
+        {
+            RoboyFinishedTalkingEvent?.Invoke();
+        }
+
+        public static void OnRoboyStoppedTalking()
+        {
+            RoboyStoppedTalkingEvent?.Invoke();
+        }
+    }
+
     /// <summary>
     /// TODO:: Add functionality e.g. startAnimationXY
     /// </summary>
@@ -86,17 +107,24 @@ namespace Pocketboy.Common
 
             m_TextToSpeechController.Talk(text);
             m_FaceController.StartTalkAnimation();
+            RoboyEvents.OnRoboyStartedTalking();
+
         }
 
         public void TalkDone()
         {
             m_FaceController.StopTalkAnimation();
+            RoboyEvents.OnRoboyFinishedTalking();
         }
 
         public void StopTalking()
         {
+            if (!IsTalking)
+                return;
+
             m_TextToSpeechController.StopTalking();
             m_FaceController.StopTalkAnimation();
+            RoboyEvents.OnRoboyStoppedTalking();
         }
 
         public void Listen()

@@ -9,30 +9,25 @@ namespace Pocketboy.JointGame
         [SerializeField]
         private float MovementLength = 0f;
 
-        protected override IEnumerator MotionAnimation()
-        {
-            if (m_IsMoving)
-                yield break;
+        private float m_CurrentTimer = 0f;
 
-            m_IsMoving = true;
-            float currentDuration = MotionDuration / 2f;
-            Vector3 startPosition = m_IdlePosition - MovementLength * transform.up;
-            Vector3 endPosition = m_IdlePosition + MovementLength * transform.up;
-            while (m_IsMoving)
-            {
-                if (currentDuration >= MotionDuration)
-                {
-                    var temp = startPosition;
-                    startPosition = endPosition;
-                    endPosition = temp;
-                    transform.position = startPosition;
-                    currentDuration = 0f;
-                }
-                transform.position = Vector3.Lerp(startPosition, endPosition, currentDuration / MotionDuration);
-                currentDuration += Time.deltaTime;
-                yield return null;
-            }
-            m_IsMoving = false;
+        private Vector3 m_CurrentPositon;
+
+        protected override void StartMotion()
+        {
+            if (IsMoving)
+                return;
+
+            m_CurrentTimer = 0f;
+            IsMoving = true;
+        }
+
+        protected override void UpdateMotion()
+        {
+            m_CurrentTimer += Time.fixedDeltaTime;
+            m_CurrentPositon = transform.localPosition;
+            m_CurrentPositon.y = Mathf.PingPong(m_CurrentTimer / (MotionDuration * 2f), MovementLength) + m_IdlePosition.y;
+            transform.localPosition = m_CurrentPositon;
         }
     }
 }

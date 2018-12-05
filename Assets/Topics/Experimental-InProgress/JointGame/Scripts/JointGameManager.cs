@@ -15,6 +15,9 @@ namespace Pocketboy.JointGame
         private float TimePerGame;
 
         [SerializeField]
+        private float WarningTime;
+
+        [SerializeField]
         private int MaxPointsPerRound;
 
         [Header("UI Joint Buttons")]
@@ -45,39 +48,22 @@ namespace Pocketboy.JointGame
         [SerializeField]
         private TextMeshProUGUI TimeText;
 
-        [Header("Effector and Joints")]
-
         [SerializeField]
-        private RoboticArmController UserRoboticArm;
-
-        [SerializeField]
-        private Transform EndEffector;
-
-        [SerializeField]
-        private Joint LinearJoint;
-
-        [SerializeField]
-        private Joint OrthogonalJoint;
-
-        [SerializeField]
-        private Joint RotationalJoint;
-
-        [SerializeField]
-        private Joint TwistJoint;
-
-        [SerializeField]
-        private Joint RevolvingJoint;
+        private TextMeshProUGUI HighscoreText;
 
         [Header("Other stuff")]
+
+        [SerializeField]
+        private RoboticArmController RoboticArm;
 
         [SerializeField]
         private Transform LevelsParent;
 
         [SerializeField]
-        private GameObject TryingInstruction;
+        private Button PlayButton;
 
         [SerializeField]
-        private GameObject GameInstruction;
+        private Button StopButton;
 
         private List<JointGameLevel> m_Levels = new List<JointGameLevel>();
 
@@ -96,16 +82,32 @@ namespace Pocketboy.JointGame
 
         private bool m_IsGameStarted;
 
+        private int m_CurrentLevelPointHits;
+
+        private bool m_CountdownWarningTriggered;
+
+        private float m_Highscore;
+
+        private static string m_HighscorePlayerPrefsName = "JointGameHighscore";
+
         private void Awake()
         {
             AddSubscribers();
             SetupLevels();
+            LoadHighscore();
 
             if (LevelManager.InstanceExists)
             {
                 LevelManager.Instance.RegisterGameObjectWithRoboy(LevelsParent.gameObject, Vector3.right * 0.2f + Vector3.forward * 0.3f, Quaternion.identity);
                 LevelsParent.forward = -LevelsParent.forward;
             }
+
+            TimeText.text = TimePerGame.ToString("n0");
+        }
+
+        private void OnDestroy()
+        {
+            SaveHighscore();
         }
 
         private void Update()
@@ -116,51 +118,77 @@ namespace Pocketboy.JointGame
             m_CurrentTime -= Time.deltaTime;
             TimeText.text = m_CurrentTime.ToString("n1");
 
-            if (m_CurrentTime < 0f)
+            if (m_CurrentTime < WarningTime && !m_CountdownWarningTriggered)
             {
-                StopGame();
+                CountdownManager.Instance.StartWarningCountdown(WarningTime, StopGame);
+                m_CountdownWarningTriggered = true;
             }
 
             PointsText.text = m_CurrentPoints.ToString("n0");
         }
 
+        public void PointWasHit()
+        {
+            IncreaseUserPoints();
+            m_CurrentLevelPointHits++;
+            if (m_CurrentLevelPointHits == m_Levels[m_CurrentLevelIndex].Points)
+            {
+                ShowNextLevel();
+            }
+        }
+
         private void AddSubscribers()
         {
-            LinearJointButton.onClick.AddListener( () => ChangeJoint(LinearJoint));
-            OrthogonalJointButton.onClick.AddListener(() => ChangeJoint(OrthogonalJoint));
-            RotationalJointButton.onClick.AddListener(() => ChangeJoint(RotationalJoint));
-            TwistJointButton.onClick.AddListener(() => ChangeJoint(TwistJoint));
-            RevolvingJointButton.onClick.AddListener(() => ChangeJoint(RevolvingJoint));
-        }
-
-        private void ChangeJoint(Joint joint)
-        {           
-            if (!m_IsGameStarted)
+            LinearJointButton.onClick.AddListener(() => 
             {
-                if (m_CurrentUserJoint != null)
-                {
-                    m_CurrentUserJoint.StopMotion();
-                    m_CurrentUserJoint.gameObject.SetActive(false);
-                }
-
-                joint.gameObject.SetActive(true);
-                joint.ApplyMotion(EndEffector);
-            }
-            else
-            {
-                if (m_Levels[m_CurrentLevelIndex].CheckJoint(joint))
-                {
-                    m_CurrentPoints += MaxPointsPerRound / (float)m_CurrentTry;
-                    ShowNextLevel();
-                }
-                else
-                {
-                    Handheld.Vibrate();
+                if (m_IsGameStarted)
                     m_CurrentTry++;
-                }
-            }
-            m_CurrentUserJoint = joint;
-        }
+
+                RoboticArm.LinearMotion();
+            });
+            OrthogonalJointButton.onClick.AddListener(() =>
+            {
+                if (m_IsGameStarted)
+                    m_CurrentTry++;
+
+                RoboticArm.OrthogonalMotion();
+            });
+            RotationalJointButton.onClick.AddListener(() =>
+            {
+                if (m_IsGameStarted)
+                    m_CurrentTry++;
+
+                RoboticArm.RotationalMotion();
+            });
+            TwistJointButton.onClick.AddListener(() =>
+            {
+                if (m_IsGameStarted)
+                    m_CurrentTry++;
+
+                RoboticArm.TwistMoting();
+            });
+            RevolvingJointButton.onClick.AddListener(() =>
+            {
+                if (m_IsGameStarted)
+                    m_CurrentTry++;
+
+                RoboticArm.RevolvingMotion();
+            });
+
+            PlayButton.onClick.AddListener(() => 
+            {
+                PlayButton.gameObject.SetActive(false);
+                StopButton.gameObject.SetActive(true);
+                StartGame();
+            });
+
+            StopButton.onClick.AddListener(() => 
+            {
+                PlayButton.gameObject.SetActive(true);
+                StopButton.gameObject.SetActive(false);
+                StopGame();
+            });
+        }        
 
         private void SetupLevels()
         {
@@ -174,22 +202,22 @@ namespace Pocketboy.JointGame
             }
         }
 
-        public void StartGame()
+        private void StartGame()
         {
             if (m_IsGameStarted)
                 return;
 
-            UserRoboticArm.StopMotion();
-            UserRoboticArm.gameObject.SetActive(false);
-            TryingInstruction.SetActive(false);
-            GameInstruction.SetActive(true);
-            CountdownManager.Instance.StartCountdown(3f, StartGameInternal);
+            RoboticArm.StopMotion();
+            CountdownManager.Instance.StartCountdownBlockingInput(3f, StartGameInternal);
         }
+
+
 
         private void StartGameInternal()
         {
+            m_CountdownWarningTriggered = false;
             m_CurrentTime = TimePerGame;
-            m_CurrentTry = 1;
+            m_CurrentTry = 0;
             m_Levels[m_CurrentLevelIndex].Hide();
             m_CurrentLevelIndex = 0;
             m_Levels.Shuffle();
@@ -202,17 +230,19 @@ namespace Pocketboy.JointGame
             if (!m_IsGameStarted)
                 return;
 
-            m_IsGameStarted = false;
-            TryingInstruction.SetActive(true);
-            GameInstruction.SetActive(false);
-            UserRoboticArm.gameObject.SetActive(true);           
+            m_IsGameStarted = false;       
             m_Levels[m_CurrentLevelIndex].Hide();
-            PointsText.text = TimePerGame.ToString("n0");
+            m_CurrentPoints = 0f;
+            PointsText.text = "0";
+            TimeText.text = TimePerGame.ToString("n0");
+            StopButton.gameObject.SetActive(false);
+            PlayButton.gameObject.SetActive(true);
         }
 
         private void ShowLevel(int index)
         {
-            m_CurrentTry = 1;
+            m_CurrentTry = 0;
+            m_CurrentLevelPointHits = 0;
             m_Levels[m_CurrentLevelIndex].Hide();
             m_CurrentLevelIndex = MathUtility.WrapArrayIndex(index, m_Levels.Count); ;
             m_Levels[m_CurrentLevelIndex].Show();
@@ -220,6 +250,8 @@ namespace Pocketboy.JointGame
 
         private void ResetLevels()
         {
+            m_CurrentLevelPointHits = 0;
+            m_CurrentTry = 0;
             m_Levels[m_CurrentLevelIndex].Hide();
             m_CurrentLevelIndex = 0;
             m_Levels.Shuffle();
@@ -235,6 +267,39 @@ namespace Pocketboy.JointGame
             }
             
             ShowLevel(m_CurrentLevelIndex + 1);
+        }
+
+        private void IncreaseUserPoints()
+        {
+            m_CurrentPoints += MaxPointsPerRound / Mathf.Max(1f, m_CurrentTry);
+            PointsText.text = m_CurrentPoints.ToString();
+            UpdateHighscore();
+        }
+
+        private void UpdateHighscore()
+        {
+            if (m_CurrentPoints <= m_Highscore)
+                return;
+
+            m_Highscore = m_CurrentPoints;
+            HighscoreText.text = m_Highscore.ToString("n0");
+        }
+
+        private void LoadHighscore()
+        {
+            if (PlayerPrefs.GetFloat(m_HighscorePlayerPrefsName) == default(float)) // if not saved yet, GetInt returns default value
+                return;
+
+            m_Highscore = PlayerPrefs.GetFloat(m_HighscorePlayerPrefsName);
+            HighscoreText.text = m_Highscore.ToString("n0");
+        }
+
+        private void SaveHighscore()
+        {
+            if (PlayerPrefs.GetFloat(m_HighscorePlayerPrefsName) >= m_Highscore)
+                return;
+
+            PlayerPrefs.SetFloat(m_HighscorePlayerPrefsName, m_Highscore);
         }
     }
 }
