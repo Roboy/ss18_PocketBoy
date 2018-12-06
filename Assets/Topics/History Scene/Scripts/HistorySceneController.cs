@@ -84,7 +84,7 @@ namespace Pocketboy.HistoryScene
         private void Initialize()
         {
             List<Object> tvContent = new List<Object>();
-            List<int> dates = new List<int>();
+            List<string> dates = new List<string>();
             foreach (var content in Content)
             {
                 tvContent.Add(content.TVContent);

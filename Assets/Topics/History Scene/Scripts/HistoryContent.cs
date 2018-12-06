@@ -8,7 +8,7 @@ namespace Pocketboy.HistoryScene
     public class HistoryContent : ScriptableObject
     {
         public UnityEngine.Object TVContent;
-        public int Date;
+        public string Date;
         public string Text;
     }
 }

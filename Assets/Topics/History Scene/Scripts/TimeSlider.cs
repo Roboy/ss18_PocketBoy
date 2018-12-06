@@ -56,7 +56,7 @@ namespace Pocketboy.HistoryScene
 
         private bool m_Changing;
 
-        public void FillSlider(int[] dates)
+        public void FillSlider(string[] dates)
         {
             // e.g. partsize = 200 with 5 parts => (200 * (5-1)) = 800 => 800 / 2 => 400 => first position = -400
             float x_position = 0f;

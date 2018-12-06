@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
+  m_Name: 1973-wabot
+  m_EditorClassIdentifier: 
+  TVContent: {fileID: 2800000, guid: 148e4b89d7929d54f82d9cd381b2b3e6, type: 3}
+  Date: 1973
+  Text: "Im Jahr Neunzehnhundert und Dreiundsiebzig wird der erste Robotor in Lebensgr\xF6\xDFe
+    gebaut, sein Name Ist Wabot One."

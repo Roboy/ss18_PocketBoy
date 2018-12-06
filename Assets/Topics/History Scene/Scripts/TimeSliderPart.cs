@@ -34,7 +34,7 @@ namespace Pocketboy.HistoryScene
             UpdateFadeState();
         }
 
-        public void Setup(TimeSlider slider, RectTransform container, Vector2 position, Vector2 size, int date, Color color)
+        public void Setup(TimeSlider slider, RectTransform container, Vector2 position, Vector2 size, string date, Color color)
         {
             SoftMask.MaskScalingRect = container;
             transform.localPosition = position;
