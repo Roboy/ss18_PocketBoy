@@ -12,24 +12,24 @@ namespace Pocketboy.JointGame
         [SerializeField]
         protected float MotionDuration = 0f;
 
-        protected bool m_IsMoving;
+        public bool IsMoving { get; protected set; }
 
         protected Vector3 m_IdlePosition;
 
         protected Quaternion m_IdleRotation;
 
-        private Coroutine m_Motion;
-
         protected virtual void Awake()
         {
-            m_IdlePosition = transform.position;
-            m_IdleRotation = transform.rotation;
+            m_IdlePosition = transform.localPosition;
+            m_IdleRotation = transform.localRotation;
         }
 
-        private void OnEnable()
+        private void FixedUpdate()
         {
-            transform.position = m_IdlePosition;
-            transform.rotation = m_IdleRotation;
+            if (!IsMoving)
+                return;
+
+            UpdateMotion();
         }
 
         public void ApplyMotion(Transform effector)
@@ -38,20 +38,23 @@ namespace Pocketboy.JointGame
             effector.transform.localPosition = Vector3.zero;
             effector.transform.localRotation = Quaternion.identity;
 
-            transform.position = m_IdlePosition;
-            transform.rotation = m_IdleRotation;
-            m_Motion = StartCoroutine(MotionAnimation());
+            transform.localPosition = m_IdlePosition;
+            transform.localRotation = m_IdleRotation;
+            StartMotion();
         }
+
+
 
         public void StopMotion()
         {
-            if (m_Motion != null)
-                StopCoroutine(m_Motion);
-
-            m_IsMoving = false;
+            IsMoving = false;
+            transform.localPosition = m_IdlePosition;
+            transform.localRotation = m_IdleRotation;
         }
 
-        protected abstract IEnumerator MotionAnimation();
+        protected abstract void StartMotion();
+
+        protected abstract void UpdateMotion();
     }
 }
 

@@ -9,7 +9,7 @@ namespace Pocketboy.Common
     /// </summary>
     public class Instruction : MonoBehaviour
     {
-        [SerializeField, Tooltip("This text will be shown and read out loud by Roboy when pressed on the Help button.")]
+        [SerializeField, TextArea, Tooltip("This text will be shown and read out loud by Roboy when pressed on the Help button.")]
         private string InstructionText;
 
         private void Awake()

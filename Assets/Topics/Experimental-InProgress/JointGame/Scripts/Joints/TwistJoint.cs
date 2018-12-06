@@ -6,20 +6,15 @@ namespace Pocketboy.JointGame
 {
     public class TwistJoint : Joint
     {
-        protected override IEnumerator MotionAnimation()
+        protected override void StartMotion()
         {
-            if (m_IsMoving)
-                yield break;
+            IsMoving = true;
+        }
 
-            m_IsMoving = true;
-           
-            while (m_IsMoving)
-            {
-                transform.Rotate(Vector3.up * 6f / MotionDuration, Space.Self); // 360 degrees / 60fps * MotionDuration = 6 / MotionDuration
-                yield return null;
-            }
-            m_IsMoving = false;
-        } 
+        protected override void UpdateMotion()
+        {
+            transform.Rotate(Vector3.up * 6f / MotionDuration, Space.Self); // 360 degrees / 60fps * MotionDuration = 6 / MotionDuration
+        }
     }
 }
 

@@ -7,6 +7,10 @@ using TMPro;
 
 namespace Pocketboy.Common
 {
+    /// <summary>
+    /// InstructionManager shows the Instruction in each scene at commands Roboy to read the instruction if not muted.
+    /// TODO:: Push sentences which are split in following pages to the next page if it fits one page.
+    /// </summary>
     [RequireComponent(typeof(PageController))]
     public class InstructionManager : Singleton<InstructionManager>
     {
@@ -41,6 +45,8 @@ namespace Pocketboy.Common
                 HelpButton.gameObject.SetActive(false);
                 m_SceneCanvases.Clear();
             };
+
+            RoboyEvents.RoboyFinishedTalkingEvent += NextInstruction;
         }
 
         public void PushInstruction(string text)
@@ -122,7 +128,7 @@ namespace Pocketboy.Common
 
         public void NextInstruction()
         {
-            if (m_PageController.NextPage(InstructionText))
+            if (m_IsActive && m_PageController.NextPage(InstructionText))
             {
                 ReadInstruction();
             }
@@ -130,7 +136,7 @@ namespace Pocketboy.Common
 
         public void PreviousInstruction()
         {
-            if (m_PageController.PreviousPage(InstructionText))
+            if (m_IsActive && m_PageController.PreviousPage(InstructionText))
             {
                 ReadInstruction();
             }
