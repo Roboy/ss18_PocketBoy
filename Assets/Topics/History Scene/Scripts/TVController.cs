@@ -197,6 +197,8 @@ namespace Pocketboy.HistoryScene
             {
                 DefaultMaterial.mainTexture = VideoTexture;
                 m_VideoPlayer.clip = m_ContentList[m_CurrentContent].Video;
+                m_VideoPlayer.isLooping = true;
+                m_VideoPlayer.aspectRatio = VideoAspectRatio.Stretch;
                 m_VideoPlayer.Stop();
                 m_VideoPlayer.Play();
             }

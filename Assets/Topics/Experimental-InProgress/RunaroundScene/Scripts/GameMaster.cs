@@ -243,13 +243,13 @@ namespace Pocketboy.Runaround
                 if (m_playerAnswer != null && m_correctAnswer == AnswerPlanes.IndexOf(m_playerAnswer))
                 {
                     m_playerWon = true;
-                    m_Outcome.text = "You win!";
+                    m_Outcome.text = "Richtig!";
                     m_Outcome.GetComponent<TextMeshProUGUI>().color = m_colWinning;
                 }
                 else
                 {
                     m_playerWon = false;
-                    m_Outcome.text = "You loose!";
+                    m_Outcome.text = "Falsch!";
                     m_Outcome.GetComponent<TextMeshProUGUI>().color = m_colLoosing;
                 }
                 ToggleResultText("ON");
@@ -319,6 +319,8 @@ namespace Pocketboy.Runaround
                 ans.Floor.transform.localScale = dic_plane_scale[tmp];
                 //Asign the original materials to the floor
                 ans.Floor.GetComponent<Renderer>().material = dic_mat_floors[tmp];
+                //Asign the orginal materials to the posts
+                ans.SignPost.GetComponent<Renderer>().material = dic_mat_posts[tmp];
             }
             yield return null;
         }

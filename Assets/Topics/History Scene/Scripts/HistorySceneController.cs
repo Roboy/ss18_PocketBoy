@@ -94,7 +94,7 @@ namespace Pocketboy.HistoryScene
             TV.FillContent(tvContent.ToArray());
             Slider.FillSlider(dates.ToArray());
 
-            LevelManager.Instance.RegisterGameObjectWithRoboy(TV.gameObject, new Vector3(0.65f, 0f, 0f));
+            LevelManager.Instance.RegisterGameObjectWithRoboy(TV.gameObject, new Vector3(0.65f, 0.25f, 0f));
             TV.transform.forward = RoboyManager.Instance.transform.forward;
 
             //German localization
