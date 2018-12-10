@@ -22,7 +22,7 @@ namespace Pocketboy.Common
 
         private void Awake()
         {
-            HomeButton.onClick.AddListener(() => LoadScene("HomeScene"));
+            HomeButton.onClick.AddListener(GoHome);
         }
 
         private void OnEnable()
@@ -35,6 +35,12 @@ namespace Pocketboy.Common
         {
             SceneManager.sceneLoaded -= (scene, mode) => FadeOutImage();
             SceneManager.sceneLoaded -= (scene, mode) => ToggleHomeButton(scene);
+        }
+
+        private void GoHome()
+        {
+            AudioSourcesManager.Instance.PlaySound("ButtonClick");
+            LoadScene("HomeScene");
         }
 
         /// <summary>

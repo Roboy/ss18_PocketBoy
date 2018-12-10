@@ -64,10 +64,12 @@ namespace Pocketboy.Common
         {
             if (!m_IsActive)
             {
+                AudioSourcesManager.Instance.PlaySound("ButtonClick");
                 ShowInstruction();
             }
             else
             {
+                AudioSourcesManager.Instance.PlaySound("ButtonClick");
                 HideInstruction();
             }
         }

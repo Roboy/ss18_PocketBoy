@@ -249,6 +249,21 @@ Prefab:
       propertyPath: m_SortingOrder
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 114841991687818114, guid: 57dae54c396da0d4eaaa97ec625042c4,
+        type: 2}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114841991687818114, guid: 57dae54c396da0d4eaaa97ec625042c4,
+        type: 2}
+      propertyPath: m_ReferenceResolution.x
+      value: 2960
+      objectReference: {fileID: 0}
+    - target: {fileID: 114841991687818114, guid: 57dae54c396da0d4eaaa97ec625042c4,
+        type: 2}
+      propertyPath: m_ReferenceResolution.y
+      value: 1440
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57dae54c396da0d4eaaa97ec625042c4, type: 2}
   m_IsPrefabAsset: 0

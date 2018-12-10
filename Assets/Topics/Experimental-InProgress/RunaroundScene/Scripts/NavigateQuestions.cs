@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using Pocketboy.Common;
 
 namespace Pocketboy.Runaround
 {
@@ -15,6 +15,7 @@ namespace Pocketboy.Runaround
             if (gameObject.GetComponent<Button>().enabled)
             {
                 QuestionManager.Instance.NavigateQuestion(gameObject.tag);
+                AudioSourcesManager.Instance.PlaySound("ItemSwitch");
             }
         }
     }

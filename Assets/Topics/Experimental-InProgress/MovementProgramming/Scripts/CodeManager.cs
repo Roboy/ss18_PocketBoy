@@ -122,6 +122,7 @@ namespace Pocketboy.MovementProgramming
 
         private void ExecuteInstructionCode()
         {
+            AudioSourcesManager.Instance.PlaySound("ButtonClick");
             m_ExecutingCode = true;
             ToggleButtons("OFF");
             UpdateAttemptCounter(1);
@@ -170,6 +171,7 @@ namespace Pocketboy.MovementProgramming
 
         private void CreateInstruction(string operation)
         {
+            AudioSourcesManager.Instance.PlaySound("ButtonClick");
             Rect DP = DisplayPanel.rect;
             //Resize parent panel to have enough space for the additional rect
             DisplayPanel.sizeDelta = new Vector2(DP.width, DP.height + LineOfCodePrefab.rect.height);
@@ -209,6 +211,7 @@ namespace Pocketboy.MovementProgramming
 
         private void DeleteInsctruction()
         {
+            AudioSourcesManager.Instance.PlaySound("ButtonClick");
             List<RectTransform> ToBeRemoved = new List<RectTransform>();
 
             foreach (RectTransform rt in m_LinesOfCode)
@@ -260,6 +263,7 @@ namespace Pocketboy.MovementProgramming
 
         private void MoveInstructionDown()
         {
+            AudioSourcesManager.Instance.PlaySound("ItemSwitch");
             //Only one element can be switched at a time
             if (m_SelectedLines.Count != 1)
                 return;
@@ -285,6 +289,7 @@ namespace Pocketboy.MovementProgramming
 
         private void MoveInsctructionUp()
         {
+            AudioSourcesManager.Instance.PlaySound("ItemSwitch");
             //Only one element can be switched at a time
             if (m_SelectedLines.Count != 1)
                 return;

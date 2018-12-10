@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pocketboy.Common;
 
 namespace Pocketboy.HistoryScene
 {
@@ -33,14 +34,18 @@ namespace Pocketboy.HistoryScene
             {
                 case ButtonType.Next:
                     EventManager.OnNextContent();
+                    AudioSourcesManager.Instance.PlaySound("TVChannelSwitch");
                     break;
                 case ButtonType.Previous:
-                    EventManager.OnPreviousContent();                    
+                    EventManager.OnPreviousContent();
+                    AudioSourcesManager.Instance.PlaySound("TVChannelSwitch");
                     break;
                 case ButtonType.Repeat:
                     EventManager.OnRepeatContent();
+                    AudioSourcesManager.Instance.PlaySound("ButtonClick");
                     break;
             }
+            
             StartCoroutine(HighlightAnimation());
         }
 
