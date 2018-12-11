@@ -45,9 +45,6 @@ namespace Pocketboy.HistoryScene
 
         private void NextContent()
         {
-            if (RoboyManager.Instance.IsTalking)
-                return;
-
             if(m_IsOn)
                 m_CurrentContentIndex = MathUtility.WrapArrayIndex(m_CurrentContentIndex + 1, TextForSpeech.Count);
 
@@ -57,25 +54,22 @@ namespace Pocketboy.HistoryScene
 
         private void PreviousContent()
         {
-            if (RoboyManager.Instance.IsTalking)
-                return;
-
             m_CurrentContentIndex = MathUtility.WrapArrayIndex(m_CurrentContentIndex - 1, TextForSpeech.Count);
             ShowContent(m_CurrentContentIndex);           
         }
 
         private void RepeatContent()
         {
-            if (RoboyManager.Instance.IsTalking)
-                return;
-
+            AudioSourcesManager.Instance.PlaySound("ButtonClick");
             TV.RepeatContent();
             RoboyManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
         }
 
         private void ShowContent(int index)
         {
+            AudioSourcesManager.Instance.PlaySound("TVChannelSwitch");
             TV.ShowContent(m_CurrentContentIndex);
+
             Slider.ShowDate(m_CurrentContentIndex);
             RoboyManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
             

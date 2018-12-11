@@ -102,7 +102,7 @@ namespace Pocketboy.GoogleCloud
 
         private string GetAudioConfig()
         {
-            return "\"audioConfig\" : { \"audioEncoding\" : \"LINEAR16\", \"sampleRateHertz\": \"44100\"}";
+            return "\"audioConfig\" : { \"audioEncoding\" : \"LINEAR16\", \"sampleRateHertz\": \"44100\", \"volumeGainDb\":\"6.0\"}";
         }
     }
 }

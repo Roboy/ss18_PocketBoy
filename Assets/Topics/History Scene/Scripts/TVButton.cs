@@ -33,16 +33,13 @@ namespace Pocketboy.HistoryScene
             switch(ButtonOperation)
             {
                 case ButtonType.Next:
-                    EventManager.OnNextContent();
-                    AudioSourcesManager.Instance.PlaySound("TVChannelSwitch");
+                    EventManager.OnNextContent();                   
                     break;
                 case ButtonType.Previous:
                     EventManager.OnPreviousContent();
-                    AudioSourcesManager.Instance.PlaySound("TVChannelSwitch");
                     break;
                 case ButtonType.Repeat:
-                    EventManager.OnRepeatContent();
-                    AudioSourcesManager.Instance.PlaySound("ButtonClick");
+                    EventManager.OnRepeatContent();                   
                     break;
             }
             
