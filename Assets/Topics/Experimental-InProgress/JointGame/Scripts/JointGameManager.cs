@@ -141,6 +141,7 @@ namespace Pocketboy.JointGame
         {
             LinearJointButton.onClick.AddListener(() => 
             {
+                AudioSourcesManager.Instance.PlaySound("ButtonClick");
                 if (m_IsGameStarted)
                     m_CurrentTry++;
 
@@ -148,6 +149,7 @@ namespace Pocketboy.JointGame
             });
             OrthogonalJointButton.onClick.AddListener(() =>
             {
+                AudioSourcesManager.Instance.PlaySound("ButtonClick");
                 if (m_IsGameStarted)
                     m_CurrentTry++;
 
@@ -155,6 +157,7 @@ namespace Pocketboy.JointGame
             });
             RotationalJointButton.onClick.AddListener(() =>
             {
+                AudioSourcesManager.Instance.PlaySound("ButtonClick");
                 if (m_IsGameStarted)
                     m_CurrentTry++;
 
@@ -162,6 +165,7 @@ namespace Pocketboy.JointGame
             });
             TwistJointButton.onClick.AddListener(() =>
             {
+                AudioSourcesManager.Instance.PlaySound("ButtonClick");
                 if (m_IsGameStarted)
                     m_CurrentTry++;
 
@@ -169,6 +173,7 @@ namespace Pocketboy.JointGame
             });
             RevolvingJointButton.onClick.AddListener(() =>
             {
+                AudioSourcesManager.Instance.PlaySound("ButtonClick");
                 if (m_IsGameStarted)
                     m_CurrentTry++;
 
@@ -177,6 +182,7 @@ namespace Pocketboy.JointGame
 
             PlayButton.onClick.AddListener(() => 
             {
+                AudioSourcesManager.Instance.PlaySound("ButtonClick");
                 PlayButton.gameObject.SetActive(false);
                 StopButton.gameObject.SetActive(true);
                 StartGame();
@@ -184,6 +190,7 @@ namespace Pocketboy.JointGame
 
             StopButton.onClick.AddListener(() => 
             {
+                AudioSourcesManager.Instance.PlaySound("ButtonClick");
                 PlayButton.gameObject.SetActive(true);
                 StopButton.gameObject.SetActive(false);
                 StopGame();

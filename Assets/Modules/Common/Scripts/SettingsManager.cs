@@ -28,6 +28,18 @@ namespace Pocketboy.Common
         [SerializeField]
         private AudioMixer m_MasterAudioMixer;
 
+        [SerializeField]
+        private AudioSource m_AudioSpeech;
+
+        [SerializeField]
+        private AudioSource m_AudioUI;
+
+        [SerializeField]
+        private AudioSource m_AudioWorld;
+
+        [SerializeField]
+        private AudioSource m_AudioMusic;
+
         private void Awake()
         {
             DontDestroyOnLoad(transform.root.gameObject);
@@ -44,9 +56,13 @@ namespace Pocketboy.Common
 
         public void InitializeAudio()
         {
-            m_MasterAudioMixer.SetFloat("VolSpeech", CalculateDB(m_SpeechSlider.value));
-            m_MasterAudioMixer.SetFloat("VolFX", CalculateDB(m_FXSlider.value));
-            m_MasterAudioMixer.SetFloat("VolMusic", CalculateDB(m_MusicSlider.value));
+            //m_MasterAudioMixer.SetFloat("VolSpeech", CalculateDB(m_SpeechSlider.value));
+            //m_MasterAudioMixer.SetFloat("VolFX", CalculateDB(m_FXSlider.value));
+            //m_MasterAudioMixer.SetFloat("VolMusic", CalculateDB(m_MusicSlider.value));
+            m_AudioSpeech.volume = m_SpeechSlider.value;
+            m_AudioUI.volume = m_FXSlider.value;
+            m_AudioWorld.volume = m_FXSlider.value;
+            m_AudioMusic.volume = m_MusicSlider.value;
         }
 
         public void ToggleSettings()
@@ -57,17 +73,21 @@ namespace Pocketboy.Common
 
         public void SetSpeechVolume()
         {
-            m_MasterAudioMixer.SetFloat("VolSpeech", CalculateDB(m_SpeechSlider.value));
+            //m_MasterAudioMixer.SetFloat("VolSpeech", CalculateDB(m_SpeechSlider.value));
+            m_AudioSpeech.volume = m_SpeechSlider.value;
         }
 
         public void SetFXVolume()
         {
-            m_MasterAudioMixer.SetFloat("VolFX", CalculateDB(m_FXSlider.value));
+            //m_MasterAudioMixer.SetFloat("VolFX", CalculateDB(m_FXSlider.value));
+            m_AudioUI.volume = m_FXSlider.value;
+            m_AudioWorld.volume = m_FXSlider.value;
         }
 
         public void SetMusicVolume()
         {
-            m_MasterAudioMixer.SetFloat("VolMusic", CalculateDB(m_MusicSlider.value));
+            //m_MasterAudioMixer.SetFloat("VolMusic", CalculateDB(m_MusicSlider.value));
+            m_AudioMusic.volume = m_MusicSlider.value;
 
         }
 

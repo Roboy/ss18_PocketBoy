@@ -12,7 +12,17 @@ ModelImporter:
     4300000: Cylinder
     7400000: Default Take
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_front__roboy_coin_png
+    second: {fileID: 2100000, guid: 1a9bc24858d27464a9525c7e29c6fcb8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_side__roboy_coin_png
+    second: {fileID: 2100000, guid: 2a171fff4feb15045a1f7a1e24b2d301, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
