@@ -27,6 +27,7 @@ namespace Pocketboy.Runaround
 
         public void Listen()
         {
+            AudioSourcesManager.Instance.PlaySound("ButtonClick");
             GameMaster.Instance.StartRunaround(QuestionManager.Instance.GetCurrentQuestion().CorrectAnswerID);
         }
 

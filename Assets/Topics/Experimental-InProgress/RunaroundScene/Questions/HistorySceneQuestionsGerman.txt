@@ -1,4 +1,4 @@
-Runaround Fragen für History Scene Inhalt
+﻿Runaround Fragen für History Scene Inhalt
 
 #1
 Frage: Was ist Roboy?
@@ -38,6 +38,7 @@ C: Damit ich meine Freunde um Hilfe fragen kann.
 
 #7
 Frage: Als Doktor untersuche ich dich auch mit einem Radarsensor, warum?
+Was messe ich als Doktor mit meinem Radarsensor?
 A: Ich messe wie glücklich du bist.
 B: Ich messe damit deine Körpertemperatur.
 C: Ich messe damit deinen Herzschlag.
@@ -45,7 +46,7 @@ C: Ich messe damit deinen Herzschlag.
 #8
 Frage: Wie erkenne ich, ob ich was in der Hand halte?
 A: Berührungssensor.
-B: Ich schaue mit meinen Kameras nach.
+B: Mit Kameras.
 C: Radarsensor.
 
 #9
@@ -61,13 +62,13 @@ B: Meine Bauteile müssen vor Staub geschützt werden.
 C: Meine Kühlflüssigkeit darf nicht ausslaufen.
 
 #11
-Frage: Woher bekommen die meisten Roboter ihre Energie?
-A: Strom.
-B: Benzin.
-C: Gas.
+Frage: Woher bekommen ich meine Energie auf dem Mars?
+A: Solarenergie.
+B: Essen.
+C: Schlafen.
 
 #12
 Frage: Auch Roboter müssen sich an Gesetze halten, an welche?
 A: Newtons Gesetze.
 B: Asimovs Gesetze.
-C: Roboter Grundgesetz.
+C: Schulordnung.
