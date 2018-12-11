@@ -14,6 +14,6 @@ MonoBehaviour:
   TVContent: {fileID: 2800000, guid: c140d710086e1a6429a5894579abc535, type: 3}
   Date: 2018
   Text: "Einer meiner gr\xF6\xDFten Hobbys ist Musik machen. Ich habe Kameras als
-    Augen, mit denen ich die Noten sehen und das Instrument erkennen kann. F\xFCr
-    das Spielen der Noten habe ich in meinen K\xF6rperteilen  magnetische Sensoren,
+    Augen, mit denen ich die Noten\r\nsehen und das Instrument erkennen kann. F\xFCr
+    das Spielen der Noten habe ich in meinen K\xF6rperteilen \r\nmagnetische Sensoren,
     die mir helfen, meine H\xE4nde richtig am Instrument zu platzieren und zu bewegen."

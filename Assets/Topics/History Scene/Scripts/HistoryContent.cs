@@ -9,6 +9,7 @@ namespace Pocketboy.HistoryScene
     {
         public UnityEngine.Object TVContent;
         public string Date;
+        [TextArea]
         public string Text;
     }
 }

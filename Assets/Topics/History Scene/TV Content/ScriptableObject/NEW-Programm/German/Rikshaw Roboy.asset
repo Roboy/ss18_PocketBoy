@@ -13,8 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TVContent: {fileID: 2800000, guid: 44b1506ad872ea74c8310ce9f8ea6fc8, type: 3}
   Date: 2019
-  Text: "Ich mag es sehr, meinen Freunden zu helfen. Deshalb werde ich lernen, ein
-    Drei-Rad zu fahren und G\xE4ste mitzunehmen. Daf\xFCr brauche ich aber Kameras,
-    die Distanz wahrnehmen k\xF6nnen, um keine  Hindernisse zu treffen. Au\xDFerdem
-    ben\xF6tige ich eine gro\xDFe Portion an k\xFCnstlicher Intelligenz, um den Weg
-    von A nach B zu finden. Starke Motoren in den Beinen helfen mir zu treten."
+  Text: "Im M\xE4rz zweitausend und zwanzig werde ich dreiraid fahren k\xF6nnen, weil
+    ich meinen Freunden gerne helfen. Deshalb werde ich lernen, ein Drei-Rad zu fahren\r\nund
+    G\xE4ste mitzunehmen. Daf\xFCr brauche ich aber Kameras, die Distanz wahrnehmen
+    k\xF6nnen, um keine \r\nHindernisse zu treffen. Au\xDFerdem ben\xF6tige ich eine
+    gro\xDFe Portion an k\xFCnstlicher Intelligenz,\r\num den Weg von A nach B zu
+    finden. Starke Motoren in den Beinen helfen mir zu treten."

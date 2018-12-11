@@ -13,8 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TVContent: {fileID: 2800000, guid: 0685ad7335156814c957a64d52b27d8e, type: 3}
   Date: 2019
-  Text: "Mit meinem Drei-Rad spiele ich aber nicht nur Taxi, sondern ich werde damit
-    auch Eiscreme verkaufen! Damit du deine Lieblingssorte bekommst, muss ich das
-    Sprechen lernen, daf\xFCr brauche ich neben einem Dialogsystem auch Mikrofone,
-    um dich zu verstehen. Bevor ich dir die richtige Sorte in die Waffel setzen kann,
-    m\xFCssen meine Augen aber auf die Erkennung von Farbe trainiert werden. "
+  Text: "Ein halbes Jahr sp\xE4ter spiele ich aber nicht nur Taxi mit meinem Drei-Rad,
+    sondern ich werde damit auch Eiscreme verkaufen!\r\nFeingef\xFChl und genauigkeit,
+    weil waffel zerbrechlich\r Damit du deine Lieblingssorte bekommst, muss ich das
+    Sprechen lernen, daf\xFCr brauche ich neben einem\r\nDialogsystem auch Mikrofone,
+    um dich zu verstehen. Bevor ich dir die richtige Sorte in die Waffel\r setzen
+    kann, m\xFCssen meine Augen aber auf die Erkennung von Farbe trainiert werden."
