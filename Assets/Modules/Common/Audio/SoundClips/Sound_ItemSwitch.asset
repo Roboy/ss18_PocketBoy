@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: Sound_ItemSwitch
   m_EditorClassIdentifier: 
   ID: ItemSwitch
-  AudioFile: {fileID: 8300000, guid: 1da3380f38964e64eac801b72e34c9c1, type: 3}
+  AudioFile: {fileID: 8300000, guid: 922d231794d164249a431a9a34410512, type: 3}
