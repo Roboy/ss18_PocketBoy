@@ -59,6 +59,7 @@ namespace Pocketboy.Runaround
             m_currentQuestion = Questions[index];
             StartCoroutine(GameMaster.Instance.ResetGame());
             QuestionImage.GetComponentInChildren<TextMeshProUGUI>().text = m_currentQuestion.QuestionText;
+            RoboyManager.Instance.Talk(m_currentQuestion.QuestionText);
 
             //Try to load image for question.
             if (m_currentQuestion.QuestionImage != null)

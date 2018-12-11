@@ -244,12 +244,14 @@ namespace Pocketboy.Runaround
                 {
                     m_playerWon = true;
                     m_Outcome.text = "Richtig!";
+                    AudioSourcesManager.Instance.PlaySound("Winning");
                     m_Outcome.GetComponent<TextMeshProUGUI>().color = m_colWinning;
                 }
                 else
                 {
                     m_playerWon = false;
                     m_Outcome.text = "Falsch!";
+                    AudioSourcesManager.Instance.PlaySound("Losing");
                     m_Outcome.GetComponent<TextMeshProUGUI>().color = m_colLoosing;
                 }
                 ToggleResultText("ON");

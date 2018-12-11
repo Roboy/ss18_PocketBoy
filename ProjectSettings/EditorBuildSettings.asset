@@ -8,9 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Topics/Base Scene/Scenes/BaseScene.unity
     guid: 796a58abdd61b194a8f997d793580c1d
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Topics/Home Scene/Scenes/HomeScene.unity
+    guid: 352c64f03a1c45b41aea57163e2af6fc
   - enabled: 1
     path: Assets/Topics/History Scene/Scenes/HistoryScene.unity
     guid: e8d25eb8e5405514799984e52e9ab7aa
