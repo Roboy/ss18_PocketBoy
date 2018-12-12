@@ -35,10 +35,13 @@ namespace Pocketboy.Common
             IsTalking = true;
             if (m_GoogleCloudTTS != null && m_GoogleCloudTTS.IsAvailable())
             {
+                Debug.Log("google voice");
                 m_GoogleCloudTTS.SynthesizeText(text, m_AudioSource, TalkDoneGoogleTTS);
+                
             }
             else
             {
+                Debug.Log("native voice");
                 TalkNative(text);
             }
         }
