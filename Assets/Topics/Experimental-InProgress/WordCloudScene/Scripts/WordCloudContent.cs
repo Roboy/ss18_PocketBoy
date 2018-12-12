@@ -6,7 +6,7 @@ namespace Pocketboy.Wordcloud
 {
 
 
-    [CreateAssetMenu(fileName = "Word", menuName = "WordCloud/Words", order = 1)]
+    [CreateAssetMenu(fileName = "Word", menuName = "Pocketboy/WordCloud/Words")]
     public class WordCloudContent : ScriptableObject
     {
         public List<WordInCloud> Words;

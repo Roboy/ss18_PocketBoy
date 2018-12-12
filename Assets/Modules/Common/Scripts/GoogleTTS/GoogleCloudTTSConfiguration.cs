@@ -155,7 +155,7 @@ namespace Pocketboy.GoogleCloud
         tr_TR_Wavenet_A
     }
 
-    [CreateAssetMenu(fileName = "TTSConfiguration", menuName = "PocketBoy/Google/TTSConfiguration")]
+    [CreateAssetMenu(fileName = "TTSConfiguration", menuName = "GoogleARCore/TTSConfiguration")]
     public class GoogleCloudTTSConfiguration : ScriptableObject
     {
         [Header("Private API Key. Make sure NOT TO PUBLISH THIS.")]

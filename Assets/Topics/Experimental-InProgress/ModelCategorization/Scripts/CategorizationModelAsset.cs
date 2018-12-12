@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Pocketboy.ModelCategorization
 {
-    [CreateAssetMenu(fileName = "CategorizationModelAsset", menuName = "ModelCategorization/CategorizationModelAsset", order = 1)]
+    [CreateAssetMenu(fileName = "CategorizationModelAsset", menuName = "Pocketboy/ModelCategorization/CategorizationModelAsset")]
     public class CategorizationModelAsset : ScriptableObject
     {
         public GameObject ModelPrefab;

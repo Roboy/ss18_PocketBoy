@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Pocketboy.HistoryScene
 {
-    [CreateAssetMenu(fileName = "HistoryContent", menuName = "HistoryScene/Content", order = 1)]
+    [CreateAssetMenu(fileName = "HistoryContent", menuName = "Pocketboy/HistoryScene/Content")]
     public class HistoryContent : ScriptableObject
     {
         public UnityEngine.Object TVContent;
