@@ -4,10 +4,10 @@ Es hat lange gedauert, bis Roboter so aussahen wie ich und
 die gleichen Fähigkeiten entwickelt haben. Blicken wir doch kurz zurück!
 
 #2 Vergangenheit
-Elektro ist einer der ersten Roboter, er funktioniert aber nur ferngesteuert.
-Einige Jahre später kann Wabot mithilfe von Sensoren seine Umgebung wahrnehmen, über die Zeit entwickelt
-er Feingefühl und spielt Klavier. Den nächsten Meilenstein stellt Asimo dar. Er kann sehr gut laufen,
-die Energie dafür bekommt er aus einem Akku in seinem Rucksack.
+- Elektro ist einer der ersten Roboter, er sieht einem Menschen ähnlich, funktioniert aber nur ferngesteuert.
+- Einige Jahre später kann Wabot mithilfe von Sensoren seine Umgebung wahrnehmen, über die Zeit entwickelt
+er Feingefühl und spielt Klavier. 
+- Den nächsten Meilenstein stellt Asimo dar. Er kann sehr gut laufen, die Energie dafür bekommt er aus einem Akku in seinem Rucksack.
 
 #3 Zusammenbau
 Und dann war auch schon meine Zeit gekommen! Viele Studenten haben mich über lange Zeit 
@@ -20,39 +20,39 @@ sehen und das Instrument erkennen kann. Für das Spielen der Noten habe ich in m
 magnetische Sensoren, die mir helfen, meine Hände richtig am Instrument zu platzieren und zu bewegen.
 
 #5 Roboy Rikshaw
-Im März zweitausend und zwanzig werde ich dreiraid fahren können, weil ich meinen Freunden gerne helfen. Deshalb werde ich lernen, ein Drei-Rad zu fahren
-und Gäste mitzunehmen. Dafür brauche ich aber Kameras, die Distanz wahrnehmen können, um keine 
-Hindernisse zu treffen. Außerdem benötige ich eine große Portion an künstlicher Intelligenz,
-um den Weg von A nach B zu finden. Starke Motoren in den Beinen helfen mir zu treten.
+Im März zweitausend und zwanzig werde ich Dreirad fahren können, weil ich meinen Freunden gerne helfe.
+Um den Weg von A nach B zu finden, brauche ich eine große Portion künstlicher Intelligenz.
+Starke Motoren in den Beinen helfen mir zu treten. Ich brauche aber auch Kameras, die Distanz wahrnehmen können, um keine Hindernisse zu treffen.
 
 #6 Roboy Eiscreme
-Ein halbes Jahr später spiele ich aber nicht nur Taxi mit meinem Drei-Rad, sondern ich werde damit auch Eiscreme verkaufen!
-Feingefühl und genauigkeit, weil waffel zerbrechlich
-Damit du deine Lieblingssorte bekommst, muss ich das Sprechen lernen, dafür brauche ich neben einem
+Ein halbes Jahr später spiele ich aber nicht nur Taxi mit meinem Dreirad, sondern ich werde damit auch Eiscreme verkaufen, 
+weil es im Sommer immer so heiß ist! Um die Waffel vorsichtig und genau greifen zu können, brauche ich feine Gelenke
+in den Händen. Damit du deine Lieblingssorte bekommst, muss ich das Sprechen lernen, dafür benötige ich neben einem
 Dialogsystem auch Mikrofone, um dich zu verstehen. Bevor ich dir die richtige Sorte in die Waffel
 setzen kann, müssen meine Augen aber auf die Erkennung von Farbe trainiert werden.
 
 #7 Chefkoch
 Ich wollte schon immer Koch werden. Doch bisher fehlen mir noch ein paar Bauteile dafür.
-Für das Kochen brauche ich Temperatur- und Geschmackssensoren. Ich brauche gute Balance, um zu rühren,
-schneiden zutaten, die habe ich noch nicht.
-Ich bin mit dem Internet verbunden, von dort bekomme ich die Rezepte für leckeres Essen. Guten Appetit!
+Für das Kochen brauche ich Temperatur- und Geschmackssensoren. Ich brauche gute Balance, 
+um Zutaten zu schneiden und zu rühren, die habe ich noch nicht.
+Ich bin mit dem Internet verbunden, von dort bekomme ich die Rezepte für leckeres Essen. 
+Guten Appetit!
 
 #8 Doktor Roboy
 Nachdem ich Chefkoch geworden bin, will ich Arzt werden, weil ich es nicht mag, wenn meine Freunde krank sind. 
 Dafür muss ich Medizin studieren und durch Computerprogramme bekomme ich dasselbe Wissen wie echte Ärzte.
 Als Erstes muss ich wissen, was du für eine Krankheit hast. Mit einem Radarsensor kann ich deinen Puls
-messen ohne dich zu berühren.Zudem messe ich deine Temperatur, nach der ersten Untersuchung
-erkenne ich durch meine künstliche Intelligenz, wie du wieder gesund wirst. Mein Gesicht kann verschiedene Gefühle
-zeigen, um dich aufzumuntern.
+messen ohne dich zu berühren. Zudem messe ich deine Temperatur, nach der ersten Untersuchung
+erkenne ich durch meine künstliche Intelligenz, wie du wieder gesund wirst. 
+Mein Gesicht kann verschiedene Gefühle zeigen, um dich aufzumuntern.
 
 #9 Roboy Kellner
 Im Februar 2021 werde ich ein Kellner sein, weil ich das Essen auch im Roboy Restaurant an die Tische
-bringen will. Durch das Dialogsystem kann ich Bestellung aufnehmen und durch meine künstliche Intelligenz
+bringen will. Durch das Dialogsystem kann ich Bestellungen aufnehmen und durch meine künstliche Intelligenz
 verarbeiten. Dann laufe ich in die Küche, bereite das Essen zu und laufe zurück. Dabei muss ich sehr 
-aufpassen die Teller nicht fallen zu lassen, dafür brauche ich noch mehr Balance und sehr starke Beine, die
-mein Gesamtgewicht tragen. Essen ist leider nicht umsonst, deswegen muss ich lernen, Geld zu erkennen und zu zählen. Ob Geld in meiner Hand liegt,
-weiß ich über meine Berührungssensoren.
+aufpassen, die Teller nicht fallen zu lassen, dafür brauche ich noch mehr Balance und sehr starke Beine, die
+mein Gesamtgewicht tragen. Essen ist leider nicht umsonst, deswegen muss ich lernen, Geld zu erkennen und zu zählen. 
+Ob Geld in meiner Hand liegt, weiß ich über meine Berührungssensoren.
 
 #10 Roboy baut Roboy
 Zwei Jahre später baue ich mir Geschwister, damit wir noch mehr Leuten helfen können. 
@@ -61,14 +61,18 @@ brauche ich Werkzeuge, für das notwendige Feingefühl und Kraft in meinen Händ
 
 #11 Roboy auf dem Mars
 2024 besuche ich den Mars zusammen mit meinem Team und erfülle Aufgaben, die für Menschen gefährlich sind.
-Für die Erkundung eines fremden Planeten brauche ich eine Haut, die meine Bauteile und Sensoren schützt. 
+Für die Erkundung eines fremden Planeten brauche ich eine Haut, die meine Bauteile und Sensoren vor Staub schützt.
 Da ich aber nicht schwitzen kann, brauche ich ein Kühlsystem, damit meine Motoren nicht überhitzen.
 Außerdem gibt es auf dem Mars noch keine Steckdosen, aus denen ich Energie bekomme. 
 Somit benötige ich Akkus, die zum Beispiel über Sonnenergie geladen werden.
 
 #12 Asimovs Gesetze
 Jeder muss sich an Gesetze halten, ich und alle anderen Roboter leben nach den Gesetzen von Asimov.
-Davon gibt es drei Stück und sie sagen Folgendes aus.
-Erstens, ein Roboter darf keinen Menschen verletzen oder zulassen, dass einem Menschen Schaden zugefügt wird.
-Zweitens, ein Roboter muss seinen Befehlen gehorchen, es sei denn, ein Befehl verletzt die erste Regel.
-Drittens, ein Roboter muss seine eigenes Leben beschützen, solange dies nicht die erste oder zweite Regel verletzt.
+Davon gibt es drei Stück und sie lauten.
+- Erstens, ein Roboter darf keinen Menschen verletzen oder zulassen, dass einem Menschen Schaden zugefügt wird.
+- Zweitens, ein Roboter muss seinen Befehlen gehorchen, es sei denn, ein Befehl verletzt die erste Regel.
+- Drittens, ein Roboter muss seine eigenes Leben beschützen, solange dies nicht die erste oder zweite Regel verletzt.
+
+#13 Endgame
+Juhu! Du hast es geschafft! Du hast den Roboy Grundkurs abgeschlossen. Teste nun dein neues Wissen
+im nächsten Level mit den A B C Balken. Kehre dafür in das Hauptmenu über das Haussymbol zurück.

@@ -2,46 +2,45 @@
 
 #1
 Frage: Was ist Roboy?
-A: Ein humanoider Roboter.
-B: Ein Industrieroboter.
-C: Ein Putzroboter.
+A: Humanoider Roboter.
+B: Industrieroboter.
+C: Putzroboter.
 
 #2
 Frage: Wie entstehen Körperteile für Roboy?
-A: Sie wachsen im Labor.
-B: Sie sind 3D gedruckt.
-C: Sie sind aus Stein gemeißelt.
+A: Wachsen im Labor.
+B: 3D gedruckt.
+C: Aus Stein gemeißelt.
 
 #3
 Frage: Was mache ich mit meinen Kameras im Kopf?
-A: Ich mache Bilder für Instagram.
-B: Musikinstrumente und andere Objekte erkennen.
-C: Ich schaue mir die Sterne an.
+A: Bilder für Instagram.
+B: Objekte erkennen.
+C: Sterne anschauen.
 
 #4
 Frage: Was brauche ich, wenn ich von A nach B mit meinem Dreirad fahre?
-A: Künstliche Intelligenz und schwache Motoren.
-B: Echte Intelligenz und starke Motoren.
-C: Künstliche Intelligenz und starke Motoren.
+A: Künstliche Intelligenz + schwache Motoren.
+B: Echte Intelligenz + starke Motoren.
+C: Künstliche Intelligenz + starke Motoren.
 
 #5
 Frage: Wenn du mit mir redest, wie machst du das?
-A: Ich benutze Zeichensprache.
-B: Ich benutze das Dialogsystem.
-C: Ich benutze das Monologsystem.
+A: Zeichensprache.
+B: Dialogsystem.
+C: Monologsystem.
 
 #6
 Frage: Wofür brauche ich das Internet beim Kochen?
-A: Ich schaue Kochvideos auf youcook.com an.
-B: Als Schnittstelle, um Rezepte zu bekommen.
-C: Damit ich meine Freunde um Hilfe fragen kann.
+A: Tutorials anschauen.
+B: Für Rezepte.
+C: Mit Freunden chatten.
 
 #7
-Frage: Als Doktor untersuche ich dich auch mit einem Radarsensor, warum?
-Was messe ich als Doktor mit meinem Radarsensor?
-A: Ich messe wie glücklich du bist.
-B: Ich messe damit deine Körpertemperatur.
-C: Ich messe damit deinen Herzschlag.
+Frage: Was messe ich als Doktor mit meinem Radarsensor?
+A: Glücklichkeit.
+B: Körpertemperatur.
+C: Herzschlag.
 
 #8
 Frage: Wie erkenne ich, ob ich was in der Hand halte?
@@ -51,15 +50,15 @@ C: Radarsensor.
 
 #9
 Frage: Was fehlt meiner Hand noch, um Werkzeuge zu benutzen?
-A: Feingefühl und Kraft.
-B: Mehr Finger und Kraft.
+A: Feingefühl + Kraft.
+B: Mehr Finger + Kraft.
 C: Dauerhafte Magnete.
 
 #10
 Frage: Warum brauche ich eine Haut für einen Ausflug zum Mars?
-A: Ich möchte nicht nackt aussehen, wenn ich reise.
-B: Meine Bauteile müssen vor Staub geschützt werden.
-C: Meine Kühlflüssigkeit darf nicht ausslaufen.
+A: Ich fühle mich nackt.
+B: Schutz vor Staub.
+C: Kühlflüssigkeit kann auslaufen.
 
 #11
 Frage: Woher bekommen ich meine Energie auf dem Mars?
