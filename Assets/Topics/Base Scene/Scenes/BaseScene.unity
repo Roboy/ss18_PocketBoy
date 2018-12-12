@@ -1275,8 +1275,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-=======
     - target: {fileID: 82422711323431224, guid: 6cefbcdbfc03a854ea98615c71cbd1a8,
         type: 2}
       propertyPath: OutputAudioMixerGroup
@@ -1292,7 +1290,6 @@ Prefab:
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 0}
->>>>>>> f47fddea59ee83aae0f79770e7f375ed1cbd55d2
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cefbcdbfc03a854ea98615c71cbd1a8, type: 2}
   m_IsPrefabAsset: 0
@@ -1696,6 +1693,7 @@ GameObject:
   - component: {fileID: 2139701669}
   - component: {fileID: 2139701668}
   - component: {fileID: 2139701667}
+  - component: {fileID: 2139701670}
   m_Layer: 0
   m_Name: CalibrateFloor Button
   m_TagString: Untagged
@@ -1797,6 +1795,17 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2139701665}
   m_CullTransparentMesh: 0
+--- !u!114 &2139701670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2139701665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30add954d8cb8dd4288bb4efb7ee98f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2141514913
 Prefab:
   m_ObjectHideFlags: 0
