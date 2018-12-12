@@ -24,9 +24,29 @@ namespace Pocketboy.HistoryScene
 
         private bool m_IsOn = false;
 
+        private float m_CurrentTalkDelay = 0f;
+
+        private float m_TalkDelay = 0.5f;
+
+        private bool m_ContentTalkingWasTriggered;
+
         private void Awake()
         {
             Initialize();
+        }
+
+        private void Update()
+        {
+            if (m_ContentTalkingWasTriggered)
+                return;
+
+            m_CurrentTalkDelay += Time.unscaledDeltaTime;
+            if (m_CurrentTalkDelay > m_TalkDelay)
+            {
+                RoboyManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
+                m_CurrentTalkDelay = 0f;
+                m_ContentTalkingWasTriggered = true;
+            }
         }
 
         private void OnEnable()
@@ -62,17 +82,18 @@ namespace Pocketboy.HistoryScene
         {
             AudioSourcesManager.Instance.PlaySound("ButtonClick");
             TV.RepeatContent();
-            RoboyManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
+            m_ContentTalkingWasTriggered = false;
+            //RoboyManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
         }
 
         private void ShowContent(int index)
         {
             AudioSourcesManager.Instance.PlaySound("TVChannelSwitch");
             TV.ShowContent(m_CurrentContentIndex);
-
+            m_ContentTalkingWasTriggered = false;
             Slider.ShowDate(m_CurrentContentIndex);
-            RoboyManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
-            
+            RoboyManager.Instance.StopTalking();
+            //RoboyManager.Instance.Talk(TextForSpeech[m_CurrentContentIndex]);
         }
 
         private void Initialize()

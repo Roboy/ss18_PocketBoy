@@ -129,6 +129,7 @@ namespace Pocketboy.JointGame
 
         public void PointWasHit()
         {
+            AudioSourcesManager.Instance.PlaySound("CoinPickup");
             IncreaseUserPoints();
             m_CurrentLevelPointHits++;
             if (m_CurrentLevelPointHits == m_Levels[m_CurrentLevelIndex].Points)
