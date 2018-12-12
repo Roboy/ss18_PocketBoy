@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 namespace Pocketboy.Common
@@ -29,9 +30,6 @@ namespace Pocketboy.Common
         private AudioMixer m_MasterAudioMixer;
 
         [SerializeField]
-        private AudioSource m_AudioSpeech;
-
-        [SerializeField]
         private AudioSource m_AudioUI;
 
         [SerializeField]
@@ -40,6 +38,8 @@ namespace Pocketboy.Common
         [SerializeField]
         private AudioSource m_AudioMusic;
 
+        private bool m_Initialized;
+
         private void Awake()
         {
             DontDestroyOnLoad(transform.root.gameObject);
@@ -47,19 +47,28 @@ namespace Pocketboy.Common
 
         void Start()
         {
+            m_SettingsButton.gameObject.SetActive(false);
             m_SettingsButton.onClick.AddListener(ToggleSettings);
             m_SpeechSlider.onValueChanged.AddListener(delegate { SetSpeechVolume(); });
             m_FXSlider.onValueChanged.AddListener(delegate { SetFXVolume(); });
             m_MusicSlider.onValueChanged.AddListener(delegate { SetMusicVolume(); });
-            InitializeAudio();
         }
 
-        public void InitializeAudio()
+        private void Update()
+        {
+            if (m_Initialized || !RoboyManager.InstanceExists)
+                return;
+
+            Initialize();
+        }
+
+        public void Initialize()
         {
             //m_MasterAudioMixer.SetFloat("VolSpeech", CalculateDB(m_SpeechSlider.value));
             //m_MasterAudioMixer.SetFloat("VolFX", CalculateDB(m_FXSlider.value));
             //m_MasterAudioMixer.SetFloat("VolMusic", CalculateDB(m_MusicSlider.value));
-            m_AudioSpeech.volume = m_SpeechSlider.value;
+            m_SettingsButton.gameObject.SetActive(true);
+            RoboyManager.Instance.ChangeVolume(m_SpeechSlider.value);
             m_AudioUI.volume = m_FXSlider.value;
             m_AudioWorld.volume = m_FXSlider.value;
             m_AudioMusic.volume = m_MusicSlider.value;
@@ -74,7 +83,7 @@ namespace Pocketboy.Common
         public void SetSpeechVolume()
         {
             //m_MasterAudioMixer.SetFloat("VolSpeech", CalculateDB(m_SpeechSlider.value));
-            m_AudioSpeech.volume = m_SpeechSlider.value;
+            RoboyManager.Instance.ChangeVolume(m_SpeechSlider.value);
         }
 
         public void SetFXVolume()

@@ -26,9 +26,9 @@ namespace Pocketboy.HistoryScene
 
         private float m_CurrentTalkDelay = 0f;
 
-        private float m_TalkDelay = 0.5f;
+        private float m_TalkDelay = 1f;
 
-        private bool m_ContentTalkingWasTriggered;
+        private bool m_ContentTalkingWasTriggered = true;
 
         private void Awake()
         {

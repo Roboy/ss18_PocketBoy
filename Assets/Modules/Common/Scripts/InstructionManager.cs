@@ -42,7 +42,8 @@ namespace Pocketboy.Common
 
             SceneManager.sceneUnloaded += (scene) =>
             {
-                HelpButton.gameObject.SetActive(false);
+                HelpButton.gameObject.SetActive(false); // we may load into a scene without an instruction, this should not happen but better save than sorry
+                HideInstruction();
                 m_SceneCanvases.Clear();
             };
 
@@ -64,12 +65,10 @@ namespace Pocketboy.Common
         {
             if (!m_IsActive)
             {
-                AudioSourcesManager.Instance.PlaySound("ButtonClick");
                 ShowInstruction();
             }
             else
             {
-                AudioSourcesManager.Instance.PlaySound("ButtonClick");
                 HideInstruction();
             }
         }

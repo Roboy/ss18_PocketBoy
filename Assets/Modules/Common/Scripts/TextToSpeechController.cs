@@ -27,6 +27,11 @@ namespace Pocketboy.Common
             Initialize();
         }
 
+        public void ChangeVolume(float newVolume)
+        {
+            m_AudioSource.volume = newVolume;
+        }
+
         public void Talk(string text)
         {
             if (IsTalking || !m_Initialized)
@@ -53,6 +58,7 @@ namespace Pocketboy.Common
 
             IsTalking = false;
             m_TextToSpeechJavaClass.CallStatic("stopSpeech");
+            m_GoogleCloudTTS.StopPlaying();
         }
 
         private void TalkNative(string text)

@@ -30,6 +30,12 @@ namespace Pocketboy.GoogleCloud
             StartCoroutine(SynthesizeTextInternal(text, audioSource, audioPlayingDoneCallback));
         }
 
+        public void StopPlaying()
+        {
+            if (m_AudioSource != null && m_AudioSource.isPlaying)
+                m_AudioSource.Stop();
+        }
+
         private IEnumerator SynthesizeTextInternal(string text, AudioSource audioSource, Action<string, bool> audioPlayingDoneCallback)
         {
 

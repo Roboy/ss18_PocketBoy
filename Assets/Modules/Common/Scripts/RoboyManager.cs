@@ -111,6 +111,11 @@ namespace Pocketboy.Common
 
         }
 
+        public void ChangeVolume(float newVolume)
+        {
+            m_TextToSpeechController.ChangeVolume(newVolume);
+        }
+
         public void TalkDone()
         {
             m_FaceController.StopTalkAnimation();

@@ -45,7 +45,7 @@ namespace Pocketboy.Common
         /// </summary>
         private void CheckTrackingStatus()
         {
-            if(m_RealAnchor == null || m_RealAnchor.TrackingState != TrackingState.Tracking)
+            if(m_RealAnchor == null || m_RealAnchor.TrackingState != TrackingState.Tracking) // todo, check session tracking state and anchor tracking state, if session is tracking again but anchor is not => create new anchor
                 CreateNewAnchor();
         }
 
