@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Pocketboy.Runaround
 {
-    [CreateAssetMenu(fileName = "Question", menuName = "Runaround/Question", order = 1)]
+    [CreateAssetMenu(fileName = "Question", menuName = "Pocketboy/Runaround/Question", order = 1)]
     public class RunaroundQuestion : ScriptableObject
     {
         public string QuestionText;

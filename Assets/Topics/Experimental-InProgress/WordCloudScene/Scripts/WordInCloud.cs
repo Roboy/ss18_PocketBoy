@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Pocketboy.Wordcloud
 {
-    [CreateAssetMenu(fileName = "Word", menuName = "WordCloud/Word", order = 1)]
+    [CreateAssetMenu(fileName = "Word", menuName = "Pocketboy/WordCloud/Word")]
     public class WordInCloud : ScriptableObject
     {
 

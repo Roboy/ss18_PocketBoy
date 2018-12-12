@@ -112,7 +112,9 @@
         {
             if (createAnchor)
             {
-                gameObj.transform.parent = ARSessionManager.Instance.FloorPlane.CreateAnchor(ARSessionManager.Instance.FloorPlane.CenterPose).transform;
+                var anchor = ARSessionManager.Instance.FloorPlane.CreateAnchor(ARSessionManager.Instance.FloorPlane.CenterPose);
+                TemporaryAnchor.Create(anchor, false);
+                gameObj.transform.parent = anchor.transform;
             }               
             gameObj.transform.position = m_Roboy.transform.TransformPoint(relativePosition);
         }
@@ -130,13 +132,13 @@
 
             var plane = ARSessionManager.Instance.FloorPlane;
             var anchor = plane.CreateAnchor(plane.CenterPose);
+            TemporaryAnchor.Create(anchor, true);
             m_Roboy = Instantiate(RoboyPrefab, plane.CenterPose.position, plane.CenterPose.rotation);
             m_Roboy.transform.parent = anchor.transform;
             m_Roboy.Initialize(anchor);
             var face = Instantiate(UnityFacePrefab);
             face.gameObject.transform.SetParent(m_Roboy.ARAnchor.transform);
             SpawnPlanetSystems();
- 
         }
 
         private void SpawnPlanetSystems()

@@ -14,7 +14,7 @@ namespace Pocketboy.JointGame
 
         private void Update()
         {
-            MovingLink.Rotate(Vector3.forward * Speed * Time.deltaTime);
+            MovingLink.Rotate(Vector3.up * Speed * Time.deltaTime);
         }
     }
 }

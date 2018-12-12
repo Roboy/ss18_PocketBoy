@@ -161,7 +161,6 @@ namespace Pocketboy.HistoryScene
             if (m_ContentList[m_CurrentContent].IsVideo)
             {
                 ShowContent(m_CurrentContent, false);
-                Debug.Log("R");
             }            
         }
 
@@ -196,10 +195,11 @@ namespace Pocketboy.HistoryScene
             else
             {
                 DefaultMaterial.mainTexture = VideoTexture;
+                VideoTexture.Release();
                 m_VideoPlayer.clip = m_ContentList[m_CurrentContent].Video;
                 m_VideoPlayer.isLooping = true;
                 m_VideoPlayer.aspectRatio = VideoAspectRatio.Stretch;
-                m_VideoPlayer.Stop();
+                m_VideoPlayer.Stop();            
                 m_VideoPlayer.Play();
             }
             MonitorRenderer.material = DefaultMaterial;
