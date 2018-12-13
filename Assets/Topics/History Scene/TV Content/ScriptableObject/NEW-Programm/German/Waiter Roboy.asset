@@ -11,12 +11,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
   m_Name: Waiter Roboy
   m_EditorClassIdentifier: 
-  TVContent: {fileID: 2800000, guid: d29e7b6c94f80ca4faa73f13a81d4771, type: 3}
+  TVContent: {fileID: 2800000, guid: aec78518a8c8d6748847df782e2452ae, type: 3}
   Date: 2021
-  Text: "Nachdem ich das Kochen gelernt habe, m\xF6chte ich nun das Essen im Roboy
-    Restaurant an die Tische bringen. Durch das Dialogsystem kann ich Bestellung aufnehmen
-    und durch meine k\xFCnstliche Intelligenz verarbeiten. Dann laufe ich in die K\xFCche,
-    bereite das Essen zu und laufe zur\xFCck. Dabei muss ich sehr  aufpassen die Teller
-    nicht fallen zu lassen, daf\xFCr brauche ich noch mehr Balance. Essen ist leider
-    nicht umsonst, deswegen muss ich lernen, geld zu erkennen und zu z\xE4hlen. Ob
-    Geld in meiner Hand liegt, wei\xDF ich \xFCber meine Ber\xFChrungssensoren."
+  Year: 0
+  Text: "Im Februar 2021 werde ich ein Kellner sein, weil ich das Essen auch im Roboy
+    Restaurant an die Tische\r\nbringen will. Durch das Dialogsystem kann ich Bestellungen
+    aufnehmen und durch meine k\xFCnstliche Intelligenz\r\nverarbeiten. Dann laufe
+    ich in die K\xFCche, bereite das Essen zu und laufe zur\xFCck. Dabei muss ich
+    sehr \r\naufpassen, die Teller nicht fallen zu lassen, daf\xFCr brauche ich noch
+    mehr Balance und sehr starke Beine, die\r\nmein Gesamtgewicht tragen. Essen ist
+    leider nicht umsonst, deswegen muss ich lernen, Geld zu erkennen und zu z\xE4hlen.
+    \r\nOb Geld in meiner Hand liegt, wei\xDF ich \xFCber meine Ber\xFChrungssensoren."

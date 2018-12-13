@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestionText: Was mache ich mit meinen Kameras im Kopf?
   QuestionAnswers:
-  - "Ich mache Bilder f\xFCr Instagram."
-  - Musikinstrumente und andere Objekte erkennen.
-  - Ich schaue mir die Sterne an.
+  - "Bilder f\xFCr Instagram."
+  - Objekte erkennen.
+  - Sterne anschauen.
   CorrectAnswerID: 1
   QuestionImage: {fileID: 0}
   AnswerImagesPresent: 0

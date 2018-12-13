@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestionText: "Warum brauche ich eine Haut f\xFCr einen Ausflug zum Mars?"
   QuestionAnswers:
-  - "Ich m\xF6chte nicht nackt aussehen, wenn ich reise."
-  - "Meine Bauteile m\xFCssen vor Staub gesch\xFCtzt werden."
-  - "Meine K\xFChlfl\xFCssigkeit darf nicht ausslaufen."
+  - "Ich f\xFChle mich nackt."
+  - Schutz vor Staub.
+  - "K\xFChlfl\xFCssigkeit kann ausslaufen."
   CorrectAnswerID: 1
   QuestionImage: {fileID: 0}
   AnswerImagesPresent: 0

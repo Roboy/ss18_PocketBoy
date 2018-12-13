@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestionText: Was ist Roboy?
   QuestionAnswers:
-  - Ein humanoider Roboter.
-  - Ein Industrieroboter.
-  - Ein Putzroboter.
+  - Humonoider Roboter
+  - Industrieroboter.
+  - Putzroboter.
   CorrectAnswerID: 0
   QuestionImage: {fileID: 0}
   AnswerImagesPresent: 0

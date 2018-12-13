@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b652b4bb282897347a09800a497ee6cd, type: 3}
   m_Name: Roboter Energiequelle
   m_EditorClassIdentifier: 
-  QuestionText: Woher bekommen die meisten Roboter ihre Energie?
+  QuestionText: Woher bekommen ich meine Energie auf dem Mars?
   QuestionAnswers:
-  - Strom.
-  - Benzin.
-  - Gas.
+  - Sonnenenergie.
+  - Essen.
+  - Schlafen.
   CorrectAnswerID: 0
   QuestionImage: {fileID: 0}
   AnswerImagesPresent: 0

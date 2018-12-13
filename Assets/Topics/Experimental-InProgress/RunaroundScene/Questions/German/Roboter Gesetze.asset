@@ -15,7 +15,7 @@ MonoBehaviour:
   QuestionAnswers:
   - Newtons Gesetze.
   - Asimovs Gesetze.
-  - Roboter Grundgesetz.
+  - Schulordnung.
   CorrectAnswerID: 0
   QuestionImage: {fileID: 0}
   AnswerImagesPresent: 0

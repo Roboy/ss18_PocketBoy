@@ -14,7 +14,7 @@ MonoBehaviour:
   QuestionText: Wie erkenne ich, ob ich was in der Hand halte?
   QuestionAnswers:
   - "Ber\xFChrungssensor."
-  - Ich schaue mit meinen Kameras nach.
+  - Mit Kameras.
   - Radarsensor.
   CorrectAnswerID: 0
   QuestionImage: {fileID: 0}

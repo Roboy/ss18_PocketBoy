@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TVContent: {fileID: 2800000, guid: ee8c26e3184bdf049831066695a156c2, type: 3}
   Date: 2013
+  Year: 2013
   Text: "Mein Name ist Roboy, ich bin ein humanoider Roboter mit Sehnen und Muskeln.
     Es hat lange gedauert, bis Roboter so aussahen wie ich und die gleichen F\xE4higkeiten
     entwickelt haben. Blicken wir doch kurz zur\xFCck!"

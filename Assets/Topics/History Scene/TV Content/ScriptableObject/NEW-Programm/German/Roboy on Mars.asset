@@ -13,11 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TVContent: {fileID: 32900000, guid: 6e7c64decdbf35f48b8100b3a29e59fa, type: 3}
   Date: 2024
-  Text: "Ich mag die Erde, aber w\xE4re es nicht sch\xF6n den Mars zu besuchen? F\xFCr
-    die Erkundung eines fremden Planeten brauche ich eine Haut, die meine Bauteile
-    und Sensoren sch\xFCtzt. Dann habe ich aber das Problem, dass meine Motoren \xFCberhitzen,
-    deshalb brauche ich eine K\xFChlsystem. Au\xDFerdem gibt es auf dem Mars noch
-    keine Steckdosen, aus denen ich Energie bekomme. Somit ben\xF6tige ich auch Akkus,
-    die \xFCber die Sonnenergie geladen werden k\xF6nnte. Au\xDFerdem m\xFCsste ich
-    komplett selbst\xE4ndig denken k\xF6nnen, weil auf dem Mars noch keine Menschen
-    leben, die mich programmieren k\xF6nnten."
+  Year: 2024
+  Text: "2024 besuche ich den Mars zusammen mit meinem Team und erf\xFClle Aufgaben,
+    die f\xFCr Menschen gef\xE4hrlich sind.\r\nF\xFCr die Erkundung eines fremden
+    Planeten brauche ich eine Haut, die meine Bauteile und Sensoren vor Staub sch\xFCtzt.\r\nDa
+    ich aber nicht schwitzen kann, brauche ich ein K\xFChlsystem, damit meine Motoren
+    nicht \xFCberhitzen.\r\nAu\xDFerdem gibt es auf dem Mars noch keine Steckdosen,
+    aus denen ich Energie bekomme. \r\nSomit ben\xF6tige ich Akkus, die zum Beispiel
+    \xFCber Sonnenergie geladen werden."

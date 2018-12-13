@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestionText: Was fehlt meiner Hand noch, um Werkzeuge zu benutzen?
   QuestionAnswers:
-  - "Feingef\xFChl und Kraft."
-  - Mehr Finger und Kraft.
+  - "Feingef\xFChl + Kraft."
+  - Mehr Finger + Kraft.
   - Dauerhafte Magnete.
   CorrectAnswerID: 0
   QuestionImage: {fileID: 0}

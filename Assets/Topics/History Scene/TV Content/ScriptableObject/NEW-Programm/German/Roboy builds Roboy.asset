@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
   m_Name: Roboy builds Roboy
   m_EditorClassIdentifier: 
-  TVContent: {fileID: 32900000, guid: 327018c0000e39e4bac78dd3bede3b6f, type: 3}
+  TVContent: {fileID: 32900000, guid: b3da354fbfdace644b09993703b3dea5, type: 3}
   Date: 2023
-  Text: "Ich h\xE4tte gerne mehr Geschwister, sodass ich nicht mehr so alleine bin.
-    Deshalb werde ich in Zukunft einfach Roboter wie mich bauen. Oder mich selber
-    reparieren, wenn etwas kaputt geht. F\xFCr den Zusammenbau brauche ich Werkzeuge,
-    doch meinen H\xE4nden fehlt noch das notwendige Feingef\xFChl und die Kraft daf\xFCr.
-    Hier k\xF6nnten mir Elektromagneten helfen, meine Haltung zu ver\xE4ndern."
+  Year: 2023
+  Text: "Zwei Jahre sp\xE4ter baue ich mir Geschwister, damit wir noch mehr Leuten
+    helfen k\xF6nnen. \r\nWenn etwas an mir kaputt geht, kann ich mich dann selber
+    reparieren. F\xFCr den Zusammenbau\r\nbrauche ich Werkzeuge, f\xFCr das notwendige
+    Feingef\xFChl und Kraft in meinen H\xE4nden habe ich Elektromagneten."

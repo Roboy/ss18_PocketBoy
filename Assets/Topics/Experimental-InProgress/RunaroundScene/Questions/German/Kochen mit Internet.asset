@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestionText: " Wof\xFCr brauche ich das Internet beim Kochen?"
   QuestionAnswers:
-  - Ich schaue Kochvideos auf youcook.com an.
-  - Als Schnittstelle, um Rezepte zu bekommen.
-  - Damit ich meine Freunde um Hilfe fragen kann.
+  - Tutorials schauen.
+  - "F\xFCr Rezepte."
+  - Chatten.
   CorrectAnswerID: 1
   QuestionImage: {fileID: 0}
   AnswerImagesPresent: 0

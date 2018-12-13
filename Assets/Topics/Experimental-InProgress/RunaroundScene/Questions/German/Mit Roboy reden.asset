@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b652b4bb282897347a09800a497ee6cd, type: 3}
   m_Name: Mit Roboy reden
   m_EditorClassIdentifier: 
-  QuestionText: Wenn du mit mir redest, wie machst du das?
+  QuestionText: Wie redest du mit mir?
   QuestionAnswers:
-  - Ich benutze Zeichensprache.
-  - Ich benutze das Dialogsystem.
-  - Ich benutze das Monologsystem.
+  - Zeichensprache.
+  - Dialogsystem.
+  - Monologsystem.
   CorrectAnswerID: 1
   QuestionImage: {fileID: 0}
   AnswerImagesPresent: 0

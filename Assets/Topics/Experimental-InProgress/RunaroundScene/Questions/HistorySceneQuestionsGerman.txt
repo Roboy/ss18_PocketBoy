@@ -25,7 +25,7 @@ B: Echte Intelligenz + starke Motoren.
 C: Künstliche Intelligenz + starke Motoren.
 
 #5
-Frage: Wenn du mit mir redest, wie machst du das?
+Frage: Wie redest du mit mir?
 A: Zeichensprache.
 B: Dialogsystem.
 C: Monologsystem.
@@ -34,7 +34,7 @@ C: Monologsystem.
 Frage: Wofür brauche ich das Internet beim Kochen?
 A: Tutorials anschauen.
 B: Für Rezepte.
-C: Mit Freunden chatten.
+C: Chatten.
 
 #7
 Frage: Was messe ich als Doktor mit meinem Radarsensor?

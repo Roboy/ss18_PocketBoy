@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestionText: "Wie entstehen K\xF6rperteile f\xFCr Roboy?"
   QuestionAnswers:
-  - Sie wachsen im Labor.
-  - Sie sind 3D gedruckt.
-  - "Sie sind aus Stein gemei\xDFelt."
+  - Wachsen im Labor.
+  - 3D gedruckt.
+  - "Aus Stein gemei\xDFelt."
   CorrectAnswerID: 1
   QuestionImage: {fileID: 0}
   AnswerImagesPresent: 0

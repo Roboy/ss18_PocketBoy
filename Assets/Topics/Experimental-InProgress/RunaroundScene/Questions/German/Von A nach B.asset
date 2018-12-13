@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestionText: Was brauche ich, wenn ich von A nach B mit meinem Dreirad fahre?
   QuestionAnswers:
-  - "K\xFCnstliche Intelligenz und schwache Motoren."
-  - Echte Intelligenz und starke Motoren.
-  - "K\xFCnstliche Intelligenz und starke Motoren."
+  - "K\xFCnstliche Intelligenz + schwache Motoren."
+  - Echte Intelligenz + starke Motoren.
+  - "K\xFCnstliche Intelligenz + starke Motoren."
   CorrectAnswerID: 2
   QuestionImage: {fileID: 0}
   AnswerImagesPresent: 0
