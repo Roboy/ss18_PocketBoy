@@ -16,7 +16,7 @@ MonoBehaviour:
   - Newtons Gesetze.
   - Asimovs Gesetze.
   - Schulordnung.
-  CorrectAnswerID: 0
+  CorrectAnswerID: 1
   QuestionImage: {fileID: 0}
   AnswerImagesPresent: 0
   AnswerImages: []
