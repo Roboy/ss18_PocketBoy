@@ -200,13 +200,13 @@ namespace Pocketboy.Cupgame
         public IEnumerator checkForWin()
         {
             //Show the text on GUI
-            ResultText.text = "checking";
+            ResultText.text = "überprüfe";
             ResultText.enabled = true;
 
             if (ZoneToBetOn == null)
             {
                 
-                ResultText.text = "You Lose!";
+                ResultText.text = "Verloren!";
                 yield return null;
             }
 
@@ -221,11 +221,11 @@ namespace Pocketboy.Cupgame
             GameObject Cup = ZoneToBetOn.gameObject.transform.parent.gameObject;
             if (Cup.GetComponent<DragMe>().HoldsBall)
             {
-                ResultText.text = "You Win!";
+                ResultText.text = "Gewonnen!";
             }
             else
             {
-                ResultText.text = "You Lose!";
+                ResultText.text = "Verloren!";
             }
         }
 

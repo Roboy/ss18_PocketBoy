@@ -54,7 +54,9 @@ namespace Pocketboy.PuzzleGame
 
         public IEnumerator  Explode()
         {
-            m_Colliders = Physics.OverlapSphere(Vector3.zero, Radius);
+            int layermask = LayerMask.GetMask("PuzzlePieces");
+
+            m_Colliders = Physics.OverlapSphere(Vector3.zero, Radius, layermask);
 
             foreach (Collider co in m_Colliders)
             {

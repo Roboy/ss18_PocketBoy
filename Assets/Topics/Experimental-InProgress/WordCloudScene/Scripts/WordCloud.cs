@@ -38,7 +38,7 @@ namespace Pocketboy.Wordcloud
         /// <summary>
         /// Displayed text explaining the context relation for the specific word.
         /// </summary>
-        public GameObject Explanation;
+        public TextMeshProUGUI ExplanationText;
 
 
         /// <summary>
@@ -71,8 +71,7 @@ namespace Pocketboy.Wordcloud
             m_CloudSpawned = false;
             m_CurrentAngle = 0.0f;
             m_CurrentDistance = 0.0f;
-            TextMeshProUGUI textfield = Explanation.GetComponent<TextMeshProUGUI>();
-            textfield.text = "Please start again!";
+            ExplanationText.text = "Bitte nochmal starten!";
         }
 
         /// <summary>
@@ -115,7 +114,7 @@ namespace Pocketboy.Wordcloud
             }
 
             Renderer[] rr = tmp_word.GetComponentsInChildren<Renderer>();
-            TextMeshProUGUI textfield = Explanation.GetComponent<TextMeshProUGUI>();
+            
 
             //The case where the word was clicked before
             if (tmp_word.isClickedOn() == true)
@@ -132,7 +131,7 @@ namespace Pocketboy.Wordcloud
                         rr[i].material = mat_default;
                     }
 
-                    textfield.text = "";
+                    ExplanationText.text = "";
                 }
             }
             //The case where it the word is unselected
@@ -192,7 +191,9 @@ namespace Pocketboy.Wordcloud
 
                 }
 
-                textfield.text = tmp_content.Explanation;
+                ExplanationText.text = tmp_content.Explanation;
+                RoboyManager.Instance.StopTalking();
+                RoboyManager.Instance.Talk(tmp_content.Explanation);
             }
 
 

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 136204725212980954}
   - component: {fileID: 54718455080723124}
   - component: {fileID: 114922439807337888}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Hand_right
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 136003457670921756}
   - component: {fileID: 54090151273795352}
   - component: {fileID: 114198565594619794}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Foot_right
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 136947563282106438}
   - component: {fileID: 54439024539776514}
   - component: {fileID: 114828842792488306}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Hand_left
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 136248815394242990}
   - component: {fileID: 54346441258234116}
   - component: {fileID: 114471806795607292}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Thigh_right
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 65541090018374740}
   - component: {fileID: 54558001607554136}
   - component: {fileID: 114817158761674066}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Spine
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 136175763711071714}
   - component: {fileID: 54524291331477160}
   - component: {fileID: 114824927861093558}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Shank_left
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 136667433017620610}
   - component: {fileID: 54003365313113754}
   - component: {fileID: 114785960184967350}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Thigh_left
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 136750341904975432}
   - component: {fileID: 54089119277469622}
   - component: {fileID: 114656869724379348}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Lower_arm_right
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 136320063116850184}
   - component: {fileID: 54059424812074762}
   - component: {fileID: 114779159389264932}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Shank_right
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 65960265763086200}
   - component: {fileID: 54722369613666400}
   - component: {fileID: 114502187017547108}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Hip
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 136714316617645664}
   - component: {fileID: 54365606398695764}
   - component: {fileID: 114936733021596706}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Upper_arm_left
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 136958661111328798}
   - component: {fileID: 54917091084563512}
   - component: {fileID: 114096082453457704}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Lower_arm_left
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 135822394141333340}
   - component: {fileID: 54683206279199562}
   - component: {fileID: 114939672229205538}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Head
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 136130518940722120}
   - component: {fileID: 54948941947051942}
   - component: {fileID: 114382644155841416}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Upper_arm_right
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 65743392037625822}
   - component: {fileID: 54558986710785696}
   - component: {fileID: 114801719649207952}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Neck
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 136608534014154188}
   - component: {fileID: 54719890498250548}
   - component: {fileID: 114392395539925710}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Foot_left
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 65466804086694336}
   - component: {fileID: 54186049657756174}
   - component: {fileID: 114619883366142820}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Torso
   m_TagString: RoboyPart
   m_Icon: {fileID: 0}
