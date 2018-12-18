@@ -123,7 +123,7 @@ Prefab:
     - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
         type: 2}
       propertyPath: PlanetSystems.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4365924198581326, guid: 2b68885390b2ac346adfcd7a9d92fd1b, type: 2}
       propertyPath: m_LocalPosition.x
@@ -328,13 +328,13 @@ Prefab:
         type: 2}
       propertyPath: PlanetSystems.Array.data[0]
       value: 
-      objectReference: {fileID: 114549632958100736, guid: 2a28de4962c1c364da6cd834ddca983d,
+      objectReference: {fileID: 114405581393563084, guid: 3c015cadf31dc1440a1b676c40bb2416,
         type: 2}
     - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
         type: 2}
       propertyPath: PlanetSystems.Array.data[1]
       value: 
-      objectReference: {fileID: 114405581393563084, guid: 3c015cadf31dc1440a1b676c40bb2416,
+      objectReference: {fileID: 114405581393563084, guid: 27b8dc5c22a260248bb506606e122196,
         type: 2}
     - target: {fileID: 114127295636378702, guid: 2b68885390b2ac346adfcd7a9d92fd1b,
         type: 2}
