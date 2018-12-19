@@ -11,7 +11,6 @@ namespace Pocketboy.Common
 
         private bool m_MouthAnimation;
         private bool m_Talking;
-        private bool m_GlassesOn;
 
         private void Awake()
         {
@@ -21,7 +20,6 @@ namespace Pocketboy.Common
         private void Initialize()
         {
             m_Talking = false;
-            m_GlassesOn = false;
 
         }
 
@@ -52,12 +50,67 @@ namespace Pocketboy.Common
 
         public void DisplayEmotion(string emotion)
         {
-            if (emotion == "dealwithit")
+            if (m_Animator == null)
             {
-                m_GlassesOn = !m_GlassesOn;
-                m_Animator.SetBool("dealwithit", m_GlassesOn);
+                m_Animator = GameObject.FindGameObjectWithTag("FaceAnimator").GetComponent<Animator>();
+            }
+            #region displaying objects
+            if (emotion == "cool")
+            {
+                m_Animator.SetBool("dealwithit", true);
+            }
+            #endregion
+            #region looking in a direction
+            if (emotion == "lookleft")
+            {
+                m_Animator.SetTrigger("lookleft");
             }
 
+            if (emotion == "lookright")
+            {
+                m_Animator.SetTrigger("lookright");
+            }
+
+            if (emotion == "rolling")
+            {
+                m_Animator.SetTrigger("rolling");
+            }
+            #endregion
+            #region eyes only
+            if (emotion == "wink")
+            {
+                m_Animator.SetTrigger("smileblink");
+            }
+
+            if (emotion == "hypno")
+            {
+                m_Animator.SetTrigger("hypno_eyes");
+            }
+
+            if (emotion == "hearts")
+            {
+                m_Animator.SetTrigger("hearts");
+            }
+
+            #endregion
+
+
+
+            if (emotion == "shy")
+            {
+                m_Animator.SetTrigger("shy");
+            }
+
+            if (emotion == "angry")
+            {
+                m_Animator.SetTrigger("angry");
+            }
+
+            if(emotion == "remove")
+            {
+
+                m_Animator.SetBool("dealwithit", false);
+            }
         }
     }
 }
