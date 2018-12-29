@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -14,5 +14,6 @@ MonoBehaviour:
   ModelPrefab: {fileID: 1248565237040348, guid: 398caba0e263e7542b3522d7df48e7d7,
     type: 2}
   Name: Marvin
-  Explanation: Suck a dick.
+  Explanation: "I could calculate your chance of survival, but you won\u2019t like
+    it."
   ContentRelatedState: 0

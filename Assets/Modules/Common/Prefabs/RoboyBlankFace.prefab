@@ -1361,6 +1361,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4702225908061658}
+  - component: {fileID: 114539358129106388}
   m_Layer: 31
   m_Name: LEDs
   m_TagString: Untagged
@@ -7219,6 +7220,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114539358129106388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1680408270772642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558c3c16be93ece488e0d45c38121306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LEDs:
+  - {fileID: 23437644645634858}
+  - {fileID: 23740623607424044}
+  - {fileID: 23868636074891808}
+  HighlightTimePerLED: 2
+  HighlightColor: {r: 1, g: 0.036886375, b: 0, a: 1}
+  LEDMaterial: {fileID: 2100000, guid: e4478f1bdac263941ad8374b22ee4557, type: 2}
 --- !u!114 &114563966088093054
 MonoBehaviour:
   m_ObjectHideFlags: 1
