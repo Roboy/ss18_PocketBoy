@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Pocketboy.Common;
 using TMPro;
+using Pocketboy.Logging;
 
 namespace Pocketboy.JointGame
 {
@@ -65,6 +66,9 @@ namespace Pocketboy.JointGame
         [SerializeField]
         private Button StopButton;
 
+        [SerializeField]
+        private JointGameLogger m_Logger;
+
         private List<JointGameLevel> m_Levels = new List<JointGameLevel>();
 
         /// <summary>
@@ -94,7 +98,7 @@ namespace Pocketboy.JointGame
         {
             AddSubscribers();
             SetupLevels();
-            LoadHighscore();
+            //LoadHighscore();
 
             if (LevelManager.InstanceExists)
             {
@@ -134,6 +138,7 @@ namespace Pocketboy.JointGame
             m_CurrentLevelPointHits++;
             if (m_CurrentLevelPointHits == m_Levels[m_CurrentLevelIndex].Points)
             {
+                m_Logger.SaveTries(m_CurrentTry);
                 ShowNextLevel();
             }
         }
@@ -219,8 +224,6 @@ namespace Pocketboy.JointGame
             CountdownManager.Instance.StartCountdownBlockingInput(3f, StartGameInternal);
         }
 
-
-
         private void StartGameInternal()
         {
             m_CountdownWarningTriggered = false;
@@ -238,6 +241,8 @@ namespace Pocketboy.JointGame
             if (!m_IsGameStarted)
                 return;
 
+            m_Logger.SaveTries(m_CurrentTry);
+            m_Logger.SaveScore(m_CurrentPoints);
             m_IsGameStarted = false;       
             m_Levels[m_CurrentLevelIndex].Hide();
             m_CurrentPoints = 0f;
@@ -245,6 +250,8 @@ namespace Pocketboy.JointGame
             TimeText.text = TimePerGame.ToString("n0");
             StopButton.gameObject.SetActive(false);
             PlayButton.gameObject.SetActive(true);
+
+
         }
 
         private void ShowLevel(int index)
