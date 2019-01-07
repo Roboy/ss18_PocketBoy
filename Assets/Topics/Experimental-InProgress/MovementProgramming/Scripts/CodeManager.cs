@@ -482,11 +482,18 @@ namespace Pocketboy.MovementProgramming
             m_AttemptCounter.text = "Versuch Nr. " + count;
         }
 
+        public void ResetGoal()
+        {
+            m_Player.m_GoalHit = false;
+        }
+
         private IEnumerator ScrollDown()
         {
             yield return new WaitForEndOfFrame();
            VerticalScrollbar.value = 0f;
         }
+
+
 
         
     }

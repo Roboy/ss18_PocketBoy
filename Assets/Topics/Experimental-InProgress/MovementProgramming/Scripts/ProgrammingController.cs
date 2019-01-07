@@ -51,6 +51,7 @@ namespace Pocketboy.MovementProgramming
             CodeManager.Instance.m_NumberOfTries = 0;
             CodeManager.Instance.UpdateAttemptCounter(0);
             CodeManager.Instance.DeleteAllInstructions();
+            CodeManager.Instance.ResetGoal();
             
         }
 
