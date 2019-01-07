@@ -17,6 +17,7 @@ namespace Pocketboy.Runaround
         public Material mat_QuestionTransparent;
         public Material mat_QuestionSolid;
         public Image[] answer_Images;
+        public int CurrentQuestionIndex;
         private RunaroundQuestion m_currentQuestion = null;
 
         public void NavigateQuestion(string tag)
@@ -53,6 +54,7 @@ namespace Pocketboy.Runaround
 
         public void LoadQuestion(int index)
         {
+            CurrentQuestionIndex = index;
             ToggleAnswersVisibility("OFF");
             GameMaster.Instance.ToggleHUDvisibility("OFF");
             GameMaster.Instance.ToggleResultText("OFF");

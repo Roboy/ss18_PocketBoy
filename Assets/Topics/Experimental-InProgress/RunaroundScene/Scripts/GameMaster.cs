@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Pocketboy.Common;
 using UnityEngine.UI;
+using Pocketboy.Logging;
 
 namespace Pocketboy.Runaround
 {
@@ -40,6 +41,8 @@ namespace Pocketboy.Runaround
        
         public Color m_colWinning;
         public Color m_colLoosing;
+
+        public RunaroundLogger Logger;
 
 
         [SerializeField]
@@ -225,7 +228,7 @@ namespace Pocketboy.Runaround
                 //Display the current score as feedback for the player
                 m_Score.text = Score.ToString();
                 time -= Time.deltaTime;
-                yield return new WaitForSeconds(Time.deltaTime);
+                yield return null;
             }
         }
 
@@ -255,6 +258,8 @@ namespace Pocketboy.Runaround
                     m_Outcome.GetComponent<TextMeshProUGUI>().color = m_colLoosing;
                 }
                 ToggleResultText("ON");
+
+                Logger.AddStats(QuestionManager.Instance.CurrentQuestionIndex, m_playerWon, m_CurrentScore);
             }
 
             foreach(RunaroundAnswer ans in AnswerPlanes)
