@@ -60,7 +60,7 @@ namespace Pocketboy.Logging
 
         private void SaveSceneStatsToFile(string scene, string stats)
         {
-            string filePath = string.Format("{0}/{1}_{2}.json", Application.streamingAssetsPath, m_ID, scene);
+            string filePath = string.Format("{0}/{1}_{2}.json", Application.persistentDataPath, m_ID, scene);
             StreamWriter streamWriter = new StreamWriter(filePath, true);
             streamWriter.WriteLine(stats);
             streamWriter.Close();
