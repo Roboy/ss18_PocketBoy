@@ -17,6 +17,8 @@ namespace Pocketboy.Common
 
         private float m_TimeSinceLastLookup = 0f;
 
+        private bool m_DontDestroyOnLoad;
+
         private void Update()
         {
             m_TimeSinceLastLookup += Time.unscaledDeltaTime;
@@ -36,7 +38,9 @@ namespace Pocketboy.Common
         private void Setup(Anchor realAnchor, bool dontDestroyOnLoad)
         {
             m_RealAnchor = realAnchor;
-            if(dontDestroyOnLoad)
+            m_DontDestroyOnLoad = dontDestroyOnLoad;
+
+            if (dontDestroyOnLoad)
                 DontDestroyOnLoad(transform);
         }
 
@@ -51,6 +55,9 @@ namespace Pocketboy.Common
 
         private void CacheAnchorChildren()
         {
+            if (m_RealAnchor == null)
+                return;
+
             foreach (Transform child in m_RealAnchor.transform)
             {
                 m_AnchorChildren.Add(child);
@@ -71,6 +78,8 @@ namespace Pocketboy.Common
             CacheAnchorChildren();
             var plane = ARSessionManager.Instance.FloorPlane;
             m_RealAnchor = plane.CreateAnchor(plane.CenterPose);
+            if (m_DontDestroyOnLoad)
+                DontDestroyOnLoad(m_RealAnchor);
             AttachChildrenToRealAnchor();
         }
     }

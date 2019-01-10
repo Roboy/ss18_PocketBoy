@@ -8,15 +8,12 @@ using System.Text;
 using UnityEngine.SceneManagement;
 using System.Diagnostics;
 using Pocketboy.Common;
-
 using System.Net.Http;
 
 namespace Pocketboy.Logging
 {
     public class LoggerManager : Singleton<LoggerManager>
     {
-        
-
         private Stopwatch m_Stopwatch = new Stopwatch();
 
         private SceneLogger m_SceneLogger;
@@ -27,9 +24,10 @@ namespace Pocketboy.Logging
 
         private void Awake()
         {
+            DontDestroyOnLoad(gameObject);
             
             LoadID();
-            SceneManager.sceneUnloaded += (scene) => SaveSceneStats(scene);
+            SceneManager.sceneUnloaded += (scene) => SaveSceneStats(scene); m_SceneLogger = null;
             SceneManager.sceneLoaded += (scene, loadMode) => ResetSceneStats();
         }
 
@@ -52,7 +50,9 @@ namespace Pocketboy.Logging
         {
             m_Stopwatch.Stop();
             var time = m_Stopwatch.ElapsedMilliseconds;
-            var stats = m_SceneLogger.GetStats();
+            string stats = "No stats available for this scene";
+            if(m_SceneLogger != null)
+                stats = m_SceneLogger.GetStats();
 
             string output = string.Format("{{ID : {0}, Scene : {1},  Time : {2} seconds, Data : {3}}}", m_ID, scene.name, time / 1000f, stats);
             SaveSceneStatsToFile(scene.name, output);
@@ -74,7 +74,6 @@ namespace Pocketboy.Logging
             }
             
             PlayerPrefs.SetInt(m_IDPlayerPrefsName, m_ID);
-            UnityEngine.Debug.Log(PlayerPrefs.HasKey(m_IDPlayerPrefsName));
         } 
     }
 }

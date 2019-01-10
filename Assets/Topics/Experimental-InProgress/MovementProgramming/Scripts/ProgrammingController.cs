@@ -10,6 +10,7 @@ namespace Pocketboy.MovementProgramming
 
     public class ProgrammingController : Singleton<ProgrammingController>
     {
+        public int Difficulty { get { return m_DifficultyLevel.value; } }
        
         [SerializeField]
         private GameObject m_PlayerPrefab;
@@ -21,7 +22,6 @@ namespace Pocketboy.MovementProgramming
         private GameObject m_Maze;
         [SerializeField]
         private TMP_Dropdown m_DifficultyLevel;
-
 
         // Use this for initialization
         void Start()

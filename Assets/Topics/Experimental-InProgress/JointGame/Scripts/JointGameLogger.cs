@@ -23,7 +23,7 @@ namespace Pocketboy.Logging
     [Serializable]
     public class JointGameStats
     {
-        public List<JointGameStat> Stats = new List<JointGameStat>();
+        public List<JointGameStat> StatsList = new List<JointGameStat>();
     }
 
     public class JointGameLogger : SceneLogger
@@ -40,7 +40,7 @@ namespace Pocketboy.Logging
 
         public void SaveScore(float score)
         {
-            m_Stats.Stats.Add(new JointGameStat(score, m_Tries));
+            m_Stats.StatsList.Add(new JointGameStat(score, m_Tries));
             m_Tries.Clear();
         }
 

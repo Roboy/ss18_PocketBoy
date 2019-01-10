@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Pocketboy.Common;
 using System;
 using TMPro;
+using Pocketboy.Logging;
 
 namespace Pocketboy.MovementProgramming
 {
@@ -45,6 +46,8 @@ namespace Pocketboy.MovementProgramming
         [SerializeField]
         private List<RectTransform> m_LinesOfCode = new List<RectTransform>();
         private List<RectTransform> m_SelectedLines = new List<RectTransform>();
+        [SerializeField]
+        private MovementProgrammingLogger Logger;
 
         private List<Button> m_Buttons = new List<Button>();
         private int m_CountSelectedLines = 0;
@@ -102,12 +105,14 @@ namespace Pocketboy.MovementProgramming
                 {
                     m_AttemptCounter.text = ("Noch kein Ausweg in Sicht, mit " + m_NumberOfTries + " Versuchen.");
                     m_Player.ResetPlayerPose();
+                    
                 }
                 else
                 {
                     m_AttemptCounter.text = ("Du bist entkommen, mit " + m_NumberOfTries + " Versuchen."); 
-                }
 
+                }
+                Logger.SaveTry(m_NumberOfTries, ProgrammingController.Instance.Difficulty, m_Player.m_GoalHit);
                 m_ExecutingCode = false;
                 m_CurrentVisualLineOfCode = null;
                 ToggleButtons("ON");
