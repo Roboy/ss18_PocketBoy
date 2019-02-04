@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a079afbfff84624593ed32bfb0a5834, type: 3}
+  m_Name: Sound_Losing
+  m_EditorClassIdentifier: 
+  ID: Losing
+  AudioFile: {fileID: 8300000, guid: ea7077b1e00950a45b30d0deb9a9e4ed, type: 3}

@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Roboy
+  - RoboyPart
+  - Level
+  - Logo
+  - Floor
+  - Sign
+  - PreviousQuestion
+  - NextQuestion
+  - Levelsphere
+  - NoColorChange
+  - WordCloud
+  - Deadzone
+  - Cup
+  - Hand
+  - GameBoard
+  - BetZone
+  - PlanetSystemCollider
+  - Wall
+  - WinningZone
+  - PlayerSpawn
+  - SceneUI
+  - FaceAnimator
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - LevelSphere
+  - LevelSphereCollider
+  - Words
+  - Ignore
+  - QuestionButtons
+  - CategorizationModels
+  - CategorizationPlatforms
+  - Deadzone
+  - PlanetSystem
+  - MazeObjects
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Face
+  - Roboy
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

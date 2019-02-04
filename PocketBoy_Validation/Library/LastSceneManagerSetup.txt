@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Topics/History Scene/Scenes/HistoryScene.unity
+  isLoaded: 1
+  isActive: 1

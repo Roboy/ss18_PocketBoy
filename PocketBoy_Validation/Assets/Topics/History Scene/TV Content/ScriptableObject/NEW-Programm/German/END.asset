@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
+  m_Name: END
+  m_EditorClassIdentifier: 
+  TVContent: {fileID: 2800000, guid: 08609300e350d1a4e8adad22dbbae2ce, type: 3}
+  Date: Dez. 2018
+  Year: 2018.9
+  Text: "Juhu! Du hast es geschafft! Du hast den Roboy Grundkurs abgeschlossen. Teste
+    nun dein neues Wissen\r im n\xE4chsten Level mit den A B C Balken. Kehre daf\xFCr
+    in das Hauptmenu \xFCber das Haussymbol zur\xFCck."

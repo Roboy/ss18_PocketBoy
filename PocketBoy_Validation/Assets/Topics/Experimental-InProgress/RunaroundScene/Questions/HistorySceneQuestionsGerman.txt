@@ -1,0 +1,73 @@
+﻿Runaround Fragen für History Scene Inhalt
+
+#1
+Frage: Was ist Roboy?
+A: Humanoider Roboter.
+B: Industrieroboter.
+C: Putzroboter.
+
+#2
+Frage: Wie entstehen Körperteile für Roboy?
+A: Wachsen im Labor.
+B: 3D gedruckt.
+C: Aus Stein gemeißelt.
+
+#3
+Frage: Was mache ich mit meinen Kameras im Kopf?
+A: Bilder für Instagram.
+B: Objekte erkennen.
+C: Sterne anschauen.
+
+#4
+Frage: Was brauche ich, wenn ich von A nach B mit meinem Dreirad fahre?
+A: Künstliche Intelligenz + schwache Motoren.
+B: Echte Intelligenz + starke Motoren.
+C: Künstliche Intelligenz + starke Motoren.
+
+#5
+Frage: Wie redest du mit mir?
+A: Zeichensprache.
+B: Dialogsystem.
+C: Monologsystem.
+
+#6
+Frage: Wofür brauche ich das Internet beim Kochen?
+A: Tutorials anschauen.
+B: Für Rezepte.
+C: Chatten.
+
+#7
+Frage: Was messe ich als Doktor mit meinem Radarsensor?
+A: Glücklichkeit.
+B: Körpertemperatur.
+C: Herzschlag.
+
+#8
+Frage: Wie erkenne ich, ob ich was in der Hand halte?
+A: Berührungssensor.
+B: Mit Kameras.
+C: Radarsensor.
+
+#9
+Frage: Was fehlt meiner Hand noch, um Werkzeuge zu benutzen?
+A: Feingefühl + Kraft.
+B: Mehr Finger + Kraft.
+C: Dauerhafte Magnete.
+
+#10
+Frage: Warum brauche ich eine Haut für einen Ausflug zum Mars?
+A: Ich fühle mich nackt.
+B: Schutz vor Staub.
+C: Kühlflüssigkeit kann auslaufen.
+
+#11
+Frage: Woher bekommen ich meine Energie auf dem Mars?
+A: Solarenergie.
+B: Essen.
+C: Schlafen.
+
+#12
+Frage: Auch Roboter müssen sich an Gesetze halten, an welche?
+A: Newtons Gesetze.
+B: Asimovs Gesetze.
+C: Schulordnung.

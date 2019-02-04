@@ -1,0 +1,9 @@
+{
+	"ID":3,
+	"IsPictureBased":false,
+	"Question":"What was the first humanoid robot?",
+	"Answers":["Mark Zuckerberg by unknown", "Eric by Captain William Richards","Roboy by Raf","Maschinenmensch by Fritz Lang"],
+	"CorrectAnswer":1,
+	"CanBeKnown":true,
+	"Asked":false
+}

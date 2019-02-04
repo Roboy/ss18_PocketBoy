@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
+  m_Name: Waiter Roboy
+  m_EditorClassIdentifier: 
+  TVContent: {fileID: 2800000, guid: aec78518a8c8d6748847df782e2452ae, type: 3}
+  Date: 2021
+  Year: 0
+  Text: "Im Februar 2021 werde ich ein Kellner sein, weil ich das Essen auch im Roboy
+    Restaurant an die Tische\r\nbringen will. Durch das Dialogsystem kann ich Bestellungen
+    aufnehmen und durch meine k\xFCnstliche Intelligenz\r\nverarbeiten. Dann laufe
+    ich in die K\xFCche, bereite das Essen zu und laufe zur\xFCck. Dabei muss ich
+    sehr \r\naufpassen, die Teller nicht fallen zu lassen, daf\xFCr brauche ich noch
+    mehr Balance und sehr starke Beine, die\r\nmein Gesamtgewicht tragen. Essen ist
+    leider nicht umsonst, deswegen muss ich lernen, Geld zu erkennen und zu z\xE4hlen.
+    \r\nOb Geld in meiner Hand liegt, wei\xDF ich \xFCber meine Ber\xFChrungssensoren."

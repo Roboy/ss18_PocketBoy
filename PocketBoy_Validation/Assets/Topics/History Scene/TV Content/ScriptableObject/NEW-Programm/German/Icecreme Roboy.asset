@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
+  m_Name: Icecreme Roboy
+  m_EditorClassIdentifier: 
+  TVContent: {fileID: 2800000, guid: 7da969c900af0c94fbe256a140a15066, type: 3}
+  Date: Aug. 2019
+  Year: 2019.8
+  Text: "Ein halbes Jahr sp\xE4ter spiele ich aber nicht nur Taxi mit meinem Dreirad,
+    sondern ich werde damit auch Eiscreme verkaufen, \r\nweil es im Sommer immer so
+    hei\xDF ist! Um die Waffel vorsichtig und genau greifen zu k\xF6nnen, brauche
+    ich feine Gelenke\r\nin den H\xE4nden. Damit du deine Lieblingssorte bekommst,
+    muss ich das Sprechen lernen, daf\xFCr ben\xF6tige ich neben einem\r\nDialogsystem
+    auch Mikrofone, um dich zu verstehen. Bevor ich dir die richtige Sorte in die
+    Waffel\r\nsetzen kann, m\xFCssen meine Augen aber auf die Erkennung von Farbe
+    trainiert werden."

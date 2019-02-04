@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
+  m_Name: Assembly Roboy
+  m_EditorClassIdentifier: 
+  TVContent: {fileID: 32900000, guid: 1c21dc4c1f3b72645ab5157a16741e1c, type: 3}
+  Date: "M\xE4rz 2018"
+  Year: 2018.3
+  Text: "Und dann war auch schon meine Zeit gekommen! Viele Studenten haben mich \xFCber
+    lange Zeit \ram Computer entworfen und anschlie\xDFend zusammengebaut.\r Ich bestehe
+    aus mechanischen und elektrischen Bauteilen. Viele meiner K\xF6rperteile sind
+    3d gedruckt.\r"

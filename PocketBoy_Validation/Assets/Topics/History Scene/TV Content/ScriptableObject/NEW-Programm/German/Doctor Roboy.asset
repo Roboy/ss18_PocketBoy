@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
+  m_Name: Doctor Roboy
+  m_EditorClassIdentifier: 
+  TVContent: {fileID: 2800000, guid: 5049e623fd1d21d47a253cdff90877be, type: 3}
+  Date: Aug. 2020
+  Year: 2020.8
+  Text: "Nachdem ich Chefkoch geworden bin, will ich Arzt werden, weil ich es nicht
+    mag, wenn meine Freunde krank sind. \r\nDaf\xFCr muss ich Medizin studieren und
+    durch Computerprogramme bekomme ich dasselbe Wissen wie echte \xC4rzte.\r\nAls
+    Erstes muss ich wissen, was du f\xFCr eine Krankheit hast. Mit einem Radarsensor
+    kann ich deinen Puls\r\nmessen ohne dich zu ber\xFChren. Zudem messe ich deine
+    Temperatur, nach der ersten Untersuchung\r\nerkenne ich durch meine k\xFCnstliche
+    Intelligenz, wie du wieder gesund wirst. \r\nMein Gesicht kann verschiedene Gef\xFChle
+    zeigen, um dich aufzumuntern."

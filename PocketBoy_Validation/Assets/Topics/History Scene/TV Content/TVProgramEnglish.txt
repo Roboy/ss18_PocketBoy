@@ -1,0 +1,58 @@
+#1 My name is roboy, I am a humanoid robot with tendons and muscles.
+It took robots a long time look like me and have the same functions as me.
+Lets take a quick look what has happened in the past!
+
+#2 Elektro is one of the first robots, but is only functional through remote control.
+Many years later Wabot is able to perceive its environment through sensors, over time
+he develops sensitivity and the ability to play the piano. The next milestone represents Asimo.
+This robot is very good at walking and the needed energy for this is provided by batteries in his backpack.
+
+#3
+And then it was already my time! Many students have designed me with the help of computers
+over a long period of time and assembled then my body. This body consists of mechanical and
+electrical components. Many of my body parts are 3d printed.
+
+#4 roboy dj, optical sensors, instrument
+tracking to see where he has put his hands
+xylophone playing VIDEO
+hand/ fingers need fine movements for that
+-> sensitive servos
+
+#5 roboy rikshaw, depth sensors see obstacles,
+accustic sensors, ai because pathfinding and
+control bike
+
+#6 roboy sells icecream, colour recognition,
+which flavor to pick, talk to customers
+matrix (multiple microphones), 
+multiple people orders
+
+#7 roboy chef, temperature, smell sensors to know
+cooking state, maybe test, able to walk balance (gewichts
+ausgleich), database for recipes
+
+#8 dr roboy, connection to database, dialog
+system for symtomps, show emotions/ compassion
+assessment of pulse, temperatur
+
+#9 roboy waiter, perfect walking, quick operation
+avoid obstacles, count money, exchange cash,
+carry meals (balanced) dont drop it brah
+
+#10 roboy builds roboy, self repair,
+build siblings, family, operate machines,
+
+#11 roboy on mars, protection from harsh weather, skin
+navigate on foreign planet, communicate with other
+robots -> interface; scientific tests
+
+#12 I live by the same laws as all robots,
+the asimov laws. These the following.
+
+
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
+  m_Name: Roboy on Mars
+  m_EditorClassIdentifier: 
+  TVContent: {fileID: 32900000, guid: 6e7c64decdbf35f48b8100b3a29e59fa, type: 3}
+  Date: 2024
+  Year: 2024
+  Text: "2024 besuche ich den Mars zusammen mit meinem Team und erf\xFClle Aufgaben,
+    die f\xFCr Menschen gef\xE4hrlich sind.\r\nF\xFCr die Erkundung eines fremden
+    Planeten brauche ich eine Haut, die meine Bauteile und Sensoren vor Staub sch\xFCtzt.\r\nDa
+    ich aber nicht schwitzen kann, brauche ich ein K\xFChlsystem, damit meine Motoren
+    nicht \xFCberhitzen.\r\nAu\xDFerdem gibt es auf dem Mars noch keine Steckdosen,
+    aus denen ich Energie bekomme. \r\nSomit ben\xF6tige ich Akkus, die zum Beispiel
+    \xFCber Sonnenergie geladen werden."

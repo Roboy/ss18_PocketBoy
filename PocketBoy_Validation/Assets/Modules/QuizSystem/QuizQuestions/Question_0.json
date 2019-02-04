@@ -1,0 +1,9 @@
+{
+	"ID":0,
+	"IsPictureBased":false,
+	"Question":"What is special about Roboy?",
+	"Answers":["He can walk","He is 300 years old","His muscles can lift 1000kg","His motors resemble the human muscles"],
+	"CorrectAnswer":3,
+	"CanBeKnown":true,
+	"Asked":false
+}

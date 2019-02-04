@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1019266938600762}
+  m_IsPrefabAsset: 1
+--- !u!1 &1019266938600762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4236819324143348}
+  - component: {fileID: 135256953297979024}
+  - component: {fileID: 114549632958100736}
+  m_Layer: 16
+  m_Name: PlanetSystem_SchoolTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4236819324143348
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1019266938600762}
+  m_LocalRotation: {x: -0, y: -0, z: -0.0000000037252899, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114549632958100736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1019266938600762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929508ed9f0cec848b5da27049c77d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PathsParent: {fileID: 1586690203550210, guid: e628b1efa1efa3d4599ab8e4f9ad36af,
+    type: 2}
+  SunPrefab: {fileID: 114983647907239652, guid: f3ae71da621c22d48b24d266b4c62dad,
+    type: 2}
+  TrailPrefab: {fileID: 96344137357182958, guid: eca94092779b72c4ea5b73e4b8b6cb2e,
+    type: 2}
+  LevelSpherePrefabs:
+  - {fileID: 114615876313410518, guid: 00fde2b96e3b0c243916f0f1c454758c, type: 2}
+  - {fileID: 114496713990713876, guid: 5c2cc3d9b7d3b044190fa370da361674, type: 2}
+  - {fileID: 114030129862603682, guid: 116a2719a8d9e9e46919d1c9621d558d, type: 2}
+  - {fileID: 114019739532799838, guid: 228477b212fd466418f9a42031ea5cbf, type: 2}
+  LevelSphereSize: 0.025
+  LevelSphereScaleFactor: 2.5
+  MinCycleDuration: 2
+--- !u!135 &135256953297979024
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1019266938600762}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}

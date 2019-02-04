@@ -1,0 +1,75 @@
+##HOME-SCENE##
+
+Hallo, ich bin Roboy. Schön, dass Du da bist.
+Ich habe ein paar Herausforderungen für dich.
+Siehst Du die kleinen Planeten vor mir?
+Jeder Planet bringt dich in eine andere Welt,
+in der Du neue Aufgaben bekommst.
+Um auf dem Planeten zu landen, bewege dein
+Handy in die Nähe des Planeten und Du wirst
+teleportiert!
+
+##MOVEMENT-PROGRAMMING##
+
+Damit ein Roboter funktioniert, muss man ihm vorscheiben, was er zu tun hat.
+Nur wenn Du mir den Weg aufschreibst, entkomme ich dem Labyrinth. Ich kann
+geradeaus laufen, mich links und rechts drehen. Tippe rechts unten auf die
+Buttons um eine Bewegung in die Liste zu schreiben. Ist die Liste fertig,
+tippe auf Start und schaue zu, wie ich im Labyrinth laufe.
+
+##RUN-AROUND##
+
+Ob Du wirklich richtig stehst, siehst Du, wenn das Licht angeht!
+Zeig mir was Du gelernt hast und stelle dich auf den Balken, der
+zur richtigen Antwort gehört. Bewegst Du dich bevor die Uhr abläuft,
+gibt es Bonus Punkte! Benutze die Pfeile, um zwischen den Fragen zu
+wechseln. Bist Du bereit, lese die Frage durch und tippe auf start, um die
+Antworten zu sehen und das Spiel zu starten.
+
+##HISTORY-LESSON##
+
+Zeit für eine kurze Geschichtsstunde! Schaue mit mir diese tolle
+Fernsehsendung und entdecke die größten Ereignisse in der Entwicklung
+von Robotern. Tippe auf die Pfeile auf dem Fernseher um zwischen den
+Ereignissen zu springen. Wenn ich etwas nochmal erzählen soll, tippe einfach
+auf den Wiederholen Button.
+
+##WORD-CLOUD##
+
+Was verbindest Du mit den Begriffen Robotik und Roboter?
+Zeig es mir, indem Du auf die einzelen Wolken tippst!
+Wenn Du eine Wolke berührst, gebe ich Dir mehr Informationen
+zu dem Wort, das in ihr geschrieben steht.
+
+##PITCH-PLATTFORMER##
+
+Ich möchte deine schöne Stimme hören! Nur mit deinen Tönen kann ich
+die Hindernisse überwinden und die Level abschließen. Zuerst solltest
+Du das Level an deine stimme anpassen. Das muss einmal für deinen tiefsten
+Ton gemacht werden und für deinen höchsten Ton, den Du erzeugen kannst.
+Nach der Anpassung kannst du in den Leveln Plattformen mit der Höhe deiner
+Stimme erzeugen. Machst Du das richtig, kann ich weiterlaufen!
+
+##MODEL-CATEGORIZATION##
+
+Wie sieht Roboter aus? Zeig es mir, indem Du ein Objekt aufhebst und es in
+eine von drei Zonen trägst. Lege das Objekt in die grüne Zone, wenn Du denkst,
+es ist ein Roboter, in die rote, wenn nicht. Wenn Du unischer bist, gibt es die 
+blaue Zone. Jede Zone hat eine Flagge, legst du ein Objekt in die passende Zone,
+bewegt sich die Flagge nach oben. Erkunde die Umgebung, um alle Objekte zu finden!
+
+##GLASS-BREAKER##
+
+Du kannst mit deiner Stimme Glas zerspringen lassen! Passe zunächst das Level
+an deine Stimme an. Tippe dazu auf Anpassen und folge den Anweisungen.
+Danach kannst du immer lauter in das Handy schreien und sehen wie der Bildschirm
+immer weiter kaputt geht. Bist Du laut genug springt er sogar komplett!
+
+##CUP-GAME##
+
+Lust auf ein Hütchenspiel? Setz deine wertvollen Roboy Münzen auf den richtigen Becher
+und gewinne. Tippe zuerst auf Aufdecken, um zu sehen, wo der Ball am Anfang ist.
+Anschließend wähle oben die Schwierigkeit aus und tippe auf Mischen. Am Ende ziehst
+Du die Münzen vor den Becher deiner Wahl. Soll Roboy Dir helfen, tippe auf Scannen, damit
+er mit seinem Radarsensor loslegt. Dann siehst du wie die Radarwellen von seiner Hand
+auf die Becher treffen und unterschiedliche Ergebnisse erzielen. Wie oft kannst Du gewinnen?

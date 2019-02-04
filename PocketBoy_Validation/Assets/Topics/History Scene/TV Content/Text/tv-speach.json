@@ -1,0 +1,13 @@
+{
+	"intro"			: "Thank you for tuning in. This programm will tell you about some awesome milestones in the evolution of robots. In order to change the milestones just click on the buttons attached to the television.",
+	"1939-elektro"	: "Elektro is an early human looking robot, that can talk, walk and smoke.",
+	"1942-asimoov"	: "A robot may not injure a human being or, through inaction, allow a human being to come to harm. A robot must obey orders given it by human beings except where such orders would conflict with the First Law. A robot must protect its own existence as long as such protection does not conflict with the First or Second Law.",
+	"1961-unimate"	: "Unimate is the first robot that can be programmed.",
+	"1973-wabot1"	: "In 1973 the first full sized humanoid robot is created. His name is Wabot one.",
+	"1974-irb6"		: "This is an electric industrial robot controlled for the first time by a microcomputer.",
+	"1984-wabot2"	: "In 1984 robots start playing the piano. But I am way better at playing the xylophone than Wabot two.",
+	"1988-consight"	: "First robot sorting out different objects from a assembly line with the help of visual sensory.",
+	"2000-asimo"	: "Asimo can walk and even run in a circle. A lot of research is done with it.",
+	"2012-baxter"	: "Baxter is a collaborative robot with a face projected on a display. This makes him more friendly to interact with. He also has a little brother called Sawyer.",
+	"2013-roboy"	: "I was born, a robot as good as the human body."
+}

@@ -1,0 +1,9 @@
+{
+	"ID":1,
+	"IsPictureBased":false,
+	"Question":"How was the body of roboy built?",
+	"Answers":["His body is 3D printed","Raf gave birth to him","Elon Musk gave birth to him","Nobody knows, he is from the future"],
+	"CorrectAnswer":0,
+	"CanBeKnown":true,
+	"Asked":false
+}

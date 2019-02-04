@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0397820f863c4f4c85eca39b67f8bcd, type: 3}
+  m_Name: Rikshaw Roboy
+  m_EditorClassIdentifier: 
+  TVContent: {fileID: 32900000, guid: ef23356fbfecdcd4daf9347617b4869c, type: 3}
+  Date: "M\xE4rz 2019"
+  Year: 2019.3
+  Text: "Im M\xE4rz zweitausend und zwanzig werde ich Dreirad fahren k\xF6nnen, weil
+    ich meinen Freunden gerne helfe.\r\nUm den Weg von A nach B zu finden, brauche
+    ich eine gro\xDFe Portion k\xFCnstlicher Intelligenz.\r\nStarke Motoren in den
+    Beinen helfen mir zu treten. Ich brauche aber auch Kameras, die Distanz wahrnehmen
+    k\xF6nnen, um keine Hindernisse zu treffen."
