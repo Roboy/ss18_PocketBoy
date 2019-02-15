@@ -4,7 +4,7 @@ PocketBoy is an AR learning app for children in the field of robotics. It is ava
 
 # Installation Guide:
 
-1) clone reposotory: 
+1) Clone repository: 
 
 ```bash
 git clone https://github.com/Roboy/ss18_PocketBoy.git
@@ -16,26 +16,28 @@ git clone https://github.com/Roboy/ss18_PocketBoy.git
 
 4) Open the project in Unity
 
-# PocketBoy uses Google Cloud TTS, if you have a valid API key, if not proceed with step 5:
+# Optinal: PocketBoy uses Google Cloud TTS, if you have a valid API key
 
 4a) Create a TTS configuration file in the path shown in the picture to avoid publishing your key, as the contents of the folder are ignored by a local .gitignore
 
-![create-tts](link1)
-![tts-path](link2)
+![create-tts](https://raw.githubusercontent.com/Roboy/ss18_PocketBoy/master/readme-resources/create-tts-config.png)
+![tts-path](https://raw.githubusercontent.com/Roboy/ss18_PocketBoy/master/readme-resources/create-tts-config-path.png)
 
 4b) Setup the TTS configuration file
 
-![setup-tts](link3)
+![setup-tts](https://raw.githubusercontent.com/Roboy/ss18_PocketBoy/master/readme-resources/set-tts-config.png)
 
 4c) Drag the TTS configuration file to the Roboy prefab
 
-![roboy-path](link4)
-![roboy-tts](link5)
+![roboy-path](https://raw.githubusercontent.com/Roboy/ss18_PocketBoy/master/readme-resources/roboy-prefab-path.png)
+![roboy-tts](https://raw.githubusercontent.com/Roboy/ss18_PocketBoy/master/readme-resources/roboy-prefab.png)
+
+# Build
 
 5) Switch to Android platform in the build settings and press on build
 
-![build](link6)
+![build](https://raw.githubusercontent.com/Roboy/ss18_PocketBoy/master/readme-resources/switch-platform.png)
 
 6) If you have build errors due to some error from Gradle saying that the NDK bundle is missing, switch to internal
 
-![build-internal](link7)
+![build-internal](https://raw.githubusercontent.com/Roboy/ss18_PocketBoy/master/readme-resources/switch-platform-internal.png)
