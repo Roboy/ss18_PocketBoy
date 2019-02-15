@@ -2,7 +2,9 @@
 
 PocketBoy is an AR learning app for children in the field of robotics. It is available for Android for smartphones which support [ARCore](https://developers.google.com/ar/discover/supported-devices).
 
-# Installation Guide:
+# Installation Guide
+
+## Setup:
 
 1) Clone repository: 
 
@@ -16,7 +18,7 @@ git clone https://github.com/Roboy/ss18_PocketBoy.git
 
 4) Open the project in Unity
 
-# Optinal: PocketBoy uses Google Cloud TTS, if you have a valid API key
+## Optional: PocketBoy uses Google Cloud TTS, if you have a valid API key
 
 4a) Create a TTS configuration file in the path shown in the picture to avoid publishing your key, as the contents of the folder are ignored by a local .gitignore
 
@@ -32,7 +34,7 @@ git clone https://github.com/Roboy/ss18_PocketBoy.git
 ![roboy-path](https://raw.githubusercontent.com/Roboy/ss18_PocketBoy/master/readme-resources/roboy-prefab-path.png)
 ![roboy-tts](https://raw.githubusercontent.com/Roboy/ss18_PocketBoy/master/readme-resources/roboy-prefab.png)
 
-# Build
+## Build
 
 5) Switch to Android platform in the build settings and press on build
 
